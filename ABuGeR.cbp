@@ -34,8 +34,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/parcel.h" />
 		<Unit filename="include/shpto3d.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/parcel.cpp" />
 		<Unit filename="src/shpto3d.cpp" />
 		<Extensions>
 			<code_completion />

@@ -15,3 +15,9 @@ shpto3d::~shpto3d()
 {
     cout << "fin" << endl;
 }
+
+/*shpto3d::readSHP()
+{
+
+}
+*/

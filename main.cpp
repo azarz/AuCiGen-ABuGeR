@@ -1,11 +1,11 @@
 #include <iostream>
-#include "shpto3d.h"
+#include "parcel.h"
 
 using namespace std;
 
 int main()
 {
-    shpto3d("/home", "toto");
+    Parcel();
     cout << "Hello world!" << endl;
     return 0;
 }

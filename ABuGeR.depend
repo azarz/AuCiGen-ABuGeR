@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1508337490 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+	<iostream>
+	"parcel.h"
+
+1508250472 /home/formation/AuCiGen/ABuGeR/include/shpto3d.h
+	<iostream>
+
+1508311189 source:/home/formation/AuCiGen/ABuGeR/src/shpto3d.cpp
+	"shpto3d.h"
+	<iostream>
+
+1508337463 source:/home/formation/AuCiGen/ABuGeR/src/parcel.cpp
+	<iostream>
+	"parcel.h"
+
+1508337370 /home/formation/AuCiGen/ABuGeR/include/parcel.h
+
