@@ -21,7 +21,7 @@ Parcel::~Parcel()
 
 OGRLinearRing Parcel::create_footprint(OGRLineString linearIntersection, OGRLineString otherSides)
 {
-    vector<double> margins = Parcel.type.get_margin();
+    vector<double> margins = type->get_margin();
     OGRPolygon road_buffer = linearIntersection.Buffer(margins.at(1));
     OGRPolygon neigh_buffer = otherSides.Buffer(margins.at(0));
 
