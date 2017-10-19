@@ -8,7 +8,7 @@
 * @param[in] polygon It's the polygon of the parcel.
 * @return The linear geometry of the polygon.
 */
-OGRLinearRing get_linear_geometry(OGRPolygon polygon);
+OGRGeometry* get_linear_geometry(OGRPolygon polygon);
 
 /**
 * This function allows us to get the intersection line between a linear ring and the road polygons.
@@ -16,7 +16,7 @@ OGRLinearRing get_linear_geometry(OGRPolygon polygon);
 * @param[in] road It's the polygons that represent the road.
 * @return The side in front of the largest road.
 */
-OGRLineString get_intersection_road(OGRLinearRing linearRing, OGRPolygon road);
+OGRLineString* get_intersection_road(OGRGeometry* linearRing, OGRPolygon* road);
 
 /**
 * Get the other sides of the parcel contour
@@ -24,6 +24,6 @@ OGRLineString get_intersection_road(OGRLinearRing linearRing, OGRPolygon road);
 * @param[in] intersectionLine It's the side in front of the largest road.
 * @return The other sides of the parcel (without the side in front of the largest road).
 */
-OGRLineString get_other_sides(OGRLinearRing linearRing, OGRLineString intersectionLine);
+OGRLineString* get_other_sides(OGRGeometry* linearRing, OGRGeometry* intersectionLine);
 
 #endif // ORIENT_H_INCLUDED

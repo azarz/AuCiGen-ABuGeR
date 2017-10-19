@@ -1,21 +1,25 @@
 #include <iostream>
 #include "ogrsf_frmts.h"
 
-OGRLinearRing get_linear_geometry(OGRPolygon polygon)
+OGRGeometry* get_linear_geometry(OGRPolygon polygon)
 {
-    OGRLinearRing linearRing = polygon.getLinearGeometry();
+    OGRGeometry* linearRing = polygon.getLinearGeometry();
+    //OGRLinearRing* linearRing2 = (OGRLinearRing *) linearRing;
     return linearRing;
 }
 
-OGRLineString get_intersection_road(OGRLinearRing linearRing, OGRPolygon road)
+OGRLineString* get_intersection_road(OGRGeometry* linearRing, OGRPolygon* road)
 {
     //don't forget to test if there is an intersection (choice a side if not)
-    OGRLineString linearIntersection = linearRing.Intersection(road);
-    return linearIntersection;
+//    OGRGeometry* linearRingGeom = (OGRGeometry*)linearRing;
+    OGRGeometry* linearIntersection = linearRing->Intersection(road);
+    OGRLineString* linearIntersection2 = (OGRLineString *) linearIntersection;
+    return linearIntersection2;
 }
 
-OGRLineString get_other_sides(OGRLinearRing linearRing, OGRLineString intersectionLine)
+OGRLineString* get_other_sides(OGRGeometry* linearRing, OGRGeometry* intersectionLine)
 {
-    OGRLineString otherSides = linearRing.Difference(intersectionLine);
+    OGRGeometry* otherSidesGeom = linearRing->Difference(intersectionLine);
+    OGRLineString* otherSides = (OGRLineString *) otherSidesGeom;
     return otherSides;
 }

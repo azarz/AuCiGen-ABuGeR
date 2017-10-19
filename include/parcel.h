@@ -11,7 +11,7 @@ class Parcel
         Parcel();
         virtual ~Parcel();
 
-        OGRLinearRing create_footprint(OGRLineString linearIntersection, OGRLineString otherSides);
+        OGRLinearRing* create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
         void to_obj();
 
         OGRPolygon geom;
