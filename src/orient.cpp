@@ -3,7 +3,7 @@
 
 OGRLinearRing get_linear_geometry(OGRPolygon polygon)
 {
-    OGRGeometry linearRing = polygon.getLinearGeometry();
+    OGRLinearRing linearRing = polygon.getLinearGeometry();
     return linearRing;
 }
 
