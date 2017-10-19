@@ -3,6 +3,7 @@
 
 #include "ogrsf_frmts.h"
 #include "BuildingType.h"
+#include "orient.h"
 
 class Parcel
 {
@@ -10,7 +11,7 @@ class Parcel
         Parcel();
         virtual ~Parcel();
 
-        void create_footprint();
+        OGRLinearRing create_footprint(OGRLineString linearIntersection, OGRLineString otherSides);
         void to_obj();
 
         OGRPolygon geom;
