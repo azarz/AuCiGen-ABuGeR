@@ -80,7 +80,7 @@ int main()
 #endif // OPEN_SHP_INCLUDED
 
 /*
-nt main()
+int main()
 {
     GDALAllRegister();
 

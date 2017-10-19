@@ -13,10 +13,14 @@ class Road
 
         void to_obj();
 
-        OGRPolygon geom;
-        string type;
+        //Getters
+        OGRPolygon get_geom()const{return geom;};
+        string get_type()const{return type;};
+
     protected:
     private:
+        OGRPolygon geom;
+        string type;
 };
 
 #endif // ROAD_H

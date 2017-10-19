@@ -31,7 +31,7 @@ std::vector<int> BuildingType::get_surface_type()
 }
 std::vector<double> BuildingType::get_margin()
 {
-    double tmp[] = { margin_p, margin_r };
+    double tmp[] = { margin_parcel, margin_road };
     std::vector<double> margin( tmp, tmp+2 );
     return margin;
 }
@@ -46,8 +46,8 @@ void Industry::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_p=1.0;
-    margin_r=1.0;
+    margin_parcel=1.0;
+    margin_road=1.0;
 }
 Office::Office(){set_param();}
 void Office::set_param()
@@ -58,8 +58,8 @@ void Office::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_p=1;
-    margin_r=1;
+    margin_parcel=1;
+    margin_road=1;
 }
 ApartmentBuilding::ApartmentBuilding(){set_param();}
 void ApartmentBuilding::set_param()
@@ -70,8 +70,8 @@ void ApartmentBuilding::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_p=1;
-    margin_r=1;
+    margin_parcel=1;
+    margin_road=1;
 }
 Villa::Villa(){set_param();}
 void Villa::set_param()
@@ -82,8 +82,8 @@ void Villa::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_p=1;
-    margin_r=1;
+    margin_parcel=1;
+    margin_road=1;
 }
 Townhouse::Townhouse(){set_param();}
 void Townhouse::set_param()
@@ -94,6 +94,6 @@ void Townhouse::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_p=1;
-    margin_r=1;
+    margin_parcel=1;
+    margin_road=1;
 }

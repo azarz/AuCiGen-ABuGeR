@@ -1,5 +1,5 @@
 #include "Building.h"
-#include "parcel.h"
+#include "Parcel.h"
 #include "BuildingModel.h"
 #include <vector>
 

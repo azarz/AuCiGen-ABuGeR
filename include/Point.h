@@ -8,11 +8,16 @@ class Point
         Point();
         virtual ~Point();
 
+        //Getters
+        double get_x()const{return x;};
+        double get_y()const{return y;};
+        double get_z()const{return z;};
+
+    protected:
+    private:
         double x;
         double y;
         double z;
-    protected:
-    private:
 };
 
 #endif // POINT_H

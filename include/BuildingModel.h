@@ -2,7 +2,7 @@
 #define BUILDINGMODEL_H
 
 #include "Triangle.h"
-#include "parcel.h"
+#include "Parcel.h"
 #include <vector>
 
 class BuildingModel
@@ -21,10 +21,14 @@ class BuildingModel
         void scope();
         void to_obj();
 
-        std::vector<Triangle> li_triangle;
-        Parcel *parcel;
+        // Getters
+        std::vector<Triangle> get_li_triangle()const{return li_triangle;};
+        Parcel* get_parcel()const{return parcel;};
+
     protected:
     private:
+        std::vector<Triangle> li_triangle;
+        Parcel* parcel;
 };
 
 #endif // BUILDINGMODEL_H

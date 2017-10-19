@@ -2,7 +2,7 @@
 #include "Parcel.h"
 #include "ogrsf_frmts.h"
 #include "BuildingType.h"
-#include "FootPrint.h"
+#include "Footprint.h"
 #include <vector>
 using namespace std;
 
