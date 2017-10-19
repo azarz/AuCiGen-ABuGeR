@@ -17,7 +17,7 @@ class Parcel
         BuildingType type;
         double area;
         double area_price;
-        double floor_price;
+        double floorspace;
 
     protected:
     private:

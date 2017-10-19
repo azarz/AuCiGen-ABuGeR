@@ -700,7 +700,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+floor_price: double",
+											"text": "+floor_space: double",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15219,7 +15219,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfLmcE48W2qsc="
 							},
-							"name": "floor_price",
+							"name": "floor_space",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
