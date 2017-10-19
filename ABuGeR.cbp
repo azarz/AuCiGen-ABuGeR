@@ -34,12 +34,22 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/open_shp" />
+		<Unit filename="include/BuildingModel.h" />
+		<Unit filename="include/Envelop.h" />
+		<Unit filename="include/FootPrint.h" />
+		<Unit filename="include/Point.h" />
+		<Unit filename="include/Road.h" />
+		<Unit filename="include/Triangle.h" />
+		<Unit filename="include/open_shp.h" />
 		<Unit filename="include/parcel.h" />
-		<Unit filename="include/shpto3d.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/BuildingModel.cpp" />
+		<Unit filename="src/Envelop.cpp" />
+		<Unit filename="src/FootPrint.cpp" />
+		<Unit filename="src/Point.cpp" />
+		<Unit filename="src/Road.cpp" />
+		<Unit filename="src/Triangle.cpp" />
 		<Unit filename="src/parcel.cpp" />
-		<Unit filename="src/shpto3d.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
