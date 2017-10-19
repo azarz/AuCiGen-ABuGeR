@@ -9,3 +9,8 @@ Road::~Road()
 {
     //dtor
 }
+
+void Road::to_obj()
+{
+    //convert to .obj
+}

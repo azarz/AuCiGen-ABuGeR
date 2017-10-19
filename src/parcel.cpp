@@ -1,6 +1,8 @@
 #include <iostream>
 #include "parcel.h"
-// include class FootPrint
+#include "ogrsf_frmts.h"
+#include "BuildingType.h"
+#include "FootPrint.h"
 using namespace std;
 
 
@@ -19,4 +21,8 @@ Parcel::~Parcel()
 void Parcel::create_footprint()
 {
     //create the foot print of building
+}
+void Parcel::to_obj()
+{
+    //convert to .obj
 }

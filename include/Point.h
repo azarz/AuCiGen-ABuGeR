@@ -7,6 +7,10 @@ class Point
     public:
         Point();
         virtual ~Point();
+
+        double x;
+        double y;
+        double z;
     protected:
     private:
 };
