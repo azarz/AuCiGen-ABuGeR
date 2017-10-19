@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/open_shp" />
 		<Unit filename="include/parcel.h" />
 		<Unit filename="include/shpto3d.h" />
 		<Unit filename="main.cpp" />
