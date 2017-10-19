@@ -1,5 +1,5 @@
 #include <iostream>
-#include "parcel.h"
+#include "Parcel.h"
 #include "ogrsf_frmts.h"
 #include "BuildingType.h"
 #include "FootPrint.h"

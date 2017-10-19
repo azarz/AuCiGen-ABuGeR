@@ -1,6 +1,6 @@
 #include "BuildingModel.h"
 #include "Triangle.h"
-#include "parcel.h"
+#include "Parcel.h"
 #include <vector>
 
 BuildingModel::BuildingModel()
