@@ -13,8 +13,8 @@ class BuildingModel
 
         void translate();
         void rotate();
-        BuildingModel join();
-        BuildingModel creat_roof();
+        //BuildingModel join();
+        //BuildingModel creat_roof();
         void size();
         void split();
         void repeat();

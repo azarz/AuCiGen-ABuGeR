@@ -15,7 +15,7 @@ class Parcel
         void to_obj();
 
         OGRPolygon geom;
-        BuildingType type;
+        BuildingType* type;
         double area;
         double area_price;
         double floorspace;

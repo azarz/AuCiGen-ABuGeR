@@ -20,7 +20,7 @@ void BuildingModel::rotate()
 {
     //
 }
-BuildingModel BuildingModel::join()
+/*BuildingModel BuildingModel::join()
 {
     //
 }
@@ -28,6 +28,7 @@ BuildingModel BuildingModel::creat_roof()
 {
     //
 }
+*/
 void BuildingModel::size()
 {
     //
