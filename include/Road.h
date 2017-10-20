@@ -3,25 +3,24 @@
 
 #include <iostream>
 #include "ogrsf_frmts.h"
-#include "Polygon.h"
 using namespace std;
 
-class Road : public Polygon
+class Road
 {
     public:
-        Road(OGRPolygon* poPolygon, std::string t_r);
+        Road(OGRPolygon* poPolygon, int t_r);
         virtual ~Road();
 
         void to_obj();
 
         //Getters
         OGRPolygon* get_geom()const{return geom;};
-        string get_type()const{return type;};
+        int get_type()const{return type;};
 
     protected:
     private:
         OGRPolygon* geom;
-        string type;
+        int type;
 };
 
 #endif // ROAD_H

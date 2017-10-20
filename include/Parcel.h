@@ -3,10 +3,9 @@
 
 #include "ogrsf_frmts.h"
 #include "BuildingType.h"
-#include "Polygon.h"
 #include "orient.h"
 
-class Parcel : public Polygon
+class Parcel
 {
     public:
         Parcel(OGRPolygon* poPolygon);

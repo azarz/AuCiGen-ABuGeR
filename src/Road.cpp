@@ -2,7 +2,7 @@
 #include <iostream>
 #include "ogrsf_frmts.h"
 
-Road::Road(OGRPolygon* poPolygon, std::string t_r)
+Road::Road(OGRPolygon* poPolygon, int t_r)
 {
     geom= poPolygon;
     type= t_r;
