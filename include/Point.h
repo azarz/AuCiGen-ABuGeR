@@ -5,7 +5,7 @@
 class Point
 {
     public:
-        Point();
+        Point(double p_x, double p_y, double p_z);
         virtual ~Point();
 
         //Getters
