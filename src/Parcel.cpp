@@ -7,11 +7,14 @@
 using namespace std;
 
 
-Parcel::Parcel()
+Parcel::Parcel() : area(1), area_price(1), floorspace(1)// area(geom->OGRCurvePolygon::get_Area());
 {
     //ctor
     //type = new Industry;
-    cout << "parcel" << endl;
+    cout << "parcel :" <<endl;
+    cout << "area->"<< area << endl;
+    cout << "area_price->"<< area_price << endl;
+    cout << "floorspace->" << floorspace<< endl;
 }
 
 Parcel::~Parcel()
