@@ -15,7 +15,7 @@ ROOF
 class Triangle
 {
     public:
-        Triangle();
+        Triangle(Point* T_p1, Point* T_p2, Point* T_p3, TriangleType T_type);
         virtual ~Triangle();
 
         //Getters
