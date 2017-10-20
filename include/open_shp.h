@@ -46,7 +46,7 @@ if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
            OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
                 int iField =1;
                 OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
-                if( poFieldDefn->GetType() == OFTString )
+                if( poFieldDefn->GetType() == OFTInteger )
                 {
                     Road* road = new Road(poPolygon, poFeature->GetFieldAsInteger(iField));
                     //printf("%s\n", road->type);
