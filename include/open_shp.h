@@ -5,15 +5,16 @@
 #include "ogrsf_frmts.h"
 #include "Road.h"
 #include "Parcel.h"
+#include <vector>
 
 using namespace std;
 
 
-void OpenShapeFile(char* fill_directory, char layer_type)
+vector<Polygon> OpenShapeFile(char* fill_directory, char layer_type)
 {
     OGRErr error;
     GDALAllRegister();
-
+    vector<Polygon> liPolygon;
     GDALDataset       *poDS;
     poDS = (GDALDataset*) GDALOpenEx( fill_directory, GDAL_OF_VECTOR, NULL, NULL, NULL );
     if( poDS == NULL )
@@ -58,11 +59,12 @@ if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
 
                     Road* road = new Road(poPolygon, poFeature->GetFieldAsString(iField));
                     //printf("%s\n", road->type);
+                    liPolygon.push_back(*road);
                     cout << road->get_type() << endl;
                 }
             }
             else
-            {Parcel* parcel = new Parcel(poPolygon);}
+            {Parcel* parcel = new Parcel(poPolygon);liPolygon.push_back(*parcel);}
 
 
        }
@@ -72,6 +74,7 @@ if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
 }
 
 GDALClose( poDS );
+return liPolygon;
 }
 
 /*int main()

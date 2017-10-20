@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include "ogrsf_frmts.h"
+#include "Polygon.h"
 using namespace std;
 
-class Road
+class Road : public Polygon
 {
     public:
         Road(OGRPolygon* poPolygon, std::string t_r);
