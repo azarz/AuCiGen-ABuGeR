@@ -1,9 +1,11 @@
 #include "Footprint.h"
 #include "Envelop.h"
+#include "Parcel.h"
 
-Footprint::Footprint()
+Footprint::Footprint(OGRLinearRing* linearRing,Parcel* parcel)
 {
-    //ctor
+    this->geom = linearRing;
+    this->parcel = parcel;
 }
 
 Footprint::~Footprint()

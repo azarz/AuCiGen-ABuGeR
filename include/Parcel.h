@@ -15,7 +15,7 @@ class Parcel
         void to_obj();
 
         // Getters
-        OGRPolygon* get_geom;
+        OGRPolygon* get_geom()const{return geom;};
         BuildingType* get_type()const{return type;};
         double get_area()const{return area;};
         double get_area_price()const{return area_price;};

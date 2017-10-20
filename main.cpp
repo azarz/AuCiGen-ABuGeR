@@ -6,6 +6,8 @@
 #include <vector>
 #include "Road.h"
 #include "Parcel.h"
+#include "orient.h"
+#include "Footprint.h"
 
 using namespace std;
 
@@ -23,6 +25,20 @@ int main()
     fill_directory ="1_data/shp_P.shp";
     layer_type ='P';
     PARCELS=OpenShapeFile_parcels(fill_directory);
+    //OGRGeometry* v12 = PARCELS.at(0).get_geom();
+
+    OGRGeometry* v1 = PARCELS.at(0).get_geom()->getExteriorRing();
+    OGRLineString* v2 = get_intersection_road(v1,ROADS);
+    OGRLineString* v3 = get_other_sides(v1,v2);
+    OGRLinearRing* v4 = PARCELS.at(0).create_footprint(v2,v3);
+    int v5=0;
+    int v6=0;
+    int v7=0;
+    int v8=0;
+
+    Footprint* footprint2 = new Footprint(v4,&PARCELS.at(0));
+
+    cout << "Test Antoine " << footprint2->get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
     return 0;
 }

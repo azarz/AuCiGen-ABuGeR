@@ -9,17 +9,17 @@ class Envelop;
 class Footprint
 {
     public:
-        Footprint();
+        Footprint(OGRLinearRing* linearRing,Parcel* parcel);
         virtual ~Footprint();
 
         Envelop create_envelop();
 
         // Getters
-        OGRPolygon get_geom()const{return geom;};
+        OGRLinearRing* get_geom()const{return geom;};
         Parcel* get_parcel()const{return parcel;};
     protected:
     private:
-        OGRPolygon geom;
+        OGRLinearRing* geom;
         Parcel* parcel;
 };
 
