@@ -1,8 +1,11 @@
 #include "Road.h"
+#include <iostream>
+#include "ogrsf_frmts.h"
 
-Road::Road()
+Road::Road(OGRPolygon* poPolygon, std::string t_r)
 {
-    //ctor
+    geom= poPolygon;
+    type= t_r;
 }
 
 Road::~Road()
@@ -14,3 +17,4 @@ void Road::to_obj()
 {
     //convert to .obj
 }
+

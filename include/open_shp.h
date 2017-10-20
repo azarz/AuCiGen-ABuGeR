@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include "ogrsf_frmts.h"
+#include "Road.h"
+#include "Parcel.h"
 
 using namespace std;
 
 
-void OpenShapeFile(string fill_directory, char layer_type)
+void OpenShapeFile(char* fill_directory, char layer_type)
 {
     OGRErr error;
     GDALAllRegister();
@@ -20,10 +22,10 @@ void OpenShapeFile(string fill_directory, char layer_type)
         exit( 1 );
     }
     OGRLayer  *poLayer;
-    if (layer_type == "R")
-    {poLayer = poDS->GetLayerByName( "Road" );}
+    if (layer_type == 'R')
+    {poLayer = poDS->GetLayerByName( "shp_R");}//"Road" );}
     else
-    {poLayer = poDS->GetLayerByName( "Parcel" );}
+    {poLayer = poDS->GetLayerByName( "shp_P" );}
 
 
 
@@ -35,7 +37,6 @@ poLayer ->ResetReading();
 if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
 {
    OGRFeature *poFeature;
-   PolygonFeature Polygon;
    OGRPoint ptTemp;
    for ( int i = 0; i < NumberOfFeatures; i++ )
    {
@@ -47,17 +48,21 @@ if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
        {
            OGRPolygon *poPolygon = ( OGRPolygon * )poGeometry;
            OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
-           int iField =0;
-            OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
-            if (layer_type == "R")
+
+            if (layer_type == 'R')
             {
+                int iField =1;
+                OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
                 if( poFieldDefn->GetType() == OFTString )
                 {
-                    Road road = new Road(poPolygon, poFeature->GetFieldAsString(iField));
+
+                    Road* road = new Road(poPolygon, poFeature->GetFieldAsString(iField));
+                    //printf("%s\n", road->type);
+                    cout << road->get_type() << endl;
                 }
             }
             else
-            {Parcel parcel = new Parcel(poPolygon);}
+            {Parcel* parcel = new Parcel(poPolygon);}
 
 
        }
@@ -69,52 +74,12 @@ if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
 GDALClose( poDS );
 }
 
-int main()
+/*int main()
 {
     OpenShapeFile();
     cout << "Hello world!" << endl;
     return 0;
-}
+}*/
 
 
 #endif // OPEN_SHP_INCLUDED
-
-/*
-int main()
-{
-    GDALAllRegister();
-
-    GDALDataset       *poDS;
-    //poDS = (GDALDataset*) GDALOpenEx( "data/geoflar-departementsLAM.shp", GDAL_OF_VECTOR, NULL, NULL, NULL );
-    poDS = (GDALDataset*) GDALOpenEx( "data/test_shp/test_shpLAM.shp", GDAL_OF_VECTOR, NULL, NULL, NULL );
-    if( poDS == NULL )
-    {
-        printf( "Open failed.\n" );
-        exit( 1 );
-    }
-    OGRLayer  *poLayer;
-    //poLayer = poDS->GetLayerByName( "geoflar-departementsLAM" );
-    poLayer = poDS->GetLayerByName( "test_shpLAM" );
-    OGRFeature *poFeature;
-    poLayer->ResetReading();
-    while( (poFeature = poLayer->GetNextFeature()) != NULL )
-    {
-        OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
-        int iField;
-        //iField =0;
-        for( iField = 0; iField < poFDefn->GetFieldCount(); iField++ )
-        {
-            //printf( "place : %d", iField );
-            OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
-            if( poFieldDefn->GetType() == OFTInteger )
-                printf( "%d,", poFeature->GetFieldAsInteger( iField ) );
-            else if( poFieldDefn->GetType() == OFTInteger64 )
-                printf( CPL_FRMT_GIB ",", poFeature->GetFieldAsInteger64( iField ) );
-            else if( poFieldDefn->GetType() == OFTReal )
-                printf( "%.3f,", poFeature->GetFieldAsDouble(iField) );
-            else if( poFieldDefn->GetType() == OFTString )
-                printf( "%s,", poFeature->GetFieldAsString(iField) );
-            else
-                printf( "%s,", poFeature->GetFieldAsString(iField) );
-        }
-*/

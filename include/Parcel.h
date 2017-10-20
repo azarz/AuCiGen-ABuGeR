@@ -8,14 +8,14 @@
 class Parcel
 {
     public:
-        Parcel();
+        Parcel(OGRPolygon* poPolygon);
         virtual ~Parcel();
 
         OGRLinearRing* create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
         void to_obj();
 
         // Getters
-        OGRPolygon get_geom;
+        OGRPolygon* get_geom;
         BuildingType* get_type()const{return type;};
         double get_area()const{return area;};
         double get_area_price()const{return area_price;};
@@ -23,7 +23,7 @@ class Parcel
 
     protected:
     private:
-        OGRPolygon geom;
+        OGRPolygon* geom;
         BuildingType* type;
         double area;
         double area_price;

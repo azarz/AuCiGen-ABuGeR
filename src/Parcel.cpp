@@ -7,14 +7,20 @@
 using namespace std;
 
 
-Parcel::Parcel() : area(1), area_price(1), floorspace(1)// area(geom->OGRCurvePolygon::get_Area());
+Parcel::Parcel(OGRPolygon* poPolygon)
 {
     //ctor
-    //type = new Industry;
+    //area(1), area_price(1), floorspace(1)// area(geom->OGRCurvePolygon::get_Area());
+    OGRPolygon* geom = poPolygon;
+    BuildingType* type = new Industry();
+    double area=geom->OGRCurvePolygon::get_Area();
+    double area_price=0;
+    double floorspace=0;
     cout << "parcel :" <<endl;
     cout << "area->"<< area << endl;
     cout << "area_price->"<< area_price << endl;
     cout << "floorspace->" << floorspace<< endl;
+
 }
 
 Parcel::~Parcel()
@@ -29,7 +35,7 @@ OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLi
     OGRGeometry* road_buffer = linearIntersection->Buffer(margins.at(1));
     OGRGeometry* neigh_buffer = otherSides->Buffer(margins.at(0));
 
-    OGRGeometry* diff1 = geom.Difference(road_buffer);
+    OGRGeometry* diff1 = geom->Difference(road_buffer);
     OGRGeometry* diff2 = diff1->Difference(neigh_buffer);
 
     OGRGeometry* contour = diff2->getLinearGeometry();
