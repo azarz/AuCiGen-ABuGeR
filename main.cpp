@@ -8,8 +8,8 @@
 using namespace std;
 
 
-vector<Polygon> ROADS
-vector<Polygon> PARCELS
+vector<Polygon> ROADS;
+vector<Polygon> PARCELS;
 
 
 int main()

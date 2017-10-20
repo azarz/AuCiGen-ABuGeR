@@ -14,8 +14,8 @@ Parcel::Parcel(OGRPolygon* poPolygon)
     OGRPolygon* geom = poPolygon;
     BuildingType* type = new Industry();
     double area=geom->OGRCurvePolygon::get_Area();
-    double area_price=0;
-    double floorspace=0;
+    double area_price=10*area;
+    double floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
     cout << "parcel :" <<endl;
     cout << "area->"<< area << endl;
     cout << "area_price->"<< area_price << endl;
