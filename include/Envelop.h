@@ -7,7 +7,7 @@
 class Envelop
 {
     public:
-        Envelop();
+        Envelop(Footprint* trace);
         virtual ~Envelop();
 
         // Getters

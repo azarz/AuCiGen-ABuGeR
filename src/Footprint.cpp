@@ -15,5 +15,8 @@ Footprint::~Footprint()
 
 Envelop Footprint::create_envelop()
 {
-    //_
+    /*// return an object envelop instancied by Envelop class from here
+    Envelop envelop = new Envelop::Envelop()
+    return envelop
+    */
 }
