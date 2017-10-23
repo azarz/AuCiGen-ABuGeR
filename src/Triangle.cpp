@@ -1,6 +1,9 @@
 #include "Triangle.h"
 
-Triangle::Triangle(Point* T_p1, Point* T_p2, Point* T_p3, TriangleType T_type)
+Triangle::Triangle()
+{
+}
+Triangle::Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type)
 {
     type= T_type; //wall, floor, roof
     p1=T_p1;
@@ -10,7 +13,7 @@ Triangle::Triangle(Point* T_p1, Point* T_p2, Point* T_p3, TriangleType T_type)
 
 Triangle::~Triangle()
 {
-    delete p1;
-    delete p2;
-    delete p3;
+    //delete p1;
+    //delete p2;
+    //delete p3;
 }

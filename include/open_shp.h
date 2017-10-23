@@ -98,13 +98,13 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
 
                 Parcel parcel = Parcel(poPolygon);
                 liPolygon.push_back(parcel);
-                cout << liPolygon.size() << endl;
+                //cout << liPolygon.size() << endl;
            }
 
        }
        //OGRFeature::DestroyFeature(poFeature);
     }
-    cout << liPolygon.size() << endl;
+    //cout << liPolygon.size() << endl;
     GDALClose( poDS );
 }
 
