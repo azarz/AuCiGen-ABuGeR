@@ -21,11 +21,14 @@ int main()
     //Parcel();
     char* fill_directory ="1_data/shp_R.shp";
     char layer_type ='R';
-    ROADS=OpenShapeFile_roads(fill_directory);
+    OpenShapeFile_roads(fill_directory, ROADS);
     fill_directory ="1_data/shp_P.shp";
     layer_type ='P';
-    PARCELS=OpenShapeFile_parcels(fill_directory);
+    OpenShapeFile_parcels(fill_directory, PARCELS);
     //OGRGeometry* v12 = PARCELS.at(0).get_geom();
+
+    cout << PARCELS.size() << endl;
+    PARCELS.at(0).print();
 
     OGRGeometry* v1 = PARCELS.at(0).get_geom()->getExteriorRing();
     OGRLineString* v2 = get_intersection_road(v1,ROADS);
@@ -36,9 +39,9 @@ int main()
     int v7=0;
     int v8=0;
 
-    Footprint* footprint2 = new Footprint(v4,&PARCELS.at(0));
+    //Footprint* footprint2 = new Footprint(v4,&PARCELS.at(0));
 
-    cout << "Test Antoine " << footprint2->get_parcel()->get_area() << endl;
+//    cout << "Test Antoine " << footprint2->get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
     return 0;
 }

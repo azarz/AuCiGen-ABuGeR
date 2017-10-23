@@ -34,26 +34,36 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Building.h" />
 		<Unit filename="include/BuildingModel.h" />
 		<Unit filename="include/BuildingType.h" />
 		<Unit filename="include/Envelop.h" />
 		<Unit filename="include/FootPrint.h" />
+		<Unit filename="include/Footprint.h" />
+		<Unit filename="include/Parcel.h" />
 		<Unit filename="include/Point.h" />
 		<Unit filename="include/Road.h" />
 		<Unit filename="include/Triangle.h" />
+		<Unit filename="include/catch.h" />
 		<Unit filename="include/open_shp.h" />
 		<Unit filename="include/orient.h" />
 		<Unit filename="include/parcel.h" />
+		<Unit filename="include/test.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Building.cpp" />
 		<Unit filename="src/BuildingModel.cpp" />
 		<Unit filename="src/BuildingType.cpp" />
 		<Unit filename="src/Envelop.cpp" />
 		<Unit filename="src/FootPrint.cpp" />
+		<Unit filename="src/Footprint.cpp" />
+		<Unit filename="src/Parcel.cpp" />
 		<Unit filename="src/Point.cpp" />
 		<Unit filename="src/Road.cpp" />
 		<Unit filename="src/Triangle.cpp" />
+		<Unit filename="src/catch.cpp" />
 		<Unit filename="src/orient.cpp" />
 		<Unit filename="src/parcel.cpp" />
+		<Unit filename="src/test.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
