@@ -97,24 +97,20 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
        OGRPoint ptTemp;
        for ( int i = 0; i < NumberOfFeatures; i++ )
        {
-           //printf("\nelement : %d\n", i);
-           poFeature = poLayer ->GetNextFeature();
-           OGRGeometry *poGeometry;
-           poGeometry = poFeature ->GetGeometryRef();
+           poFeature = poLayer->GetNextFeature();
+           OGRGeometry* poGeometry;
+           poGeometry = poFeature->GetGeometryRef();
            if ( poGeometry != NULL && wkbFlatten ( poGeometry ->getGeometryType() ) == wkbPolygon )
            {
                 OGRPolygon* poPolygon = (OGRPolygon*)poGeometry;
-                //OGRFeatureDefn* poFDefn = poLayer->GetLayerDefn();
 
                 Parcel parcel = Parcel(poPolygon);
                 liPolygon.push_back(parcel);
-                //cout << liPolygon.size() << endl;
            }
 
        }
-       //OGRFeature::DestroyFeature(poFeature);
+       OGRFeature::DestroyFeature(poFeature);
     }
-    //cout << liPolygon.size() << endl;
     GDALClose( poDS );
 }
 
