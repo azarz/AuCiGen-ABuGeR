@@ -14,6 +14,11 @@ class Point
         double get_y()const{return y;};
         double get_z()const{return z;};
 
+        //Other functions
+        void translate(double vec[3]);
+        void rotate(double vec[3], double angle);
+        void size(double vec[3]);
+
     protected:
     private:
         double x;
