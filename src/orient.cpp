@@ -24,7 +24,8 @@ OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> ROADS
     {
         Road road = ROADS.at(i);
 
-        //OGRGeometry* road_ring = (OGRGeometry*)road.get_geom()->getExteriorRing();
+        //OGRGeometry* road_bound = road.get_geom()->getBoundary();
+        //OGRGeometry* parcel_bound = parcelGeom->getBoundary();
 
         if(road.get_geom()->Intersects(parcelGeom))
         {
