@@ -7,11 +7,25 @@
 
 class Parcel
 {
+    /**
+    *@class Parcel
+    *contain parcel
+    */
     public:
         Parcel(OGRPolygon* poPolygon);
+        /**
+        *\fn Parcel::Parcel(OGRPolygon* poPolygon)
+        *creator
+        *@param[in] poPolygon OGRPolygon* : parcel geometry
+        */
         virtual ~Parcel();
 
         OGRLinearRing* create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
+        /**
+        *\fn OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
+        *creat the footprint of the building on the parcel
+        *@param[in] linearIntersection OGRLineString* :
+        */
         void to_obj();
         void print();
 
