@@ -55,12 +55,12 @@ void Point::size(double vec[3])
 
 
 
-TEST_CASE("operator == are computed","[opertator==]")
+/*TEST_CASE("operator == are computed","[opertator==]")
 {
     REQUIRE(a==a);
     REQUIRE(b==b);
     REQUIRE(c==c);
 }
-
+*/
 
 

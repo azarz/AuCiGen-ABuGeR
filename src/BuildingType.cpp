@@ -46,8 +46,8 @@ void Industry::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=1.0;
-    margin_road=1.0;
+    margin_parcel=0.00001;
+    margin_road=0.00001;
 }
 Office::Office(){set_param();}
 void Office::set_param()
