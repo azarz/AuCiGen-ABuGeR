@@ -23,7 +23,7 @@ class BuildingModel
         * @param[in] vec It's the array of the translation.
         * @param[in] name It's the name of the selected surfaces.
         */
-        void translate(double vec[3], string name);
+        void translate(double vec[3], TriangleType name);
 
         /**
         * This function allows us to rotate the selected surfaces of the BuildingModel according to an axis and an angle of rotation (the origin is [0, 0, 0]).
@@ -31,14 +31,14 @@ class BuildingModel
         * @param[in] angle It's the angle of rotation.
         * @param[in] name It's the name of the selected surfaces.
         */
-        void rotate(double vec[3], double angle, string name);
+        void rotate(double vec[3], double angle, TriangleType name);
 
         /**
         * This function allows us to resize the selected surfaces of the BuildingModel according to an array.
         * @param[in] vec It's the array of the resize.
         * @param[in] name It's the name of the selected surfaces.
         */
-        void size(double vec[3], string name);
+        void size(double vec[3], TriangleType name);
 
         /**
         * This function allows us to split the selected surfaces of the BuildingModel according to an axis and a origin point.

@@ -14,52 +14,31 @@ BuildingModel::~BuildingModel()
 {
     //dtor
 }
-void BuildingModel::translate(double vec[3], string name)
+void BuildingModel::translate(double vec[3], TriangleType name)
 {
     for (int i=0; i<li_triangle.size(); i++)
     {
-        int j=0;
-        bool b = true;
-        while (j<li_triangle[i].get_type().size() && b)
-        {
-            if (li_triangle[i].get_type()[j] == name){b=false;}
-            j++;
-        }
-        if (!b)
+        if (li_triangle[i].get_type() == name)
         {
             li_triangle[i].translate(vec);
         }
     }
 }
-void BuildingModel::rotate(double vec[3], double angle, string name)
+void BuildingModel::rotate(double vec[3], double angle, TriangleType name)
 {
     for (int i=0; i<li_triangle.size(); i++)
     {
-        int j=0;
-        bool b = true;
-        while (j<li_triangle[i].get_type().size() && b)
-        {
-            if (li_triangle[i].get_type()[j] == name){b=false;}
-            j++;
-        }
-        if (!b)
+        if (li_triangle[i].get_type() == name)
         {
             li_triangle[i].rotate(vec,angle);
         }
     }
 }
-void BuildingModel::size(double vec[3], string name)
+void BuildingModel::size(double vec[3], TriangleType name)
 {
     for (int i=0; i<li_triangle.size(); i++)
     {
-        int j=0;
-        bool b = true;
-        while (j<li_triangle[i].get_type().size() && b)
-        {
-            if (li_triangle[i].get_type()[j] == name){b=false;}
-            j++;
-        }
-        if (!b)
+        if (li_triangle[i].get_type() == name)
         {
             li_triangle[i].size(vec);
         }

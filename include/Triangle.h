@@ -19,16 +19,17 @@ ROOF
 class Triangle
 {
     public:
-        Triangle(Point* T_p1, Point* T_p2, Point* T_p3, vector<string> T_type);
+        Triangle();
+        Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type);
         virtual ~Triangle();
 
         //Getters
-        vector<string> get_type()const{return type;};
-        Point* get_p1()const{return p1;};
-        Point* get_p2()const{return p2;};
-        Point* get_p3()const{return p3;};
+        TriangleType get_type()const{return type;};
+        Point get_p1()const{return p1;};
+        Point get_p2()const{return p2;};
+        Point get_p3()const{return p3;};
 
-        void add_type(string newType);
+        void add_type(TiangleType newType);
 
         void translate(double vec[3]);
         void rotate(double vec[3], double angle);
@@ -46,10 +47,17 @@ class Triangle
 
     protected:
     private:
+<<<<<<< HEAD
         vector<string> type; //wall, floor, roof
         Point* p1;
         Point* p2;
         Point* p3;
+=======
+        TriangleType type; //wall, floor, roof
+        Point p1;
+        Point p2;
+        Point p3;
+>>>>>>> b09b6814f60911ff2cf67854168a380500d8d474
 };
 
 #endif // TRIANGLE_H

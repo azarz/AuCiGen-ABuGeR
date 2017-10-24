@@ -11,15 +11,15 @@ Parcel::Parcel(OGRPolygon* poPolygon)
 {
     //ctor
     //area(1), area_price(1), floorspace(1)// area(geom->OGRCurvePolygon::get_Area());
-    OGRPolygon* geom = poPolygon;
-    BuildingType* type = new Industry();
-    double area=geom->OGRCurvePolygon::get_Area();
-    double area_price=10*area;
-    double floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
-    cout << "parcel :" <<endl;
+    geom = poPolygon;
+    type = new Industry();
+    area=geom->OGRCurvePolygon::get_Area();
+    area_price=10*area;
+    floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
+    /*cout << "parcel :" <<endl;
     cout << "area->"<< area << endl;
     cout << "area_price->"<< area_price << endl;
-    cout << "floorspace->" << floorspace<< endl;
+    cout << "floorspace->" << floorspace<< endl;*/
 
 }
 
@@ -27,6 +27,14 @@ Parcel::~Parcel()
 {
     //dtor
     cout << "del" << endl;
+}
+
+void Parcel::print(){
+    cout << "parcel :" <<endl;
+    cout << "geom:"<< geom->getGeometryType() << endl;
+    cout << "area->"<< geom->OGRCurvePolygon::get_Area() << endl;
+    cout << "area_price->"<< area_price << endl;
+    cout << "floorspace->" << floorspace<< endl;
 }
 
 OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides)

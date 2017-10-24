@@ -13,6 +13,7 @@ class Parcel
 
         OGRLinearRing* create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
         void to_obj();
+        void print();
 
         // Getters
         OGRPolygon* get_geom()const{return geom;};

@@ -2,6 +2,9 @@
 #include <cmath>
 #define PI 3.14159265
 
+Point::Point()
+{
+}
 Point::Point(double p_x, double p_y, double p_z)
 {
     //ctor

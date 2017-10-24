@@ -19,15 +19,20 @@ vector<Parcel> PARCELS;
 int main()
 {
     //Parcel();
-    char* fill_directory ="1_data/shp_R.shp";
+    char* fill_directory ="1_data/test/road_test.shp";
     char layer_type ='R';
-    ROADS=OpenShapeFile_roads(fill_directory);
-    fill_directory ="1_data/shp_P.shp";
+    OpenShapeFile_roads(fill_directory, ROADS);
+    fill_directory ="1_data/test/test_parcel.shp";
     layer_type ='P';
-    PARCELS=OpenShapeFile_parcels(fill_directory);
+    OpenShapeFile_parcels(fill_directory, PARCELS);
     //OGRGeometry* v12 = PARCELS.at(0).get_geom();
+    //ROADS.pop_back();
+    cout << PARCELS.size() << endl;
+    cout << "rest:" << PARCELS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
+    PARCELS.at(0).print();
 
     OGRGeometry* v1 = PARCELS.at(0).get_geom()->getExteriorRing();
+    cout << v1->getGeometryName()<< endl;
     OGRLineString* v2 = get_intersection_road(v1,ROADS);
     OGRLineString* v3 = get_other_sides(v1,v2);
     OGRLinearRing* v4 = PARCELS.at(0).create_footprint(v2,v3);

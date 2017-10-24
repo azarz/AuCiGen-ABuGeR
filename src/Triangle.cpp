@@ -3,7 +3,10 @@
 #include <vector>
 #include <string>
 
-Triangle::Triangle(Point* T_p1, Point* T_p2, Point* T_p3, vector<string> T_type)
+Triangle::Triangle()
+{
+}
+Triangle::Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type)
 {
     type= T_type; //wall, floor, roof
     p1=T_p1;
@@ -16,9 +19,9 @@ Triangle::~Triangle()
 
 }
 
-void Triangle::add_type(string newType)
+void Triangle::add_type(TriangleType newType)
 {
-    type.push_back(newType);
+    type = newType;
 }
 
 void Triangle::translate(double vec[3])
@@ -63,5 +66,10 @@ Triangle[2] Triangle::split(double axis[3], Point orirgin, string oldName, strin
 Triangle Triangle::repeat(string newName)
 {
     //to fill
+=======
+    //delete p1;
+    //delete p2;
+    //delete p3;
+>>>>>>> b09b6814f60911ff2cf67854168a380500d8d474
 }
 */
