@@ -1,0 +1,248 @@
+# depslib dependency file v1.0
+1508742893 source:/home/formation/AuCiGen/ABuGeR/src/Building.cpp
+	"Building.h"
+	"Parcel.h"
+	"BuildingModel.h"
+	<vector>
+
+1508742893 /home/formation/AuCiGen/ABuGeR/include/Building.h
+	"Parcel.h"
+	"BuildingModel.h"
+	<vector>
+
+1508854445 /home/formation/AuCiGen/ABuGeR/include/Parcel.h
+	"ogrsf_frmts.h"
+	"BuildingType.h"
+	"orient.h"
+	"Footprint.h"
+
+1508742893 /home/formation/AuCiGen/ABuGeR/include/BuildingType.h
+	<vector>
+	<iostream>
+
+1508851353 /home/formation/AuCiGen/ABuGeR/include/orient.h
+	<vector>
+	"ogrsf_frmts.h"
+	"Road.h"
+
+1508853883 /home/formation/AuCiGen/ABuGeR/include/Road.h
+	<iostream>
+	"ogrsf_frmts.h"
+
+1508852956 /home/formation/AuCiGen/ABuGeR/include/BuildingModel.h
+	"Triangle.h"
+	"Parcel.h"
+	<vector>
+
+1508852956 /home/formation/AuCiGen/ABuGeR/include/Triangle.h
+	"Point.h"
+	<iostream>
+	<vector>
+	<string>
+
+1508852956 /home/formation/AuCiGen/ABuGeR/include/Point.h
+
+1508839296 source:/home/formation/AuCiGen/ABuGeR/src/BuildingType.cpp
+	"BuildingType.h"
+
+1508742893 source:/home/formation/AuCiGen/ABuGeR/src/catch.cpp
+	"catch.h"
+
+1508742893 /home/formation/AuCiGen/ABuGeR/include/catch.h
+	<sstream>
+	<algorithm>
+	<string>
+	<vector>
+	<string>
+	<cstddef>
+	<sstream>
+	<iomanip>
+	<limits>
+	<vector>
+	<cstddef>
+	<tuple>
+	<type_traits>
+	<string>
+	<string>
+	<string>
+	<signal.h>
+	<cstddef>
+	<string>
+	<stdint.h>
+	<string>
+	<vector>
+	<string>
+	<stdlib.h>
+	<string>
+	<vector>
+	<string>
+	<cmath>
+	<limits>
+	<type_traits>
+	<string>
+	<string>
+	<set>
+	<string>
+	<crtdbg.h>
+	<stdexcept>
+	<string>
+	<vector>
+	<iosfwd>
+	<string>
+	<vector>
+	<streambuf>
+	<streambuf>
+	<ostream>
+	<fstream>
+	<memory>
+	<memory>
+	<vector>
+	<string>
+	<stdexcept>
+	<string>
+	<vector>
+	<sstream>
+	<algorithm>
+	<cctype>
+	<map>
+	<stdexcept>
+	<memory>
+	<fstream>
+	<ctime>
+	<string>
+	<vector>
+	<sstream>
+	<string>
+	<ostream>
+	<map>
+	<limits>
+	<algorithm>
+	<algorithm>
+	<string>
+	<assert.h>
+	<vector>
+	<stdexcept>
+	<AfxWin.h>
+	<windows.h>
+	<signal.h>
+	<set>
+	<string>
+	<fstream>
+	<stdlib.h>
+	<limits>
+	<vector>
+	<set>
+	<sstream>
+	<algorithm>
+	<map>
+	<map>
+	<sstream>
+	<stdexcept>
+	<cstdio>
+	<iostream>
+	<cerrno>
+	<unistd.h>
+	<vector>
+	<string>
+	<map>
+	<cctype>
+	<sys/time.h>
+	<cstring>
+	<cctype>
+	<assert.h>
+	<stdbool.h>
+	<sys/types.h>
+	<unistd.h>
+	<sys/sysctl.h>
+	<fstream>
+	<string>
+	<cstring>
+	<cfloat>
+	<cstdio>
+	<assert.h>
+	<sstream>
+	<string>
+	<vector>
+	<iomanip>
+	<assert.h>
+	<cfloat>
+	<cstdio>
+
+1508830334 source:/home/formation/AuCiGen/ABuGeR/src/Envelop.cpp
+	"Envelop.h"
+
+1508830334 /home/formation/AuCiGen/ABuGeR/include/Envelop.h
+	"BuildingModel.h"
+	"Footprint.h"
+
+1508854419 /home/formation/AuCiGen/ABuGeR/include/Footprint.h
+	"Parcel.h"
+	"ogrsf_frmts.h"
+
+1508839772 source:/home/formation/AuCiGen/ABuGeR/src/Footprint.cpp
+	"Footprint.h"
+	"Envelop.h"
+	"Parcel.h"
+
+1508849045 source:/home/formation/AuCiGen/ABuGeR/src/orient.cpp
+	<iostream>
+	"ogrsf_frmts.h"
+	"Road.h"
+	"catch.h"
+	<vector>
+
+1508839324 source:/home/formation/AuCiGen/ABuGeR/src/Parcel.cpp
+	<iostream>
+	"Parcel.h"
+	"ogrsf_frmts.h"
+	"BuildingType.h"
+	"Footprint.h"
+	<vector>
+
+1508742893 source:/home/formation/AuCiGen/ABuGeR/src/Road.cpp
+	"Road.h"
+	<iostream>
+	"ogrsf_frmts.h"
+
+1508742893 source:/home/formation/AuCiGen/ABuGeR/src/test.cpp
+	"catch.h"
+
+1508852956 source:/home/formation/AuCiGen/ABuGeR/src/BuildingModel.cpp
+	"BuildingModel.h"
+	"Triangle.h"
+	"Point.h"
+	"Parcel.h"
+	<vector>
+	<iostream>
+
+1508852956 source:/home/formation/AuCiGen/ABuGeR/src/Point.cpp
+	"Point.h"
+	"catch.h"
+	<iostream>
+	<cmath>
+
+1508852956 source:/home/formation/AuCiGen/ABuGeR/src/Triangle.cpp
+	"Triangle.h"
+	"Point.h"
+	"catch.h"
+	<vector>
+	<string>
+	<cmath>
+
+1508854429 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+	<iostream>
+	<vector>
+	"open_shp.h"
+	"Road.h"
+	"Parcel.h"
+	"orient.h"
+	"Footprint.h"
+
+1508849461 /home/formation/AuCiGen/ABuGeR/include/open_shp.h
+	<iostream>
+	"ogrsf_frmts.h"
+	"Road.h"
+	"Parcel.h"
+	<vector>
+	"catch.h"
+
