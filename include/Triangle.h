@@ -3,14 +3,18 @@
 
 #include "Point.h"
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
+/*
 enum TriangleType{
 WALL,
 FLOOR,
 ROOF
 };
+*/
 
 class Triangle
 {
@@ -25,12 +29,35 @@ class Triangle
         Point get_p2()const{return p2;};
         Point get_p3()const{return p3;};
 
+        void add_type(TiangleType newType);
+
+        void translate(double vec[3]);
+        void rotate(double vec[3], double angle);
+        void size(double vec[3]);
+
+        bool is_equal(Triangle otherTriangle);
+
+        //Triangle[2] split(double axis[3], Point orirgin, string oldName, string newName);
+        //void repeat(string newName);
+        //void scope();
+
+        //BuildingModel creat_roof();
+
+
+
     protected:
     private:
+<<<<<<< HEAD
+        vector<string> type; //wall, floor, roof
+        Point* p1;
+        Point* p2;
+        Point* p3;
+=======
         TriangleType type; //wall, floor, roof
         Point p1;
         Point p2;
         Point p3;
+>>>>>>> b09b6814f60911ff2cf67854168a380500d8d474
 };
 
 #endif // TRIANGLE_H

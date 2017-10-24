@@ -16,21 +16,22 @@ OGRGeometry* get_linear_geometry(OGRPolygon* polygon)
 
 OGRLineString* get_intersection_road(OGRGeometry* linearRing, vector<Road> ROADS)
 {
-
     int maxi = 0;
     bool bo = true;
     OGRLineString* linearIntersection2;
 
-    for (int i=0; i<ROADS.size();i++)
+    for (int i=0; i<ROADS.size();++i)
     {
         Road road = ROADS.at(i);
 
-        if(road.get_geom()->Intersect(linearRing))
+        OGRGeometry* road_ring = (OGRGeometry*)road.get_geom()->getExteriorRing();
+
+        if(road_ring->Touches(linearRing))
         {
             if(maxi<road.get_type())
             {
                 maxi=road.get_type();
-                OGRGeometry* linearIntersectionGeom = road.get_geom()->Intersection(linearRing);
+                OGRGeometry* linearIntersectionGeom = road_ring->Intersection(linearRing);
                 linearIntersection2 = (OGRLineString *) linearIntersectionGeom;
             }
             bo =false;
@@ -48,6 +49,7 @@ OGRLineString* get_intersection_road(OGRGeometry* linearRing, vector<Road> ROADS
 
 OGRLineString* get_other_sides(OGRGeometry* linearRing, OGRGeometry* intersectionLine)
 {
+    cout << linearRing->Contains(intersectionLine) << endl;
     OGRGeometry* otherSidesGeom = linearRing->Difference(intersectionLine);
     OGRLineString* otherSides = (OGRLineString *) otherSidesGeom;
     return otherSides;

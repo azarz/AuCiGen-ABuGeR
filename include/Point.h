@@ -42,6 +42,11 @@ class Point
         *@return z double
         */
 
+        //Other functions
+        void translate(double vec[3]);
+        void rotate(double vec[3], double angle);
+        void size(double vec[3]);
+
     protected:
     private:
         double x;
