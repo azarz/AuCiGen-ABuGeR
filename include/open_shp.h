@@ -22,7 +22,7 @@ void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
         exit( 1 );
     }
     OGRLayer  *poLayer;
-    poLayer = poDS->GetLayerByName( "shp_R");
+    poLayer = poDS->GetLayerByName( "road_test");
 
     OGRwkbGeometryType LayerGeometryType = poLayer ->GetGeomType();
     int NumberOfFeatures = poLayer ->GetFeatureCount(true);
@@ -35,23 +35,23 @@ void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
        OGRPoint ptTemp;
        for ( int i = 0; i < NumberOfFeatures; i++ )
        {
-           printf("\nelement : %d\n", i);
+           //printf("\nelement : %d\n", i);
            poFeature = poLayer ->GetNextFeature();
            OGRGeometry *poGeometry;
            poGeometry = poFeature ->GetGeometryRef();
-           if ( poGeometry != NULL && wkbFlatten ( poGeometry ->getGeometryType() ) == wkbPolygon )
+           if ( poGeometry != NULL && wkbFlatten ( poGeometry->getGeometryType() ) == wkbPolygon )
            {
-               OGRPolygon *poPolygon = ( OGRPolygon * )poGeometry;
-               OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
-                    int iField =1;
-                    OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
-                    if( poFieldDefn->GetType() == OFTInteger )
-                    {
-                        Road road = Road(poPolygon, poFeature->GetFieldAsInteger(iField));
-                        //printf("%s\n", road->type);
-                        liPolygon.push_back(road);
-                        cout << road.get_type() << endl;
-                    }
+                OGRPolygon *poPolygon = ( OGRPolygon * )poGeometry;
+                /*OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
+                int iField =1;
+                OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
+                if( poFieldDefn->GetType() == OFTInteger )
+                {*/
+                    Road road = Road(poPolygon,1);// poFeature->GetFieldAsInteger(iField));
+                    //printf("%s\n", road->type);
+                    liPolygon.push_back(road);
+                    //cout << road.get_type() << endl;
+                //}
            }
 
        }
@@ -73,7 +73,7 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
         exit( 1 );
     }
     OGRLayer  *poLayer;
-    poLayer = poDS->GetLayerByName( "shp_P" );
+    poLayer = poDS->GetLayerByName( "test_parcel" );
 
 
     OGRwkbGeometryType LayerGeometryType = poLayer ->GetGeomType();
@@ -87,7 +87,7 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
        OGRPoint ptTemp;
        for ( int i = 0; i < NumberOfFeatures; i++ )
        {
-           printf("\nelement : %d\n", i);
+           //printf("\nelement : %d\n", i);
            poFeature = poLayer ->GetNextFeature();
            OGRGeometry *poGeometry;
            poGeometry = poFeature ->GetGeometryRef();
@@ -98,7 +98,7 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
 
                 Parcel parcel = Parcel(poPolygon);
                 liPolygon.push_back(parcel);
-                cout << liPolygon.size() << endl;
+                //cout << liPolygon.size() << endl;
            }
 
        }
