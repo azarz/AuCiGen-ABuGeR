@@ -26,7 +26,7 @@ Parcel::Parcel(OGRPolygon* poPolygon)
 Parcel::~Parcel()
 {
     //dtor
-    cout << "del" << endl;
+    //cout << "del" << endl;
 }
 
 void Parcel::print(){
