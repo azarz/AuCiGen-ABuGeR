@@ -9,6 +9,7 @@
 #include "catch.h"
 using namespace std;
 
+/** @file */
 /**
 *@fn void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
 *open the SHP of roads and create the road object associated
