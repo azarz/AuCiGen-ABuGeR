@@ -75,7 +75,6 @@ TEST_CASE("Point constructor + Getter","[Point] [get_x] [get_y] [get_z]")
 }
 
 TEST_CASE("operator == are computed","[opertator==]")
->>>>>>> 25e17072d31067e770621848c6bbae7b719bc6ec
 {
     Point a =  Point(2,5,6);
     Point b =  Point(3,9,7);
