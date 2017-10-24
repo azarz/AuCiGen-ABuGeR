@@ -1,12 +1,24 @@
 #include "Envelop.h"
 
-Envelop::Envelop()
+Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointers to get an envelop from it
 {
     //ctor
 
-    /*//calculating number of floors
-	double n_calc(( parcel->get_floorspace() )/( footprint->get_geom()->OGRCurvePolygon::get_Area() ));
-	int n_floor = static_cast<int>(n_calc); //converting from double to int
+    /*  //setting the footprint pointer
+    this->footprint = trace;
+    */
+
+    /*  //setting the parcel pointer
+    this->parcel = trace->parcel;
+    */
+
+    /*  //setting the the buildingmodel pointer for volume
+    this->volume = buildingmodel?????;
+    */
+
+    /*  //calculating floor number
+	double n_calc(( trace->parcel->get_floorspace() )/( footprint->get_geom()->OGRCurvePolygon::get_Area() ));
+	this->floor = static_cast<int>(n_calc); //converting from double to int
     */
 }
 
