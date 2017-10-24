@@ -4,6 +4,9 @@
 #include "ogrsf_frmts.h"
 #include "BuildingType.h"
 #include "orient.h"
+#include "Footprint.h"
+
+class Footprint;
 
 class Parcel
 {
@@ -20,17 +23,24 @@ class Parcel
         */
         virtual ~Parcel();
 
-        OGRLinearRing* create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
+        Footprint create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
         /**
         *\fn OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
-        *creat the footprint of the building on the parcel
-        *@param[in] linearIntersection OGRLineString* :
+        *creates the footprint of the building on the parcel
+        *@param[in] linearIntersection OGRLineString* : intersection between the parcel and the main road
+        *@param[in] otherSides OGRLineString* : the sides of the parcel that aren't "linearIntersection"
+        *@returns the Footprint associated to the parcel
         */
         void to_obj();
         void print();
 
         // Getters
         OGRPolygon* get_geom()const{return geom;};
+        /**
+        *@fn OGRPolygon* Parcel::get_geom()
+        *Returns the parcel's geometry
+        *@return geom
+        */
         BuildingType* get_type()const{return type;};
         double get_area()const{return area;};
         double get_area_price()const{return area_price;};

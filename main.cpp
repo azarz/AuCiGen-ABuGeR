@@ -40,17 +40,15 @@ int main()
     cout << v3->getGeometryName()<< endl;
     cout << v3->OGRSimpleCurve::getNumPoints()<< endl;
 
-    OGRLinearRing* v4 = PARCELS.at(35).create_footprint(v2,v3);
-    cout << v4->getGeometryName()<< endl;
+    Footprint footprint2 = PARCELS.at(35).create_footprint(v2,v3);
 
     int v5=0;
     int v6=0;
     int v7=0;
     int v8=0;
 
-    Footprint* footprint2 = new Footprint(v4,&PARCELS.at(35));
 
-    cout << "Test Antoine " << footprint2->get_parcel()->get_area() << endl;
+    cout << "Test Antoine " << footprint2.get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
     return 0;
 }

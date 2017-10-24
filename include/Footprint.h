@@ -2,6 +2,7 @@
 #define FOOTPRINT_H
 
 class Envelop;
+class Parcel;
 
 #include "Parcel.h"
 #include "ogrsf_frmts.h"

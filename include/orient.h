@@ -4,7 +4,7 @@
 #include <vector>
 #include "ogrsf_frmts.h"
 #include "Road.h"
-
+/*! \file */
 /**
 * This function allows us to get the intersection line between a linear ring and the road polygons.
 * @param[in] parcelGeom The parcel geometry

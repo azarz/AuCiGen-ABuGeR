@@ -37,7 +37,7 @@ void Parcel::print(){
     cout << "floorspace->" << floorspace<< endl;
 }
 
-OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides)
+Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides)
 {
     vector<double> margins = type->get_margin();
     OGRGeometry* road_buffer = linearIntersection->Buffer(margins.at(1));
@@ -48,7 +48,8 @@ OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLi
 
     OGRGeometry* contour = diff2->getBoundary();
     OGRLinearRing* contour2 = (OGRLinearRing*) contour;
-    return contour2;
+    Footprint footprint(contour2,this);
+    return footprint;
 }
 
 void Parcel::to_obj()
