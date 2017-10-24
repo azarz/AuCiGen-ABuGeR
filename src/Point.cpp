@@ -1,4 +1,7 @@
 #include "Point.h"
+
+#include "catch.h"
+
 #include <cmath>
 #define PI 3.14159265
 
@@ -52,7 +55,12 @@ void Point::size(double vec[3])
 
 
 
-
+TEST_CASE("operator == are computed","[opertator==]")
+{
+    REQUIRE(a==a);
+    REQUIRE(b==b);
+    REQUIRE(c==c);
+}
 
 
 

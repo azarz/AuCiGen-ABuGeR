@@ -54,4 +54,6 @@ class Point
         double z;
 };
 
+bool operator==(Point a, Point b);
+
 #endif // POINT_H

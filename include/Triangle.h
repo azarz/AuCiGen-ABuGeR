@@ -8,13 +8,13 @@
 
 using namespace std;
 
-/*
+
 enum TriangleType{
 WALL,
 FLOOR,
 ROOF
 };
-*/
+
 
 class Triangle
 {
@@ -30,7 +30,7 @@ class Triangle
         Point get_p2()const{return p2;};
         Point get_p3()const{return p3;};
 
-        void add_type(TiangleType newType);
+        void add_type(TriangleType newType);
 
         void translate(double vec[3]);
         void rotate(double vec[3], double angle);
@@ -52,7 +52,6 @@ class Triangle
         Point p1;
         Point p2;
         Point p3;
-
 };
 
 #endif // TRIANGLE_H

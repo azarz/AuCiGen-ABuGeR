@@ -38,6 +38,8 @@ int main()
     //cout << v2->getDimension()<< endl;
     OGRLineString* v3 = get_other_sides(v1,v2);
     OGRLinearRing* v4 = PARCELS.at(0).create_footprint(v2,v3);
+
+    cout << v4->getGeometryName()<< endl;
     int v5=0;
     int v6=0;
     int v7=0;

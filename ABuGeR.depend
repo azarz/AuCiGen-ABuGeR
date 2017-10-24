@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1508833708 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+1508834372 source:/home/formation/AuCiGen/ABuGeR/main.cpp
 	<iostream>
 	<vector>
 	"open_shp.h"
@@ -33,20 +33,24 @@
 	<vector>
 	<iostream>
 
-1508742893 source:/home/formation/AuCiGen/ABuGeR/src/BuildingModel.cpp
+1508834034 source:/home/formation/AuCiGen/ABuGeR/src/BuildingModel.cpp
 	"BuildingModel.h"
 	"Triangle.h"
+	"Point.h"
 	"Parcel.h"
 	<vector>
+	<iostream>
 
-1508742893 /home/formation/AuCiGen/ABuGeR/include/BuildingModel.h
+1508834034 /home/formation/AuCiGen/ABuGeR/include/BuildingModel.h
 	"Triangle.h"
 	"Parcel.h"
 	<vector>
 
-1508830334 /home/formation/AuCiGen/ABuGeR/include/Triangle.h
+1508834437 /home/formation/AuCiGen/ABuGeR/include/Triangle.h
 	"Point.h"
 	<iostream>
+	<vector>
+	<string>
 
 1508742893 source:/home/formation/AuCiGen/ABuGeR/src/BuildingType.cpp
 	"BuildingType.h"
@@ -67,10 +71,11 @@
 	"ogrsf_frmts.h"
 	"Envelop.h"
 
-1508830334 source:/home/formation/AuCiGen/ABuGeR/src/Point.cpp
+1508834034 source:/home/formation/AuCiGen/ABuGeR/src/Point.cpp
 	"Point.h"
+	<cmath>
 
-1508830334 /home/formation/AuCiGen/ABuGeR/include/Point.h
+1508834607 /home/formation/AuCiGen/ABuGeR/include/Point.h
 
 1508742893 source:/home/formation/AuCiGen/ABuGeR/src/Road.cpp
 	"Road.h"
@@ -100,7 +105,7 @@
 	"ogrsf_frmts.h"
 	"Road.h"
 
-1508833461 source:/home/formation/AuCiGen/ABuGeR/src/orient.cpp
+1508833924 source:/home/formation/AuCiGen/ABuGeR/src/orient.cpp
 	<iostream>
 	"ogrsf_frmts.h"
 	"Road.h"
