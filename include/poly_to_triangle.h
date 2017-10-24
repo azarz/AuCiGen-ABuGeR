@@ -13,12 +13,12 @@ using namespace std;
 
 /** @file */
 /**
-*@fn void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
+*@fn void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector , TriangleType T_t)
 *creat the triangulated surface of a polygon
 *@param[in] OGRPolygon* poPolygon : polygon greometry to triangulate
 *@param[out] vector<Triangle>& li_vector : empty vector that will be filled with created Triangle objects
 */
-void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
+void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType T_t)
 {
     vector<Point> li_point;
     OGRPoint ptTemp;
@@ -71,7 +71,7 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
         if (poPolygon->OGRCurvePolygon::Contains(&triangle))
         {
             //cout << li_point.at(i).get_x()<<endl;
-            tri = new Triangle(li_point.at(i), li_point.at(j), li_point.at(k), FLOOR);
+            tri = new Triangle(li_point.at(i), li_point.at(j), li_point.at(k), T_t);
             li_vector.push_back(*tri);
             li_point.erase(li_point.begin()+j);
         }
