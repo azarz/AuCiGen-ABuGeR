@@ -47,32 +47,32 @@ class BuildingModel
         * @param[in] oldName It's the name of the selected surfaces.
         * @param[in] newName It's the new additional name of the split surfaces.
         */
-        //void split(double axis[3], Point origin, string oldName, string newName);
+        void split(double axis[3], Point origin, TriangleType oldName, TriangleType newName);
 
         /**
         * This function allows us to repeat/copy the selected surfaces of the BuildingModel.
         * @param[in] oldName It's the name of the selected surfaces.
         * @param[in] newName It's the new additional name of the repeated surfaces.
         */
-        //void repeat(string oldName, string newName);
+        void repeat(TriangleType oldName, TriangleType newName);
 
         /**
         * This function allows us to join together two BuildingModel.
         * @param[in]
         */
-        //BuildingModel join();
+        BuildingModel join();
 
         /**
         * This function allows us to extract the surfaces touched by occlusion.
         * @param[in]
         */
-        //void scope();
+        void scope();
 
         /**
         * This function allows us to create a roof for a simple building depending of his roof angle.
         * @param[in] roofAngle It's the roof angle of the roof.
         */
-        //BuildingModel creat_roof(double roofAngle);
+        BuildingModel creat_roof(double roofAngle);
 
         /**
         * This function allows us to convert our BuildingModel in .obj.
