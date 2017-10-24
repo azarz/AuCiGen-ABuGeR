@@ -8,7 +8,7 @@
 #include "Point.h"
 #include <ogr_geometry.h>
 #include <iostream>
-#include "catch.h"
+//#include "catch.h"
 using namespace std;
 
 
@@ -85,7 +85,7 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
 }
 
 
-TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
+/*TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
 {
     vector<Parcel> PARCELS;
     char* fill_directory ="1_data/test/test_parcel.shp";
