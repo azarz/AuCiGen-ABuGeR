@@ -6,10 +6,15 @@
 #include "Road.h"
 #include "Parcel.h"
 #include <vector>
-
+#include "catch.h"
 using namespace std;
 
-
+/**
+*@fn void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
+*open the SHP of roads and create the road object associated
+*@param[in] fill_directory char* : Road SHP fil directory
+*@param[out] vector<Road>& liPolygon : empty vector that will be filled with created roads objects
+*/
 void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
 {
     OGRErr error;
@@ -60,7 +65,12 @@ void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
 
     GDALClose( poDS );
 }
-
+/**
+*@fn void OpenShapeFile_parcels(char* fill_directory, vector<Road>& liPolygon)
+*open the SHP of parcels and create the Parcel object associated
+*@param[in] fill_directory char* : Parcel SHP fil directory
+*@param[out] vector<Road>& liPolygon : empty vector that will be filled with created parcels objects
+*/
 void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
 {
     OGRErr error;
@@ -104,6 +114,32 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
     GDALClose( poDS );
 }
 
+
+
+
+
+/*
+TEST_CASE("OpenShapeFile_roads are computed","[OpenShapeFile_roads]")
+{
+    vector<Road> ROADS;
+    char* fill_directory ="1_data/test/road_test.shp";
+    OpenShapeFile_roads(fill_directory, ROADS);
+    REQUIRE(ROADS.size()==1193);
+    REQUIRE(ROADS.at(0).get_type()==1);
+    REQUIRE(ROADS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==55);
+    REQUIRE(ROADS.at(0).get_geom()->getGeometryType()==3);
+}
+
+TEST_CASE("OpenShapeFile_parcels are computed","[OpenShapeFile_parcels]")
+{
+    vector<Parcel> PARCELS;
+    char* fill_directory ="1_data/test/test_parcel.shp";
+    OpenShapeFile_parcels(fill_directory, PARCELS);
+    REQUIRE(PARCELS.size()==594);
+    REQUIRE(PARCELS.at(0).get_area()==PARCELS.at(0).get_geom()->OGRCurvePolygon::get_Area());
+    REQUIRE(PARCELS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==4);
+    REQUIRE(PARCELS.at(0).get_geom()->getGeometryType()==3);
+}/**/
 
 
 #endif // OPEN_SHP_INCLUDED
