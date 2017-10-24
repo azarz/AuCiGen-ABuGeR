@@ -6,13 +6,6 @@
 #include "Road.h"
 
 /**
-* This function allows us to extract the linear geometry from a OGRPolygon.
-* @param[in] polygon It's the polygon of the parcel.
-* @return The linear geometry of the polygon.
-*/
-OGRGeometry* get_linear_geometry(OGRPolygon* polygon);
-
-/**
 * This function allows us to get the intersection line between a linear ring and the road polygons.
 * @param[in] parcelGeom The parcel geometry
 * @param[in] road Vector containing all the roads
