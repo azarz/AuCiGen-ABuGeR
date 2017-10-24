@@ -44,7 +44,6 @@ void Point::rotate(double vec[3], double angle)
     double xtemp = (ux*ux*(1-c)+c)*x + (ux*uy*(1-c)-uz*s)*y + (ux*uz*(1-c)+uy*s)*z;
     double ytemp = (uy*uy*(1-c)+c)*y + (ux*uy*(1-c)+uz*s)*x + (uy*uz*(1-c)-ux*s)*z;
     double ztemp = (uz*uz*(1-c)+c)*z + (ux*uz*(1-c)-uy*s)*x + (uy*uz*(1-c)+ux*s)*y;
-    std::cout << ytemp << std::endl;
 
     x = xtemp;
     y = ytemp;
@@ -61,7 +60,9 @@ void Point::size(double vec[3])
 
 /*
 
-TEST_CASE("Point constructor + Getter","[Point] [get_x] [get_y] [get_z]")
+
+TEST_CASE("Point constructor + Getters","[Point] [get_x] [get_y] [get_z]")
+
 {
     Point a =  Point(2,5,6);
     Point b =  Point(3,9,7);
@@ -75,7 +76,6 @@ TEST_CASE("Point constructor + Getter","[Point] [get_x] [get_y] [get_z]")
 }
 
 TEST_CASE("operator == are computed","[opertator==]")
->>>>>>> 25e17072d31067e770621848c6bbae7b719bc6ec
 {
     Point a =  Point(2,5,6);
     Point b =  Point(3,9,7);
@@ -86,7 +86,7 @@ TEST_CASE("operator == are computed","[opertator==]")
     REQUIRE(!(c==a));
 }
 
-TEST_CASE("translate are computed","[translate]")
+TEST_CASE("translate point are computed","[translate]")
 {
     Point a =  Point(2,5,6);
     double vec[3];
@@ -128,4 +128,5 @@ TEST_CASE("size are computed", "[size]")
     REQUIRE(a.get_y()==10.0);
     REQUIRE(a.get_z()==18.0);
 }
-/*
+
+*/

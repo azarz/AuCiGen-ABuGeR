@@ -44,58 +44,71 @@ void BuildingModel::size(double vec[3], TriangleType name)
         }
     }
 }
-/*
-void BuildingModel::split(double axis[3], Point origin, string oldName, string newName )
+
+void BuildingModel::split(double axis[3], Point origin, TriangleType oldName, TriangleType newName )
 {
     for (int i=0; i<li_triangle.size(); i++)
     {
-        int j=0;
-        bool b = true;
-        while (j<li_triangle[i].get_type().size() && b)
+        if (li_triangle[i].get_type() == oldName)
         {
-            if (li_triangle[i].get_type()[j] == oldName){b=false;}
-            j++;
-        }
-        if (!b)
-        {
-            Triangle[2] listSplit = li_triangle[i].split(axis,origin,newName);
+            vector <Triangle> listSplit = li_triangle[i].split(axis,origin,newName);
             li_triangle[i]=listSplit[0];
             li_triangle.push_back(listSplit[1]);
         }
     }
 }
-void BuildingModel::repeat(string oldName, string newName)
+
+void BuildingModel::repeat(TriangleType oldName, TriangleType newName)
 {
     for (int i=0; i<li_triangle.size(); i++)
     {
-        int j=0;
-        bool b = true;
-        while (j<li_triangle[i].get_type().size() && b)
-        {
-            if (li_triangle[i].get_type()[j] == oldName){b=false;}
-            j++;
-        }
-        if (!b)
+        if (li_triangle[i].get_type() == newName)
         {
             Triangle temp = li_triangle[i].repeat(newName);
             li_triangle.push_back(temp);
         }
     }
 }
+
 void BuildingModel::scope()
 {
 
 }
+
 BuildingModel BuildingModel::join()
 {
 
 }
-BuildingModel BuildingModel::creat_roof()
+
+BuildingModel BuildingModel::creat_roof(double roofAngle)
 {
 
 }
 
 void BuildingModel::to_obj()
+{
+
+}
+
+
+
+/*
+TEST_CASE("BuildingModel are computed", "[BuildingModel]")
+{
+
+}
+
+TEST_CASE("translate BuildingModel", "[translate]")
+{
+
+}
+
+TEST_CASE("rotate BuildingModel", "[rotate]")
+{
+
+}
+
+TEST_CASE("size BuildingModel", "[size]")
 {
 
 }

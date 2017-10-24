@@ -12,12 +12,12 @@ class Point
         Point();
         /**
         *@fn Point::Point()
-        *Simple créator Point()
+        *Simple constructor Point()
         */
         Point(double p_x, double p_y, double p_z);
         /**
         *@fn Point::Point()
-        *Créator Point()
+        *Constructor Point()
         *@param[in] p_x double : x coordinate
         *@param[in] p_y double : y coordinate
         *@param[in] p_z double : z coordinate
@@ -63,7 +63,7 @@ class Point
         void size(double vec[3]);
         /**
         *@fn void Point::size(double vec[3])
-        *???
+        *This function allows us to resize the Point according to an array (the origin is [0, 0, 0]).
         *update the x, y, z coordiantes
         *@param[in] vec vector<double> dim 3 : ?????
         */
