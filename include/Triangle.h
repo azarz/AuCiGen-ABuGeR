@@ -19,6 +19,7 @@ ROOF
 class Triangle
 {
     public:
+
         Triangle();
         Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type);
         virtual ~Triangle();
@@ -47,17 +48,11 @@ class Triangle
 
     protected:
     private:
-<<<<<<< HEAD
-        vector<string> type; //wall, floor, roof
-        Point* p1;
-        Point* p2;
-        Point* p3;
-=======
         TriangleType type; //wall, floor, roof
         Point p1;
         Point p2;
         Point p3;
->>>>>>> b09b6814f60911ff2cf67854168a380500d8d474
+
 };
 
 #endif // TRIANGLE_H
