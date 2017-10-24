@@ -2,7 +2,7 @@
 #include "Envelop.h"
 #include "Parcel.h"
 
-Footprint::Footprint(OGRLinearRing* linearRing,Parcel* parcel)
+Footprint::Footprint(OGRLinearRing* linearRing, Parcel* parcel)
 {
     this->geom = linearRing;
     this->parcel = parcel;

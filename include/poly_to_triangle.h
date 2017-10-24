@@ -8,10 +8,16 @@
 #include "Point.h"
 #include <ogr_geometry.h>
 #include <iostream>
+//#include "catch.h"
 using namespace std;
 
 
-//vertor<Triangle>
+/**
+*@fn void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
+*creat the triangulated surface of a polygon
+*@param[in] OGRPolygon* poPolygon : polygon greometry to triangulate
+*@param[out] vector<Triangle>& li_vector : empty vector that will be filled with created Triangle objects
+*/
 void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
 {
     vector<Point> li_point;
@@ -26,10 +32,11 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
         if (ptTemp.getX()!=0.0 && ptTemp.getY()!=0.0)
         {
             pt= new Point(ptTemp.getX(), ptTemp.getY(), 0.0);
-            printf("%.10f, %.10f\n", ptTemp.getX(), ptTemp.getY());
+            //printf("%.10f, %.10f\n", ptTemp.getX(), ptTemp.getY());
             li_point.push_back(*pt);
         }
     }
+    //cout << "nomber points" << NumberOfExteriorRingVertices-1 <<endl;
     int i=0;
     /*for (int k=0; k<li_point.size(); k++)
     {
@@ -49,18 +56,18 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
         int j=i+1;
          if (j>=li_point.size())
         {
-            j=0;
+            j=j-li_point.size();
         }
         OGRPoint p2 =OGRPoint(li_point.at(j).get_x(), li_point.at(j).get_y(), li_point.at(j).get_z());
         int k=i+2;
          if (k>=li_point.size())
         {
-            k=0;
+            k=k-li_point.size();
         }
         OGRPoint p3 =OGRPoint(li_point.at(k).get_x(), li_point.at(k).get_y(), li_point.at(k).get_z());
         OGRTriangle triangle =	OGRTriangle(p1,p2,p3);
         //OGRGeometry* g_tri = (OGRGeometry * ) triangle;
-        cout << true << "test : " << poPolygon->OGRCurvePolygon::Contains(&triangle) << endl;
+        //cout << i<<", "<< j <<", "<< k <<  " / " << li_point.size() << "test : " << poPolygon->OGRCurvePolygon::Contains(&triangle) << "   "<< li_vector.size() << endl;
         if (poPolygon->OGRCurvePolygon::Contains(&triangle))
         {
             //cout << li_point.at(i).get_x()<<endl;
@@ -73,8 +80,30 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
         i++;
         }
     }/**/
-    cout << "in : "<<li_vector.at(0).get_p2().get_x()<<endl;
+    //cout << "in : "<<li_vector.at(0).get_p2().get_x()<<endl;
     //cout << "in : "<<li_vector.at(2).get_p2()->get_x()<<endl;
 }
+
+
+/*TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
+{
+    vector<Parcel> PARCELS;
+    char* fill_directory ="1_data/test/test_parcel.shp";
+    OpenShapeFile_parcels(fill_directory, PARCELS);
+    vector<Triangle> li_vector;
+    poly_to_triangle(PARCELS.at(7).get_geom(), li_vector );
+    REQUIRE(li_vector.at(0).get_type()==FLOOR);
+    REQUIRE(li_vector.size()==30);
+
+}/**/
+
+
+
+
+
+
+
+
+
 
 #endif // POLY_TO_TRIANGLE_H_INCLUDED

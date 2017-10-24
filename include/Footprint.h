@@ -9,7 +9,7 @@ class Envelop;
 class Footprint
 {
     public:
-        Footprint(OGRLinearRing* linearRing,Parcel* parcel);
+        Footprint(OGRLinearRing* linearRing, Parcel* parcel);
         virtual ~Footprint();
 
         Envelop create_envelop();

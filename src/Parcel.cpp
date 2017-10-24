@@ -46,7 +46,7 @@ OGRLinearRing* Parcel::create_footprint(OGRLineString* linearIntersection, OGRLi
     OGRGeometry* diff1 = geom->Difference(road_buffer);
     OGRGeometry* diff2 = diff1->Difference(neigh_buffer);
 
-    OGRGeometry* contour = diff2->getLinearGeometry();
+    OGRGeometry* contour = diff2->getBoundary();
     OGRLinearRing* contour2 = (OGRLinearRing*) contour;
     return contour2;
 }
