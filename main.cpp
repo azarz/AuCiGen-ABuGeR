@@ -31,9 +31,11 @@ int main()
     cout << "rest:" << PARCELS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
     PARCELS.at(0).print();
 
-    OGRGeometry* v1 = PARCELS.at(0).get_geom()->getExteriorRing();
+    OGRGeometry* v1 = PARCELS.at(0).get_geom();
     cout << v1->getGeometryName()<< endl;
     OGRLineString* v2 = get_intersection_road(v1,ROADS);
+    cout << v2->getGeometryName()<< endl;
+    //cout << v2->getDimension()<< endl;
     OGRLineString* v3 = get_other_sides(v1,v2);
     OGRLinearRing* v4 = PARCELS.at(0).create_footprint(v2,v3);
     int v5=0;

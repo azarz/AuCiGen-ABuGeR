@@ -14,31 +14,33 @@ OGRGeometry* get_linear_geometry(OGRPolygon* polygon)
     return linearRing;
 }
 
-OGRLineString* get_intersection_road(OGRGeometry* linearRing, vector<Road> ROADS)
+OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> ROADS)
 {
-    int maxi = 0;
+    int mini = 3;
     bool bo = true;
     OGRLineString* linearIntersection2;
 
-    for (int i=0; i<ROADS.size();++i)
+    for (int i=0; i<ROADS.size()-1;++i)
     {
         Road road = ROADS.at(i);
 
-        OGRGeometry* road_ring = (OGRGeometry*)road.get_geom()->getExteriorRing();
+        //OGRGeometry* road_ring = (OGRGeometry*)road.get_geom()->getExteriorRing();
 
-        if(road_ring->Touches(linearRing))
+        if(road.get_geom()->Intersects(parcelGeom))
         {
-            if(maxi<road.get_type())
+            if(mini>road.get_type())
             {
-                maxi=road.get_type();
-                OGRGeometry* linearIntersectionGeom = road_ring->Intersection(linearRing);
-                linearIntersection2 = (OGRLineString *) linearIntersectionGeom;
+                mini=road.get_type();
+
+                OGRGeometry* linearIntersectionGeom = road.get_geom()->Intersection(parcelGeom);
+                linearIntersection2 = (OGRLineString*)linearIntersectionGeom;
             }
             bo =false;
         }
     }
     if(bo)
     {
+        OGRGeometry* linearRing = ((OGRPolygon*)parcelGeom)->getExteriorRing();
         OGRMultiLineString* linearRandomMulti = (OGRMultiLineString*) linearRing;
         OGRGeometry* linearRandomMultiGeom = linearRandomMulti->getGeometryRef(0);
         linearIntersection2 = (OGRLineString *) linearRandomMultiGeom;
@@ -47,10 +49,10 @@ OGRLineString* get_intersection_road(OGRGeometry* linearRing, vector<Road> ROADS
     return linearIntersection2;
 }
 
-OGRLineString* get_other_sides(OGRGeometry* linearRing, OGRGeometry* intersectionLine)
+OGRLineString* get_other_sides(OGRGeometry* parcelGeom, OGRGeometry* intersectionLine)
 {
-    cout << linearRing->Contains(intersectionLine) << endl;
-    OGRGeometry* otherSidesGeom = linearRing->Difference(intersectionLine);
+    OGRGeometry* parcel_boundary = parcelGeom->getBoundary();
+    OGRGeometry* otherSidesGeom = parcel_boundary->Difference(intersectionLine);
     OGRLineString* otherSides = (OGRLineString *) otherSidesGeom;
     return otherSides;
 }
