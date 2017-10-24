@@ -26,23 +26,23 @@ void Triangle::add_type(TriangleType newType)
 
 void Triangle::translate(double vec[3])
 {
-    p1->translate(vec);
-    p2->translate(vec);
-    p3->translate(vec);
+    p1.translate(vec);
+    p2.translate(vec);
+    p3.translate(vec);
 }
 
 void Triangle::size(double vec[3])
 {
-    p1->size(vec);
-    p2->size(vec);
-    p3->size(vec);
+    p1.size(vec);
+    p2.size(vec);
+    p3.size(vec);
 }
 
 void Triangle::rotate(double vec[3], double angle)
 {
-    p1->rotate(vec, angle);
-    p2->rotate(vec, angle);
-    p3->rotate(vec, angle);
+    p1.rotate(vec, angle);
+    p2.rotate(vec, angle);
+    p3.rotate(vec, angle);
 }
 
 bool Triangle::is_equal(Triangle otherTriangle)
