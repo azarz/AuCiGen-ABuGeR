@@ -11,7 +11,7 @@
 //#include "catch.h"
 using namespace std;
 
-
+/** @file */
 /**
 *@fn void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector )
 *creat the triangulated surface of a polygon
