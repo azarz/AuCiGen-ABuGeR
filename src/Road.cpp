@@ -1,11 +1,15 @@
 #include "Road.h"
 #include <iostream>
 #include "ogrsf_frmts.h"
+#include "poly_to_triangle.h"
+#include <string>
+#include <sstream>
 //#include "catch.h"
+
 Road::Road(OGRPolygon* poPolygon, int t_r)
 {
-    geom= poPolygon;
-    type= t_r;
+    geom = poPolygon;
+    type = t_r;
 }
 
 Road::~Road()
@@ -16,6 +20,20 @@ Road::~Road()
 void Road::to_obj()
 {
     //convert to .obj
+    vector<Triangle> triangles;
+    poly_to_triangle(geom,triangles,FLOOR);
+
+    std::string vertices;
+    string uv_coordinates;
+    string faces;
+
+    for (int i=0; i<triangles.size() ;++i)
+    {
+        Triangle triangle = triangles.at(i);
+
+
+    }
+
 }
 
 

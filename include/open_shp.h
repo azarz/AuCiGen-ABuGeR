@@ -145,7 +145,7 @@ TEST_CASE("OpenShapeFile_parcels are computed","[OpenShapeFile_parcels]")
     REQUIRE(PARCELS.at(0).get_area()==PARCELS.at(0).get_geom()->OGRCurvePolygon::get_Area());
     REQUIRE(PARCELS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==4);
     REQUIRE(PARCELS.at(0).get_geom()->getGeometryType()==3);
-}/**/
+}*/
 
 
 #endif // OPEN_SHP_INCLUDED

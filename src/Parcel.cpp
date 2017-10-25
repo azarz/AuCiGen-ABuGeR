@@ -12,7 +12,7 @@ Parcel::Parcel(OGRPolygon* poPolygon)
     //ctor
     //area(1), area_price(1), floorspace(1)//
     geom = poPolygon;
-    area(poPolygon->OGRCurvePolygon::get_Area());
+    area = poPolygon->OGRCurvePolygon::get_Area();
     type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
