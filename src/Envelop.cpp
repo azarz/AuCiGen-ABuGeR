@@ -4,22 +4,19 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
 {
     //ctor
 
-    /*  //setting the footprint pointer
-    this->footprint = trace;
-    */
-
-    /*  //setting the parcel pointer
-    this->parcel = trace->parcel;
-    */
-
-    /*  //setting the the buildingmodel pointer for volume
+    /*//setting the buildingmodel pointer for volume
     this->volume = buildingmodel?????;
     */
 
-    /*  //calculating floor number
-	double n_calc(( trace->parcel->get_floorspace() )/( footprint->get_geom()->OGRCurvePolygon::get_Area() ));
-	this->floor = static_cast<int>(n_calc); //converting from double to int
-    */
+    //setting the footprint pointer
+    this->footprint = trace;
+
+    //setting the parcel pointer
+    this->parcel = trace->get_parcel();
+
+    //calculating floor number
+	double n_calc(( trace->get_parcel()->get_floorspace() )/( trace->get_geom()->OGRLineString::get_Area() ));
+	this->n_floor = static_cast<int>(n_calc); //converting from double to int
 }
 
 Envelop::~Envelop()

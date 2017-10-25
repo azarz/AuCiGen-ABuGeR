@@ -4,6 +4,9 @@
 #include "BuildingModel.h"
 #include "Footprint.h"
 
+class Footprint;
+class BuildingModel;
+
 class Envelop
 {
   /**
