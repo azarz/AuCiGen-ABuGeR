@@ -9,10 +9,10 @@ BuildingType::~BuildingType()
 {
     //dtor
 }
-double BuildingType::get_profitability()
+/*double BuildingType::get_profitability()
 {
     return profitability;
-}
+}*/
 double BuildingType::get_height(double n_floor)
 {
     double height;
@@ -23,12 +23,12 @@ double BuildingType::get_height(double n_floor)
     }
     return height;
 }
-std::vector<int> BuildingType::get_surface_type()
+/*std::vector<int> BuildingType::get_surface_type()
 {
     int tmp[] = { roof, wall, floor };
     std::vector<int> surface_type( tmp, tmp+3 );
     return surface_type;
-}
+}*/
 std::vector<double> BuildingType::get_margin()
 {
     double tmp[] = { margin_parcel, margin_road };

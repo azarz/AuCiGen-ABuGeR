@@ -7,26 +7,101 @@ using namespace std;
 
 class BuildingType
 {
+    /**
+    *@class BuildingType
+    *Contain the generality for all building type
+    */
     public:
         BuildingType();
+        /**
+        *@fn BuildingType::BuildingType()
+        *Constructor
+        */
         virtual ~BuildingType();
+        /**
+        *@fn virtual BuildingType::~BuildingType()
+        *Destructor
+        */
 
-        double get_profitability();
         double get_height(double n_floor);
-        std::vector<int> get_surface_type();
-        std::vector<double> get_margin();
+        /**
+        *@fn double BuildingType::get_height(double n_floor)
+        *Calculate the height of the building without roof
+        *@return building_height double
+        */
 
         virtual void set_param() = 0;
+        /**
+        *@fn virtual void BuildingType::set_param() = 0
+        *Virtual function
+        */
+
+        std::vector<double> get_margin();
+        /**
+        *@fn std::vector<double> BuildingType::get_margin()
+        *Get the tow type of margin between the building and the
+        *parcel borders [m]
+        *@return [margin_parcel, margin_road] std::vector<double>
+        */
 
         // Getters
         double get_profitability()const{return profitability;};
+        /**
+        *@fn double BuildingType::get_profitability()
+        *Get the profitability price [€/m2]
+        *@return profitability double
+        */
+
         double get_floor_height()const{return floor_height;};
-        double get_gap()const{return gap;}; //height between the 0floor and the 1floor
+        /**
+        *@fn double BuildingType::get_floor_height()
+        *Get the height for one floor [m]
+        *@return floor_height double
+        */
+
+        double get_gap()const{return gap;};
+        /**
+        *@fn double BuildingType::get_gap()
+        *Get the height betwen the 1st floor and the second floor
+        *@return gap double
+        */
+
         int get_roof()const{return roof;};
+        /**
+        *@fn int BuildingType::get_roof()
+        *Get the roof type for the building
+        *@return roof int
+        */
+
         int get_wall()const{return wall;};
+        /**
+        *@fn int BuildingType::get_wall()
+        *Get the wall type for the building
+        *@return wall int
+        */
+
         int get_floor()const{return floor;};
+        /**
+        *@fn int BuildingType::get_floor()
+        *Get the floor type for the building
+        *@return floor int
+        */
+
         double get_margin_parcel()const{return margin_parcel;};
+        /**
+        *@fn double BuildingType::get_margin_parcel()
+        *Get the margin between the building and the parcel
+        *border without road [m]
+        *@return margin_parcel double
+        */
+
         double get_margin_road()const{return margin_road;};
+        /**
+        *@fn double BuildingType::get_margin_road()
+        *Get the margin between the building and the parcel
+        *border with road [m]
+        *@return margin_road double
+        */
 
     protected:
         double profitability;
@@ -42,41 +117,101 @@ class BuildingType
 
 class Industry: public BuildingType
 {
+    /**
+    *@class Industry: public BuildingType
+    *Contain the generality for all building type
+    */
     public:
         Industry();
+        /**
+        *@fn Industry::Industry()
+        *Constructor
+        */
         void set_param();
+        /**
+        *@fn void Industry::set_param()
+        *Set the value to the parameter
+        */
     protected:
     private:
 };
 class Office: public BuildingType
 {
+    /**
+    *@class Office: public BuildingType
+    *Contain the generality for all building type
+    */
     public:
         Office();
+        /**
+        *@fn Office::Office()
+        *Constructor
+        */
         void set_param();
+        /**
+        *@fn void Office::set_param()
+        *Set the value to the parameter
+        */
     protected:
     private:
 };
 class ApartmentBuilding: public BuildingType
 {
+    /**
+    *@class ApartmentBuilding: public BuildingType
+    *Contain the generality for all building type
+    */
     public:
         ApartmentBuilding();
+        /**
+        *@fn ApartmentBuilding::ApartmentBuilding()
+        *Constructor
+        */
         void set_param();
+        /**
+        *@fn void ApartmentBuilding::set_param()
+        *Set the value to the parameter
+        */
     protected:
     private:
 };
 class Villa: public BuildingType
 {
+    /**
+    *@class Villa: public BuildingType
+    *Contain the generality for all building type
+    */
     public:
         Villa();
+        /**
+        *@fn Villa::Villa()
+        *Constructor
+        */
         void set_param();
+        /**
+        *@fn void Villa::set_param()
+        *Set the value to the parameter
+        */
     protected:
     private:
 };
 class Townhouse: public BuildingType
 {
+    /**
+    *@class Townhouse: public BuildingType
+    *Contain the generality for all building type
+    */
     public:
         Townhouse();
+        /**
+        *@fn Townhouse::Townhouse()
+        *Constructor
+        */
         void set_param();
+        /**
+        *@fn Townhouse::void set_param()
+        *Set the value to the parameter
+        */
     protected:
     private:
 };
