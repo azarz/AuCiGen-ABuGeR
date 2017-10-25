@@ -46,7 +46,6 @@
 		<Unit filename="include/catch.h" />
 		<Unit filename="include/creat_wall.h" />
 		<Unit filename="include/open_shp.h" />
-		<Unit filename="include/open_shp_test.h" />
 		<Unit filename="include/orient.h" />
 		<Unit filename="include/poly_to_triangle.h" />
 		<Unit filename="include/test.h" />
@@ -61,6 +60,8 @@
 		<Unit filename="src/Road.cpp" />
 		<Unit filename="src/Triangle.cpp" />
 		<Unit filename="src/catch.cpp" />
+		<Unit filename="src/creat_wall.cpp" />
+		<Unit filename="src/open_shp.cpp" />
 		<Unit filename="src/orient.cpp" />
 		<Unit filename="src/poly_to_triangle.cpp" />
 		<Unit filename="src/test.cpp" />
