@@ -9,6 +9,11 @@ BuildingModel::BuildingModel()
 {
     //ctor
 }
+BuildingModel::BuildingModel(std::vector<Triangle> li_T, Parcel* p)
+{
+    li_triangle=li_T;
+    parcel=p;
+}
 
 BuildingModel::~BuildingModel()
 {
