@@ -1,13 +1,31 @@
 #include "Envelop.h"
+#include "catch.h"
+#include "typeinfo"
+#include "Footprint.h"
+#include "Parcel.h"
+//#include "open_shp.h"
+
+#include "BuildingModel.h"
+#include "poly_to_triangle.h"
+#include "Triangle.h"
+#include "creat_wall.h"
 
 Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointers to get an envelop from it
 {
     //ctor
 
-    /*//setting the buildingmodel pointer for volume
-    this->volume = buildingmodel?????;
-    */
+    //setting the buildingmodel pointer for volume
+    OGRPolygon poPolygon;
+    OGRLinearRing a= (OGRLinearRing)trace->get_geom();
+    poPolygon.addRing(&a);
+    vector<Triangle> li_vector;
+    poly_to_triangle(&poPolygon, li_vector, FLOOR);
+    creat_wall(&poPolygon, 4, li_vector);
 
+
+    this->volume= new BuildingModel ( li_vector,  trace->get_parcel());
+    cout << "aire envelop : "<<volume->get_parcel()->get_area() <<endl;
+    cout << " x : "<<volume->get_li_triangle().at(0).get_p1().get_x() <<endl;
     //setting the footprint pointer
     this->footprint = trace;
 
@@ -23,3 +41,36 @@ Envelop::~Envelop()
 {
     //dtor
 }
+/*
+
+TEST_CASE("Envelop is created and its attributes ","[Envelop]")
+{
+    vector<Road> ROADS;
+    vector<Parcel> PARCELS;
+    char* fill_directory ="1_data/test/road_test.shp";
+    char layer_type ='R';
+    OpenShapeFile_roads(fill_directory, ROADS);
+    fill_directory ="1_data/test/test_parcel.shp";
+    layer_type ='P';
+    OpenShapeFile_parcels(fill_directory, PARCELS);
+
+    OGRGeometry* v1 = PARCELS.at(35).get_geom();
+    cout << v1->getGeometryName()<< endl;
+
+    OGRLineString* v2 = get_intersection_road(v1,ROADS);
+    cout << v2->getGeometryName()<< endl;
+    cout << v2->OGRSimpleCurve::getNumPoints()<< endl;
+
+    OGRLineString* v3 = get_other_sides(v1,v2);
+    cout << v3->getGeometryName()<< endl;
+    cout << v3->OGRSimpleCurve::getNumPoints()<< endl;
+
+    Footprint v4 = PARCELS.at(35).create_footprint(v2,v3);
+    Envelop env = v4.create_envelop();
+
+    REQUIRE(env.get_n_floor() > 0);
+    REQUIRE(env.get_parcel()->get_geom()->getGeometryType() == 3);
+    REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
+    //REQUIRE(env.get_volume());
+}
+*/

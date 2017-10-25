@@ -14,6 +14,13 @@ class BuildingModel
         BuildingModel();
 
         /**
+        * Constructor
+        *@param[in] li_T std::vector<Triangle> : list of Triangles making up the BuildingModel
+        *@param[in] p Parcel* : parcel associated to the BuildingModel
+        */
+        BuildingModel(std::vector<Triangle> li_T, Parcel* p);
+
+        /**
         * Destructor
         */
         virtual ~BuildingModel();

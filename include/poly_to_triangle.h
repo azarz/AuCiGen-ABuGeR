@@ -22,7 +22,7 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
 {
     vector<Point> li_point;
     OGRPoint ptTemp;
-    int NumberOfInnerRings = poPolygon ->getNumInteriorRings();
+    //int NumberOfInnerRings = poPolygon ->getNumInteriorRings();
     OGRLinearRing *poExteriorRing = poPolygon ->getExteriorRing();
     int NumberOfExteriorRingVertices = poExteriorRing ->OGRSimpleCurve::getNumPoints();
     for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)//NumberOfExteriorRingVertices; k++ )
@@ -71,7 +71,11 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
         if (poPolygon->OGRCurvePolygon::Contains(&triangle))
         {
             //cout << li_point.at(i).get_x()<<endl;
-            tri = new Triangle(li_point.at(i), li_point.at(j), li_point.at(k), T_t);
+            OGRLinearRing* triangle_trace = triangle.getExteriorRing();
+            if (!triangle_trace->isClockwise())
+                tri = new Triangle(li_point.at(i), li_point.at(j), li_point.at(k), T_t);
+            else
+                tri = new Triangle(li_point.at(k), li_point.at(j), li_point.at(i), T_t);
             li_vector.push_back(*tri);
             li_point.erase(li_point.begin()+j);
         }
