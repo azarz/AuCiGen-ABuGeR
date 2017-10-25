@@ -2,6 +2,8 @@
 #include "Envelop.h"
 #include "Parcel.h"
 #include "catch.h"
+#include "typeinfo"
+
 
 Footprint::Footprint(OGRLinearRing* linearRing, Parcel* parcel)
 {
@@ -27,7 +29,7 @@ Envelop Footprint::create_envelop()
 /*
 TEST_CASE("footprint is created and its attributes ","[Foorprint]")
 {
-
+    //#include "open_shp.h"
     vector<Road> ROADS;
     vector<Parcel> PARCELS;
     char* fill_directory ="1_data/test/road_test.shp";
@@ -49,7 +51,9 @@ TEST_CASE("footprint is created and its attributes ","[Foorprint]")
     cout << v3->OGRSimpleCurve::getNumPoints()<< endl;
 
     Footprint v4 = PARCELS.at(35).create_footprint(v2,v3);
-    cout << v4.get_geom()<< v4.get_parcel()<<endl;
+    cout<<v4.get_parcel()->get_geom()->getGeometryType()<<endl;
+    REQUIRE(v4.get_geom()->getGeometryType() == 2);
+    REQUIRE(v4.get_parcel()->get_geom()->getGeometryType()== 3);
 }
 
 
@@ -77,6 +81,8 @@ TEST_CASE("envelop is created","[create_envelop]")
 
     Footprint v4 = PARCELS.at(35).create_footprint(v2,v3);
     Envelop env = v4.create_envelop();
-}
+    cout << typeid(env).name();
 
+}
 */
+
