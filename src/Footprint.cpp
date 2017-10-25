@@ -4,6 +4,7 @@
 #include "catch.h"
 #include "typeinfo"
 
+using namespace std;
 
 Footprint::Footprint(OGRLinearRing* linearRing, Parcel* parcel)
 {
