@@ -2,6 +2,7 @@
 #include <iostream>
 #include "ogrsf_frmts.h"
 #include "poly_to_triangle.h"
+#include "Triangle.h"
 #include <string>
 #include <sstream>
 //#include "catch.h"
