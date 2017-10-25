@@ -3,6 +3,7 @@
 #include "Parcel.h"
 #include "catch.h"
 #include "typeinfo"
+//#include "open_shp.h"
 
 using namespace std;
 
@@ -83,7 +84,10 @@ TEST_CASE("envelop is created","[create_envelop]")
     Footprint v4 = PARCELS.at(35).create_footprint(v2,v3);
     Envelop env = v4.create_envelop();
     cout << typeid(env).name();
-
+    REQUIRE(env.get_n_floor() > 0);
+    REQUIRE(env.get_parcel()->get_geom()->getGeometryType() == 3);
+    REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
+    //REQUIRE(env.get_volume());
 }
 */
 
