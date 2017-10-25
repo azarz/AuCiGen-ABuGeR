@@ -32,7 +32,14 @@ class Parcel
         *@returns the Footprint associated to the parcel
         */
         void to_obj();
+        /** TODO
+
+        */
         void print();
+        /**
+        *\fn void Parcel::print();
+        *Displays the parcel's attributes.
+        */
 
         // Getters
         OGRPolygon* get_geom()const{return geom;};
@@ -42,9 +49,29 @@ class Parcel
         *@return geom
         */
         BuildingType* get_type()const{return type;};
+        /**
+        *@fn BuildingType* Parcel::get_type()
+        *Returns the parcel's type
+        *@return type
+        */
         double get_area()const{return area;};
+        /**
+        *@fn double Parcel::get_area()
+        *Returns the parcel's area
+        *@return area
+        */
         double get_area_price()const{return area_price;};
+        /**
+        *@fn double Parcel::get_area_price()
+        *Returns the parcel's area_price
+        *@return area_price
+        */
         double get_floorspace()const{return floorspace;};
+        /**
+        *@fn double Parcel::get_floorspace()
+        *Returns the parcel's floorspace
+        *@return floorspace
+        */
 
     protected:
     private:
