@@ -104,7 +104,7 @@ class Triangle
         * This function allows us to repeat/copy the triangle.
         * @param[in] newName It's the new type of the Triangle.
         */
-        Triangle repeat(TriangleType newName);
+        //Triangle repeat(TriangleType newName);
 
         //void scope();
 

@@ -61,13 +61,13 @@ class BuildingModel
         * @param[in] oldName It's the name of the selected surfaces.
         * @param[in] newName It's the new additional name of the repeated surfaces.
         */
-        void repeat(TriangleType oldName, TriangleType newName);
+        //void repeat(TriangleType oldName, TriangleType newName);
 
         /**
         * This function allows us to join together two BuildingModel.
         * @param[in]
         */
-        BuildingModel join();
+        void join(BuildingModel buildingModel);
 
         /**
         * This function allows us to extract the surfaces touched by occlusion.

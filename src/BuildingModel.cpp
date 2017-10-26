@@ -63,6 +63,7 @@ void BuildingModel::split(double axis[3], Point origin, TriangleType oldName, Tr
     }
 }
 
+/*
 void BuildingModel::repeat(TriangleType oldName, TriangleType newName)
 {
     for (int i=0; i<li_triangle.size(); i++)
@@ -74,15 +75,19 @@ void BuildingModel::repeat(TriangleType oldName, TriangleType newName)
         }
     }
 }
+*/
 
 void BuildingModel::scope()
 {
 
 }
 
-BuildingModel BuildingModel::join()
+void BuildingModel::join(BuildingModel buildingModel)
 {
-
+    for (int i=0; i<buildingModel.li_triangle.size(); i++)
+    {
+        li_triangle.push_back(buildingModel.li_triangle[i]);
+    }
 }
 
 BuildingModel BuildingModel::creat_roof(double roofAngle)
