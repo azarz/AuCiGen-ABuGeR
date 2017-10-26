@@ -24,9 +24,8 @@ class Road
         void to_obj();
         /**
         *@fn Road::to_obj()
-        *creat a .obj of road
-        * /!\/!\/!\ not implemented yet /!\/!\/!\
-        */
+        *creates a .obj of road
+        **/
 
         //Getters
         OGRPolygon* get_geom()const{return geom;};

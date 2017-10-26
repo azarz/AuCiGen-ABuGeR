@@ -42,14 +42,12 @@ int main()
 
     Footprint footprint2 = PARCELS.at(35).create_footprint(v2,v3);
 
-    int v5=0;
-    int v6=0;
-    int v7=0;
-    int v8=0;
-
-
     cout << "Test Antoine " << footprint2.get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
+
+
+    cout << "Test Amaury " << endl;
+    ROADS.at(25).to_obj();
     return 0;
 }
 
