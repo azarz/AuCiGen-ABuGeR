@@ -13,13 +13,18 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
 {
     //ctor
 
+    //calculating floor number
+    double n_calc(( trace->get_parcel()->get_floorspace() )/( trace->get_geom()->OGRLineString::get_Area() ));
+	this->n_floor = static_cast<int>(n_calc); //converting from double to int
+
     //setting the buildingmodel pointer for volume
+    double height =trace->get_parcel()->get_type()->get_height(n_floor);
     OGRPolygon poPolygon;
     OGRLinearRing a= (OGRLinearRing)trace->get_geom();
     poPolygon.addRing(&a);
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);
-    creat_wall(&poPolygon, 4, li_vector);
+    creat_wall(&poPolygon, height, li_vector);
 
 
     this->volume= new BuildingModel ( li_vector,  trace->get_parcel());
@@ -31,9 +36,8 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
     //setting the parcel pointer
     this->parcel = trace->get_parcel();
 
-    //calculating floor number
-	double n_calc(( trace->get_parcel()->get_floorspace() )/( trace->get_geom()->OGRLineString::get_Area() ));
-	this->n_floor = static_cast<int>(n_calc); //converting from double to int
+
+    cout << " n floor : "<< n_floor <<endl;
 }
 
 Envelop::~Envelop()
