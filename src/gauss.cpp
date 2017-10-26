@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-//#include "catch.h"
 using namespace std;
 
 int gauss3P(double A[3][3], double B[3][1], double C[3][1])
@@ -111,7 +110,7 @@ int gauss3P(double A[3][3], double B[3][1], double C[3][1])
     double x;
     double y;
     double z;
-    //résolution a1 toujour !=0
+    //a1 all time !=0
     if ((a1*b2-b1*a2)!=0 && (a1*b2-b1*a2)*(a1*c3-c1*a3)-(a1*c2-c1*a2)*(a1*b3-b1*a3)!=0)
     {
         z=((a1*b2-b1*a2)*(a1*B3-c1*B1)-(a1*c2-c1*a2)*(a1*B2-b1*B1))/((a1*b2-b1*a2)*(a1*c3-c1*a3)-(a1*c2-c1*a2)*(a1*b3-b1*a3));
@@ -235,7 +234,7 @@ int gauss2P(double A[3][2], double B[3][1], double C[2][1])
     }
     double x;
     double y;
-    //résolution a1 toujour !=0
+    //a1 all time !=0
     if ((a1*b2-b1*a2)*(a1*B3-c1*B1)-(a1*c2-c1*a2)*(a1*B2-b1*B1)==0 && (a1*b2-b1*a2)!=0)
     {
         y=(a1*B2-b1*B1)/(a1*b2-b1*a2);
@@ -259,8 +258,9 @@ int gauss2P(double A[3][2], double B[3][1], double C[2][1])
     return 1;
 }
 
-
-/*TEST_CASE("gauss3p are computed","[gauss3p]")
+/*
+#include "catch.h"
+TEST_CASE("gauss3p are computed","[gauss3p]")
 {
     double A[3][3];
     double B[3][1];
@@ -283,9 +283,9 @@ int gauss2P(double A[3][2], double B[3][1], double C[2][1])
     B[2][0]=-8;
     int a= gauss3P(A, B, C);
     REQUIRE(a==1);
-    REQUIRE(C[0][0]]==2);
-    REQUIRE(C[1][0]]==-3);
-    REQUIRE(C[2][0]]==1);
+    REQUIRE(C[0][0]==2);
+    REQUIRE(C[1][0]==-3);
+    REQUIRE(C[2][0]==1);
 
     A[0][0]=1;
     A[0][1]=1;
@@ -305,7 +305,6 @@ int gauss2P(double A[3][2], double B[3][1], double C[2][1])
     a= gauss3P(A, B, C);
     REQUIRE(a==2);
 
-    double A[3][3];
     A[0][0]=2;
     A[0][1]=3;
     A[0][2]=-1;
@@ -318,14 +317,59 @@ int gauss2P(double A[3][2], double B[3][1], double C[2][1])
     A[2][1]=4;
     A[2][2]=-10;
 
-    double B[3][1];
     B[0][0]=-6;
     B[1][0]=4;
     B[2][0]=-8;
 
-    double C[3][1];
     a= gauss3P(A, B, C);
     REQUIRE(a==0);
 
+}
+TEST_CASE("gauss2p are computed","[gauss2p]")
+{
+    double A[3][2];
+    double B[3][1];
+    double C[2][1];
+
+    A[0][0]=1;
+    A[0][1]=1;
+
+    A[1][0]=1;
+    A[1][1]=1;
+
+    A[2][0]=1;
+    A[2][1]=1;
+
+
+    B[0][0]=1;
+    B[1][0]=1;
+    B[2][0]=1;
+
+    int a= gauss2P(A, B, C);
+    REQUIRE(a==2);
+
+    A[0][0]=2;
+    A[0][1]=5;
+
+    A[1][0]=3;
+    A[1][1]=6;
+
+    A[2][0]=4;
+    A[2][1]=7;
+
+    B[0][0]=7;
+    B[1][0]=9;
+    B[2][0]=11;
+
+    a= gauss2P(A, B, C);
+    REQUIRE(a==1);
+    REQUIRE(C[0][0]==1);
+    REQUIRE(C[1][0]==1);
+    B[2][0]=12;
+
+    a= gauss2P(A, B, C);
+    REQUIRE(a==0);
+    REQUIRE(C[0][0]==1);
+    REQUIRE(C[1][0]==1);
 }
 /* */
