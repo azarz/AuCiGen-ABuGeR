@@ -70,27 +70,28 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     double ac1 = p3.get_x() - p1.get_x();
     double ac2 = p3.get_y() - p1.get_y();
     double ac3 = p3.get_z() - p1.get_z();
+    std::cout << "AC vector " << ac1 << "_" << ac2 << "_" << ac3 << std::endl;
     //set AB coordinates
     double ab1 = p2.get_x() - p1.get_x();
     double ab2 = p2.get_y() - p1.get_y();
     double ab3 = p2.get_z() - p1.get_z();
+    std::cout << "AB vector " << ab1 << "_" << ab2 << "_" << ab3 << std::endl;
     //set BC coordinates
     double bc1 = p3.get_x() - p2.get_x();
     double bc2 = p3.get_y() - p2.get_y();
     double bc3 = p3.get_z() - p2.get_z();
+    std::cout << "BC vector " << bc1 << "_" << bc2 << "_" << bc3 << std::endl;
     //set S coordinates
     double x = origin.get_x() + axis[0];
     double y = origin.get_y() + axis[1];
     double z = origin.get_z() + axis[2];
-    //init S' coordinates
-    double x1;
-    double y1;
-    double z1;
+    std::cout << "S vector " << x << "_" << y << "_" << z << std::endl;
 
     //calculate V = AC ^ AB
     double v1 = ac2*ab3 - ac3*ab2;
     double v2 = ac3*ab1 - ac1*ab3;
     double v3 = ac1*ab2 - ac2*ab1;
+    std::cout << "V vector " << v1 << "_" << v2 << "_" << v3 << std::endl;
 
     //set matrix of the equation
     double A[3][3];
@@ -114,6 +115,7 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     double X[3][1];
     //fill S' array
     gauss3P(A,B,X);
+    std::cout << "First Gauss3P finished _________________________" << std::endl;
 
     //set result of the equation for origin (O)
     double B2[3][1];
@@ -125,45 +127,38 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     double X2[3][1];
     //fill O' array
     int score = gauss3P(A,B2,X2);
+    std::cout << "Second Gauss3P finished _________________________" << std::endl;
 
     //set an array for the projected line
     double d1 = X2[0][0] - X[0][0];
     double d2 = X2[1][0] - X[1][0];
     double d3 = X2[2][0] - X[2][0];
+    std::cout << "D' vector (of the projected line) " << d1 << "_" << d2 << "_" << d3 << std::endl;
 
     //set matrix of intersection between the projected line and a side of the triangle (AB)
-    double MDAB[3][3];
+    double MDAB[3][2];
     MDAB[0][0] = d1;
     MDAB[0][1] = - ab1;
-    MDAB[0][2] = 0;
     MDAB[1][0] = d2;
     MDAB[1][1] = - ab2;
-    MDAB[1][2] = 0;
     MDAB[2][0] = d3;
     MDAB[2][1] = - ab3;
-    MDAB[2][2] = 0;
     //set matrix of intersection between the projected line and a side of the triangle (BC)
-    double MDBC[3][3];
+    double MDBC[3][2];
     MDBC[0][0] = d1;
     MDBC[0][1] = - bc1;
-    MDBC[0][2] = 0;
     MDBC[1][0] = d2;
     MDBC[1][1] = - bc2;
-    MDBC[1][2] = 0;
     MDBC[2][0] = d3;
     MDBC[2][1] = - bc3;
-    MDBC[2][2] = 0;
     //set matrix of intersection between the projected line and a side of the triangle (CA)
-    double MDCA[3][3];
+    double MDCA[3][2];
     MDCA[0][0] = d1;
     MDCA[0][1] = ac1;
-    MDCA[0][2] = 0;
     MDCA[1][0] = d2;
     MDCA[1][1] = ac2;
-    MDCA[1][2] = 0;
     MDCA[2][0] = d3;
     MDCA[2][1] = ac3;
-    MDCA[2][2] = 0;
 
     //set the results of the different intersections
     double BDAB[3][1];
@@ -187,9 +182,9 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     double paramDCA[3][1];
 
     //fill param array
-    int scoreAB = gauss3P(MDAB,BDAB,paramDAB);
-    int scoreBC = gauss3P(MDBC,BDBC,paramDBC);
-    int scoreCA = gauss3P(MDCA,BDCA,paramDCA);
+    int scoreAB = gauss2P(MDAB,BDAB,paramDAB);
+    int scoreBC = gauss2P(MDBC,BDBC,paramDBC);
+    int scoreCA = gauss2P(MDCA,BDCA,paramDCA);
 
     paramDAB[2][0] = scoreAB;
     paramDBC[2][0] = scoreBC;
@@ -204,13 +199,13 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     double QDCA[3][1];
 
     //if the projected line contains a side of the triangle it's useless to split it
-    if (paramDAB[2][0] == 2 || paramDBC[2][0] == 2 || paramDCA[2][0] == 2)
+    if (paramDAB[2][0] == 0 || paramDBC[2][0] == 0 || paramDCA[2][0] == 0)
     {
         result.push_back(*this);
         return result;
     }
     //if there is a side parallel to the projected line it's useless to search an intersection
-    else if (paramDAB[2][0] == 1)
+    else if (paramDAB[2][0] == 2)
     {
             //init intersection points coordinates
         double P[3][1];
@@ -241,7 +236,7 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             return result;
         }
     }
-    else if (paramDBC[2][0] == 1)
+    else if (paramDBC[2][0] == 2)
     {
             //init intersection points coordinates
         double P[3][1];
@@ -272,7 +267,7 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             return result;
         }
     }
-    else if (paramDCA[2][0] == 1)
+    else if (paramDCA[2][0] == 2)
     {
             //init intersection points coordinates
         double P[3][1];
@@ -325,6 +320,10 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         Point P(Pt[0][0],Pt[1][0],Pt[2][0]);
         Point R(Rt[0][0],Rt[1][0],Rt[2][0]);
         Point Q(Qt[0][0],Qt[1][0],Qt[2][0]);
+
+        std::cout << P.get_x() << "_" << P.get_y() << "_" << P.get_z() << std::endl;
+        std::cout << Q.get_x() << "_" << Q.get_y() << "_" << Q.get_z() << std::endl;
+        std::cout << R.get_x() << "_" << R.get_y() << "_" << R.get_z() << std::endl;
 
         double ap1 = P.get_x() - p1.get_x() ;
         double ap2 = P.get_y() - p1.get_y() ;
