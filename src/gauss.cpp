@@ -146,7 +146,12 @@ int gauss3P(double A[3][3], double B[3][1], double C[3][1])
     cout << "( "<< x << ", "<< y << ", " << z << ")"<<endl;
     return 1;
 }
-/*int gauss2P(double A[3][2], double B[3][1], double C[3][1])
+
+
+
+
+
+int gauss2P(double A[3][2], double B[3][1], double C[2][1])
 {
     double a1;
     double a2;
@@ -230,39 +235,97 @@ int gauss3P(double A[3][3], double B[3][1], double C[3][1])
     }
     double x;
     double y;
-    double z;
     //résolution a1 toujour !=0
-    /*if ((a1*b2-b1*a2)!=0 && (a1*b2-b1*a2)*(a1*c3-c1*a3)-(a1*c2-c1*a2)*(a1*b3-b1*a3)!=0)
+    if ((a1*b2-b1*a2)*(a1*B3-c1*B1)-(a1*c2-c1*a2)*(a1*B2-b1*B1)==0 && (a1*b2-b1*a2)!=0)
     {
-        z=((a1*b2-b1*a2)*(a1*B3-c1*B1)-(a1*c2-c1*a2)*(a1*B2-b1*B1))/((a1*b2-b1*a2)*(a1*c3-c1*a3)-(a1*c2-c1*a2)*(a1*b3-b1*a3));
-        y=(a1*B2-b1*B1-(a1*b3-b1*a3)*z)/(a1*b2-b1*a2);
-        x=(B1-a3*z-a2*y)/a1;
+        y=(a1*B2-b1*B1)/(a1*b2-b1*a2);
+        x= (B1-a2*y)/a1;
+        cout << "solution 1" << endl;
+    }
+    else if ((a1*b2-b1*a2)*(a1*B3-c1*B1)-(a1*c2-c1*a2)*(a1*B2-b1*B1)==0 && (a1*b2-b1*a2)!=0)
+    {
+        y=(a1*B2-b1*B1)/(a1*b2-b1*a2);
+        x= (B1-a2*y)/a1;
         cout << "solution 2" << endl;
     }
-    else if ((a1*b2-b1*a2)!=0 && (a1*b2-b1*a2)*(a1*c3-c1*a3)-(a1*c2-c1*a2)*(a1*b3-b1*a3)==0)
+    else
     {
-        cout << "no solution 3" << endl;
+        cout << "no solution 2" << endl;
         return 0;
-    }
-    else if ((a1*b2-b1*a2)==0 && (a1*c2-c1*a2)==0)
-    {
-        cout << "no solution 4" << endl;
-        return 0;
-    }
-    else if ((a1*b2-b1*a2)==0 && (a1*c2-c1*a2)!=0 && (a1*b3-b1*a3)==0)
-    {
-        cout << "no solution 5" << endl;
-        return 0;
-    }
-    else if ((a1*b2-b1*a2)==0 && (a1*c2-c1*a2)!=0 && (a1*b3-b1*a3)!=0)
-    {
-        z=(a1*B2-b1*B1)/(a1*b3-b1*a3);
-        y=(a1*B3-c1*B1-(a1*c3-c1*a3)*z)/(a1*c2-c1*a2);
-        x=(B1-a3*z-a2*y)/a1;
     }
     C[0][0]=x;
     C[1][0]=y;
-    C[2][0]=z;
-    cout << "( "<< x << ", "<< y << ", " << z << ")"<<endl;
+    cout << "( "<< x << ", "<< y << ")"<<endl;
     return 1;
-}*/
+}
+
+
+/*TEST_CASE("gauss3p are computed","[gauss3p]")
+{
+    double A[3][3];
+    double B[3][1];
+    double C[3][1];
+    A[0][0]=2;
+    A[0][1]=3;
+    A[0][2]=-1;
+
+    A[1][0]=3;
+    A[1][1]=-1;
+    A[1][2]=2;
+
+    A[2][0]=7;
+    A[2][1]=4;
+    A[2][2]=-10;
+
+
+    B[0][0]=-6;
+    B[1][0]=11;
+    B[2][0]=-8;
+    int a= gauss3P(A, B, C);
+    REQUIRE(a==1);
+    REQUIRE(C[0][0]]==2);
+    REQUIRE(C[1][0]]==-3);
+    REQUIRE(C[2][0]]==1);
+
+    A[0][0]=1;
+    A[0][1]=1;
+    A[0][2]=1;
+
+    A[1][0]=1;
+    A[1][1]=1;
+    A[1][2]=1;
+
+    A[2][0]=1;
+    A[2][1]=1;
+    A[2][2]=1;
+
+    B[0][0]=1;
+    B[1][0]=1;
+    B[2][0]=1;
+    a= gauss3P(A, B, C);
+    REQUIRE(a==2);
+
+    double A[3][3];
+    A[0][0]=2;
+    A[0][1]=3;
+    A[0][2]=-1;
+
+    A[1][0]=3;
+    A[1][1]=-2;
+    A[1][2]=-8;
+
+    A[2][0]=7;
+    A[2][1]=4;
+    A[2][2]=-10;
+
+    double B[3][1];
+    B[0][0]=-6;
+    B[1][0]=4;
+    B[2][0]=-8;
+
+    double C[3][1];
+    a= gauss3P(A, B, C);
+    REQUIRE(a==0);
+
+}
+/* */
