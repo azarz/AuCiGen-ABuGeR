@@ -4,7 +4,6 @@
 #include "Footprint.h"
 #include "Parcel.h"
 //#include "open_shp.h"
-
 #include "BuildingModel.h"
 #include "poly_to_triangle.h"
 #include "Triangle.h"
@@ -41,8 +40,8 @@ Envelop::~Envelop()
 {
     //dtor
 }
-/*
 
+/*
 TEST_CASE("Envelop is created and its attributes ","[Envelop]")
 {
     vector<Road> ROADS;
@@ -71,6 +70,6 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
     REQUIRE(env.get_n_floor() > 0);
     REQUIRE(env.get_parcel()->get_geom()->getGeometryType() == 3);
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
-    //REQUIRE(env.get_volume());
+    REQUIRE(env.get_volume()->get_parcel()->get_geom()->getGeometryType() == 3);
 }
 */
