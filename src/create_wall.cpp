@@ -1,10 +1,10 @@
-#include "creat_wall.h"
+#include "create_wall.h"
 #include "BuildingModel.h"
 #include "ogrsf_frmts.h"
 #include "Point.h"
 #include "Triangle.h"
 
-void creat_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
+void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
 {
     vector<Point> li_point;
     OGRPoint ptTemp;
