@@ -52,7 +52,11 @@ Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineStr
 
 void Parcel::to_obj()
 {
-    //convert to .obj
+    // Converting the road polygons to triangles
+    vector<Triangle> triangles;
+    poly_to_triangle(geom,triangles,FLOOR);
+
+    to_obj(triangles);
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")

@@ -32,9 +32,11 @@ class Parcel
         *@returns the Footprint associated to the parcel
         */
         void to_obj();
-        /** TODO
+        /**
+        *@fn Road::to_obj()
+        *creates a .obj of road
+        **/
 
-        */
         void print();
         /**
         *\fn void Parcel::print();
