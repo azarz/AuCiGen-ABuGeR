@@ -1,9 +1,8 @@
 #include "Footprint.h"
 #include "Envelop.h"
 #include "Parcel.h"
-#include "catch.h"
+
 #include "typeinfo"
-//#include "open_shp.h"
 
 using namespace std;
 
@@ -22,13 +21,14 @@ Footprint::~Footprint()
 Envelop Footprint::create_envelop()
 {
     // return an object envelop instancied by Envelop class from here
-    Envelop envelop(this);
-    return envelop;
+    Envelop a = Envelop(this);
+    return a;
 
 }
-
-
 /*
+
+#include "catch.h"
+#include "open_shp.h"
 TEST_CASE("footprint is created and its attributes ","[Foorprint]")
 {
     //#include "open_shp.h"
@@ -83,11 +83,11 @@ TEST_CASE("envelop is created","[create_envelop]")
 
     Footprint v4 = PARCELS.at(35).create_footprint(v2,v3);
     Envelop env = v4.create_envelop();
-    cout << typeid(env).name();
+    //cout << typeid(env).name();
+    cout <<"n-floor "<<env.get_n_floor()<<endl;
     REQUIRE(env.get_n_floor() > 0);
     REQUIRE(env.get_parcel()->get_geom()->getGeometryType() == 3);
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
     //REQUIRE(env.get_volume());
 }
-*/
-
+/* */

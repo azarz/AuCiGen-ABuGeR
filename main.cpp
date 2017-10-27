@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
-//#include "Envelop.h"
+#include "Envelop.h"
 #include "open_shp.h"
 #include "Road.h"
 #include "Parcel.h"
 #include "orient.h"
 #include "Footprint.h"
-
+#include "catch.h"
 using namespace std;
 
 
@@ -49,4 +49,4 @@ int main()
     PARCELS.at(25).to_obj();
     return 0;
 }
-
+/* */

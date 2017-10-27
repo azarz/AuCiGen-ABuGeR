@@ -25,16 +25,15 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);
     create_wall(&poPolygon, height, li_vector);
-
-
     this->volume= li_vector;
+    //setting the parcel pointer
+    this->parcel = trace->get_parcel();
     cout << "aire envelop : "<<parcel->get_area() <<endl;
     cout << " x : "<<volume.at(0).get_p1().get_x() <<endl;
     //setting the footprint pointer
     this->footprint = trace;
 
-    //setting the parcel pointer
-    this->parcel = trace->get_parcel();
+
 
 
     cout << " n floor : "<< n_floor <<endl;
