@@ -8,13 +8,7 @@
 #include "to_obj.h"
 //#include "catch.h"
 
-template <typename T>
-  string num_to_string ( T Number )
-  {
-     ostringstream ss;
-     ss << Number;
-     return ss.str();
-  }
+
 
 Road::Road(OGRPolygon* poPolygon, int t_r)
 {
@@ -27,7 +21,7 @@ Road::~Road()
     //dtor
 }
 
-void Road::to_obj()
+void Road::R_to_obj()
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;

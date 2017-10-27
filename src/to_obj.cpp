@@ -1,6 +1,15 @@
 #include "to_obj.h"
 #include <sstream>
 
+
+template <typename T>
+  string num_to_string ( T Number )
+  {
+     ostringstream ss;
+     ss << Number;
+     return ss.str();
+  }
+
 vector<string> to_obj(vector<Triangle> triangles)
 {
     // Vector of all the points
@@ -13,6 +22,7 @@ vector<string> to_obj(vector<Triangle> triangles)
 
     for (int i=0; i<triangles.size() ;++i)
     {
+    //cout << i << "/ " << triangles.size()<< endl;
         // Getting the triangle and its points
         Triangle triangle = triangles.at(i);
         Point p1 = triangle.get_p1();
@@ -43,7 +53,7 @@ vector<string> to_obj(vector<Triangle> triangles)
         } else
         {
             // Testing if the triangles's points are already in the list
-            for(i=0;i<points.size();++i)
+            for(int i=0;i<points.size();++i)
             {
                 Point p_i = points.at(i);
                 if(p_i==p1){
@@ -97,7 +107,7 @@ vector<string> to_obj(vector<Triangle> triangles)
 
     results.push_back(vertices);
     results.push_back(uv_coordinates);
-    results.push_back(faces)
+    results.push_back(faces);
 
     /* To control the output
     cout << vertices << endl;

@@ -21,9 +21,9 @@ class Road
         */
         virtual ~Road();
 
-        void to_obj();
+        void R_to_obj();
         /**
-        *@fn Road::to_obj()
+        *@fn Road::R_to_obj()
         *creates a .obj of road
         **/
 
