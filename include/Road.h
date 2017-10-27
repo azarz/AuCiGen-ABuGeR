@@ -19,7 +19,12 @@ class Road
         *@param[in] poPolygon OGRPolygon* : road goemetry
         *@param[in] t_r int : type of road (1: main road, 2: side road)
         */
+
         virtual ~Road();
+        /**
+        *@fn Road::Road(OGRPolygon* poPolygon, int t_r)
+        *Road destructor
+        */
 
         void to_obj();
         /**

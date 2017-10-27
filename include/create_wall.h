@@ -4,6 +4,7 @@
 #include "ogrsf_frmts.h"
 #include "Triangle.h"
 
+void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri);
 /**
 *@fn void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
 *Create walls from the building footprint
@@ -11,6 +12,5 @@
 *@param[in] height double : building height
 *@param[out] li_tri vector<Triangle>& : output list of WALL Triangle
 */
-void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri);
 
 #endif // CREAT_WALL_H_INCLUDED
