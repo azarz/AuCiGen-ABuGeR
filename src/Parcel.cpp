@@ -4,6 +4,7 @@
 #include "BuildingType.h"
 #include "Footprint.h"
 #include <vector>
+#include "type_parcel.h"
 using namespace std;
 
 
@@ -15,7 +16,8 @@ Parcel::Parcel(OGRPolygon* poPolygon)
 
     area = poPolygon->OGRCurvePolygon::get_Area();
 
-    type = new Industry();
+    type = type_parcel();
+    //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
