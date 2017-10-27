@@ -31,9 +31,9 @@ class Parcel
         *@param[in] otherSides OGRLineString* : the sides of the parcel that aren't "linearIntersection"
         *@returns the Footprint associated to the parcel
         */
-        void P_to_obj();
+        void to_obj();
         /**
-        *@fn Road::P_to_obj()
+        *@fn Parcel::to_obj()
         *creates a .obj of road
         **/
 

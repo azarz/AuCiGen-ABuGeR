@@ -45,8 +45,8 @@ int main()
     cout << "Hello world!" << endl;
 
     cout << "Test Amaury " << endl;
-    ROADS.at(25).R_to_obj();
-    PARCELS.at(25).P_to_obj();
+    ROADS.at(25).to_obj();
+    PARCELS.at(25).to_obj();
     return 0;
 }
 

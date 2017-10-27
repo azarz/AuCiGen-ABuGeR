@@ -5,9 +5,8 @@
 #include "Triangle.h"
 #include <string>
 #include <fstream>
-#include "to_obj.h"
+#include "triangles_to_obj.h"
 //#include "catch.h"
-
 
 
 Road::Road(OGRPolygon* poPolygon, int t_r)
@@ -21,13 +20,13 @@ Road::~Road()
     //dtor
 }
 
-void Road::R_to_obj()
+void Road::to_obj()
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    to_obj(triangles);
+    triangles_to_obj(triangles);
 }
 
 

@@ -1,4 +1,4 @@
-#include "to_obj.h"
+#include "triangles_to_obj.h"
 #include <sstream>
 
 
@@ -10,7 +10,7 @@ template <typename T>
      return ss.str();
   }
 
-vector<string> to_obj(vector<Triangle> triangles)
+vector<string> triangles_to_obj(vector<Triangle> triangles)
 {
     // Vector of all the points
     vector<Point> points;
@@ -22,7 +22,6 @@ vector<string> to_obj(vector<Triangle> triangles)
 
     for (int i=0; i<triangles.size() ;++i)
     {
-    //cout << i << "/ " << triangles.size()<< endl;
         // Getting the triangle and its points
         Triangle triangle = triangles.at(i);
         Point p1 = triangle.get_p1();

@@ -50,6 +50,7 @@
 		<Unit filename="include/orient.h" />
 		<Unit filename="include/poly_to_triangle.h" />
 		<Unit filename="include/test.h" />
+		<Unit filename="include/triangles_to_obj.h" />
 		<Unit filename="include/type_parcel.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Building.cpp" />
@@ -68,6 +69,7 @@
 		<Unit filename="src/orient.cpp" />
 		<Unit filename="src/poly_to_triangle.cpp" />
 		<Unit filename="src/test.cpp" />
+		<Unit filename="src/triangles_to_obj.cpp" />
 		<Unit filename="src/type_parcel.cpp" />
 		<Extensions>
 			<code_completion />

@@ -7,7 +7,7 @@
 #include "type_parcel.h"
 #include "Triangle.h"
 #include "poly_to_triangle.h"
-#include "to_obj.h"
+#include "triangles_to_obj.h"
 using namespace std;
 
 
@@ -55,13 +55,13 @@ Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineStr
     return footprint;
 }
 
-void Parcel::P_to_obj()
+void Parcel::to_obj()
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    to_obj(triangles);
+    triangles_to_obj(triangles);
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")
