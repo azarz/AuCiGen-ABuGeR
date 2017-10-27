@@ -23,8 +23,7 @@ int main()
     fill_directory ="1_data/test/test_parcel.shp";
     layer_type ='P';
     OpenShapeFile_parcels(fill_directory, PARCELS);
-    //OGRGeometry* v12 = PARCELS.at(0).get_geom();
-    //ROADS.pop_back();
+
     cout << PARCELS.size() << endl;
     cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
     PARCELS.at(35).print();

@@ -7,7 +7,7 @@
 #include "BuildingModel.h"
 #include "poly_to_triangle.h"
 #include "Triangle.h"
-#include "creat_wall.h"
+#include "create_wall.h"
 
 Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointers to get an envelop from it
 {
@@ -18,18 +18,18 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
 	this->n_floor = static_cast<int>(n_calc); //converting from double to int
 
     //setting the buildingmodel pointer for volume
-    double height =trace->get_parcel()->get_type()->get_height(n_floor);
+    height =trace->get_parcel()->get_type()->get_height(n_floor);
     OGRPolygon poPolygon;
     OGRLinearRing a= (OGRLinearRing)trace->get_geom();
     poPolygon.addRing(&a);
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);
-    creat_wall(&poPolygon, height, li_vector);
+    create_wall(&poPolygon, height, li_vector);
 
 
-    this->volume= new BuildingModel ( li_vector,  trace->get_parcel());
-    cout << "aire envelop : "<<volume->get_parcel()->get_area() <<endl;
-    cout << " x : "<<volume->get_li_triangle().at(0).get_p1().get_x() <<endl;
+    this->volume= li_vector;
+    cout << "aire envelop : "<<parcel->get_area() <<endl;
+    cout << " x : "<<volume.at(0).get_p1().get_x() <<endl;
     //setting the footprint pointer
     this->footprint = trace;
 
@@ -74,6 +74,5 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
     REQUIRE(env.get_n_floor() > 0);
     REQUIRE(env.get_parcel()->get_geom()->getGeometryType() == 3);
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
-    REQUIRE(env.get_volume()->get_parcel()->get_geom()->getGeometryType() == 3);
 }
 */
