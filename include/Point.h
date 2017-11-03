@@ -18,9 +18,9 @@ class Point
         /**
         *@fn Point::Point()
         *Constructor with coordinates parameters.
-        *@param[in] p_x double : x coordinate.
-        *@param[in] p_y double : y coordinate.
-        *@param[in] p_z double : z coordinate.
+        *@param[in] p_x double: x coordinate.
+        *@param[in] p_y double: y coordinate.
+        *@param[in] p_z double: z coordinate.
         */
         virtual ~Point();
         /**
@@ -31,19 +31,19 @@ class Point
         double get_x()const{return x;};
         /**
         *@fn double Point::get_x() const
-        *This function allows us to get the x coordinate.
+        *Gets the x coordinate.
         *@return x double
         */
         double get_y()const{return y;};
         /**
         *@fn double Point::get_y() const
-        *This function allows us to get the y coordinate.
+        *Gets the y coordinate.
         *@return y double
         */
         double get_z()const{return z;};
         /**
         *@fn double Point::get_z() const
-        *This function allows us to get the z coordinate.
+        *Gets the z coordinate.
         *@return z double
         */
 
@@ -51,24 +51,24 @@ class Point
         void translate(double vec[3]);
         /**
         *@fn void Point::translate(double vec[3])
-        *This function allows us to translate the point with a 3d vector,
-        *update the x, y, z coordiantes.
-        *@param[in] vec vector<double> dim 3 : It's a translate vector
+        *Translates the point with a 3d vector,
+        *updates the x, y, z coordiantes.
+        *@param[in] vec vector<double> dim 3: Translation vector
         */
         void rotate(double vec[3], double angle);
         /**
         *@fn void Point::rotate(double vec[3], double angle)
-        *This function allows us to rotate the point with a rotate axe and a angle,
-        *update the x, y, z coordiantes.
-        *@param[in] vec vector<double> dim 3 : It's the rotate axe
-        *@param[in] angle double : It's a rotate angle [rad]
+        *Rotates the point with a rotate axis and a angle,
+        *updates the x, y, z coordinates.
+        *@param[in] vec vector<double> dim 3: Rotation axis
+        *@param[in] angle double: Rotation angle [rad]
         */
         void size(double vec[3]);
         /**
         *@fn void Point::size(double vec[3])
-        *This function allows us to resize the Point according to an array (the origin is [0, 0, 0]),
-        *update the x, y, z coordiantes.
-        *@param[in] vec vector<double> dim 3 : ?????
+        *Resizes the Point according to an array (the origin is [0, 0, 0]),
+        *updates the x, y, z coordinates.
+        *@param[in] vec vector<double> dim 3: WTF IS RESIZING A POINT ??????
         */
 
     protected:

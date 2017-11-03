@@ -11,9 +11,9 @@
 void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType T_t);
 /**
 *@fn void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector , TriangleType T_t)
-*This function allows us to create the triangulated surface of a polygon.
-*@param[in] OGRPolygon* poPolygon : polygon greometry to triangulate.
-*@param[out] vector<Triangle>& li_vector : empty vector that will be filled with created Triangle objects.
+*Creates the triangulated surface of a polygon.
+*@param[in] OGRPolygon* poPolygon: polygon geometry to triangulate.
+*@param[out] vector<Triangle>& li_vector: empty vector that will be filled with created Triangle objects.
 */
 
 #endif // POLY_TO_TRIANGLE_H_INCLUDED

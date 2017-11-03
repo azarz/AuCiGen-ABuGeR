@@ -23,7 +23,7 @@ Triangle::~Triangle()
 
 }
 
-void Triangle::add_type(TriangleType newType)
+void Triangle::set_type(TriangleType newType)
 {
     type = newType;
 }

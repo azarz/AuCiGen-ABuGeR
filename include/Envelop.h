@@ -20,7 +20,7 @@ class Envelop
         /**
         *@fn Envelop::Envelop()
         *Constructor.
-        *@param[in] trace Footprint* : It's the footprint object class.
+        *@param[in] trace Footprint*: The footprint object class.
         */
         virtual ~Envelop();
         /**
@@ -32,35 +32,35 @@ class Envelop
         vector<Triangle> get_volume()const{return volume;};
         /**
         *@fn vector<Triangle> Envelop::get_volume() const
-        *This function allows us to give the Envelop's BuildingModel.
+        *Gets the Envelop's BuildingModel.
         *@return a Triangle vector.
         */
 
         Footprint* get_footprint()const{return footprint;};
         /**
         *@fn Footprint* Envelop::get_footprint() const
-        *This function allows us to give the Envelop's footprint.
+        *Gets the Envelop's footprint.
         *@return a Footprint object pointed.
         */
 
         Parcel* get_parcel()const{return parcel;};
         /**
         *@fn Parcel* Envelop::get_parcel() const
-        *This function allows us togive the Envelop's parcel.
+        *Gets the Envelop's parcel.
         *@return a parcel object pointed within the footprint.
         */
 
         int get_n_floor()const{return n_floor;};
         /**
         *@fn int Envelop::get_n_floor() const
-        *This function allows us to give the number of floor in the Envelop.
+        *Gets the number of floors in the Envelop.
         *@return the floors number of the envelop.
         */
 
         double get_height()const{return height;};
         /**
         *@fn double Envelop::get_height() const
-        *This function allows us to give the height of the Envelop.
+        *Gets the height of the Envelop.
         *@return the height of the envelop.
         */
 

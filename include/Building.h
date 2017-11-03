@@ -27,13 +27,13 @@ class Building
         Parcel* get_parcel()const{return parcel;};
         /**
         *@fn Parcel* Building::get_parcel() const
-        *This function allows us to get the Parcel associated with the building.
+        *Gets the Parcel associated with the building.
         *@return parcel Parcel*
         */
         std::vector<BuildingModel> get_building_model()const{return building_model;};
         /**
         *@fn std::vector<BuildingModel> Building::get_building_model() const
-        *This function allows us to get the list of BuildingModel associated to one house.
+        *Gets the list of BuildingModel associated to one house.
         *@return building_model std::vector<BuildingModel>
         */
 
