@@ -6,12 +6,13 @@
 #include <vector>
 
 /** @file */
-void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon);
+vector<double> OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon);
 /**
 *@fn void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
 *open the SHP of roads and create the road object associated
 *@param[in] fill_directory char* : Road SHP fil directory
 *@param[out] vector<Road>& liPolygon : empty vector that will be filled with created roads objects
+*@return a vector containing the XY coordinates of the centroid of the road layer
 */
 
 void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon);

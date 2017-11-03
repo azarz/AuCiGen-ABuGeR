@@ -7,8 +7,9 @@
 #include "catch.h"
 using namespace std;
 
-void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
+vector<double> OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
 {
+    vector<double> centroid_xy;
     OGRErr error;
     GDALAllRegister();
     GDALDataset       *poDS;
@@ -21,27 +22,31 @@ void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
     OGRLayer  *poLayer;
     poLayer = poDS->GetLayerByName( "road_test");
 
-    OGRwkbGeometryType LayerGeometryType = poLayer ->GetGeomType();
+    OGRwkbGeometryType LayerGeometryType = poLayer->GetGeomType();
     int NumberOfFeatures = poLayer ->GetFeatureCount(true);
     poLayer ->ResetReading();
 
+    OGRGeometryCollection* road_collection = new OGRGeometryCollection();
+    OGRPoint* centroid = new OGRPoint();
+
     //Polygon Shapefile
-    if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
+    if (wkbFlatten(LayerGeometryType) == wkbPolygon )
     {
-       OGRFeature *poFeature;
+       OGRFeature* poFeature;
        OGRPoint ptTemp;
-       for ( int i = 0; i < NumberOfFeatures; i++ )
+       for (int i = 0; i < NumberOfFeatures; i++)
        {
            //printf("\nelement : %d\n", i);
            poFeature = poLayer ->GetNextFeature();
-           OGRGeometry *poGeometry;
-           poGeometry = poFeature ->GetGeometryRef();
+           OGRGeometry* poGeometry;
+           poGeometry = poFeature->GetGeometryRef();
            if ( poGeometry != NULL && wkbFlatten ( poGeometry->getGeometryType() ) == wkbPolygon )
            {
-                OGRPolygon *poPolygon = ( OGRPolygon * )poGeometry;
+                OGRPolygon* poPolygon = (OGRPolygon*)poGeometry;
+                road_collection->addGeometry(poPolygon);
                 /*OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
                 int iField =1;
-                OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
+                OGRFieldDefn* poFieldDefn = poFDefn->GetFieldDefn( iField );
                 if( poFieldDefn->GetType() == OFTInteger )
                 {*/
                     Road road = Road(poPolygon,1);// poFeature->GetFieldAsInteger(iField));
@@ -52,10 +57,14 @@ void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
            }
 
        }
+       road_collection->Centroid(centroid);
+       centroid_xy.push_back(centroid->getX());
+       centroid_xy.push_back(centroid->getY());
        OGRFeature::DestroyFeature(poFeature);
     }
 
     GDALClose( poDS );
+    return centroid_xy;
 }
 
 
@@ -83,7 +92,6 @@ void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
     if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
     {
        OGRFeature *poFeature;
-       OGRPoint ptTemp;
        for ( int i = 0; i < NumberOfFeatures; i++ )
        {
            poFeature = poLayer->GetNextFeature();
