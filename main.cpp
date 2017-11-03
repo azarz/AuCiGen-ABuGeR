@@ -16,19 +16,19 @@ vector<Parcel> PARCELS;
 
 int main()
 {
+    OGRPoint* centroid;
     //Parcel();
     char* fill_directory ="1_data/test/road_test.shp";
-    char layer_type ='R';
-    OpenShapeFile_roads(fill_directory, ROADS);
+    centroid = open_shp_roads(fill_directory, ROADS);
     fill_directory ="1_data/test/test_parcel.shp";
-    layer_type ='P';
-    OpenShapeFile_parcels(fill_directory, PARCELS);
+    open_shp_parcels(fill_directory, PARCELS);
 
   //  cout << PARCELS.size() << endl;
    // cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
  //   PARCELS.at(35).print();
 
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
+    cout << v1->Distance(centroid) << endl;
    // cout << v1->getGeometryName()<< endl;
 
     OGRLineString* v2 = get_intersection_road(v1,ROADS);

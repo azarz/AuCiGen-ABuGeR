@@ -6,16 +6,16 @@
 #include <vector>
 
 /** @file */
-vector<double> OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon);
+OGRPoint* open_shp_roads(char* fill_directory, vector<Road>& liPolygon);
 /**
 *@fn void OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
-*open the SHP of roads and create the road object associated
+*This function allows us to open the SHP of roads and create the road object associated, along with calculating the centroid of the roads
 *@param[in] fill_directory char* : Road SHP fil directory
 *@param[out] vector<Road>& liPolygon : empty vector that will be filled with created roads objects
-*@return a vector containing the XY coordinates of the centroid of the road layer
+*@return an OGRPoint* corresponding to the centroid of the layer
 */
 
-void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon);
+void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon);
 /**
 *@fn void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
 *This function allows us to open the SHP of parcels and create the Parcel object associated.

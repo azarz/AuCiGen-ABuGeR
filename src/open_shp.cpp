@@ -7,9 +7,8 @@
 #include "catch.h"
 using namespace std;
 
-vector<double> OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon)
+OGRPoint* open_shp_roads(char* fill_directory, vector<Road>& liPolygon)
 {
-    vector<double> centroid_xy;
     OGRErr error;
     GDALAllRegister();
     GDALDataset       *poDS;
@@ -58,17 +57,15 @@ vector<double> OpenShapeFile_roads(char* fill_directory, vector<Road>& liPolygon
 
        }
        road_collection->Centroid(centroid);
-       centroid_xy.push_back(centroid->getX());
-       centroid_xy.push_back(centroid->getY());
        OGRFeature::DestroyFeature(poFeature);
     }
 
     GDALClose( poDS );
-    return centroid_xy;
+    return centroid;
 }
 
 
-void OpenShapeFile_parcels(char* fill_directory, vector<Parcel>& liPolygon)
+void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon)
 
 {
     OGRErr error;
