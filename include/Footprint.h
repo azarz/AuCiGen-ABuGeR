@@ -11,41 +11,41 @@ class Footprint
 {
     /**
     *@class Footprint
-    *contain the Footprint specs
+    *Contain the Footprint specs.
     */
     public:
         Footprint(OGRLinearRing* linearRing, Parcel* parcel);
         /**
-        *@fn Footprint::Footprint()
-        *constructor Footprint()
-        *@param[in] linearRing OGRLinearRing* : bounds of the parcel
-        *@param[in] linearRing OGRLinearRing* : parcel object class
+        *@fn Footprint::Footprint(OGRLinearRing* linearRing, Parcel* parcel)
+        *Constructor Footprint()
+        *@param[in] linearRing : It's the bounds of the parcel.
+        *@param[in] parcel OGRLinearRing* : It's the parcel object class.
         */
         virtual ~Footprint();
         /**
-        *@fn Footprint::~Footprint()
+        *@fn virtual Footprint::~Footprint()
         *destructor ~Footprint()
         */
 
         Envelop create_envelop();
         /**
-        *@fn Footprint::create_envelop()
-        *create give an envelop on the parcel
-        @return an Envelop object
+        *@fn Envelop Footprint::create_envelop()
+        *This function allows us to create give an envelop on the parcel.
+        @return an Envelop object.
         */
         // Getters
         OGRLinearRing* get_geom()const{return geom;};
         /**
-        *@fn Footprint::get_geom()
-        *give the parcel geometry
-        *@return an OGRLinearRing object pointed
+        *@fn OGRLinearRing* Footprint::get_geom() const
+        *This function allows us to give the parcel geometry.
+        *@return an OGRLinearRing object pointed.
         */
 
         Parcel* get_parcel()const{return parcel;};
         /**
-        *@fn Footprint::get_parcel()
-        *give the parcel object
-        *@return a Parcel object pointed
+        *@fn Parcel* Footprint::get_parcel() const
+        *This function allows us to give the parcel object.
+        *@return a Parcel object pointed.
         */
 
     protected:

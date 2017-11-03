@@ -9,31 +9,31 @@ class Building
 {
 /**
 *@class Building
-*Contain the Building
+*Contain the Building.
 */
     public:
         Building();
         /**
         *@fn Building::Building()
-        *Constructor
+        *Constructor.
         */
         virtual ~Building();
         /**
         *@fn virtual Building::~Building()
-        *Destructor
+        *Destructor.
         */
 
         // Getters
         Parcel* get_parcel()const{return parcel;};
         /**
-        *@fn Parcel* Building::get_parcel()
-        *This function allows us to get the Parcel associated with the building
+        *@fn Parcel* Building::get_parcel() const
+        *This function allows us to get the Parcel associated with the building.
         *@return parcel Parcel*
         */
         std::vector<BuildingModel> get_building_model()const{return building_model;};
         /**
-        *@fn std::vector<BuildingModel> Building::get_building_model()
-        *This function allows us to get the list of BuildingModel associated to one house
+        *@fn std::vector<BuildingModel> Building::get_building_model() const
+        *This function allows us to get the list of BuildingModel associated to one house.
         *@return building_model std::vector<BuildingModel>
         */
 
