@@ -10,7 +10,7 @@ template <typename T>
      return ss.str();
   }
 
-vector<string> triangles_to_obj(vector<Triangle> triangles)
+vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, double y_centroid)
 {
     // Vector of all the points
     vector<Point> points;
@@ -96,8 +96,8 @@ vector<string> triangles_to_obj(vector<Triangle> triangles)
     for(int i=0;i<points.size();++i)
     {
         Point vertex = points.at(i);
-        vertices += "v " + num_to_string(vertex.get_x()) + " "
-                         + num_to_string(vertex.get_y()) + " "
+        vertices += "v " + num_to_string(vertex.get_x() - x_centroid) + " "
+                         + num_to_string(vertex.get_y() - y_centroid) + " "
                          + num_to_string(vertex.get_z()) + "\n";
 
     }
