@@ -67,8 +67,9 @@ void Parcel::to_obj(OGRPoint* centroid)
 
 BuildingType* Parcel::compute_type(OGRPoint* centroid)
 {
-    double low_thresh = 0.5;
-    double high_thresh = 1;
+    //Thresholds of distance from the center to determine the districts
+    double low_thresh = 1500; //In meters
+    double high_thresh = 6000;
 
     bool downtown = false;
     bool uptown = false;
