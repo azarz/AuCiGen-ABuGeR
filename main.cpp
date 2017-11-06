@@ -53,7 +53,7 @@ int main()
 
 
     vector<Triangle> roadTriangles;
-    for(unsigned int i=0U; i< ROADS.size();++i)
+    for(unsigned int i=1U; i< ROADS.size();++i)
     {
         // NE MARCHE PAS AVEC LA ROUTE 0 ET 32 ET SUREMENT D'AUTRES APRES
         cout << i << endl;
