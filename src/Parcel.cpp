@@ -4,14 +4,13 @@
 #include "BuildingType.h"
 #include "Footprint.h"
 #include <vector>
-#include "type_parcel.h"
 #include "Triangle.h"
 #include "poly_to_triangle.h"
 #include "triangles_to_obj.h"
 using namespace std;
 
 
-Parcel::Parcel(OGRPolygon* poPolygon)
+Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 {
     //ctor
     //area(1), area_price(1), floorspace(1)//
@@ -19,11 +18,12 @@ Parcel::Parcel(OGRPolygon* poPolygon)
 
     area = poPolygon->OGRCurvePolygon::get_Area();
 
-    type = new BuildingType();
+
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
+    this->compute_type(centroid);
 }
 
 Parcel::~Parcel()

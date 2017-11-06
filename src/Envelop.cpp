@@ -27,7 +27,7 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
     //setting the parcel pointer
     this->parcel = trace->get_parcel();
     cout << "aire envelop : "<<parcel->get_area() <<endl;
-    cout << " x : "<<volume.at(0).get_p1().get_x() <<endl;
+    //cout << " x : "<<volume.at(0).get_p1().get_x() <<endl;
     //setting the footprint pointer
     this->footprint = trace;
 

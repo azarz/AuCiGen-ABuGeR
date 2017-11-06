@@ -98,8 +98,7 @@ void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon, OGRPoint*
            {
                 OGRPolygon* poPolygon = (OGRPolygon*)poGeometry;
 
-                Parcel parcel = Parcel(poPolygon);
-                parcel.compute_type(centroid);
+                Parcel parcel = Parcel(poPolygon, centroid);
                 liPolygon.push_back(parcel);
            }
 
