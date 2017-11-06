@@ -27,15 +27,14 @@ class Envelop
         *@fn virtual Envelop::~Envelop()
         *Destructor.
         */
+        void to_obj(OGRPoint* centroid);
+        /**
+        *@fn void Envelop::to_obj()
+        *Converts the Envelop volume to Wavefront .obj format.
+        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
+        **/
 
         // Getters
-        vector<Triangle> get_volume()const{return volume;};
-        /**
-        *@fn vector<Triangle> Envelop::get_volume() const
-        *Gets the Envelop's BuildingModel.
-        *@return a Triangle vector.
-        */
-
         Footprint* get_footprint()const{return footprint;};
         /**
         *@fn Footprint* Envelop::get_footprint() const
@@ -66,7 +65,6 @@ class Envelop
 
     protected:
     private:
-        vector<Triangle> volume;
         Footprint* footprint;
         Parcel* parcel;
         int n_floor;
