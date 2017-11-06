@@ -22,8 +22,8 @@ Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
-    floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
     this->compute_type(centroid);
+    floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
 }
 
 Parcel::~Parcel()
@@ -67,32 +67,62 @@ void Parcel::to_obj(OGRPoint* centroid)
 
 void Parcel::compute_type(OGRPoint* centroid)
 {
-    int a= rand() % 5;
-    if (a==0)
+    double low_thresh = 0.5;
+    double high_thresh = 1;
+
+    bool downtown = false;
+    bool uptown = false;
+    bool suburbs = false;
+
+    double dist_centroid = geom->Distance(centroid);
+
+    if (dist_centroid <= low_thresh)
     {
-        //cout<<"I"<<endl;
-        type = new Industry();
-    }
-    if (a==1)
+        downtown = true;
+    } else if (dist_centroid > high_thresh)
     {
-        //cout<<"O"<<endl;
-        type = new Office();
-    }
-    if (a==2)
+        suburbs = true;
+    } else
     {
-        //cout<<"AB"<<endl;
-        type = new ApartmentBuilding();
+        uptown = true;
     }
-    if (a==3)
+
+    int a = rand() % 100;
+    if (downtown)
     {
-        //cout<<"V"<<endl;
-        type = new Villa();
-    }
-    else
+        if (a<50)
+        {
+            type = new Office();
+        } else
+        {
+            type = new ApartmentBuilding();
+        }
+    } else if (uptown)
     {
-        //cout<<"TH"<<endl;
-        type = new Townhouse();
+        if (a<60)
+        {
+            type = new ApartmentBuilding();
+        } else if (a>=60 && a<90)
+        {
+            type = new Townhouse();
+        } else
+        {
+            type = new Office();
+        }
+    } else
+    {
+        if (a<50)
+        {
+            type = new Villa();
+        } else if (a>=50 && a<75)
+        {
+            type = new Industry();
+        } else
+        {
+            type = new Townhouse();
+        }
     }
+
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")
