@@ -51,7 +51,7 @@ class Parcel
         *Displays the Parcel attributes.
         */
 
-        void compute_type(OGRPoint* centroid);
+        BuildingType* compute_type(OGRPoint* centroid);
         /**
         *@fn void Parcel::compute_type();
         *Computes the type of the parcel.

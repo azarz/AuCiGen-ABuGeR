@@ -22,7 +22,7 @@ Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
-    this->compute_type(centroid);
+    type = this->compute_type(centroid);
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
 }
 
@@ -65,7 +65,7 @@ void Parcel::to_obj(OGRPoint* centroid)
 }
 
 
-void Parcel::compute_type(OGRPoint* centroid)
+BuildingType* Parcel::compute_type(OGRPoint* centroid)
 {
     double low_thresh = 0.5;
     double high_thresh = 1;
