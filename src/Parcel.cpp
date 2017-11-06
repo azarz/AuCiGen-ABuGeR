@@ -22,7 +22,7 @@ Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
-    type = this->compute_type(centroid);
+    this->compute_type(centroid);
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
 }
 
@@ -73,7 +73,7 @@ void Parcel::compute_type(OGRPoint* centroid)
 
     bool downtown = false;
     bool uptown = false;
-    //Else: suburbs
+    bool suburbs = false;
 
     double dist_centroid = geom->Distance(centroid);
 
