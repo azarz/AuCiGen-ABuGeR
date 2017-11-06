@@ -7,6 +7,10 @@
 #include "orient.h"
 #include "Footprint.h"
 #include "catch.h"
+#include "poly_to_triangle.h"
+#include "triangles_to_obj.h"
+
+
 using namespace std;
 
 
@@ -18,7 +22,7 @@ int main()
 {
     OGRPoint* centroid;
     //Parcel();
-    char* fill_directory ="1_data/test/road_test.shp";
+    const char* fill_directory ="1_data/test/road_test.shp";
     centroid = open_shp_roads(fill_directory, ROADS);
     fill_directory ="1_data/test/test_parcel.shp";
     open_shp_parcels(fill_directory, PARCELS, centroid);
@@ -43,9 +47,22 @@ int main()
 
   //  cout << "Test Antoine " << footprint2.get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
-
+    cout << PARCELS.at(35).get_type()->get_type() << endl;
+    cout << PARCELS.at(1).get_type()->get_type() << endl;
     cout << "Test Amaury " << endl;
-    ROADS.at(25).to_obj(centroid);
+
+
+    vector<Triangle> roadTriangles;
+    for(unsigned int i=0U; i< ROADS.size();++i)
+    {
+        // NE MARCHE PAS AVEC LA ROUTE 0 ET 32 ET SUREMENT D'AUTRES APRES
+        cout << i << endl;
+        cout << ROADS.at(i).get_geom()->IsValid() << endl;
+        poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
+    }
+
+    triangles_to_obj(roadTriangles, centroid->getX(), centroid->getY());
+
     PARCELS.at(25).to_obj(centroid);
     return 0;
 }

@@ -15,11 +15,12 @@ class Parcel
     *Contain parcel
     */
     public:
-        Parcel(OGRPolygon* poPolygon);
+        Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
         /**
         *@fn Parcel::Parcel(OGRPolygon* poPolygon)
         *Constructor.
         *@param[in] poPolygon OGRPolygon*: The parcel geometry.
+        *@param[in] centroid OGRPoint*: Then centroid of the city.
         */
 
         virtual ~Parcel();
@@ -37,11 +38,12 @@ class Parcel
         *@returns the Footprint associated to the parcel.
         */
 
-        void to_obj(OGRPoint* centroid);
+        vector<string> to_obj(OGRPoint* centroid);
         /**
         *@fn void Parcel::to_obj()
         *Converts the Parcel to Wavefront .obj format.
         *@param[in] an OGRPoint pointer corresponding to the centroid of the city
+        *@return A vector of 3 strings: 1-vertices 2-uv coordinates 3-faces
         **/
 
         void print();

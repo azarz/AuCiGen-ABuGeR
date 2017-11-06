@@ -40,6 +40,7 @@ void Industry::set_param()
     floor=1;
     margin_parcel=0.00001;
     margin_road=0.00001;
+    type="Industry";
 }
 
 Office::Office(){set_param();}
@@ -53,6 +54,7 @@ void Office::set_param()
     floor=1;
     margin_parcel=0.00001;
     margin_road=0.00001;
+    type="Office";
 }
 ApartmentBuilding::ApartmentBuilding(){set_param();}
 void ApartmentBuilding::set_param()
@@ -65,6 +67,7 @@ void ApartmentBuilding::set_param()
     floor=1;
     margin_parcel=0.00001;
     margin_road=0.00001;
+    type="ApartmentBuilding";
 }
 Villa::Villa(){set_param();}
 void Villa::set_param()
@@ -77,6 +80,7 @@ void Villa::set_param()
     floor=1;
     margin_parcel=0.00001;
     margin_road=0.00001;
+    type="Villa";
 }
 Townhouse::Townhouse(){set_param();}
 void Townhouse::set_param()
@@ -89,6 +93,7 @@ void Townhouse::set_param()
     floor=1;
     margin_parcel=0.00001;
     margin_road=0.00001;
+    type="Townhouse";
 }
 
 /*

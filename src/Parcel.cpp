@@ -4,14 +4,13 @@
 #include "BuildingType.h"
 #include "Footprint.h"
 #include <vector>
-#include "type_parcel.h"
 #include "Triangle.h"
 #include "poly_to_triangle.h"
 #include "triangles_to_obj.h"
 using namespace std;
 
 
-Parcel::Parcel(OGRPolygon* poPolygon)
+Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 {
     //ctor
     //area(1), area_price(1), floorspace(1)//
@@ -19,10 +18,11 @@ Parcel::Parcel(OGRPolygon* poPolygon)
 
     area = poPolygon->OGRCurvePolygon::get_Area();
 
-    type = new BuildingType();
+
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
+    this->compute_type(centroid);
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
 }
 
@@ -49,50 +49,84 @@ Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineStr
     OGRGeometry* diff1 = geom->Difference(road_buffer);
     OGRGeometry* diff2 = diff1->Difference(neigh_buffer);
 
-    OGRGeometry* contour = diff2->getBoundary();
+    OGRGeometry* contour = diff2->Boundary();
     OGRLinearRing* contour2 = (OGRLinearRing*) contour;
     Footprint footprint(contour2,this);
     return footprint;
 }
 
-void Parcel::to_obj(OGRPoint* centroid)
+vector<string> Parcel::to_obj(OGRPoint* centroid)
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles, centroid->getX(), centroid->getY());
+    return triangles_to_obj(triangles, centroid->getX(), centroid->getY());
 }
 
 
 void Parcel::compute_type(OGRPoint* centroid)
 {
-    int a= rand() % 5;
-    if (a==0)
+    //Thresholds of distance from the center to determine the districts
+    double low_thresh = 1500; //In meters
+    double high_thresh = 6000;
+
+    bool downtown = false;
+    bool uptown = false;
+    bool suburbs = false;
+
+    double dist_centroid = geom->Distance(centroid);
+
+    if (dist_centroid <= low_thresh)
     {
-        //cout<<"I"<<endl;
-        type = new Industry();
+        downtown = true;
+    } else if (dist_centroid > high_thresh)
+    {
+        suburbs = true;
+    } else
+    {
+        uptown = true;
     }
-    if (a==1)
+
+    int a = rand() % 100;
+    if (downtown)
     {
-        //cout<<"O"<<endl;
+        if (a<50)
+        {
+            type = new Office();
+        } else
+        {
+            type = new ApartmentBuilding();
+        }
+    } else if (uptown)
+    {
+        if (a<60)
+        {
+            type = new ApartmentBuilding();
+        } else if (a>=60 && a<90)
+        {
+            type = new Townhouse();
+        } else
+        {
+            type = new Office();
+        }
+    } else if (suburbs)
+    {
+        if (a<50)
+        {
+            type = new Villa();
+        } else if (a>=50 && a<75)
+        {
+            type = new Industry();
+        } else
+        {
+            type = new Townhouse();
+        }
+    } else
+    {
         type = new Office();
     }
-    if (a==2)
-    {
-        //cout<<"AB"<<endl;
-        type = new ApartmentBuilding();
-    }
-    if (a==3)
-    {
-        //cout<<"V"<<endl;
-        type = new Villa();
-    }
-    else
-    {
-        //cout<<"TH"<<endl;
-        type = new Townhouse();
-    }
+
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")
@@ -106,4 +140,4 @@ void Parcel::compute_type(OGRPoint* centroid)
     p.get_geom()->exportToWkt(&wktS);
     //REQUIRE(wktS==wkt);
 }
-/**/
+*/

@@ -20,13 +20,13 @@ Road::~Road()
     //dtor
 }
 
-void Road::to_obj(OGRPoint* centroid)
+vector<string> Road::to_obj(OGRPoint* centroid)
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles, centroid->getX(), centroid->getY());
+    return triangles_to_obj(triangles, centroid->getX(), centroid->getY());
 }
 
 
@@ -41,4 +41,4 @@ void Road::to_obj(OGRPoint* centroid)
     r.get_geom()->exportToWkt(&wktS);
     //REQUIRE(wktS==wkt);
 }
-/**/
+*/
