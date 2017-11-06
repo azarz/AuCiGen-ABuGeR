@@ -6,6 +6,7 @@
 #include "poly_to_triangle.h"
 #include "Triangle.h"
 #include "create_wall.h"
+#include "triangles_to_obj.h"
 
 Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointers to get an envelop from it
 {
@@ -27,7 +28,6 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
     //setting the parcel pointer
     this->parcel = trace->get_parcel();
     cout << "aire envelop : "<<parcel->get_area() <<endl;
-    //cout << " x : "<<volume.at(0).get_p1().get_x() <<endl;
     //setting the footprint pointer
     this->footprint = trace;
 
@@ -45,6 +45,13 @@ Envelop::~Envelop()
 void Envelop::to_obj(OGRPoint* centroid)
 {
     //
+    OGRPolygon poPolygon;
+    OGRLinearRing a= (OGRLinearRing)footprint->get_geom();
+    poPolygon.addRing(&a);
+    vector<Triangle> li_vector;
+    poly_to_triangle(&poPolygon, li_vector, FLOOR);
+    create_wall(&poPolygon, height, li_vector);
+    triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
 }
 
 /*
