@@ -15,12 +15,11 @@ class Parcel
     *Contain parcel
     */
     public:
-        Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
+        Parcel(OGRPolygon* poPolygon);
         /**
         *@fn Parcel::Parcel(OGRPolygon* poPolygon)
         *Constructor.
         *@param[in] poPolygon OGRPolygon*: The parcel geometry.
-        *@param[in] centroid OGRPoint*: Then centroid of the city.
         */
 
         virtual ~Parcel();
@@ -49,6 +48,13 @@ class Parcel
         /**
         *@fn void Parcel::print();
         *Displays the Parcel attributes.
+        */
+
+        void compute_type(OGRPoint* centroid);
+        /**
+        *@fn void Parcel::compute_type();
+        *Computes the type of the parcel.
+        *@param[in] centroid OGRPoint*: Then centroid of the city.
         */
 
         // Getters
