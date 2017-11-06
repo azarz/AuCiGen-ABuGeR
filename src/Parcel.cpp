@@ -11,7 +11,7 @@
 using namespace std;
 
 
-Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
+Parcel::Parcel(OGRPolygon* poPolygon)
 {
     //ctor
     //area(1), area_price(1), floorspace(1)//
@@ -19,7 +19,7 @@ Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 
     area = poPolygon->OGRCurvePolygon::get_Area();
 
-    type = type_parcel(centroid);
+    type = new BuildingType();
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
@@ -62,6 +62,37 @@ void Parcel::to_obj(OGRPoint* centroid)
     poly_to_triangle(geom,triangles,FLOOR);
 
     triangles_to_obj(triangles, centroid->getX(), centroid->getY());
+}
+
+
+void Parcel::compute_type(OGRPoint* centroid)
+{
+    int a= rand() % 5;
+    if (a==0)
+    {
+        //cout<<"I"<<endl;
+        type = new Industry();
+    }
+    if (a==1)
+    {
+        //cout<<"O"<<endl;
+        type = new Office();
+    }
+    if (a==2)
+    {
+        //cout<<"AB"<<endl;
+        type = new ApartmentBuilding();
+    }
+    if (a==3)
+    {
+        //cout<<"V"<<endl;
+        type = new Villa();
+    }
+    else
+    {
+        //cout<<"TH"<<endl;
+        type = new Townhouse();
+    }
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")
