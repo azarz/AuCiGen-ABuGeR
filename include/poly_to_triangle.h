@@ -8,7 +8,7 @@
 #include <ogr_geometry.h>
 
 /** @file */
-void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType T_t);
+void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType type);
 /**
 *@fn void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector , TriangleType T_t)
 *Creates the triangulated surface of a polygon.

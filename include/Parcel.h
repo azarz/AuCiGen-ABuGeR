@@ -38,11 +38,12 @@ class Parcel
         *@returns the Footprint associated to the parcel.
         */
 
-        void to_obj(OGRPoint* centroid);
+        vector<string> to_obj(OGRPoint* centroid);
         /**
         *@fn void Parcel::to_obj()
         *Converts the Parcel to Wavefront .obj format.
         *@param[in] an OGRPoint pointer corresponding to the centroid of the city
+        *@return A vector of 3 strings: 1-vertices 2-uv coordinates 3-faces
         **/
 
         void print();
@@ -51,7 +52,7 @@ class Parcel
         *Displays the Parcel attributes.
         */
 
-        BuildingType* compute_type(OGRPoint* centroid);
+        void compute_type(OGRPoint* centroid);
         /**
         *@fn void Parcel::compute_type();
         *Computes the type of the parcel.

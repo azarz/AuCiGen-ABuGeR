@@ -21,7 +21,7 @@ BuildingModel::~BuildingModel()
 }
 void BuildingModel::translate(double vec[3], TriangleType name)
 {
-    for (int i=0; i<li_triangle.size(); i++)
+    for (unsigned int i=0U; i<li_triangle.size(); i++)
     {
         if (li_triangle[i].get_type() == name)
         {
@@ -31,7 +31,7 @@ void BuildingModel::translate(double vec[3], TriangleType name)
 }
 void BuildingModel::rotate(double vec[3], double angle, TriangleType name)
 {
-    for (int i=0; i<li_triangle.size(); i++)
+    for (unsigned int i=0U; i<li_triangle.size(); i++)
     {
         if (li_triangle[i].get_type() == name)
         {
@@ -41,7 +41,7 @@ void BuildingModel::rotate(double vec[3], double angle, TriangleType name)
 }
 void BuildingModel::size(double vec[3], TriangleType name)
 {
-    for (int i=0; i<li_triangle.size(); i++)
+    for (unsigned int i=0U; i<li_triangle.size(); i++)
     {
         if (li_triangle[i].get_type() == name)
         {
@@ -52,7 +52,7 @@ void BuildingModel::size(double vec[3], TriangleType name)
 
 void BuildingModel::split(double axis[3], Point origin, TriangleType oldName, TriangleType newName )
 {
-    for (int i=0; i<li_triangle.size(); i++)
+    for (unsigned int i=0U; i<li_triangle.size(); i++)
     {
         if (li_triangle[i].get_type() == oldName)
         {
@@ -84,7 +84,7 @@ void BuildingModel::scope()
 
 void BuildingModel::join(BuildingModel buildingModel)
 {
-    for (int i=0; i<buildingModel.li_triangle.size(); i++)
+    for (unsigned int i=0U; i<buildingModel.li_triangle.size(); i++)
     {
         li_triangle.push_back(buildingModel.li_triangle[i]);
     }

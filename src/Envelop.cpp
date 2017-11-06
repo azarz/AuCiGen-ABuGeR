@@ -87,4 +87,4 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
     REQUIRE(env.get_height() > 0);
 }
-/* */
+ */
