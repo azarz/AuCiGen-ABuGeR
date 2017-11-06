@@ -65,7 +65,7 @@ void Parcel::to_obj(OGRPoint* centroid)
 }
 
 
-BuildingType* Parcel::compute_type(OGRPoint* centroid)
+void Parcel::compute_type(OGRPoint* centroid)
 {
     //Thresholds of distance from the center to determine the districts
     double low_thresh = 1500; //In meters
@@ -73,7 +73,7 @@ BuildingType* Parcel::compute_type(OGRPoint* centroid)
 
     bool downtown = false;
     bool uptown = false;
-    bool suburbs = false;
+    //Else: suburbs
 
     double dist_centroid = geom->Distance(centroid);
 
