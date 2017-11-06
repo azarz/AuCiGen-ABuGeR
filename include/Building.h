@@ -3,6 +3,7 @@
 
 #include "Parcel.h"
 #include "BuildingModel.h"
+#include "Envelop.h"
 #include <vector>
 
 class Building
@@ -12,10 +13,11 @@ class Building
 *Contain the Building.
 */
     public:
-        Building();
+        Building(Envelop* env);
         /**
         *@fn Building::Building()
         *Constructor.
+        *@param[in] env : envelop object
         */
         virtual ~Building();
         /**
