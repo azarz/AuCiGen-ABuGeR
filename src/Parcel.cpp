@@ -22,8 +22,9 @@ Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
+    type = this->compute_type(centroid);
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
-    this->compute_type(centroid);
+    //cout << type->get_type() << endl;
 }
 
 Parcel::~Parcel()
@@ -65,33 +66,38 @@ void Parcel::to_obj(OGRPoint* centroid)
 }
 
 
-void Parcel::compute_type(OGRPoint* centroid)
+BuildingType* Parcel::compute_type(OGRPoint* centroid)
 {
     int a= rand() % 5;
     if (a==0)
     {
         //cout<<"I"<<endl;
-        type = new Industry();
+        //type = new Industry();
+        return new Industry();
     }
     if (a==1)
     {
         //cout<<"O"<<endl;
-        type = new Office();
+        //type = new Office();
+        return new Office();
     }
     if (a==2)
     {
         //cout<<"AB"<<endl;
-        type = new ApartmentBuilding();
+        //type = new ApartmentBuilding();
+        return  new ApartmentBuilding();
     }
     if (a==3)
     {
         //cout<<"V"<<endl;
-        type = new Villa();
+        //type = new Villa();
+        return  new Villa();
     }
     else
     {
         //cout<<"TH"<<endl;
-        type = new Townhouse();
+        //type = new Townhouse();
+        return new Townhouse();
     }
 }
 

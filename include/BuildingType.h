@@ -104,6 +104,8 @@ class BuildingType
         *@return margin_road double
         */
 
+        string get_type()const{return type;};
+
     protected:
         double profitability;
         double floor_height;
@@ -113,6 +115,7 @@ class BuildingType
         int floor;
         double margin_parcel;
         double margin_road;
+        string type;
     private:
 };
 

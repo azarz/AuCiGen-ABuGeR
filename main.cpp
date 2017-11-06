@@ -43,7 +43,8 @@ int main()
 
   //  cout << "Test Antoine " << footprint2.get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
-
+    cout << PARCELS.at(35).get_type()->get_type() << endl;
+    cout << PARCELS.at(1).get_type()->get_type() << endl;
     cout << "Test Amaury " << endl;
     ROADS.at(25).to_obj(centroid);
     PARCELS.at(25).to_obj(centroid);
