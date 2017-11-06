@@ -255,7 +255,7 @@
 	<iostream>
 	"gauss.h"
 
-1509980705 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+1509984295 source:/home/formation/AuCiGen/ABuGeR/main.cpp
 	<iostream>
 	<vector>
 	"Envelop.h"
@@ -265,6 +265,8 @@
 	"orient.h"
 	"Footprint.h"
 	"catch.h"
+	"poly_to_triangle.h"
+	"triangles_to_obj.h"
 
 1509982759 /home/formation/AuCiGen/ABuGeR/include/open_shp.h
 	"Road.h"
@@ -281,7 +283,7 @@
 	"ogrsf_frmts.h"
 	"Triangle.h"
 
-1509982548 source:/home/formation/AuCiGen/ABuGeR/src/poly_to_triangle.cpp
+1509984684 source:/home/formation/AuCiGen/ABuGeR/src/poly_to_triangle.cpp
 	"poly_to_triangle.h"
 	"Triangle.h"
 	"ogrsf_frmts.h"
