@@ -12,3 +12,12 @@ Building::~Building()
 {
     //dtor
 }
+
+void Building::creat_roof(double roofAngle)
+{
+
+}
+void Building::to_obj(OGRPoint* centroid)
+{
+    //
+}

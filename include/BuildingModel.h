@@ -89,13 +89,6 @@ class BuildingModel
         *Extracts the surfaces touched by occlusion.
         */
 
-        BuildingModel creat_roof(double roofAngle);
-        /**
-        *@fn BuildingModel BuildingModel::creat_roof(double roofAngle)
-        *Creates a roof for a simple building depending of his roof angle.
-        *@param[in] roofAngle: The roof angle.
-        */
-
         void to_obj();
         /**
         *@fn void BuildingModel::to_obj()

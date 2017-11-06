@@ -23,6 +23,20 @@ class Building
         *Destructor.
         */
 
+        void creat_roof(double roofAngle);
+        /**
+        *@fn BuildingModel Building::creat_roof(double roofAngle)
+        *Creates a roof for a simple building depending of his roof angle.
+        *@param[in] roofAngle: The roof angle.
+        */
+
+        void to_obj(OGRPoint* centroid);
+        /**
+        *@fn void Building::to_obj()
+        *Converts the Building to Wavefront .obj format.
+        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
+        **/
+
         // Getters
         Parcel* get_parcel()const{return parcel;};
         /**

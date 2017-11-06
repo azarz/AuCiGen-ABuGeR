@@ -90,11 +90,6 @@ void BuildingModel::join(BuildingModel buildingModel)
     }
 }
 
-BuildingModel BuildingModel::creat_roof(double roofAngle)
-{
-
-}
-
 void BuildingModel::to_obj()
 {
 
