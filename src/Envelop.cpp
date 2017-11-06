@@ -17,13 +17,13 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
 
     //setting the buildingmodel pointer for volume
     height =trace->get_parcel()->get_type()->get_height(n_floor);
-    OGRPolygon poPolygon;
+    /*OGRPolygon poPolygon;
     OGRLinearRing a= (OGRLinearRing)trace->get_geom();
     poPolygon.addRing(&a);
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);
     create_wall(&poPolygon, height, li_vector);
-    this->volume= li_vector;
+    this->volume= li_vector;*/
     //setting the parcel pointer
     this->parcel = trace->get_parcel();
     cout << "aire envelop : "<<parcel->get_area() <<endl;
@@ -40,6 +40,11 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
 Envelop::~Envelop()
 {
     //dtor
+}
+
+void Envelop::to_obj(OGRPoint* centroid)
+{
+    //
 }
 
 /*
