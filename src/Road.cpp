@@ -20,13 +20,13 @@ Road::~Road()
     //dtor
 }
 
-void Road::to_obj()
+void Road::to_obj(OGRPoint* centroid)
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles);
+    triangles_to_obj(triangles, centroid.getX(), centroid.getY());
 }
 
 

@@ -55,13 +55,13 @@ Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineStr
     return footprint;
 }
 
-void Parcel::to_obj()
+void Parcel::to_obj(OGRPoint* centroid)
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles);
+    triangles_to_obj(triangles, centroid.getX(), centroid.getY());
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")

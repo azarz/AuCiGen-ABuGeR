@@ -26,10 +26,11 @@ class Road
         *Road destructor.
         */
 
-        void to_obj();
+        void to_obj(OGRPoint* centroid);
         /**
         *@fn void Road::to_obj()
         *Creates an .obj of road.
+        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
         **/
 
         //Getters
