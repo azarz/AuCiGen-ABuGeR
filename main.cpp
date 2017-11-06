@@ -56,9 +56,8 @@ int main()
     for(unsigned int i=0U; i< ROADS.size();++i)
     {
         // NE MARCHE PAS AVEC LA ROUTE 0 ET 32 ET SUREMENT D'AUTRES APRES
-        ROADS.at(i).to_obj(centroid);
         cout << i << endl;
-
+        cout << ROADS.at(i).get_geom()->IsValid() << endl;
         poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
     }
 
