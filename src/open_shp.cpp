@@ -7,7 +7,7 @@
 #include "catch.h"
 using namespace std;
 
-OGRPoint* open_shp_roads(char* fill_directory, vector<Road>& liPolygon)
+OGRPoint* open_shp_roads(const char* fill_directory, vector<Road>& liPolygon)
 {
     OGRErr error;
     GDALAllRegister();
@@ -65,7 +65,7 @@ OGRPoint* open_shp_roads(char* fill_directory, vector<Road>& liPolygon)
 }
 
 
-void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon, OGRPoint* centroid)
+void open_shp_parcels(const char* fill_directory, vector<Parcel>& liPolygon, OGRPoint* centroid)
 
 {
     OGRErr error;

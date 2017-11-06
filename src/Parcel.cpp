@@ -49,19 +49,19 @@ Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineStr
     OGRGeometry* diff1 = geom->Difference(road_buffer);
     OGRGeometry* diff2 = diff1->Difference(neigh_buffer);
 
-    OGRGeometry* contour = diff2->getBoundary();
+    OGRGeometry* contour = diff2->Boundary();
     OGRLinearRing* contour2 = (OGRLinearRing*) contour;
     Footprint footprint(contour2,this);
     return footprint;
 }
 
-void Parcel::to_obj(OGRPoint* centroid)
+vector<string> Parcel::to_obj(OGRPoint* centroid)
 {
     // Converting the road polygons to triangles
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles, centroid->getX(), centroid->getY());
+    return triangles_to_obj(triangles, centroid->getX(), centroid->getY());
 }
 
 
@@ -110,7 +110,7 @@ void Parcel::compute_type(OGRPoint* centroid)
         {
             type = new Office();
         }
-    } else
+    } else if (suburbs)
     {
         if (a<50)
         {
@@ -122,6 +122,9 @@ void Parcel::compute_type(OGRPoint* centroid)
         {
             type = new Townhouse();
         }
+    } else
+    {
+        type = new Office();
     }
 
 }
@@ -137,4 +140,4 @@ void Parcel::compute_type(OGRPoint* centroid)
     p.get_geom()->exportToWkt(&wktS);
     //REQUIRE(wktS==wkt);
 }
-/**/
+*/

@@ -7,7 +7,7 @@
 //#include "catch.h"
 using namespace std;
 
-void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType T_t)
+void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType type)
 {
     vector<Point> li_point;
     OGRPoint ptTemp;
@@ -62,9 +62,9 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
             //cout << li_point.at(i).get_x()<<endl;
             OGRLinearRing* triangle_trace = triangle.getExteriorRing();
             if (!triangle_trace->isClockwise())
-                tri = new Triangle(li_point.at(i), li_point.at(j), li_point.at(k), T_t);
+                tri = new Triangle(li_point.at(i), li_point.at(j), li_point.at(k), type);
             else
-                tri = new Triangle(li_point.at(k), li_point.at(j), li_point.at(i), T_t);
+                tri = new Triangle(li_point.at(k), li_point.at(j), li_point.at(i), type);
             li_vector.push_back(*tri);
             li_point.erase(li_point.begin()+j);
         }
