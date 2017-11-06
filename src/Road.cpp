@@ -26,7 +26,7 @@ void Road::to_obj(OGRPoint* centroid)
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles, centroid.getX(), centroid.getY());
+    triangles_to_obj(triangles, centroid->getX(), centroid->getY());
 }
 
 

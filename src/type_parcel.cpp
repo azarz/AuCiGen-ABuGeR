@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-BuildingType* type_parcel()
+BuildingType* type_parcel(OGRPoint* centroid)
 {
     int a= rand() % 5;
     if (a==0)

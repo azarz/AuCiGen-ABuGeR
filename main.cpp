@@ -21,7 +21,7 @@ int main()
     char* fill_directory ="1_data/test/road_test.shp";
     centroid = open_shp_roads(fill_directory, ROADS);
     fill_directory ="1_data/test/test_parcel.shp";
-    open_shp_parcels(fill_directory, PARCELS);
+    open_shp_parcels(fill_directory, PARCELS, centroid);
 
   //  cout << PARCELS.size() << endl;
    // cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
@@ -45,8 +45,8 @@ int main()
     cout << "Hello world!" << endl;
 
     cout << "Test Amaury " << endl;
-    ROADS.at(25).to_obj();
-    PARCELS.at(25).to_obj();
+    ROADS.at(25).to_obj(centroid);
+    PARCELS.at(25).to_obj(centroid);
     return 0;
 }
 /* */

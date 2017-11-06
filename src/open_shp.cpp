@@ -65,7 +65,7 @@ OGRPoint* open_shp_roads(char* fill_directory, vector<Road>& liPolygon)
 }
 
 
-void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon)
+void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon, OGRPoint* centroid)
 
 {
     OGRErr error;
@@ -98,7 +98,7 @@ void open_shp_parcels(char* fill_directory, vector<Parcel>& liPolygon)
            {
                 OGRPolygon* poPolygon = (OGRPolygon*)poGeometry;
 
-                Parcel parcel = Parcel(poPolygon);
+                Parcel parcel = Parcel(poPolygon,centroid);
                 liPolygon.push_back(parcel);
            }
 

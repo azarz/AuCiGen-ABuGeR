@@ -11,7 +11,7 @@
 using namespace std;
 
 
-Parcel::Parcel(OGRPolygon* poPolygon)
+Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 {
     //ctor
     //area(1), area_price(1), floorspace(1)//
@@ -19,7 +19,7 @@ Parcel::Parcel(OGRPolygon* poPolygon)
 
     area = poPolygon->OGRCurvePolygon::get_Area();
 
-    type = type_parcel();
+    type = type_parcel(centroid);
     //type = new Industry();
     area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
@@ -61,7 +61,7 @@ void Parcel::to_obj(OGRPoint* centroid)
     vector<Triangle> triangles;
     poly_to_triangle(geom,triangles,FLOOR);
 
-    triangles_to_obj(triangles, centroid.getX(), centroid.getY());
+    triangles_to_obj(triangles, centroid->getX(), centroid->getY());
 }
 
 /*TEST_CASE("Parcel are computed","[Parcel]")
