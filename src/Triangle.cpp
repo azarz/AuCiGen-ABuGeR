@@ -397,6 +397,151 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
 
 
 /*
+/////////////////////////////////////////
+
+vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType newName)
+{
+    //set AC coordinates
+    double ac0 = p3.get_x() - p1.get_x();
+    double ac1 = p3.get_y() - p1.get_y();
+    double ac2 = p3.get_z() - p1.get_z();
+    double AC[3][1];
+    AC[0][0]=ac0;
+    AC[1][0]=ac1;
+    AC[2][0]=ac2;
+    //set AB coordinates
+    double ab0 = p2.get_x() - p1.get_x();
+    double ab1 = p2.get_y() - p1.get_y();
+    double ab2 = p2.get_z() - p1.get_z();
+    double AB[3][1];
+    AB[0][0]=ab0;
+    AB[1][0]=ab1;
+    AB[2][0]=ab2;
+    //set BC coordinates
+    double bc0 = p3.get_x() - p2.get_x();
+    double bc1 = p3.get_y() - p2.get_y();
+    double bc2 = p3.get_z() - p2.get_z();
+    double BC[3][1];
+    BC[0][0]=bc0;
+    BC[1][0]=bc1;
+    BC[2][0]=bc2;
+    //set S coordinates
+    double s0 = origin.get_x() + axis[0];
+    double s1 = origin.get_y() + axis[1];
+    double s2 = origin.get_z() + axis[2];
+    double S[3][1];
+    S[0][0]=s0;
+    S[1][0]=s1;
+    S[2][0]=s2;
+    //set UX and UY
+    double UX[3][1], UY[3][1];
+    UX = AB;
+    UY = AC;
+    //calculate UZ = AB ^ AC
+    double uz0 = ab2*ac3 - ab3*ac2;
+    double uz1 = ab3*ac1 - ab1*ac3;
+    double uz2 = ab1*ac2 - ab2*ac1;
+    double UZ[3][1];
+    UZ[0][0]=uz0;
+    UZ[1][0]=uz1;
+    UZ[2][0]=uz2;
+    //set matrix M to transform carthesian coordinates in projected coordinates
+    double mat[3][3];
+    mat[0][0]=UX[0];
+    mat[1][0]=UX[1];
+    mat[2][0]=UX[2];
+    mat[0][1]=UY[0];
+    mat[1][1]=UY[1];
+    mat[2][1]=UY[2];
+    mat[0][2]=UZ[0];
+    mat[1][2]=UZ[1];
+    mat[2][2]=UZ[2];
+
+    double M[3][3];
+    invert_matrix(mat,M);
+
+    //transform origin and S in the new set of coordinates
+    double Sp[3][1], Op[3][1], O[3][1];
+    O[0][0]=origin.get_x();
+    O[1][0]=origin.get_y();
+    O[2][0]=origin.get_z();
+
+    matrix_product(M,S,Sp);
+    matrix_product(M,O,Op);
+
+    //set 2D variables
+    double Sp2[2][1], Op2[2][1], UXp2[2][1], UYp2[2][1], Ap2[2][1], Bp2[2][1], Cp2[2][2];
+    Ap2[0][0]=0;
+    Ap2[1][0]=0;
+
+    Bp2[0][0]=1;
+    Bp2[1][0]=0;
+
+    Cp2[0][0]=0;
+    Cp2[1][0]=1;
+
+    Op2[0][0]=Op[0][0];
+    Op2[1][0]=Op[1][0];
+
+    Sp2[0][0]=Sp[0][0];
+    Sp2[1][0]=Sp[1][0];
+
+    UXp2[0][0]=1;
+    UXp2[0][0]=0;
+
+    UYp2[0][0]=0;
+    UYp2[0][0]=1;
+
+    //vector OS
+    double OSp2[2][1];
+    OSp2[0][0]=Sp2[0][0]-Op2[0][0];
+    OSp2[1][0]=Sp2[1][0]-Op2[1][0];
+
+    //exeption for line // at UXp2 or UYp2
+    if (OSp2[1][0] == 0)
+    {
+
+    }
+    else if (OSp2[0][0] == 0)
+    {
+
+    }
+    else
+    {
+        //line equation ax+b
+        double coeffLine = OSp2[0][0] / OSp2[1][0];
+        double originValue = Op2[1][0] - coeffLine*Op2[0][0];
+
+    }
+
+
+}
+
+void invert_matrix(double mat[3][3],double M[3][3])
+{
+    int i, j;
+    double determinant = 0;
+
+    //finding determinant
+    for(i = 0; i < 3; i++)
+        determinant = determinant + (mat[0][i] * (mat[1][(i+1)%3] * mat[2][(i+2)%3] - mat[1][(i+2)%3] * mat[2][(i+1)%3]));
+
+    for(i = 0; i < 3; i++){
+        for(j = 0; j < 3; j++)
+            M[i][j] = ((mat[(j+1)%3][(i+1)%3] * mat[(j+2)%3][(i+2)%3]) - (mat[(j+1)%3][(i+2)%3] * mat[(j+2)%3][(i+1)%3]))/ determinant;
+    }
+}
+void matrix_product(double MG[3][3],double MD[3][1], double MR[3][1])
+{
+    MR[0] = MG[0][0]*MD[0][0] + MG[0][1]*MD[1][0] + MG[0][2]*MD[2][0];
+    MR[1] = MG[1][0]*MD[0][0] + MG[1][1]*MD[1][0] + MG[1][2]*MD[2][0];
+    MR[2] = MG[2][0]*MD[0][0] + MG[2][1]*MD[1][0] + MG[2][2]*MD[2][0];
+}
+
+////////////////////////////////////////////
+*/
+
+/*
 Triangle Triangle::repeat(TriangleType newName)
 {
     return Triangle();
