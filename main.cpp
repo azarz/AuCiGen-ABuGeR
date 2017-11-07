@@ -52,29 +52,35 @@ int main()
   //  cout << "Test Antoine " << footprint2.get_parcel()->get_area() << endl;
     cout << "Hello world!" << endl;
     cout << PARCELS.at(35).get_type()->get_type() << endl;
-    cout << PARCELS.at(1).get_type()->get_type() << endl;
+    cout << PARCELS.at(580).get_type()->get_type() << endl;
     cout << "Test Amaury " << endl;
 
 
     vector<Triangle> roadTriangles;
     for(unsigned int i=0U; i< ROADS.size();++i)
     {
-        // NE MARCHE PAS AVEC LA ROUTE 0 ET 32 ET SUREMENT D'AUTRES APRES
-        cout << i << endl;
         poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
     }
 
-    cout << "bonjour" << endl;
-    cout << roadTriangles.size() << endl;
-    vector<string> result = triangles_to_obj(roadTriangles, centroid->getX(), centroid->getY());
+    vector<Triangle> parcelTriangles;
+    for(unsigned int i=0U; i< PARCELS.size();++i)
+    {
+        poly_to_triangle(PARCELS.at(i).get_geom(), parcelTriangles, FLOOR);
+    }
 
-    PARCELS.at(25).to_obj(centroid);
+    vector<string> result_roads = triangles_to_obj(roadTriangles,
+                                                   centroid->getX(), centroid->getY());
+    vector<string> result_parcels = triangles_to_obj(parcelTriangles,
+                                                     centroid->getX(), centroid->getY());
 
     //To have an output file
-    ofstream out("roads.obj");
-    out << result.at(0) << result.at(1) << result.at(2);
-    out.close();
+    ofstream out_road("roads.obj");
+    out_road << result_roads.at(0) << result_roads.at(1) << result_roads.at(2);
+    out_road.close();
+
+    ofstream out_parcel("parcels.obj");
+    out_parcel << result_parcels.at(0) << result_parcels.at(1) << result_parcels.at(2);
+    out_parcel.close();
 
     return 0;
 }
-/* */

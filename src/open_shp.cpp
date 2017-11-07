@@ -101,7 +101,6 @@ void open_shp_parcels(const char* fill_directory, vector<Parcel>& liPolygon, OGR
            }
 
        }
-       OGRFeature::DestroyFeature(poFeature);
     }
     GDALClose( poDS );
 }

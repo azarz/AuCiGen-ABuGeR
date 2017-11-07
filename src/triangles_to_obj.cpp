@@ -22,7 +22,6 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
 
     for (int i=0; i<triangles.size() ;++i)
     {
-        cout << i << endl;
         // Getting the triangle and its points
         Triangle triangle = triangles.at(i);
         Point p1 = triangle.get_p1();
@@ -93,7 +92,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
     }
 
     // Default uv coordinates
-    uv_coordinates = "vt 0 0 \nvt 1 0 \nvt 0 1\n";
+    uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
 
     // Constructing the vertex list base on the vector
     for(int i=0;i<points.size();++i)
