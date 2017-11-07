@@ -22,6 +22,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
 
     for (int i=0; i<triangles.size() ;++i)
     {
+        cout << i << endl;
         // Getting the triangle and its points
         Triangle triangle = triangles.at(i);
         Point p1 = triangle.get_p1();
@@ -52,7 +53,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
         } else
         {
             // Testing if the triangles's points are already in the list
-            for(int i=0;i<points.size();++i)
+            /*for(int i=0;i<points.size();++i)
             {
                 Point p_i = points.at(i);
                 if(p_i==p1){
@@ -65,7 +66,12 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
                     p3_in_points = true;
                     p3_index = i+1;
                 }
-            }
+            }*/
+
+            // Faster results, bigger output file
+            p1_in_points = false;
+            p2_in_points = false;
+            p3_in_points = false;
 
             // If the point is new, it is added to the list. its index is then the size of the list
             if(!p1_in_points){
@@ -96,9 +102,9 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
     for(int i=0;i<points.size();++i)
     {
         Point vertex = points.at(i);
-        vertices += "v " + num_to_string(vertex.get_x() - x_centroid) + " "
-                         + num_to_string(vertex.get_y() - y_centroid) + " "
-                         + num_to_string(vertex.get_z()) + "\n";
+        vertices += "v " + num_to_string(vertex.get_x()*100 - x_centroid*100) + " "
+                         + num_to_string(vertex.get_z()*100) + " "
+                         + num_to_string(vertex.get_y()*100 - y_centroid*100) + "\n";
 
     }
 

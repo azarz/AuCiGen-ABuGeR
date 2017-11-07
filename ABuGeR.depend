@@ -257,9 +257,10 @@
 	<iostream>
 	"gauss.h"
 
-1510051336 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+1510053321 source:/home/formation/AuCiGen/ABuGeR/main.cpp
 	<iostream>
 	<vector>
+	<fstream>
 	"Envelop.h"
 	"open_shp.h"
 	"Road.h"
@@ -352,7 +353,7 @@
 	<vector>
 	"Triangle.h"
 
-1510046672 source:/home/formation/AuCiGen/ABuGeR/src/triangles_to_obj.cpp
+1510052812 source:/home/formation/AuCiGen/ABuGeR/src/triangles_to_obj.cpp
 	"triangles_to_obj.h"
 	<sstream>
 

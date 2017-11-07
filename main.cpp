@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "Envelop.h"
 #include "open_shp.h"
 #include "Road.h"
@@ -63,9 +64,17 @@ int main()
         poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
     }
 
-    triangles_to_obj(roadTriangles, centroid->getX(), centroid->getY());
+    cout << "bonjour" << endl;
+    cout << roadTriangles.size() << endl;
+    vector<string> result = triangles_to_obj(roadTriangles, centroid->getX(), centroid->getY());
 
     PARCELS.at(25).to_obj(centroid);
+
+    //To have an output file
+    ofstream out("roads.obj");
+    out << result.at(0) << result.at(1) << result.at(2);
+    out.close();
+
     return 0;
 }
 /* */
