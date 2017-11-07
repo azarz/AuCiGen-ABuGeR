@@ -31,7 +31,6 @@ Envelop Footprint::create_envelop()
 #include "open_shp.h"
 TEST_CASE("footprint is created and its attributes ","[Foorprint]")
 {
-    //#include "open_shp.h"
     vector<Road> ROADS;
     vector<Parcel> PARCELS;
     OGRPoint* centroid;
