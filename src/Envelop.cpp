@@ -61,12 +61,11 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
 {
     vector<Road> ROADS;
     vector<Parcel> PARCELS;
-    char* fill_directory ="1_data/test/road_test.shp";
-    char layer_type ='R';
-    OpenShapeFile_roads(fill_directory, ROADS);
+    OGRPoint* centroid;
+    const char* fill_directory ="1_data/test/road_test.shp";
+    centroid = open_shp_roads(fill_directory, ROADS);
     fill_directory ="1_data/test/test_parcel.shp";
-    layer_type ='P';
-    OpenShapeFile_parcels(fill_directory, PARCELS);
+    open_shp_parcels(fill_directory, PARCELS, centroid);
 
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
     cout << v1->getGeometryName()<< endl;
@@ -87,4 +86,4 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
     REQUIRE(env.get_height() > 0);
 }
- */
+/* */
