@@ -13,9 +13,8 @@ OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> ROADS
     bool no_road = true;
     // This is the result of the function, the linear intersection between the parcel and the main road
     OGRLineString* linearIntersection;
-
     // Going through all the loaded roads (except the last one which cases a Segmentation fault for unknown reasons
-    for (int i=0; i<ROADS.size()-1;++i)
+    for (int i=0; i<ROADS.size();++i)
     {
         // Getting the ith road int the vector
         Road road = ROADS.at(i);
