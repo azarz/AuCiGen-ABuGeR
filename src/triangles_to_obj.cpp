@@ -39,7 +39,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
         int p2_index;
         int p3_index;
 
-        // Initialization of th point list
+        // Initialization of the point list
         if(points.size()==0)
         {
             points.push_back(p1);
@@ -53,25 +53,22 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
         } else
         {
             // Testing if the triangles's points are already in the list
-            /*for(int i=0;i<points.size();++i)
+            // (Last half of the triangles for faster results, because the common points are
+            //   in adjacent triangles)
+            for(int j=(i-i/2)*3;j<points.size();++j)
             {
-                Point p_i = points.at(i);
-                if(p_i==p1){
+                Point p_j = points.at(j);
+                if(p_j==p1){
                     p1_in_points = true;
-                    p1_index = i+1;
-                } else if(p_i==p2){
+                    p1_index = j+1;
+                } else if(p_j==p2){
                     p2_in_points = true;
-                    p2_index = i+1;
-                } else if(p_i==p3){
+                    p2_index = j+1;
+                } else if(p_j==p3){
                     p3_in_points = true;
-                    p3_index = i+1;
+                    p3_index = j+1;
                 }
-            }*/
-
-            // Faster results, bigger output file
-            p1_in_points = false;
-            p2_in_points = false;
-            p3_in_points = false;
+            }
 
             // If the point is new, it is added to the list. its index is then the size of the list
             if(!p1_in_points){
@@ -102,9 +99,9 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
     for(int i=0;i<points.size();++i)
     {
         Point vertex = points.at(i);
-        vertices += "v " + num_to_string(vertex.get_x()*100 - x_centroid*100) + " "
-                         + num_to_string(vertex.get_z()*100) + " "
-                         + num_to_string(vertex.get_y()*100 - y_centroid*100) + "\n";
+        vertices += "v " + num_to_string(vertex.get_x() - x_centroid) + " "
+                         + num_to_string(vertex.get_z()) + " "
+                         + num_to_string(vertex.get_y() - y_centroid) + "\n";
 
     }
 
