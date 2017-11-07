@@ -22,7 +22,7 @@ OGRPoint* open_shp_roads(const char* fill_directory, vector<Road>& liPolygon)
     poLayer = poDS->GetLayerByName( "road_test");
 
     OGRwkbGeometryType LayerGeometryType = poLayer->GetGeomType();
-    int NumberOfFeatures = poLayer ->GetFeatureCount(true);
+    int NumberOfFeatures = poLayer->GetFeatureCount(true);
     poLayer ->ResetReading();
 
     OGRGeometryCollection* road_collection = new OGRGeometryCollection();
@@ -36,7 +36,7 @@ OGRPoint* open_shp_roads(const char* fill_directory, vector<Road>& liPolygon)
        for (int i = 0; i < NumberOfFeatures; i++)
        {
            //printf("\nelement : %d\n", i);
-           poFeature = poLayer ->GetNextFeature();
+           poFeature = poLayer->GetNextFeature();
            OGRGeometry* poGeometry;
            poGeometry = poFeature->GetGeometryRef();
            if ( poGeometry != NULL && wkbFlatten ( poGeometry->getGeometryType() ) == wkbPolygon )
@@ -57,9 +57,7 @@ OGRPoint* open_shp_roads(const char* fill_directory, vector<Road>& liPolygon)
 
        }
        road_collection->Centroid(centroid);
-       OGRFeature::DestroyFeature(poFeature);
     }
-
     GDALClose( poDS );
     return centroid;
 }

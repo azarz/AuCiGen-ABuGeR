@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "Envelop.h"
 #include "open_shp.h"
 #include "Road.h"
@@ -31,8 +32,11 @@ int main()
    // cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
  //   PARCELS.at(35).print();
 
+
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
+    OGRGeometry* v12 = ROADS.at(ROADS.size()-1).get_geom();
     cout << v1->Distance(centroid) << endl;
+    cout << v12->IsValid() << endl;
    // cout << v1->getGeometryName()<< endl;
 
     OGRLineString* v2 = get_intersection_road(v1,ROADS);
@@ -53,17 +57,24 @@ int main()
 
 
     vector<Triangle> roadTriangles;
-    for(unsigned int i=1U; i< ROADS.size();++i)
+    for(unsigned int i=0U; i< ROADS.size();++i)
     {
         // NE MARCHE PAS AVEC LA ROUTE 0 ET 32 ET SUREMENT D'AUTRES APRES
         cout << i << endl;
-        cout << ROADS.at(i).get_geom()->IsValid() << endl;
         poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
     }
 
-    triangles_to_obj(roadTriangles, centroid->getX(), centroid->getY());
+    cout << "bonjour" << endl;
+    cout << roadTriangles.size() << endl;
+    vector<string> result = triangles_to_obj(roadTriangles, centroid->getX(), centroid->getY());
 
     PARCELS.at(25).to_obj(centroid);
+
+    //To have an output file
+    ofstream out("roads.obj");
+    out << result.at(0) << result.at(1) << result.at(2);
+    out.close();
+
     return 0;
 }
 /* */
