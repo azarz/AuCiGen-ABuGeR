@@ -6,6 +6,11 @@
 #include <cmath>
 #include <iostream>
 #include "gauss.h"
+#include "matrix_methods.h"
+
+
+
+
 
 Triangle::Triangle()
 {
@@ -60,7 +65,7 @@ bool Triangle::is_equal(Triangle otherTriangle)
     return (b1 || b2 || b3 || b4 || b5 || b6);
 }
 
-
+/*
 
 vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType newName)
 {
@@ -395,12 +400,13 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     }
 }
 
+*/
 
-/*
-/////////////////////////////////////////
 
 vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType newName)
 {
+    vector <Triangle> result;
+
     //set AC coordinates
     double ac0 = p3.get_x() - p1.get_x();
     double ac1 = p3.get_y() - p1.get_y();
@@ -435,39 +441,60 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     S[2][0]=s2;
     //set UX and UY
     double UX[3][1], UY[3][1];
-    UX = AB;
-    UY = AC;
+    UX[0][0] = AB[0][0];
+    UX[1][0] = AB[1][0];
+    UX[2][0] = AB[2][0];
+    UY[0][0] = AC[0][0];
+    UY[1][0] = AC[1][0];
+    UY[2][0] = AC[2][0];
     //calculate UZ = AB ^ AC
-    double uz0 = ab2*ac3 - ab3*ac2;
-    double uz1 = ab3*ac1 - ab1*ac3;
-    double uz2 = ab1*ac2 - ab2*ac1;
+    double uz0 = ab1*ac2 - ab2*ac1;
+    double uz1 = ab2*ac0 - ab0*ac2;
+    double uz2 = ab0*ac1 - ab1*ac0;
     double UZ[3][1];
     UZ[0][0]=uz0;
     UZ[1][0]=uz1;
     UZ[2][0]=uz2;
     //set matrix M to transform carthesian coordinates in projected coordinates
     double mat[3][3];
-    mat[0][0]=UX[0];
-    mat[1][0]=UX[1];
-    mat[2][0]=UX[2];
-    mat[0][1]=UY[0];
-    mat[1][1]=UY[1];
-    mat[2][1]=UY[2];
-    mat[0][2]=UZ[0];
-    mat[1][2]=UZ[1];
-    mat[2][2]=UZ[2];
+    mat[0][0]=UX[0][0];
+    mat[1][0]=UX[1][0];
+    mat[2][0]=UX[2][0];
+    mat[0][1]=UY[0][0];
+    mat[1][1]=UY[1][0];
+    mat[2][1]=UY[2][0];
+    mat[0][2]=UZ[0][0];
+    mat[1][2]=UZ[1][0];
+    mat[2][2]=UZ[2][0];
 
     double M[3][3];
     invert_matrix(mat,M);
 
     //transform origin and S in the new set of coordinates
-    double Sp[3][1], Op[3][1], O[3][1];
+    double Sp[3][1], Op[3][1], St[3][1], Ot[3][1], O[3][1], T[3][1], T2[3][1];
     O[0][0]=origin.get_x();
     O[1][0]=origin.get_y();
     O[2][0]=origin.get_z();
 
-    matrix_product(M,S,Sp);
-    matrix_product(M,O,Op);
+    T[0][0]=p1.get_x();
+    T[1][0]=p1.get_y();
+    T[2][0]=p1.get_z();
+
+    T2[0][0]=-p1.get_x();
+    T2[1][0]=-p1.get_y();
+    T2[2][0]=-p1.get_z();
+
+    std::cout<<"S : "<<S[0][0]<<" "<<S[1][0]<<" "<<S[2][0]<<std::endl;
+    std::cout<<"O : "<<O[0][0]<<" "<<O[1][0]<<" "<<O[2][0]<<std::endl;
+
+    matrix_translation(T2,S,St);
+    matrix_translation(T2,O,Ot);
+
+    std::cout<<"St : "<<St[0][0]<<" "<<St[1][0]<<" "<<St[2][0]<<std::endl;
+    std::cout<<"Ot : "<<Ot[0][0]<<" "<<Ot[1][0]<<" "<<Ot[2][0]<<std::endl;
+
+    matrix_product(M,St,Sp);
+    matrix_product(M,Ot,Op);
 
     //set 2D variables
     double Sp2[2][1], Op2[2][1], UXp2[2][1], UYp2[2][1], Ap2[2][1], Bp2[2][1], Cp2[2][2];
@@ -483,8 +510,12 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     Op2[0][0]=Op[0][0];
     Op2[1][0]=Op[1][0];
 
+    std::cout<<"Op2 : "<<Op2[0][0]<<"    "<<Op2[1][0]<<std::endl;
+
     Sp2[0][0]=Sp[0][0];
     Sp2[1][0]=Sp[1][0];
+
+    std::cout<<"Sp2 : "<<Sp2[0][0]<<"    "<<Sp2[1][0]<<std::endl;
 
     UXp2[0][0]=1;
     UXp2[0][0]=0;
@@ -497,49 +528,224 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     OSp2[0][0]=Sp2[0][0]-Op2[0][0];
     OSp2[1][0]=Sp2[1][0]-Op2[1][0];
 
+    std::cout<<"OSp2 : "<<OSp2[0][0]<<"    "<<OSp2[1][0]<<std::endl;
+    bool intersectUXp(false);
+    bool intersectUYp(false);
+    bool intersectUZp(false);
+
+    Point ix;
+    Point iy;
+    Point iz;
     //exeption for line // at UXp2 or UYp2
     if (OSp2[1][0] == 0)
     {
+        double constValue = Op2[1][0];
 
+        if (constValue < 1 && constValue > 0)
+        {
+            intersectUYp = true;
+            intersectUZp = true;
+
+            double IYp[3][1];
+            IYp[1][0]=constValue;
+            IYp[0][0]=0;
+            IYp[2][0]=0;
+            double IZp[3][1];
+            IZp[0][0]=constValue;
+            IZp[1][0]=1-constValue;
+            IZp[2][0]=0;
+
+            double IY[3][1];
+            double IZ[3][1];
+            double IYt[3][1];
+            double IZt[3][1];
+            matrix_product(mat,IYp,IYt);
+            matrix_product(mat,IZp,IZt);
+
+            matrix_translation(T,IYt,IY);
+            matrix_translation(T,IZt,IZ);
+
+            Point iy(IY[0][0],IY[1][0],IY[2][0]);
+            Point iz(IZ[0][0],IZ[1][0],IZ[2][0]);
+        }
     }
     else if (OSp2[0][0] == 0)
     {
+        //case x=constant
+        double constValue = Op2[1][0];
 
+        if (constValue < 1 && constValue > 0)
+        {
+            intersectUXp = true;
+            intersectUZp = true;
+
+            double IXp[3][1];
+            IXp[0][0]=constValue;
+            IXp[1][0]=0;
+            IXp[2][0]=0;
+            double IZp[3][1];
+            IZp[0][0]=constValue;
+            IZp[1][0]=1-constValue;
+            IZp[2][0]=0;
+
+            double IX[3][1];
+            double IZ[3][1];
+            double IXt[3][1];
+            double IZt[3][1];
+            matrix_product(mat,IXp,IXt);
+            matrix_product(mat,IZp,IZt);
+
+            matrix_translation(T,IXt,IX);
+            matrix_translation(T,IZt,IZ);
+
+            Point ix(IX[0][0],IX[1][0],IX[2][0]);
+            Point iz(IZ[0][0],IZ[1][0],IZ[2][0]);
+        }
     }
     else
     {
         //line equation ax+b
-        double coeffLine = OSp2[0][0] / OSp2[1][0];
-        double originValue = Op2[1][0] - coeffLine*Op2[0][0];
+        double coeffLine = OSp2[1][0] / OSp2[0][0]; //a
+        double originValue = Op2[1][0] - coeffLine*Op2[0][0]; //b
+
+        std::cout<<coeffLine<<"___________"<<originValue<<std::endl;
+
+        //test UXp intersection
+        double xUXp = -originValue / coeffLine;
+
+        if (xUXp < 1 && xUXp > 0)
+        {
+            intersectUXp = true;
+            double IXp[3][1];
+            IXp[0][0]=xUXp;
+            IXp[1][0]=0;
+            IXp[2][0]=0;
+
+            double IX[3][1];
+            double IXt[3][1];
+            matrix_product(mat,IXp,IXt);
+            matrix_translation(T,IXt,IX);
+
+            Point ix(IX[0][0],IX[1][0],IX[2][0]);
+        }
+
+        //test UYp intersection
+        double yUYp = originValue;
+
+        if (yUYp < 1 && yUYp > 0)
+        {
+            intersectUYp = true;
+            double IYp[3][1];
+            IYp[1][0]=yUYp;
+            IYp[0][0]=0;
+            IYp[2][0]=0;
+
+            double IY[3][1];
+            double IYt[3][1];
+            matrix_product(mat,IYp,IYt);
+            matrix_translation(T,IYt,IY);
+
+            Point iy(IY[0][0],IY[1][0],IY[2][0]);
+        }
+
+        //test UZp intersection
+        double xUZp = (originValue - 1) / (-1 - coeffLine);
+
+        if (xUZp < 1 && xUZp > 0)
+        {
+            intersectUZp = true;
+            double IZp[3][1];
+            IZp[0][0]=xUZp;
+            IZp[1][0]=1-xUZp;
+            IZp[2][0]=0;
+
+            double IZ[3][1];
+            double IZt[3][1];
+            matrix_product(mat,IZp,IZ);
+
+            matrix_translation(T,IZt,IZ);
+
+            Point iz(IZ[0][0],IZ[1][0],IZ[2][0]);
+        }
 
     }
 
 
-}
 
-void invert_matrix(double mat[3][3],double M[3][3])
-{
-    int i, j;
-    double determinant = 0;
-
-    //finding determinant
-    for(i = 0; i < 3; i++)
-        determinant = determinant + (mat[0][i] * (mat[1][(i+1)%3] * mat[2][(i+2)%3] - mat[1][(i+2)%3] * mat[2][(i+1)%3]));
-
-    for(i = 0; i < 3; i++){
-        for(j = 0; j < 3; j++)
-            M[i][j] = ((mat[(j+1)%3][(i+1)%3] * mat[(j+2)%3][(i+2)%3]) - (mat[(j+1)%3][(i+2)%3] * mat[(j+2)%3][(i+1)%3]))/ determinant;
+    if (intersectUXp && intersectUYp && intersectUZp)
+    {
+        result.push_back(*this);
+        return result;
+        std::cout << "all"<< std::endl;
     }
-}
-void matrix_product(double MG[3][3],double MD[3][1], double MR[3][1])
-{
-    MR[0] = MG[0][0]*MD[0][0] + MG[0][1]*MD[1][0] + MG[0][2]*MD[2][0];
-    MR[1] = MG[1][0]*MD[0][0] + MG[1][1]*MD[1][0] + MG[1][2]*MD[2][0];
-    MR[2] = MG[2][0]*MD[0][0] + MG[2][1]*MD[1][0] + MG[2][2]*MD[2][0];
+    else if (intersectUXp && intersectUYp)
+    {
+        Triangle tri1 = Triangle(p1,ix,iy,newName);
+        Triangle tri2 = Triangle(p3,iy,p2,newName);
+        Triangle tri3 = Triangle(p2,iy,ix,newName);
+        result.push_back(tri1);
+        result.push_back(tri2);
+        result.push_back(tri3);
+        std::cout << "x y"<< std::endl;
+        return result;
+    }
+    else if (intersectUXp && intersectUZp)
+    {
+        Triangle tri1 = Triangle(p1,ix,p2,newName);
+        Triangle tri2 = Triangle(p2,iz,ix,newName);
+        Triangle tri3 = Triangle(p3,ix,iz,newName);
+        result.push_back(tri1);
+        result.push_back(tri2);
+        result.push_back(tri3);
+        std::cout << "x z"<< std::endl;
+        return result;
+    }
+    else if (intersectUYp && intersectUZp)
+    {
+        Triangle tri1 = Triangle(p1,iz,iy,newName);
+        Triangle tri2 = Triangle(p2,iz,p1,newName);
+        Triangle tri3 = Triangle(p3,iy,iz,newName);
+        result.push_back(tri1);
+        result.push_back(tri2);
+        result.push_back(tri3);
+        std::cout << "y z"<< std::endl;
+        return result;
+    }
+    else if (intersectUXp)
+    {
+        Triangle tri1 = Triangle(p1,ix,p3,newName);
+        Triangle tri2 = Triangle(p2,p3,ix,newName);
+        result.push_back(tri1);
+        result.push_back(tri2);
+        return result;
+    }
+    else if (intersectUYp)
+    {
+        Triangle tri1 = Triangle(p1,p2,iy,newName);
+        Triangle tri2 = Triangle(p2,p3,iy,newName);
+        result.push_back(tri1);
+        result.push_back(tri2);
+        return result;
+    }
+    else if (intersectUZp)
+    {
+        Triangle tri1 = Triangle(p1,p2,iz,newName);
+        Triangle tri2 = Triangle(p1,iz,p3,newName);
+        result.push_back(tri1);
+        result.push_back(tri2);
+        return result;
+    }
+    else
+    {
+        result.push_back(*this);
+        std::cout << "cooool"<< std::endl;
+        return result;
+    }
+
 }
 
-////////////////////////////////////////////
-*/
+
+
 
 /*
 Triangle Triangle::repeat(TriangleType newName)

@@ -9,6 +9,10 @@
 #include "triangles_to_obj.h"
 using namespace std;
 
+Parcel::Parcel()
+{
+
+}
 
 Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 {
