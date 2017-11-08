@@ -71,6 +71,12 @@ class Triangle
         *@return The third Point of the Triangle.
         */
 
+        void print();
+        /**
+        *@fn void Triangle::print()
+        *Print the coordinates of the Triangle.
+        */
+
         void set_type(TriangleType newType);
         /**
         *@fn void Triangle::add_type(TriangleType newType)
@@ -111,7 +117,7 @@ class Triangle
         vector <Triangle> split(double axis[3], Point origin, TriangleType newName);
         /**
         *@fn vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType newName)
-        *Splits the Triangle according to an axis and a origin point.
+        *Splits the Triangle according to an axis and an origin point.
         *@param[in] axis: The axis of the split.
         *@param[in] origin: The origin point of the split (to fix the axis in the 3D dimension).
         *@param[in] newName: The new type of the Triangle.
@@ -129,7 +135,7 @@ class Triangle
         //void scope();
         /**
         *@fn void Triangle::scope()
-        *Avoids the hidden walls inside buildingmodel.
+        *Avoids the hidden walls inside buildingModel.
         */
 
         //BuildingModel creat_roof();

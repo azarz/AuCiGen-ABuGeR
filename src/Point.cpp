@@ -6,7 +6,9 @@
 
 Point::Point()
 {
+
 }
+
 Point::Point(double p_x, double p_y, double p_z)
 {
     //ctor
@@ -23,6 +25,11 @@ Point::~Point()
 bool operator==(Point a, Point b)
 {
     return (a.get_x() == b.get_x() && a.get_y() == b.get_y() && a.get_z() == b.get_z());
+}
+
+void Point::print()
+{
+    std::cout<<x<<", "<<y<<", "<<z<<std::endl;
 }
 
 void Point::translate(double vec[3])
