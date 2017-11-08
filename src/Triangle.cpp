@@ -454,6 +454,7 @@ TEST_CASE("Triangle constructor + Getters are computed", "[Triangle] [get_p1] [g
     REQUIRE(d.get_type() == WALL);
 }
 
+/*
 TEST_CASE("add_type are computed", "[add_type]")
 {
     Point a =  Point(2,5,6);
@@ -502,28 +503,7 @@ TEST_CASE("translate triangle are computed", "[translate]")
 
 TEST_CASE("rotate triangle are computed", "[rotate]")
 {
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
 
-    Triangle d = Triangle(a,b,c,WALL);
-
-    double vec[3];
-    vec[0] = 0;
-    vec[1] = 0;
-    vec[2] = 1;
-
-    double angle = M_PI_2;
-
-    d.rotate(vec,angle);
-
-    Point e =  Point(-5,2,6);
-    Point f =  Point(-9,3,7);
-    Point g =  Point(-6,5,8);
-
-    Triangle h = Triangle(e,f,g,WALL);
-
-    //REQUIRE(d.is_equal(h));
 }
 
 TEST_CASE("size triangle are computed", "[size]")
@@ -550,8 +530,8 @@ TEST_CASE("size triangle are computed", "[size]")
     REQUIRE(d.is_equal(h));
 
 }
-/*
-TEST_CASE("split are computed", "[spli]")
+
+TEST_CASE("split Triangle are computed", "[split]")
 {
     Point p1(1,1,0);
     Point p2(2,1,0);
@@ -566,22 +546,16 @@ TEST_CASE("split are computed", "[spli]")
     axis[2][0] = 0;
 
     vector<Triangle> ltri;
-    ltri.push_back(tri);
 
-    Parcel par;
-    BuildingModel mod(ltri,&par);
+    ltri = tri.split(*axis,origin,ROOF);
 
-    mod.split(*axis,origin,WALL,ROOF);
+    Point iZ(1.5,1.5,0);
 
-    cout<< mod.get_li_triangle().size()<<endl;
-
-    cout<< mod.get_li_triangle()[0].get_p1().<<endl;
-
-    cout<< mod.get_li_triangle().size()<<endl;
-
-    cout<< mod.get_li_triangle().size()<<endl;
-
-    REQUIRE(mod.get_li_triangle().size()==2);
-    REQUIRE(mod.get_li_tria )
+    REQUIRE(ltri.size()==2);
+    REQUIRE(ltri[0].get_type()==ROOF);
+    REQUIRE(ltri[0].get_p1()==p1);
+    REQUIRE(ltri[0].get_p2()==p2);
+    REQUIRE(ltri[0].get_p3()==iZ);
+    REQUIRE(ltri[1].get_p3()==p3);
 }
 */

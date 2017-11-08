@@ -11,6 +11,7 @@ BuildingModel::BuildingModel()
 {
     //ctor
 }
+
 BuildingModel::BuildingModel(std::vector<Triangle> li_T, Parcel* p)
 {
     li_triangle=li_T;
@@ -21,6 +22,7 @@ BuildingModel::~BuildingModel()
 {
     //dtor
 }
+
 void BuildingModel::translate(double vec[3], TriangleType name)
 {
     for (unsigned int i=0U; i<li_triangle.size(); i++)
@@ -31,6 +33,7 @@ void BuildingModel::translate(double vec[3], TriangleType name)
         }
     }
 }
+
 void BuildingModel::rotate(double vec[3], double angle, TriangleType name)
 {
     for (unsigned int i=0U; i<li_triangle.size(); i++)
@@ -41,6 +44,7 @@ void BuildingModel::rotate(double vec[3], double angle, TriangleType name)
         }
     }
 }
+
 void BuildingModel::size(double vec[3], TriangleType name)
 {
     for (unsigned int i=0U; i<li_triangle.size(); i++)
@@ -101,16 +105,54 @@ void BuildingModel::to_obj()
 }
 
 
-
 /*
-TEST_CASE("BuildingModel are computed", "[BuildingModel]")
-{
 
+TEST_CASE("BuildingModel and Getters are computed", "[BuildingModel]")
+{
+    Point p1(1,1,0);
+    Point p2(2,1,0);
+    Point p3(1,2,0);
+
+    Triangle tri(p1,p2,p3,WALL);
+    vector<Triangle> ltri;
+    ltri.push_back(tri);
+
+    Parcel par;
+    BuildingModel test = BuildingModel(ltri,&par);
+
+    REQUIRE(test.get_li_triangle()[0].is_equal(tri));
+    //REQUIRE(test.get_parcel() ==)
 }
 
 TEST_CASE("translate BuildingModel", "[translate]")
 {
+    Point a =  Point(2,5,6);
+    Point b =  Point(3,9,7);
+    Point c =  Point(5,6,8);
 
+    Triangle d = Triangle(a,b,c,WALL);
+
+    double vec[3];
+    vec[0] = 1;
+    vec[1] = 2;
+    vec[2] = 3;
+
+    Point e =  Point(3,7,9);
+    Point f =  Point(4,11,10);
+    Point g =  Point(6,8,11);
+
+    Triangle h = Triangle(e,f,g,FLOOR);
+
+    vector<Triangle> ltri;
+    ltri.push_back(d);
+    ltri.push_back(h);
+
+    Parcel par;
+    BuildingModel test = BuildingModel(ltri,&par);
+
+    test.translate(vec,WALL);
+
+    REQUIRE(test.get_li_triangle()[0].is_equal(test.get_li_triangle()[1]));
 }
 
 TEST_CASE("rotate BuildingModel", "[rotate]")
@@ -123,9 +165,8 @@ TEST_CASE("size BuildingModel", "[size]")
 
 }
 
-TEST_CASE("split are computed", "[spli]")
+TEST_CASE("split BuildingModel are computed", "[spli]")
 {
-
     // simple intersection
 
     Point p1(1,1,0);
@@ -145,7 +186,6 @@ TEST_CASE("split are computed", "[spli]")
 
     Parcel par;
     BuildingModel test = BuildingModel(ltri,&par);
-
 
     test.split(*axis,origin,WALL,ROOF);
 
@@ -177,7 +217,6 @@ TEST_CASE("split are computed", "[spli]")
 
     Parcel dpar;
     BuildingModel dtest = BuildingModel(dltri,&dpar);
-
 
     dtest.split(*daxis,dorigin,WALL,ROOF);
 
@@ -212,10 +251,7 @@ TEST_CASE("split are computed", "[spli]")
     Parcel npar;
     BuildingModel ntest = BuildingModel(nltri,&npar);
 
-
     ntest.split(*naxis,norigin,WALL,ROOF);
-
-
 
     REQUIRE(ntest.get_li_triangle().size()==1);
     REQUIRE(ntest.get_li_triangle()[0].get_type()==WALL);
@@ -278,10 +314,6 @@ TEST_CASE("split are computed", "[spli]")
 
     ytest.split(*yaxis,yorigin,WALL,ROOF);
 
-    ytest.get_li_triangle()[0].print();
-    ytest.get_li_triangle()[1].print();
-    ytest.get_li_triangle()[2].print();
-
     Point yiX(1.5,1,0);
     Point yiZ(1.5,1.5,0);
 
@@ -292,8 +324,6 @@ TEST_CASE("split are computed", "[spli]")
     REQUIRE(ytest.get_li_triangle()[0].get_p3()==yp2);
     REQUIRE(ytest.get_li_triangle()[2].get_p3()==yiZ);
     REQUIRE(ytest.get_li_triangle()[2].get_p1()==yp3);
-
 }
 
 */
-
