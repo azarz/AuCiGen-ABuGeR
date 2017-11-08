@@ -34,10 +34,12 @@ TEST_CASE("footprint is created and its attributes ","[Foorprint]")
     vector<Road> ROADS;
     vector<Parcel> PARCELS;
     OGRPoint* centroid;
-    const char* fill_directory ="1_data/test/road_test.shp";
-    centroid = open_shp_roads(fill_directory, ROADS);
-    fill_directory ="1_data/test/test_parcel.shp";
-    open_shp_parcels(fill_directory, PARCELS, centroid);
+    const char* file_path ="1_data/test/road_test.shp";
+    const char* layer_name ="road_test";
+    centroid = open_shp_roads(file_path, ROADS, layer_name);
+    file_path ="1_data/test/test_parcel.shp";
+    layer_name ="test_parcel";
+    open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
     cout << v1->getGeometryName()<< endl;
@@ -62,10 +64,12 @@ TEST_CASE("envelop is created","[create_envelop]")
     vector<Road> ROADS;
     vector<Parcel> PARCELS;
     OGRPoint* centroid;
-    const char* fill_directory ="1_data/test/road_test.shp";
-    centroid = open_shp_roads(fill_directory, ROADS);
-    fill_directory ="1_data/test/test_parcel.shp";
-    open_shp_parcels(fill_directory, PARCELS, centroid);
+    const char* file_path ="1_data/test/road_test.shp";
+    const char* layer_name ="road_test";
+    centroid = open_shp_roads(file_path, ROADS, layer_name);
+    file_path ="1_data/test/test_parcel.shp";
+    layer_name ="test_parcel";
+    open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
     cout << v1->getGeometryName()<< endl;
@@ -87,4 +91,4 @@ TEST_CASE("envelop is created","[create_envelop]")
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
     //REQUIRE(env.get_volume());
 }
-*/
+/**/
