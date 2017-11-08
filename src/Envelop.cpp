@@ -42,7 +42,7 @@ Envelop::~Envelop()
     //dtor
 }
 
-void Envelop::to_obj(OGRPoint* centroid)
+vector<string> Envelop::to_obj(OGRPoint* centroid)
 {
     //
     OGRPolygon poPolygon;
@@ -51,7 +51,7 @@ void Envelop::to_obj(OGRPoint* centroid)
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);
     create_wall(&poPolygon, height, li_vector);
-    triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
+    return triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
 }
 
 /*
