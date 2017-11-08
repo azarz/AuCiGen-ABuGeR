@@ -64,7 +64,7 @@ void BuildingModel::split(double axis[3], Point origin, TriangleType oldName, Tr
         {
             vector <Triangle> listSplit = li_triangle[i].split(axis,origin,newName);
             li_triangle[i]=listSplit[0];
-            for(int i=1; i<listSplit.size(); i++)
+            for(unsigned int i=1; i<listSplit.size(); i++)
             {
                 li_triangle.push_back(listSplit[i]);
             }
