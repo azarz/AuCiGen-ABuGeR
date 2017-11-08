@@ -39,10 +39,8 @@ Envelop::~Envelop()
 
 vector<string> Envelop::to_obj(OGRPoint* centroid)
 {
-    //
     OGRPolygon poPolygon = OGRPolygon();
-
-    OGRCurve* a = footprint->get_geom();
+    OGRLinearRing* a = footprint->get_geom();
     poPolygon.addRing(a);
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);

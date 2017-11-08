@@ -11,17 +11,17 @@ void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
     //int NumberOfInnerRings = poPolygon ->getNumInteriorRings();
     OGRLinearRing *poExteriorRing = poPolygon ->getExteriorRing();
     int NumberOfExteriorRingVertices = poExteriorRing ->OGRSimpleCurve::getNumPoints();
-        if (poExteriorRing ->isClockwise())
+    if (poExteriorRing ->isClockwise())
     {
         for ( int k = 0; k < NumberOfExteriorRingVertices; k++)//NumberOfExteriorRingVertices; k++ )
         {
             poExteriorRing ->getPoint(k,&ptTemp);
-            Point* pt;
+            Point pt;
             if (ptTemp.getX()!=0.0 && ptTemp.getY()!=0.0)
             {
-                pt= new Point(ptTemp.getX(), ptTemp.getY(), 0.0);
+                pt = Point(ptTemp.getX(), ptTemp.getY(), 0.0);
                 //printf("%.10f, %.10f\n", ptTemp.getX(), ptTemp.getY());
-                li_point.push_back(*pt);
+                li_point.push_back(pt);
             }
         }
     }
@@ -30,19 +30,19 @@ void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
         for ( int k = NumberOfExteriorRingVertices-1; k <= 0; k--)//NumberOfExteriorRingVertices; k++ )
         {
             poExteriorRing ->getPoint(k,&ptTemp);
-            Point* pt;
+            Point pt;
             if (ptTemp.getX()!=0.0 && ptTemp.getY()!=0.0)
             {
-                pt= new Point(ptTemp.getX(), ptTemp.getY(), 0.0);
+                pt = Point(ptTemp.getX(), ptTemp.getY(), 0.0);
                 //printf("%.10f, %.10f\n", ptTemp.getX(), ptTemp.getY());
-                li_point.push_back(*pt);
+                li_point.push_back(pt);
             }
         }
     }
     //cout << "nomber points" << NumberOfExteriorRingVertices-1 <<endl;
     //int i=0;
 
-    for (unsigned int i=0U; i<li_point.size()-1; i++)
+    for (unsigned int i=0U; i<li_point.size()-5; i+=4)
     {
         Point P1 = li_point.at(i);
         Point P2 = li_point.at(i+1);

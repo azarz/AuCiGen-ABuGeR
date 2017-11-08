@@ -32,54 +32,54 @@ std::vector<double> BuildingType::get_margin()
 Industry::Industry(){set_param();}
 void Industry::set_param()
 {
-    profitability=1.0;
-    floor_height=1.0;
-    gap=1.0; //height between the 0floor and the 1floor
+    profitability=2.0;
+    floor_height=3.0;
+    gap=15.0; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.00001;
-    margin_road=0.00001;
+    margin_parcel=2.0;
+    margin_road=3.0;
     type="Industry";
 }
 
 Office::Office(){set_param();}
 void Office::set_param()
 {
-    profitability=1.0;
-    floor_height=1.0;
-    gap=1.0; //height between the 0floor and the 1floor
+    profitability=12.0;
+    floor_height=3;
+    gap=5; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.00001;
-    margin_road=0.00001;
+    margin_parcel=0.001;
+    margin_road=0.001;
     type="Office";
 }
 ApartmentBuilding::ApartmentBuilding(){set_param();}
 void ApartmentBuilding::set_param()
 {
-    profitability=1.0;
-    floor_height=1.0;
-    gap=1.0; //height between the 0floor and the 1floor
+    profitability=6.0;
+    floor_height=3.0;
+    gap=5.0; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.00001;
-    margin_road=0.00001;
+    margin_parcel=0.001;
+    margin_road=0.05;
     type="ApartmentBuilding";
 }
 Villa::Villa(){set_param();}
 void Villa::set_param()
 {
     profitability=1.0;
-    floor_height=1.0;
-    gap=1.0; //height between the 0floor and the 1floor
+    floor_height=3.0;
+    gap=3.0; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.00001;
-    margin_road=0.00001;
+    margin_parcel=0.10;
+    margin_road=0.10;
     type="Villa";
 }
 Townhouse::Townhouse(){set_param();}
@@ -91,8 +91,8 @@ void Townhouse::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.00001;
-    margin_road=0.00001;
+    margin_parcel=0.001;
+    margin_road=0.05;
     type="Townhouse";
 }
 
