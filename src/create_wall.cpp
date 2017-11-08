@@ -11,7 +11,8 @@ void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
     //int NumberOfInnerRings = poPolygon ->getNumInteriorRings();
     OGRLinearRing *poExteriorRing = poPolygon ->getExteriorRing();
     int NumberOfExteriorRingVertices = poExteriorRing ->OGRSimpleCurve::getNumPoints();
-        if (poExteriorRing ->isClockwise())
+    cout << "NumberOfExteriorRingVertices "<<NumberOfExteriorRingVertices<<endl;
+    if (poExteriorRing ->isClockwise())
     {
         for ( int k = 0; k < NumberOfExteriorRingVertices; k++)//NumberOfExteriorRingVertices; k++ )
         {

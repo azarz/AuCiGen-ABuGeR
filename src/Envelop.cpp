@@ -27,14 +27,14 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
     this->volume= li_vector;*/
     //setting the parcel pointer
     this->parcel = trace->get_parcel();
-    cout << "aire envelop : "<<parcel->get_area() <<endl;
+    //cout << "aire envelop : "<<parcel->get_area() <<endl;
     //setting the footprint pointer
     this->footprint = trace;
 
 
 
 
-    cout << " n floor : "<< n_floor <<endl;
+    //cout << " n floor : "<< n_floor <<endl;
 }
 
 Envelop::~Envelop()
