@@ -65,14 +65,17 @@ void Point::size(double vec[3])
 }
 
 
+
 /*
 
-
-TEST_CASE("Point constructor + Getters","[Point] [get_x] [get_y] [get_z]")
+TEST_CASE("Point constructor + Getters +Setters","[Point] [get_x] [get_y] [get_z] [set_x] [set_y] [set_z]")
 
 {
     Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
+    Point b =  Point();
+    b.set_x(3);
+    b.set_y(9);
+    b.set_z(7);
 
     REQUIRE(a.get_x()==2.0);
     REQUIRE(a.get_y()==5.0);
@@ -135,5 +138,4 @@ TEST_CASE("size are computed", "[size]")
     REQUIRE(a.get_y()==10.0);
     REQUIRE(a.get_z()==18.0);
 }
-
 */

@@ -65,7 +65,7 @@ class Point
         *Sets the z coordinate.
         *@param[in] p_z double
         */
-
+        //Console print
         void print();
         /**
         *@fn void Point::print()
