@@ -43,7 +43,6 @@ vector<string> Envelop::to_obj(OGRPoint* centroid)
     OGRLinearRing* a = footprint->get_geom();
     poPolygon.addRing(a);
     vector<Triangle> li_vector;
-    poly_to_triangle(&poPolygon, li_vector, FLOOR);
     create_wall(&poPolygon, height, li_vector);
     return triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
 }

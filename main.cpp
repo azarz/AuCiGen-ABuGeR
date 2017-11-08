@@ -84,7 +84,6 @@ int main()
         Envelop envelop = footprint.create_envelop();
 
         envelopObj_temp = envelop.to_obj(centroid);
-
         for (int k = 0; k<3; ++k)
         {
             envelopObj.at(k)+=envelopObj_temp.at(k);
