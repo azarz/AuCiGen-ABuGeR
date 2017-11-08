@@ -55,7 +55,15 @@ Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineStr
 
     OGRGeometry* contour = diff2->Boundary();
     OGRLinearRing* contour2 = (OGRLinearRing*) contour;
-    Footprint footprint(contour2,this);
+
+    //By default, the footprint takes all the parcel space
+    Footprint footprint(geom->getExteriorRing(),this);
+
+    // More common: if the contour is a LinearRing (expected)
+    if (contour2->getGeometryName()=="LINEARRING")
+    {
+        footprint= Footprint(contour2,this);
+    }
     return footprint;
 }
 

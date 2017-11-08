@@ -23,10 +23,10 @@ int main()
 {
     OGRPoint* centroid;
     //Parcel();
-    const char* fill_directory ="1_data/test/road_test.shp";
-    centroid = open_shp_roads(fill_directory, ROADS);
-    fill_directory ="1_data/test/test_parcel.shp";
-    open_shp_parcels(fill_directory, PARCELS, centroid);
+    string file_path ="1_data/paris_test/route_secondaire_buffer.shp";
+    centroid = open_shp_roads(file_path, ROADS);
+    file_path ="1_data/paris_test/test_paris_seuil.shp";
+    open_shp_parcels(file_path, PARCELS, centroid);
 
   //  cout << PARCELS.size() << endl;
    // cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
@@ -58,20 +58,37 @@ int main()
     vector<Triangle> roadTriangles;
     for(unsigned int i=0U; i< ROADS.size();++i)
     {
+        cout << i << endl;
         poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
     }
 
     vector<Triangle> parcelTriangles;
-    for(unsigned int i=0U; i< PARCELS.size();++i)
-    {
-        Parcel parcel = PARCELS.at(i);
-        poly_to_triangle(parcel.get_geom(), parcelTriangles, FLOOR);
-        OGRLineString linearIntersection = *get_intersection_road(parcel.get_geom(), ROADS);
-        OGRLineString otherSides = *get_other_sides(parcel.get_geom(), &linearIntersection);
 
-        Footprint footprint = PARCELS.at(i).create_footprint(&linearIntersection, &otherSides);
+    vector<string> envelopObj;
+    envelopObj.push_back("");
+    envelopObj.push_back("");
+    envelopObj.push_back("");
+
+    for(unsigned int i=0U; i<PARCELS.size();++i)
+    {
+        cout << i << endl;
+        Parcel parcel = PARCELS.at(i);
+        vector<string> envelopObj_temp;
+        poly_to_triangle(parcel.get_geom(), parcelTriangles, FLOOR);
+
+        OGRLineString* linearIntersection = get_intersection_road(parcel.get_geom(), ROADS);
+        OGRLineString* otherSides = get_other_sides(parcel.get_geom(), linearIntersection);
+
+        Footprint footprint = parcel.create_footprint(linearIntersection, otherSides);
+
         Envelop envelop = footprint.create_envelop();
-        envelop.to_obj(centroid);
+        envelopObj_temp = envelop.to_obj(centroid);
+        for (int k = 0; k<3; ++k)
+        {
+            envelopObj.at(k)+=envelopObj_temp.at(k);
+        }
+        delete linearIntersection;
+        delete otherSides;
     }
 
     vector<string> result_roads = triangles_to_obj(roadTriangles,
@@ -80,13 +97,17 @@ int main()
                                                      centroid->getX(), centroid->getY());
 
     //To have an output file
-    ofstream out_road("roads.obj");
+    ofstream out_road("2_models/roads.obj");
     out_road << result_roads.at(0) << result_roads.at(1) << result_roads.at(2);
     out_road.close();
 
-    ofstream out_parcel("parcels.obj");
+    ofstream out_parcel("2_models/parcels.obj");
     out_parcel << result_parcels.at(0) << result_parcels.at(1) << result_parcels.at(2);
     out_parcel.close();
+
+    ofstream out_envelop("2_models/envelops.obj");
+    out_envelop << envelopObj.at(0) << envelopObj.at(1) << envelopObj.at(2);
+    out_envelop.close();
 
     return 0;
 }

@@ -42,7 +42,7 @@ void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
     //cout << "nomber points" << NumberOfExteriorRingVertices-1 <<endl;
     //int i=0;
 
-    for (int i=0; i<li_point.size()-1; i++)
+    for (unsigned int i=0U; i<li_point.size()-1; i++)
     {
         Point P1 = li_point.at(i);
         Point P2 = li_point.at(i+1);
