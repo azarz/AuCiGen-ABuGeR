@@ -50,6 +50,13 @@ class Triangle
         *@return The TriangleType of the Triangle.
         */
 
+        void set_type(TriangleType newType);
+        /**
+        *@fn void Triangle::add_type(TriangleType newType)
+        *Sets the TriangleType of the Triangle.
+        *@param[in] newType: The TriangleType of the Triangle.
+        */
+
         Point get_p1()const{return p1;};
         /**
         *@fn Point Triangle::get_p1() const
@@ -71,19 +78,14 @@ class Triangle
         *@return The third Point of the Triangle.
         */
 
+        //Console print
         void print();
         /**
         *@fn void Triangle::print()
         *Print the coordinates of the Triangle.
         */
 
-        void set_type(TriangleType newType);
-        /**
-        *@fn void Triangle::add_type(TriangleType newType)
-        *Sets the TriangleType of the Triangle.
-        *@param[in] newType: The TriangleType of the Triangle.
-        */
-
+        //Other functions
         bool is_equal(Triangle otherTriangle);
         /**
         *@fn bool Triangle::is_equal(Triangle otherTriangle)
@@ -147,7 +149,7 @@ class Triangle
 
     protected:
     private:
-        TriangleType type; //wall, floor, roof
+        TriangleType type; //WALL, FLOOR, ROOF
         Point p1;
         Point p2;
         Point p3;
