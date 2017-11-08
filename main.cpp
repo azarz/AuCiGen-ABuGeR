@@ -23,10 +23,12 @@ int main()
 {
     OGRPoint* centroid;
     //Parcel();
-    string file_path ="1_data/paris_test/route_secondaire_buffer.shp";
-    centroid = open_shp_roads(file_path, ROADS);
+    const char* file_path ="1_data/paris_test/route_secondaire_buffer.shp";
+    const char* layer_name ="route_secondaire_buffer";
+    centroid = open_shp_roads(file_path, ROADS, layer_name);
     file_path ="1_data/paris_test/test_paris_seuil.shp";
-    open_shp_parcels(file_path, PARCELS, centroid);
+    layer_name ="test_paris_seuil";
+    open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
   //  cout << PARCELS.size() << endl;
    // cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
@@ -58,7 +60,6 @@ int main()
     vector<Triangle> roadTriangles;
     for(unsigned int i=0U; i< ROADS.size();++i)
     {
-        cout << i << endl;
         poly_to_triangle(ROADS.at(i).get_geom(), roadTriangles, FLOOR);
     }
 
@@ -80,6 +81,7 @@ int main()
         OGRLineString* otherSides = get_other_sides(parcel.get_geom(), linearIntersection);
 
         Footprint footprint = parcel.create_footprint(linearIntersection, otherSides);
+        cout << footprint.get_geom()->getGeometryName() << endl;
 
         Envelop envelop = footprint.create_envelop();
         envelopObj_temp = envelop.to_obj(centroid);

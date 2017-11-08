@@ -440,7 +440,7 @@ Triangle Triangle::repeat(TriangleType newName)
 
 
 
-
+/*
 TEST_CASE("Triangle constructor + Getters are computed", "[Triangle] [get_p1] [get_p2] [get_p3] [get_type]")
 {
     Point a =  Point(2,5,6);
