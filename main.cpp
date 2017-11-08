@@ -36,7 +36,6 @@ int main()
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
     OGRGeometry* v12 = ROADS.at(ROADS.size()-1).get_geom();
     cout << v1->Distance(centroid) << endl;
-    cout << v12->IsValid() << endl;
    // cout << v1->getGeometryName()<< endl;
 
     OGRLineString* v2 = get_intersection_road(v1,ROADS);
@@ -65,7 +64,14 @@ int main()
     vector<Triangle> parcelTriangles;
     for(unsigned int i=0U; i< PARCELS.size();++i)
     {
-        poly_to_triangle(PARCELS.at(i).get_geom(), parcelTriangles, FLOOR);
+        Parcel parcel = PARCELS.at(i);
+        poly_to_triangle(parcel.get_geom(), parcelTriangles, FLOOR);
+        OGRLineString linearIntersection = *get_intersection_road(parcel.get_geom(), ROADS);
+        OGRLineString otherSides = *get_other_sides(parcel.get_geom(), &linearIntersection);
+
+        Footprint footprint = PARCELS.at(i).create_footprint(&linearIntersection, &otherSides);
+        Envelop envelop = footprint.create_envelop();
+        envelop.to_obj(centroid);
     }
 
     vector<string> result_roads = triangles_to_obj(roadTriangles,
