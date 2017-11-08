@@ -7,19 +7,21 @@
 #include "catch.h"
 using namespace std;
 
-OGRPoint* open_shp_roads(const char* fill_directory, vector<Road>& liPolygon)
+
+OGRPoint* open_shp_roads(const char* file_path, vector<Road>& liPolygon, const char* layer_name)
 {
+
     OGRErr error;
     GDALAllRegister();
     GDALDataset       *poDS;
-    poDS = (GDALDataset*) GDALOpenEx( fill_directory, GDAL_OF_VECTOR, NULL, NULL, NULL );
+    poDS = (GDALDataset*) GDALOpenEx( file_path, GDAL_OF_VECTOR, NULL, NULL, NULL );
     if( poDS == NULL )
     {
         printf( "Open failed.\n" );
         exit( 1 );
     }
     OGRLayer  *poLayer;
-    poLayer = poDS->GetLayerByName( "road_test");
+    poLayer = poDS->GetLayerByName(layer_name);
 
     OGRwkbGeometryType LayerGeometryType = poLayer->GetGeomType();
     int NumberOfFeatures = poLayer->GetFeatureCount(true);
@@ -63,20 +65,20 @@ OGRPoint* open_shp_roads(const char* fill_directory, vector<Road>& liPolygon)
 }
 
 
-void open_shp_parcels(const char* fill_directory, vector<Parcel>& liPolygon, OGRPoint* centroid)
-
+void open_shp_parcels(const char* file_path, vector<Parcel>& liPolygon, OGRPoint* centroid, const char* layer_name)
 {
+
     OGRErr error;
     GDALAllRegister();
     GDALDataset       *poDS;
-    poDS = (GDALDataset*) GDALOpenEx( fill_directory, GDAL_OF_VECTOR, NULL, NULL, NULL );
+    poDS = (GDALDataset*) GDALOpenEx( file_path, GDAL_OF_VECTOR, NULL, NULL, NULL );
     if( poDS == NULL )
     {
         printf( "Open failed.\n" );
         exit( 1 );
     }
     OGRLayer  *poLayer;
-    poLayer = poDS->GetLayerByName( "test_parcel" );
+    poLayer = poDS->GetLayerByName(layer_name);
 
 
     OGRwkbGeometryType LayerGeometryType = poLayer ->GetGeomType();
@@ -101,7 +103,6 @@ void open_shp_parcels(const char* fill_directory, vector<Parcel>& liPolygon, OGR
            }
 
        }
-       OGRFeature::DestroyFeature(poFeature);
     }
     GDALClose( poDS );
 }

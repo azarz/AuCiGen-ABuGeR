@@ -27,7 +27,7 @@ class Envelop
         *@fn virtual Envelop::~Envelop()
         *Destructor.
         */
-        void to_obj(OGRPoint* centroid);
+        vector<string> to_obj(OGRPoint* centroid);
         /**
         *@fn void Envelop::to_obj()
         *Converts the Envelop volume to Wavefront .obj format.

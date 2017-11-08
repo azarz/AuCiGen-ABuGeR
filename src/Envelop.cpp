@@ -27,14 +27,9 @@ Envelop::Envelop(Footprint* trace)// have to add an arg Footprint&Envelop pointe
     this->volume= li_vector;*/
     //setting the parcel pointer
     this->parcel = trace->get_parcel();
-    //cout << "aire envelop : "<<parcel->get_area() <<endl;
+
     //setting the footprint pointer
     this->footprint = trace;
-
-
-
-
-    //cout << " n floor : "<< n_floor <<endl;
 }
 
 Envelop::~Envelop()
@@ -42,16 +37,17 @@ Envelop::~Envelop()
     //dtor
 }
 
-void Envelop::to_obj(OGRPoint* centroid)
+vector<string> Envelop::to_obj(OGRPoint* centroid)
 {
     //
-    OGRPolygon poPolygon;
-    OGRLinearRing a= (OGRLinearRing)footprint->get_geom();
-    poPolygon.addRing(&a);
+    OGRPolygon poPolygon = OGRPolygon();
+
+    OGRCurve* a = footprint->get_geom();
+    poPolygon.addRing(a);
     vector<Triangle> li_vector;
     poly_to_triangle(&poPolygon, li_vector, FLOOR);
     create_wall(&poPolygon, height, li_vector);
-    triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
+    return triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
 }
 
 /*
@@ -86,4 +82,4 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
     REQUIRE(env.get_footprint()->get_geom()->getGeometryType() == 2);
     REQUIRE(env.get_height() > 0);
 }
-/* */
+*/
