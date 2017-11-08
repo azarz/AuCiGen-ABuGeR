@@ -14,7 +14,9 @@
 
 Triangle::Triangle()
 {
+
 }
+
 Triangle::Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type)
 {
     type= T_type; //wall, floor, roof
@@ -26,6 +28,18 @@ Triangle::Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type)
 Triangle::~Triangle()
 {
 
+}
+
+void Triangle::print()
+{
+    std::cout<<"---Triangle---"<<std::endl;
+    std::cout<<"_P1_ : ";
+    p1.print();
+    std::cout<<"_P2_ : ";
+    p2.print();
+    std::cout<<"_P3_ : ";
+    p3.print();
+    std::cout<<"--------------"<<std::endl;
 }
 
 void Triangle::set_type(TriangleType newType)
@@ -64,344 +78,6 @@ bool Triangle::is_equal(Triangle otherTriangle)
     bool b6 = (p1 == otherTriangle.get_p3() && p2 == otherTriangle.get_p1() && p3 == otherTriangle.get_p2());
     return (b1 || b2 || b3 || b4 || b5 || b6);
 }
-
-/*
-
-vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType newName)
-{
-    vector <Triangle> result;
-
-    //set AC coordinates
-    double ac1 = p3.get_x() - p1.get_x();
-    double ac2 = p3.get_y() - p1.get_y();
-    double ac3 = p3.get_z() - p1.get_z();
-    std::cout << "AC vector " << ac1 << "_" << ac2 << "_" << ac3 << std::endl;
-    //set AB coordinates
-    double ab1 = p2.get_x() - p1.get_x();
-    double ab2 = p2.get_y() - p1.get_y();
-    double ab3 = p2.get_z() - p1.get_z();
-    std::cout << "AB vector " << ab1 << "_" << ab2 << "_" << ab3 << std::endl;
-    //set BC coordinates
-    double bc1 = p3.get_x() - p2.get_x();
-    double bc2 = p3.get_y() - p2.get_y();
-    double bc3 = p3.get_z() - p2.get_z();
-    std::cout << "BC vector " << bc1 << "_" << bc2 << "_" << bc3 << std::endl;
-    //set S coordinates
-    double x = origin.get_x() + axis[0];
-    double y = origin.get_y() + axis[1];
-    double z = origin.get_z() + axis[2];
-    std::cout << "S vector " << x << "_" << y << "_" << z << std::endl;
-
-    //calculate V = AC ^ AB
-    double v1 = ac2*ab3 - ac3*ab2;
-    double v2 = ac3*ab1 - ac1*ab3;
-    double v3 = ac1*ab2 - ac2*ab1;
-    std::cout << "V vector " << v1 << "_" << v2 << "_" << v3 << std::endl;
-
-    //set matrix of the equation
-    double A[3][3];
-    A[0][0] = ac1;
-    A[0][1] = ac2;
-    A[0][2] = ac3;
-    A[1][0] = ab1;
-    A[1][1] = ab2;
-    A[1][2] = ab3;
-    A[2][0] = v1;
-    A[2][1] = v2;
-    A[2][2] = v3;
-
-    //set result of the equation for S'
-    double B[3][1];
-    B[0][0] = ac1*x + ac2*y + ac3*z;
-    B[1][0] = ab1*x + ab2*y + ab3*z;
-    B[2][0] = v1*p1.get_x() + v2*p1.get_y() + v3*p2.get_z();
-
-    //set S' array
-    double X[3][1];
-    //fill S' array
-    gauss3P(A,B,X);
-    std::cout << "First Gauss3P finished _________________________" << std::endl;
-
-    //set result of the equation for origin (O)
-    double B2[3][1];
-    B[0][0] = ac1*origin.get_x() + ac2*origin.get_y() + ac3*origin.get_z();
-    B[1][0] = ab1*origin.get_x() + ab2*origin.get_y() + ab3*origin.get_z();
-    B[2][0] = v1*p1.get_x() + v2*p1.get_y() + v3*p2.get_z();
-
-    //set O' array
-    double X2[3][1];
-    //fill O' array
-    int score = gauss3P(A,B2,X2);
-    std::cout << "Second Gauss3P finished _________________________" << std::endl;
-
-    //set an array for the projected line
-    double d1 = X2[0][0] - X[0][0];
-    double d2 = X2[1][0] - X[1][0];
-    double d3 = X2[2][0] - X[2][0];
-    std::cout << "D' vector (of the projected line) " << d1 << "_" << d2 << "_" << d3 << std::endl;
-
-    //set matrix of intersection between the projected line and a side of the triangle (AB)
-    double MDAB[3][2];
-    MDAB[0][0] = d1;
-    MDAB[0][1] = - ab1;
-    MDAB[1][0] = d2;
-    MDAB[1][1] = - ab2;
-    MDAB[2][0] = d3;
-    MDAB[2][1] = - ab3;
-    //set matrix of intersection between the projected line and a side of the triangle (BC)
-    double MDBC[3][2];
-    MDBC[0][0] = d1;
-    MDBC[0][1] = - bc1;
-    MDBC[1][0] = d2;
-    MDBC[1][1] = - bc2;
-    MDBC[2][0] = d3;
-    MDBC[2][1] = - bc3;
-    //set matrix of intersection between the projected line and a side of the triangle (CA)
-    double MDCA[3][2];
-    MDCA[0][0] = d1;
-    MDCA[0][1] = ac1;
-    MDCA[1][0] = d2;
-    MDCA[1][1] = ac2;
-    MDCA[2][0] = d3;
-    MDCA[2][1] = ac3;
-
-    //set the results of the different intersections
-    double BDAB[3][1];
-    BDAB[0][0] = p1.get_x() - X[0][0];
-    BDAB[1][1] = p1.get_y() - X[1][0];
-    BDAB[2][0] = p1.get_z() - X[2][0];
-
-    double BDBC[3][1];
-    BDBC[0][0] = p2.get_x() - X[0][0];
-    BDBC[1][1] = p2.get_y() - X[1][0];
-    BDBC[2][0] = p2.get_z() - X[2][0];
-
-    double BDCA[3][1];
-    BDCA[0][0] = p3.get_x() - X[0][0];
-    BDCA[1][1] = p3.get_y() - X[1][0];
-    BDCA[2][0] = p3.get_z() - X[2][0];
-
-    //init the parameters of the parametric equation for the intersection
-    double paramDAB[3][1];
-    double paramDBC[3][1];
-    double paramDCA[3][1];
-
-    //fill param array
-    int scoreAB = gauss2P(MDAB,BDAB,paramDAB);
-    int scoreBC = gauss2P(MDBC,BDBC,paramDBC);
-    int scoreCA = gauss2P(MDCA,BDCA,paramDCA);
-
-    paramDAB[2][0] = scoreAB;
-    paramDBC[2][0] = scoreBC;
-    paramDCA[2][0] = scoreCA;
-
-    // init coordinates of intersection points
-    double PDAB[3][1];
-    double QDAB[3][1];
-    double PDBC[3][1];
-    double QDBC[3][1];
-    double PDCA[3][1];
-    double QDCA[3][1];
-
-    //if the projected line contains a side of the triangle it's useless to split it
-    if (paramDAB[2][0] == 0 || paramDBC[2][0] == 0 || paramDCA[2][0] == 0)
-    {
-        result.push_back(*this);
-        return result;
-    }
-    //if there is a side parallel to the projected line it's useless to search an intersection
-    else if (paramDAB[2][0] == 2)
-    {
-            //init intersection points coordinates
-        double P[3][1];
-        double Q[3][1];
-
-        P[0][0] = d1*paramDBC[0][0] + X[0][0];
-        P[1][0] = d2*paramDBC[0][0] + X[1][0];
-        P[2][0] = d3*paramDBC[0][0] + X[2][0];
-
-        Q[0][0] = d1*paramDCA[0][0] + X[0][0];
-        Q[1][0] = d2*paramDCA[0][0] + X[1][0];
-        Q[2][0] = d3*paramDCA[0][0] + X[2][0];
-
-        double bp1 = P[0][0] - p2.get_x() ;
-        double bp2 = P[1][0] - p2.get_y() ;
-        double bp3 = P[2][0] - p2.get_z() ;
-
-        if(bp1/bc1 < 1 && bp1/bc1 > 0 && bp2/bc2 < 1 && bp2/bc2 > 0 && bp3/bc3 < 1 && bp3/bc3 > 0)
-        {
-            result.push_back(Triangle(p1,p2,Point(P[0][0],P[1][0],P[2][0]),newName));
-            result.push_back(Triangle(p2,Point(P[0][0],P[1][0],P[2][0]),Point(Q[0][0],Q[1][0],Q[2][0]),newName));
-            result.push_back(Triangle(Point(P[0][0],P[1][0],P[2][0]),p3,Point(Q[0][0],Q[1][0],Q[2][0]),newName));
-            return result;
-        }
-        else
-        {
-            result.push_back(*this);
-            return result;
-        }
-    }
-    else if (paramDBC[2][0] == 2)
-    {
-            //init intersection points coordinates
-        double P[3][1];
-        double Q[3][1];
-
-        P[0][0] = d1*paramDAB[0][0] + X[0][0];
-        P[1][0] = d2*paramDAB[0][0] + X[1][0];
-        P[2][0] = d3*paramDAB[0][0] + X[2][0];
-
-        Q[0][0] = d1*paramDCA[0][0] + X[0][0];
-        Q[1][0] = d2*paramDCA[0][0] + X[1][0];
-        Q[2][0] = d3*paramDCA[0][0] + X[2][0];
-
-        double ap1 = P[0][0] - p1.get_x() ;
-        double ap2 = P[1][0] - p1.get_y() ;
-        double ap3 = P[2][0] - p1.get_z() ;
-
-        if (ap1/ab1 < 1 && ap1/ab1 > 0 && ap2/ab2 < 1 && ap2/ab2 > 0 && ap3/ab3 < 1 && ap3/ab3 > 0)
-        {
-            result.push_back(Triangle(p1,Point(P[0][0],P[1][0],P[2][0]),Point(Q[0][0],Q[1][0],Q[2][0]),newName));
-            result.push_back(Triangle(p2,p3,Point(P[0][0],P[1][0],P[2][0]),newName));
-            result.push_back(Triangle(Point(P[0][0],P[1][0],P[2][0]),p3,Point(Q[0][0],Q[1][0],Q[2][0]),newName));
-            return result;
-        }
-        else
-        {
-            result.push_back(*this);
-            return result;
-        }
-    }
-    else if (paramDCA[2][0] == 2)
-    {
-            //init intersection points coordinates
-        double P[3][1];
-        double Q[3][1];
-
-        P[0][0] = d1*paramDBC[0][0] + X[0][0];
-        P[1][0] = d2*paramDBC[0][0] + X[1][0];
-        P[2][0] = d3*paramDBC[0][0] + X[2][0];
-
-        Q[0][0] = d1*paramDAB[0][0] + X[0][0];
-        Q[1][0] = d2*paramDAB[0][0] + X[1][0];
-        Q[2][0] = d3*paramDAB[0][0] + X[2][0];
-
-        double bp1 = P[0][0] - p2.get_x() ;
-        double bp2 = P[1][0] - p2.get_y() ;
-        double bp3 = P[2][0] - p2.get_z() ;
-
-       if(bp1/bc1 < 1 && bp1/bc1 > 0 && bp2/bc2 < 1 && bp2/bc2 > 0 && bp3/bc3 < 1 && bp3/bc3 > 0)
-        {
-            result.push_back(Triangle(p1,Point(P[0][0],P[1][0],P[2][0]),p3,newName));
-            result.push_back(Triangle(Point(P[0][0],P[1][0],P[2][0]),p1,Point(Q[0][0],Q[1][0],Q[2][0]),newName));
-            result.push_back(Triangle(p2,Point(P[0][0],P[1][0],P[2][0]),Point(Q[0][0],Q[1][0],Q[2][0]),newName));
-            return result;
-        }
-        else
-        {
-            result.push_back(*this);
-            return result;
-        }
-    }
-
-    else
-    {
-        double Pt[3][1];
-        double Qt[3][1];
-        double Rt[3][1];
-
-        Pt[0][0] = d1*paramDAB[0][0] + X[0][0];
-        Pt[1][0] = d2*paramDAB[0][0] + X[1][0];
-        Pt[2][0] = d3*paramDAB[0][0] + X[2][0];
-
-        Qt[0][0] = d1*paramDBC[0][0] + X[0][0];
-        Qt[1][0] = d2*paramDBC[0][0] + X[1][0];
-        Qt[2][0] = d3*paramDBC[0][0] + X[2][0];
-
-        Rt[0][0] = d1*paramDCA[0][0] + X[0][0];
-        Rt[1][0] = d2*paramDCA[0][0] + X[1][0];
-        Rt[2][0] = d3*paramDCA[0][0] + X[2][0];
-
-        Point P(Pt[0][0],Pt[1][0],Pt[2][0]);
-        Point R(Rt[0][0],Rt[1][0],Rt[2][0]);
-        Point Q(Qt[0][0],Qt[1][0],Qt[2][0]);
-
-        std::cout << P.get_x() << "_" << P.get_y() << "_" << P.get_z() << std::endl;
-        std::cout << Q.get_x() << "_" << Q.get_y() << "_" << Q.get_z() << std::endl;
-        std::cout << R.get_x() << "_" << R.get_y() << "_" << R.get_z() << std::endl;
-
-        double ap1 = P.get_x() - p1.get_x() ;
-        double ap2 = P.get_y() - p1.get_y() ;
-        double ap3 = P.get_z() - p1.get_z() ;
-
-        double bq1 = Q.get_x() - p2.get_x() ;
-        double bq2 = Q.get_y() - p2.get_y() ;
-        double bq3 = Q.get_z() - p2.get_z() ;
-
-        double cr1 = R.get_x() - p3.get_x() ;
-        double cr2 = R.get_y() - p3.get_y() ;
-        double cr3 = R.get_z() - p3.get_z() ;
-
-        if (P==R && R==Q)
-        {
-            result.push_back(*this);
-            return result;
-        }
-
-        else if (P==R)
-        {
-            result.push_back(Triangle(p1,p2,Q,newName));
-            result.push_back(Triangle(p1,Q,p3,newName));
-            return result;
-        }
-        else if (P==Q)
-        {
-            result.push_back(Triangle(p1,p2,R,newName));
-            result.push_back(Triangle(p3,R,p2,newName));
-            return result;
-        }
-        else if (Q==R)
-        {
-            result.push_back(Triangle(p1,P,p3,newName));
-            result.push_back(Triangle(p2,p3,P,newName));
-            return result;
-        }
-        else if ((!(ap1/ab1 < 1 && ap1/ab1 > 0 && ap2/ab2 < 1 && ap2/ab2 > 0 && ap3/ab3 < 1 && ap3/ab3 > 0)) && (!(bq1/bc1 < 1 && bq1/bc1 > 0 && bq2/bc2 < 1 && bq2/bc2 > 0 && bq3/bc3 < 1 && bq3/bc3 > 0)) && (!(-cr1/ac1 < 1 && -cr1/ac1 > 0 && -cr2/ac2 < 1 && -cr2/ac2 > 0 && -cr3/ac3 < 1 && -cr3/ac3 > 0)))
-        {
-            result.push_back(*this);
-            return result;
-        }
-        else if ((ap1/ab1 < 1 && ap1/ab1 > 0 && ap2/ab2 < 1 && ap2/ab2 > 0 && ap3/ab3 < 1 && ap3/ab3 > 0) && (bq1/bc1 < 1 && bq1/bc1 > 0 && bq2/bc2 < 1 && bq2/bc2 > 0 && bq3/bc3 < 1 && bq3/bc3 > 0))
-        {
-            result.push_back(Triangle(p1,P,p3,newName));
-            result.push_back(Triangle(p2,Q,P,newName));
-            result.push_back(Triangle(p3,P,Q,newName));
-            return result;
-        }
-        else if ((ap1/ab1 < 1 && ap1/ab1 > 0 && ap2/ab2 < 1 && ap2/ab2 > 0 && ap3/ab3 < 1 && ap3/ab3 > 0) && (-cr1/ac1 < 1 && -cr1/ac1 > 0 && -cr2/ac2 < 1 && -cr2/ac2 > 0 && -cr3/ac3 < 1 && -cr3/ac3 > 0))
-        {
-            result.push_back(Triangle(p1,P,R,newName));
-            result.push_back(Triangle(p2,p3,P,newName));
-            result.push_back(Triangle(p3,R,P,newName));
-            return result;
-        }
-        else if ((bq1/bc1 < 1 && bq1/bc1 > 0 && bq2/bc2 < 1 && bq2/bc2 > 0 && bq3/bc3 < 1 && bq3/bc3 > 0) && (-cr1/ac1 < 1 && -cr1/ac1 > 0 && -cr2/ac2 < 1 && -cr2/ac2 > 0 && -cr3/ac3 < 1 && -cr3/ac3 > 0))
-        {
-            result.push_back(Triangle(p1,p2,Q,newName));
-            result.push_back(Triangle(p1,Q,R,newName));
-            result.push_back(Triangle(p3,R,Q,newName));
-            return result;
-        }
-        else
-        {
-            std::cout << "Je ny avais pas pensé !" << std::endl;
-        }
-
-    }
-}
-
-*/
-
 
 vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType newName)
 {
@@ -484,14 +160,8 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     T2[1][0]=-p1.get_y();
     T2[2][0]=-p1.get_z();
 
-    std::cout<<"S : "<<S[0][0]<<" "<<S[1][0]<<" "<<S[2][0]<<std::endl;
-    std::cout<<"O : "<<O[0][0]<<" "<<O[1][0]<<" "<<O[2][0]<<std::endl;
-
     matrix_translation(T2,S,St);
     matrix_translation(T2,O,Ot);
-
-    std::cout<<"St : "<<St[0][0]<<" "<<St[1][0]<<" "<<St[2][0]<<std::endl;
-    std::cout<<"Ot : "<<Ot[0][0]<<" "<<Ot[1][0]<<" "<<Ot[2][0]<<std::endl;
 
     matrix_product(M,St,Sp);
     matrix_product(M,Ot,Op);
@@ -510,12 +180,8 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     Op2[0][0]=Op[0][0];
     Op2[1][0]=Op[1][0];
 
-    std::cout<<"Op2 : "<<Op2[0][0]<<"    "<<Op2[1][0]<<std::endl;
-
     Sp2[0][0]=Sp[0][0];
     Sp2[1][0]=Sp[1][0];
-
-    std::cout<<"Sp2 : "<<Sp2[0][0]<<"    "<<Sp2[1][0]<<std::endl;
 
     UXp2[0][0]=1;
     UXp2[0][0]=0;
@@ -528,7 +194,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     OSp2[0][0]=Sp2[0][0]-Op2[0][0];
     OSp2[1][0]=Sp2[1][0]-Op2[1][0];
 
-    std::cout<<"OSp2 : "<<OSp2[0][0]<<"    "<<OSp2[1][0]<<std::endl;
     bool intersectUXp(false);
     bool intersectUYp(false);
     bool intersectUZp(false);
@@ -536,6 +201,7 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     Point ix;
     Point iy;
     Point iz;
+
     //exeption for line // at UXp2 or UYp2
     if (OSp2[1][0] == 0)
     {
@@ -559,20 +225,25 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             double IZ[3][1];
             double IYt[3][1];
             double IZt[3][1];
+
             matrix_product(mat,IYp,IYt);
             matrix_product(mat,IZp,IZt);
 
             matrix_translation(T,IYt,IY);
             matrix_translation(T,IZt,IZ);
 
-            Point iy(IY[0][0],IY[1][0],IY[2][0]);
-            Point iz(IZ[0][0],IZ[1][0],IZ[2][0]);
+            iy.set_x(IY[0][0]);
+            iy.set_y(IY[1][0]);
+            iy.set_z(IY[2][0]);
+            iz.set_x(IZ[0][0]);
+            iz.set_y(IZ[1][0]);
+            iz.set_z(IZ[2][0]);
         }
     }
     else if (OSp2[0][0] == 0)
     {
         //case x=constant
-        double constValue = Op2[1][0];
+        double constValue = Op2[0][0];
 
         if (constValue < 1 && constValue > 0)
         {
@@ -598,8 +269,12 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             matrix_translation(T,IXt,IX);
             matrix_translation(T,IZt,IZ);
 
-            Point ix(IX[0][0],IX[1][0],IX[2][0]);
-            Point iz(IZ[0][0],IZ[1][0],IZ[2][0]);
+            ix.set_x(IX[0][0]);
+            ix.set_y(IX[1][0]);
+            ix.set_z(IX[2][0]);
+            iz.set_x(IZ[0][0]);
+            iz.set_y(IZ[1][0]);
+            iz.set_z(IZ[2][0]);
         }
     }
     else
@@ -607,8 +282,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         //line equation ax+b
         double coeffLine = OSp2[1][0] / OSp2[0][0]; //a
         double originValue = Op2[1][0] - coeffLine*Op2[0][0]; //b
-
-        std::cout<<coeffLine<<"___________"<<originValue<<std::endl;
 
         //test UXp intersection
         double xUXp = -originValue / coeffLine;
@@ -626,7 +299,9 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             matrix_product(mat,IXp,IXt);
             matrix_translation(T,IXt,IX);
 
-            Point ix(IX[0][0],IX[1][0],IX[2][0]);
+            ix.set_x(IX[0][0]);
+            ix.set_y(IX[1][0]);
+            ix.set_z(IX[2][0]);
         }
 
         //test UYp intersection
@@ -645,7 +320,9 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             matrix_product(mat,IYp,IYt);
             matrix_translation(T,IYt,IY);
 
-            Point iy(IY[0][0],IY[1][0],IY[2][0]);
+            iy.set_x(IY[0][0]);
+            iy.set_y(IY[1][0]);
+            iy.set_z(IY[2][0]);
         }
 
         //test UZp intersection
@@ -661,11 +338,14 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
 
             double IZ[3][1];
             double IZt[3][1];
-            matrix_product(mat,IZp,IZ);
+
+            matrix_product(mat,IZp,IZt);
 
             matrix_translation(T,IZt,IZ);
 
-            Point iz(IZ[0][0],IZ[1][0],IZ[2][0]);
+            iz.set_x(IZ[0][0]);
+            iz.set_y(IZ[1][0]);
+            iz.set_z(IZ[2][0]);
         }
 
     }
@@ -717,6 +397,7 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         Triangle tri2 = Triangle(p2,p3,ix,newName);
         result.push_back(tri1);
         result.push_back(tri2);
+        std::cout << "x"<< std::endl;
         return result;
     }
     else if (intersectUYp)
@@ -725,14 +406,17 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         Triangle tri2 = Triangle(p2,p3,iy,newName);
         result.push_back(tri1);
         result.push_back(tri2);
+        std::cout << "y"<< std::endl;
         return result;
     }
     else if (intersectUZp)
     {
+        iz.print();
         Triangle tri1 = Triangle(p1,p2,iz,newName);
         Triangle tri2 = Triangle(p1,iz,p3,newName);
         result.push_back(tri1);
         result.push_back(tri2);
+        std::cout << "z"<< std::endl;
         return result;
     }
     else
@@ -752,10 +436,10 @@ Triangle Triangle::repeat(TriangleType newName)
 {
     return Triangle();
 }
-
 */
 
-/*
+
+
 
 TEST_CASE("Triangle constructor + Getters are computed", "[Triangle] [get_p1] [get_p2] [get_p3] [get_type]")
 {
@@ -776,7 +460,7 @@ TEST_CASE("add_type are computed", "[add_type]")
     Point b =  Point(3,9,7);
     Point c =  Point(5,6,8);
     Triangle d = Triangle(a,b,c,WALL);
-    d.add_type(ROOF);
+    d.set_type(ROOF);
 
     REQUIRE(d.get_type() == ROOF);
 }
@@ -865,5 +549,39 @@ TEST_CASE("size triangle are computed", "[size]")
 
     REQUIRE(d.is_equal(h));
 
+}
+/*
+TEST_CASE("split are computed", "[spli]")
+{
+    Point p1(1,1,0);
+    Point p2(2,1,0);
+    Point p3(1,2,0);
+
+    Triangle tri(p1,p2,p3,WALL);
+
+    Point origin(0,0,0);
+    double axis[3][1];
+    axis[0][0] = 1;
+    axis[1][0] = 1;
+    axis[2][0] = 0;
+
+    vector<Triangle> ltri;
+    ltri.push_back(tri);
+
+    Parcel par;
+    BuildingModel mod(ltri,&par);
+
+    mod.split(*axis,origin,WALL,ROOF);
+
+    cout<< mod.get_li_triangle().size()<<endl;
+
+    cout<< mod.get_li_triangle()[0].get_p1().<<endl;
+
+    cout<< mod.get_li_triangle().size()<<endl;
+
+    cout<< mod.get_li_triangle().size()<<endl;
+
+    REQUIRE(mod.get_li_triangle().size()==2);
+    REQUIRE(mod.get_li_tria )
 }
 */

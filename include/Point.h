@@ -46,6 +46,31 @@ class Point
         *Gets the z coordinate.
         *@return z double
         */
+        //Setters
+        void set_x(double p_x){x=p_x;};
+        /**
+        *@fn void Point::set_x()
+        *Sets the x coordinate.
+        *@param[in] p_x double
+        */
+        void set_y(double p_y){y=p_y;};
+        /**
+        *@fn void Point::set_y()
+        *Sets the y coordinate.
+        *@param[in] p_y double
+        */
+        void set_z(double p_z){z=p_z;};
+        /**
+        *@fn void Point::set_z()
+        *Sets the z coordinate.
+        *@param[in] p_z double
+        */
+
+        void print();
+        /**
+        *@fn void Point::print()
+        *Print the coordinates of the point.
+        */
 
         //Other functions
         void translate(double vec[3]);
