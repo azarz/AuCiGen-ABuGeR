@@ -15,6 +15,7 @@ class Parcel
     *Contain parcel
     */
     public:
+        Parcel(),
         Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
         /**
         *@fn Parcel::Parcel(OGRPolygon* poPolygon)
