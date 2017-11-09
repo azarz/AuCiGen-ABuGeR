@@ -11,7 +11,7 @@ Building::Building(Envelop* env)
 {
     //ctor
 
-    double gap=0.00005; //length between two points
+    double gap=1; //length between two points
     double step= 20; // angle between two rectangles calculated
 
 
@@ -27,10 +27,10 @@ Building::Building(Envelop* env)
     OGRLinearRing poExteriorRing= (OGRLinearRing)env->get_footprint()->get_geom();
     poPolygon.addRing(&poExteriorRing);
     int NumberOfExteriorRingVertices = poExteriorRing.OGRSimpleCurve::getNumPoints();
-    double xmin=1000000;
-    double xmax=-100000;
-    double ymin=1000000;
-    double ymax=-100000;
+    double xmin=100000000;
+    double xmax=-10000000;
+    double ymin=100000000;
+    double ymax=-10000000;
     double centerx =0;
     double centery =0;
     for ( int k = 0; k < NumberOfExteriorRingVertices; k++)//NumberOfExteriorRingVertices; k++ )
@@ -52,6 +52,7 @@ Building::Building(Envelop* env)
         {
             ymax=ptTemp.getY();
         }
+        //cout<<"("<<ptTemp.getX()<<", "<<ptTemp.getY()<<")"<<endl;
         centerx+=ptTemp.getX();
         centery+=ptTemp.getY();
     }
@@ -63,7 +64,7 @@ Building::Building(Envelop* env)
     //cout << "min ("<<xmin <<", "<< ymin<<"); max ("<<xmax<<", "<< ymax <<")"<<endl;
     double dx = xmax-xmin;
     double dy = ymax-ymin;
-    //cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
+    cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
     int N=0;
     int M;
     for (double xp=xmin; xp<=xmax+gap; xp+=gap)
@@ -82,7 +83,7 @@ Building::Building(Envelop* env)
         }
         //cout <<endl;
     }
-    //cout<< "N ="<< N<<"; M ="<< M <<endl;
+    cout<< "N ="<< N<<"; M ="<< M <<endl;
 
 
     /* for rectangles : ALL PARCEL TYPE */
@@ -120,11 +121,12 @@ Building::Building(Envelop* env)
     for (double A = M_PI/step; A<M_PI/2; A+=M_PI/step)
     {
         //with rotation :
+        cout<<M_PI/A<<endl;
         //limit :
-        double xminR=1000000;
-        double xmaxR=-100000;
-        double yminR=1000000;
-        double ymaxR=-100000;
+        double xminR=10000000000000;
+        double xmaxR=-1000000000000;
+        double yminR=10000000000000;
+        double ymaxR=-1000000000000;
         double Rx, Ry;
         OGRPoint ptTemp;
         for ( int k = 0; k < NumberOfExteriorRingVertices; k++)//NumberOfExteriorRingVertices; k++ )
@@ -232,6 +234,9 @@ Building::Building(Envelop* env)
     }
     building_footprint.addRing(&a);
     geom=&building_footprint;
+    char* text;
+    geom->OGRPolygon::exportToWkt(&text,  wkbVariantOldOgc);
+    cout<<text<<endl;
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
 
