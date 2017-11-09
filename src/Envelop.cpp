@@ -49,12 +49,13 @@ Envelop::~Envelop()
     //dtor
 }
 
-vector<string> Envelop::to_obj(OGRPoint* centroid)
+vector<string> Envelop::to_obj(OGRPoint* centroid, int& index_offset)
 {
     OGRPolygon poPolygon = OGRPolygon();
     OGRLinearRing* a = footprint->get_geom();
     poPolygon.addRing(a);
-    vector<Triangle> li_vector;
-    create_wall(&poPolygon, height, li_vector);
-    return triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
+    vector<Triangle> li_triangles;
+    poly_to_triangle(&poPolygon, li_triangles, FLOOR);
+    create_wall(&poPolygon, height, li_triangles);
+    return triangles_to_obj(li_triangles, index_offset, centroid->getX(), centroid->getY());
 }
