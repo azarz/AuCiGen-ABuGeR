@@ -1,10 +1,11 @@
 #include "poly_to_triangle.h"
+
 #include "Triangle.h"
 #include "ogrsf_frmts.h"
 #include "Point.h"
 #include <ogr_geometry.h>
 #include <iostream>
-//#include "catch.h"
+
 using namespace std;
 
 void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, TriangleType type)
@@ -81,16 +82,3 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
     //cout << "in : "<<li_vector.at(0).get_p2().get_x()<<endl;
     //cout << "in : "<<li_vector.at(2).get_p2()->get_x()<<endl;
 }
-
-
-/*TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
-{
-    vector<Parcel> PARCELS;
-    char* fill_directory ="1_data/test/test_parcel.shp";
-    OpenShapeFile_parcels(fill_directory, PARCELS);
-    vector<Triangle> li_vector;
-    poly_to_triangle(PARCELS.at(7).get_geom(), li_vector );
-    REQUIRE(li_vector.at(0).get_type()==FLOOR);
-    REQUIRE(li_vector.size()==30);
-
-}*/

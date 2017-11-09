@@ -68,7 +68,7 @@ class BuildingModel
         *@param[in] newName: The new additional name of the split surfaces.
         */
 
-        //void repeat(TriangleType oldName, TriangleType newName);
+        void repeat(TriangleType oldName, TriangleType newName);
         /**
         *@fn void BuildingModel::repeat(TriangleType oldName, TriangleType newName)
         *Repeat/copies the selected surfaces of the BuildingModel.

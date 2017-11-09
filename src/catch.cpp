@@ -1,4 +1,4 @@
-//#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_MAIN
 #include "catch.h"
 
 #include <iostream>
@@ -49,7 +49,6 @@ TEST_CASE("BuildingModel and Getters are computed", "[BuildingModel]")
     REQUIRE(test.get_li_triangle()[0].is_equal(tri));
     //REQUIRE(test.get_parcel() ==)
 }
-
 TEST_CASE("translate BuildingModel", "[translate]")
 {
     Point a =  Point(2,5,6);
@@ -80,17 +79,14 @@ TEST_CASE("translate BuildingModel", "[translate]")
 
     REQUIRE(test.get_li_triangle()[0].is_equal(test.get_li_triangle()[1]));
 }
-
 TEST_CASE("rotate BuildingModel", "[rotate]")
 {
 
 }
-
 TEST_CASE("size BuildingModel", "[size]")
 {
 
 }
-
 TEST_CASE("split BuildingModel are computed", "[split]")
 {
     // simple intersection
@@ -416,7 +412,6 @@ TEST_CASE("Footprint is created and its attributes ","[Footprint]")
     REQUIRE(v4.get_geom()->getGeometryType() == 2);
     REQUIRE(v4.get_parcel()->get_geom()->getGeometryType()== 3);
 }
-
 TEST_CASE("Envelop is created","[create_envelop]")
 {
     vector<Road> ROADS;
@@ -485,7 +480,6 @@ TEST_CASE("Point constructor + Getters + Setters","[Point] [get_x] [get_y] [get_
     REQUIRE(b.get_y()==9.0);
     REQUIRE(b.get_z()==7.0);
 }
-
 TEST_CASE("operator == Point are computed","[opertator==]")
 {
     Point a =  Point(2,5,6);
@@ -496,7 +490,6 @@ TEST_CASE("operator == Point are computed","[opertator==]")
     REQUIRE(b==b);
     REQUIRE(!(c==a));
 }
-
 TEST_CASE("translate Point are computed","[translate]")
 {
     Point a =  Point(2,5,6);
@@ -510,7 +503,6 @@ TEST_CASE("translate Point are computed","[translate]")
     REQUIRE(a.get_y()==7.0);
     REQUIRE(a.get_z()==9.0);
 }
-
 TEST_CASE("rotate Point are computed", "[rotate]")
 {
     Point a = Point(1,-1,2);
@@ -525,7 +517,6 @@ TEST_CASE("rotate Point are computed", "[rotate]")
     //REQUIRE(a.get_y()==sin(M_PI_2l)*1*1);
     REQUIRE(a.get_z()==2.0);
 }
-
 TEST_CASE("size Point are computed", "[size]")
 {
     Point a = Point(2,5,6);
@@ -572,8 +563,6 @@ TEST_CASE("Triangle constructor + Getters are computed", "[Triangle] [get_p1] [g
     REQUIRE(d.get_p3() == c);
     REQUIRE(d.get_type() == WALL);
 }
-
-
 TEST_CASE("add_type Triangle are computed", "[add_type]")
 {
     Point a =  Point(2,5,6);
@@ -584,7 +573,6 @@ TEST_CASE("add_type Triangle are computed", "[add_type]")
 
     REQUIRE(d.get_type() == ROOF);
 }
-
 TEST_CASE("is_equal Triangle are computed", "[is_equal]")
 {
     Point a =  Point(2,5,6);
@@ -595,7 +583,6 @@ TEST_CASE("is_equal Triangle are computed", "[is_equal]")
 
     REQUIRE(d.is_equal(e));
 }
-
 TEST_CASE("translate Triangle are computed", "[translate]")
 {
     Point a =  Point(2,5,6);
@@ -619,12 +606,10 @@ TEST_CASE("translate Triangle are computed", "[translate]")
 
     REQUIRE(d.is_equal(h));
 }
-
 TEST_CASE("rotate Triangle are computed", "[rotate]")
 {
 
 }
-
 TEST_CASE("size Triangle are computed", "[size]")
 {
     Point a =  Point(2,5,6);
@@ -649,7 +634,6 @@ TEST_CASE("size Triangle are computed", "[size]")
     REQUIRE(d.is_equal(h));
 
 }
-
 TEST_CASE("split Triangle are computed", "[split]")
 {
     Point p1(1,1,0);
@@ -679,5 +663,602 @@ TEST_CASE("split Triangle are computed", "[split]")
 }
 
 ////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////create_wall/////////////
+
+
+
+////////////////////////////////////
+
+/////////get_max_rectangle//////////
+
+TEST_CASE("test areaL ","[areaL]")
+{
+    vector<int> no_lim;
+    no_lim.push_back(0);no_lim.push_back(0);
+    no_lim.push_back(1);no_lim.push_back(1);
+    vector<int> b;
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    int a = areaL(0, 0, 4, 4, b, 5, no_lim);
+    REQUIRE(a==21);
+    no_lim.clear();
+    b.clear();
+    no_lim.push_back(0);no_lim.push_back(0);
+    no_lim.push_back(1);no_lim.push_back(1);
+    b.push_back(0); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    a = areaL(0, 0, 4, 4, b, 5, no_lim);
+    REQUIRE(a==21);
+    no_lim.clear();
+    b.clear();
+    no_lim.push_back(3);no_lim.push_back(0);
+    no_lim.push_back(9);no_lim.push_back(7);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    a = areaL(0, 0, 9, 9, b, 10, no_lim);
+    REQUIRE(a==44);
+}
+//test L_ones
+TEST_CASE("test L_ones ","[L_ones]")
+{
+    vector<int> lim;
+    vector<int> no_lim;
+    vector<int> b;
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    bool test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==true);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==2);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==4);
+    REQUIRE(lim.at(4)==4);
+    REQUIRE(lim.at(5)==4);
+    REQUIRE(lim.at(6)==4);
+    REQUIRE(lim.at(7)==0);
+    REQUIRE(lim.at(8)==3);
+    REQUIRE(lim.at(9)==0);
+    REQUIRE(lim.at(10)==3);
+    REQUIRE(lim.at(11)==2);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==2);
+    REQUIRE(no_lim.at(0)==0);
+    REQUIRE(no_lim.at(1)==0);
+    REQUIRE(no_lim.at(2)==1);
+    REQUIRE(no_lim.at(3)==1);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(1); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==false);
+    REQUIRE(lim.size()==0);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==false);
+    REQUIRE(lim.size()==0);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(0);b.push_back(0);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(0);b.push_back(0);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==true);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==0);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==2);
+    REQUIRE(lim.at(4)==2);
+    REQUIRE(lim.at(5)==2);
+    REQUIRE(lim.at(6)==2);
+    REQUIRE(lim.at(7)==4);
+    REQUIRE(lim.at(8)==4);
+    REQUIRE(lim.at(9)==4);
+    REQUIRE(lim.at(10)==4);
+    REQUIRE(lim.at(11)==0);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==0);
+    REQUIRE(no_lim.at(0)==0);
+    REQUIRE(no_lim.at(1)==3);
+    REQUIRE(no_lim.at(2)==1);
+    REQUIRE(no_lim.at(3)==4);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(0);b.push_back(0);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(0);b.push_back(0);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==true);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==0);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==4);
+    REQUIRE(lim.at(4)==2);
+    REQUIRE(lim.at(5)==4);
+    REQUIRE(lim.at(6)==2);
+    REQUIRE(lim.at(7)==2);
+    REQUIRE(lim.at(8)==4);
+    REQUIRE(lim.at(9)==2);
+    REQUIRE(lim.at(10)==4);
+    REQUIRE(lim.at(11)==0);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==0);
+    REQUIRE(no_lim.at(0)==3);
+    REQUIRE(no_lim.at(1)==3);
+    REQUIRE(no_lim.at(2)==4);
+    REQUIRE(no_lim.at(3)==4);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(1);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==false);
+    REQUIRE(lim.size()==0);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(1);b.push_back(1);b.push_back(1);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==true);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==0);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==4);
+    REQUIRE(lim.at(4)==4);
+    REQUIRE(lim.at(5)==4);
+    REQUIRE(lim.at(6)==4);
+    REQUIRE(lim.at(7)==2);
+    REQUIRE(lim.at(8)==2);
+    REQUIRE(lim.at(9)==2);
+    REQUIRE(lim.at(10)==2);
+    REQUIRE(lim.at(11)==0);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==0);
+    REQUIRE(no_lim.at(0)==3);
+    REQUIRE(no_lim.at(1)==0);
+    REQUIRE(no_lim.at(2)==4);
+    REQUIRE(no_lim.at(3)==1);
+    b.clear();
+    lim.clear();
+    no_lim.clear();
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    test_L_ones=L_ones(0, 0, 4, 4, b, 5, lim, no_lim);
+    REQUIRE(test_L_ones==false);
+    REQUIRE(lim.size()==0);
+}
+//test larger_L_included
+TEST_CASE("test larger_L_included ","[larger_L_included]")
+{
+    vector<int> b;
+    vector<int> lim;
+    int M=5;
+    int N=5;
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(0);b.push_back(0);
+    int test_larger_L_included = larger_L_included (b, N, M, lim, 0);
+    REQUIRE(test_larger_L_included==0);
+    REQUIRE(lim.size()==0);
+    b.clear();
+    lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    test_larger_L_included = larger_L_included (b, N, M, lim, 0);
+    REQUIRE(test_larger_L_included==19);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==0);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==4);
+    REQUIRE(lim.at(4)==4);
+    REQUIRE(lim.at(5)==4);
+    REQUIRE(lim.at(6)==4);
+    REQUIRE(lim.at(7)==3);
+    REQUIRE(lim.at(8)==2);
+    REQUIRE(lim.at(9)==3);
+    REQUIRE(lim.at(10)==2);
+    REQUIRE(lim.at(11)==0);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==0);
+    b.clear();
+    lim.clear();
+    M=10;
+    N=10;
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    test_larger_L_included = larger_L_included (b, N, M, lim, 0);
+    REQUIRE(test_larger_L_included==44);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==0);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==9);
+    REQUIRE(lim.at(4)==9);
+    REQUIRE(lim.at(5)==9);
+    REQUIRE(lim.at(6)==9);
+    REQUIRE(lim.at(7)==8);
+    REQUIRE(lim.at(8)==2);
+    REQUIRE(lim.at(9)==8);
+    REQUIRE(lim.at(10)==2);
+    REQUIRE(lim.at(11)==0);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==0);
+    b.clear();
+    lim.clear();
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    test_larger_L_included = larger_L_included (b, N, M, lim, 0);
+    REQUIRE(test_larger_L_included==36);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==0);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==9);
+    REQUIRE(lim.at(4)==5);
+    REQUIRE(lim.at(5)==9);
+    REQUIRE(lim.at(6)==5);
+    REQUIRE(lim.at(7)==8);
+    REQUIRE(lim.at(8)==2);
+    REQUIRE(lim.at(9)==8);
+    REQUIRE(lim.at(10)==2);
+    REQUIRE(lim.at(11)==0);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==0);
+    b.clear();
+    lim.clear();
+    N=10;
+    M=11;
+    b.push_back(1); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    test_larger_L_included = larger_L_included (b, N, M, lim, 0);
+    REQUIRE(test_larger_L_included==35);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==4);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==10);
+    REQUIRE(lim.at(4)==2);
+    REQUIRE(lim.at(5)==10);
+    REQUIRE(lim.at(6)==2);
+    REQUIRE(lim.at(7)==5);
+    REQUIRE(lim.at(8)==9);
+    REQUIRE(lim.at(9)==5);
+    REQUIRE(lim.at(10)==9);
+    REQUIRE(lim.at(11)==4);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==4);
+    b.clear();
+    lim.clear();
+    N=10;
+    M=11;
+    b.push_back(0); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    test_larger_L_included = larger_L_included (b, N, M, lim, 0);
+    REQUIRE(test_larger_L_included==35);
+    REQUIRE(lim.at(0)==0);
+    REQUIRE(lim.at(1)==4);
+    REQUIRE(lim.at(2)==0);
+    REQUIRE(lim.at(3)==10);
+    REQUIRE(lim.at(4)==2);
+    REQUIRE(lim.at(5)==10);
+    REQUIRE(lim.at(6)==2);
+    REQUIRE(lim.at(7)==5);
+    REQUIRE(lim.at(8)==9);
+    REQUIRE(lim.at(9)==5);
+    REQUIRE(lim.at(10)==9);
+    REQUIRE(lim.at(11)==4);
+    REQUIRE(lim.at(12)==0);
+    REQUIRE(lim.at(13)==4);
+    b.clear();
+    lim.clear();
+    N=10;
+    M=11;
+    b.push_back(1); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(1); b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);b.push_back(1); b.push_back(1); b.push_back(1);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(0);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    b.push_back(0); b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);b.push_back(0); b.push_back(0); b.push_back(0);b.push_back(1);b.push_back(1);
+    test_larger_L_included = larger_L_included (b, N, M, lim, 100);
+    REQUIRE(test_larger_L_included==100);
+    REQUIRE(lim.size()==0);
+
+}
+
+////////////////////////////////////
+
+
+///////////matrix_method////////////
+
+TEST_CASE("invert_matrix are computed", "[invert_matrix]")
+{
+    double M1[3][3];
+    double M2[3][3];
+    double MV[3][3];
+
+    M1[0][0]=1;
+    M1[0][1]=2;
+    M1[0][2]=3;
+    M1[1][0]=0;
+    M1[1][1]=1;
+    M1[1][2]=4;
+    M1[2][0]=5;
+    M1[2][1]=6;
+    M1[2][2]=0;
+
+    MV[0][0]=-24;
+    MV[0][1]=18;
+    MV[0][2]=5;
+    MV[1][0]=20;
+    MV[1][1]=-15;
+    MV[1][2]=-4;
+    MV[2][0]=-5;
+    MV[2][1]=4;
+    MV[2][2]=1;
+
+    invert_matrix(M1,M2);
+
+    REQUIRE(MV[0][0]==M2[0][0]);
+    REQUIRE(MV[0][1]==M2[0][1]);
+    REQUIRE(MV[0][2]==M2[0][2]);
+    REQUIRE(MV[1][0]==M2[1][0]);
+    REQUIRE(MV[1][1]==M2[1][1]);
+    REQUIRE(MV[1][2]==M2[1][2]);
+    REQUIRE(MV[2][0]==M2[2][0]);
+    REQUIRE(MV[2][1]==M2[2][1]);
+    REQUIRE(MV[2][2]==M2[2][2]);
+}
+TEST_CASE("matrix_product are computed","[matrix_product]")
+{
+    double MG[3][3];
+    double MD[3][1];
+    double MR[3][1];
+    double MV[3][1];
+
+    MG[0][0]=1;
+    MG[0][1]=2;
+    MG[0][2]=1;
+    MG[1][0]=1;
+    MG[1][1]=1;
+    MG[1][2]=1;
+    MG[2][0]=2;
+    MG[2][1]=3;
+    MG[2][2]=3;
+
+    MD[0][0]=1;
+    MD[1][0]=2;
+    MD[2][0]=3;
+
+    MV[0][0]=8;
+    MV[1][0]=6;
+    MV[2][0]=17;
+
+    matrix_product(MG,MD,MR);
+
+    REQUIRE(MV[0][0]==MR[0][0]);
+    REQUIRE(MV[1][0]==MR[1][0]);
+    REQUIRE(MV[2][0]==MR[2][0]);
+
+}
+TEST_CASE("matrix_translation are computed", "[matrix_translation]")
+{
+    double T[3][1];
+    double S[3][1];
+    double SR[3][1];
+    double SV[3][1];
+
+    T[0][0]=1;
+    T[1][0]=2;
+    T[2][0]=3;
+
+    S[0][0]=7;
+    S[1][0]=4;
+    S[2][0]=14;
+
+    SV[0][0]=8;
+    SV[1][0]=6;
+    SV[2][0]=17;
+
+    matrix_translation(T,S,SR);
+
+    REQUIRE(SV[0][0]==SR[0][0]);
+    REQUIRE(SV[1][0]==SR[1][0]);
+    REQUIRE(SV[2][0]==SR[2][0]);
+}
+
+////////////////////////////////////
+
+/////////////open_shp///////////////
+
+TEST_CASE("OpenShapeFile_roads are computed","[OpenShapeFile_roads]")
+{
+    vector<Road> ROADS;
+    char* fill_directory ="1_data/test/road_test.shp";
+    open_shp_roads(fill_directory, ROADS, "road_test");
+    REQUIRE(ROADS.size()==1192);
+    REQUIRE(ROADS.at(0).get_type()==1);
+    REQUIRE(ROADS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==55);
+    REQUIRE(ROADS.at(0).get_geom()->getGeometryType()==3);
+}
+
+TEST_CASE("OpenShapeFile_parcels are computed","[OpenShapeFile_parcels]")
+{
+    vector<Parcel> PARCELS;
+    char* fill_directory ="1_data/test/test_parcel.shp";
+
+    char* wkt ="POINT ((55.4683455250644 -21.3282187046573))";
+    OGRPoint* centroid = new OGRPoint();
+    centroid->OGRPoint::importFromWkt( &wkt);
+
+    open_shp_parcels(fill_directory, PARCELS, centroid, "test_parcel");
+    REQUIRE(PARCELS.size()==583);
+    REQUIRE(PARCELS.at(0).get_area()==PARCELS.at(0).get_geom()->OGRCurvePolygon::get_Area());
+    REQUIRE(PARCELS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==4);
+    REQUIRE(PARCELS.at(0).get_geom()->getGeometryType()==3);
+
+    delete centroid;
+}
+
+////////////////////////////////////
+
+//////////////orient////////////////
+/*
+TEST_CASE("get_intersection_road computed", "[get_intersection_road]")
+{
+    char* wkt ="POLYGON ((55.4683455250644 -21.3282187046573,55.4683460303297 -21.3282180820721,55.4685788303297 -21.3279358820721,55.4685905503442 -21.3279255206688,55.46860489859 -21.3279192880722,55.468620470561 -21.3279177943725,55.468635741964 -21.3279211857833,55.4686492179279 -21.3279291303297,55.4686595793312 -21.3279408503442,55.4686658119277 -21.32795519859,55.4686673056275 -21.327970770561,55.4686639142167 -21.327986041964,55.4686559696703 -21.3279995179279,55.4684234247991 -21.3282814086609,55.4681532749356 -21.3286197953427,55.4681417225811 -21.3286303433531,55.4681274761246 -21.3286368052333,55.4681119301085 -21.3286385484493,55.4680966062852 -21.3286354023632,55.4680830046573 -21.3286276749356,55.4680724566469 -21.3286161225811,55.4680659947667 -21.3286018761245,55.4680642515507 -21.3285863301085,55.4680673976368 -21.3285710062852,55.4680751250644 -21.3285574046573,55.4683455250644 -21.3282187046573))";
+    OGRPolygon* poGeom = new OGRPolygon();
+    poGeom->OGRPolygon::importFromWkt(&wkt);
+
+    char* wkt2 ="POLYGON ((55.4683455250644 -21.3282187046573,55.4683460303297,55.46834158,-21.32821711))";
+    OGRPolygon* poGeom2 = new OGRPolygon();
+    poGeom2->OGRPolygon::importFromWkt(&wkt2);
+
+    Road r(poGeom,1);
+    vector<Road> ROADS;
+    ROADS.push_back(r);
+    ROADS.push_back(r);
+
+    OGRLineString* result;
+
+    result = get_intersection_road(poGeom, ROADS);
+
+    REQUIRE(result->getGeometryName()=="LINESTRING");
+
+    delete poGeom;
+}
+
+TEST_CASE("get_other_sides computed", "[get_other_sides]")
+{
+    char* wkt ="POLYGON ((55.4683455250644 -21.3282187046573,55.4683460303297 -21.3282180820721,55.4685788303297 -21.3279358820721,55.4685905503442 -21.3279255206688,55.46860489859 -21.3279192880722,55.468620470561 -21.3279177943725,55.468635741964 -21.3279211857833,55.4686492179279 -21.3279291303297,55.4686595793312 -21.3279408503442,55.4686658119277 -21.32795519859,55.4686673056275 -21.327970770561,55.4686639142167 -21.327986041964,55.4686559696703 -21.3279995179279,55.4684234247991 -21.3282814086609,55.4681532749356 -21.3286197953427,55.4681417225811 -21.3286303433531,55.4681274761246 -21.3286368052333,55.4681119301085 -21.3286385484493,55.4680966062852 -21.3286354023632,55.4680830046573 -21.3286276749356,55.4680724566469 -21.3286161225811,55.4680659947667 -21.3286018761245,55.4680642515507 -21.3285863301085,55.4680673976368 -21.3285710062852,55.4680751250644 -21.3285574046573,55.4683455250644 -21.3282187046573))";
+    OGRPolygon* poGeom = new OGRPolygon();
+    poGeom->OGRPolygon::importFromWkt(&wkt);
+
+    char* wkt2 ="LINESTRING ((55.4683455250644 -21.3282187046573,55.4683460303297 -21.3282180820721)";
+
+    OGRLineString* intersection = new OGRLineString();
+    intersection->OGRLineString::importFromWkt(&wkt2);
+
+    OGRLineString* result;
+
+    result = get_other_sides(poGeom, intersection);
+
+    REQUIRE(result->getDimension()==2);
+}
+*/
+////////////////////////////////////
+
+//////////poly_to_triangle//////////
+
+TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
+{
+    vector<Parcel> PARCELS;
+    char* fill_directory ="1_data/test/test_parcel.shp";
+
+    char* wkt ="POINT ((55.4683455250644 -21.3282187046573))";
+    OGRPoint* centroid = new OGRPoint();
+    centroid->OGRPoint::importFromWkt( &wkt);
+
+    open_shp_parcels(fill_directory, PARCELS, centroid, "test_parcel");
+    vector<Triangle> li_vector;
+    poly_to_triangle(PARCELS.at(7).get_geom(), li_vector, FLOOR );
+    REQUIRE(li_vector.at(0).get_type()==FLOOR);
+    //REQUIRE(li_vector.size()==30);
+}
+
+////////////////////////////////////
+
+//////////triangle_to_obj///////////
+
+
+////////////////////////////////////
+
+
 
 

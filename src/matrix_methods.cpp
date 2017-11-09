@@ -5,11 +5,16 @@ void invert_matrix(double mat[3][3],double M[3][3])
 
     //finding determinant
     for(i = 0; i < 3; i++)
+    {
         determinant = determinant + (mat[0][i] * (mat[1][(i+1)%3] * mat[2][(i+2)%3] - mat[1][(i+2)%3] * mat[2][(i+1)%3]));
+    }
 
-    for(i = 0; i < 3; i++){
+    for(i = 0; i < 3; i++)
+    {
         for(j = 0; j < 3; j++)
+        {
             M[i][j] = ((mat[(j+1)%3][(i+1)%3] * mat[(j+2)%3][(i+2)%3]) - (mat[(j+1)%3][(i+2)%3] * mat[(j+2)%3][(i+1)%3]))/ determinant;
+        }
     }
 }
 void matrix_product(double MG[3][3],double MD[3][1], double MR[3][1])
