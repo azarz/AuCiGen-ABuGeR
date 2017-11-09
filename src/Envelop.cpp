@@ -39,13 +39,10 @@ Envelop::~Envelop()
 
 vector<string> Envelop::to_obj(OGRPoint* centroid)
 {
-    //
     OGRPolygon poPolygon = OGRPolygon();
-
-    OGRCurve* a = footprint->get_geom();
+    OGRLinearRing* a = footprint->get_geom();
     poPolygon.addRing(a);
     vector<Triangle> li_vector;
-    poly_to_triangle(&poPolygon, li_vector, FLOOR);
     create_wall(&poPolygon, height, li_vector);
     return triangles_to_obj(li_vector, centroid->getX(), centroid->getY());
 }
@@ -58,10 +55,13 @@ TEST_CASE("Envelop is created and its attributes ","[Envelop]")
     vector<Road> ROADS;
     vector<Parcel> PARCELS;
     OGRPoint* centroid;
-    const char* fill_directory ="1_data/test/road_test.shp";
-    centroid = open_shp_roads(fill_directory, ROADS);
-    fill_directory ="1_data/test/test_parcel.shp";
-    open_shp_parcels(fill_directory, PARCELS, centroid);
+    //Parcel();
+    const char* file_path ="1_data/test/road_test.shp";
+    const char* layer_name ="road_test";
+    centroid = open_shp_roads(file_path, ROADS, layer_name);
+    file_path ="1_data/test/test_parcel.shp";
+    layer_name ="test_parcel";
+    open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
     cout << v1->getGeometryName()<< endl;

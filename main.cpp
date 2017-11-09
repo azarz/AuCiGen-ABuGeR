@@ -34,7 +34,6 @@ int main()
    // cout << "rest:" << PARCELS.at(35).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints() << endl;
  //   PARCELS.at(35).print();
 
-
     OGRGeometry* v1 = PARCELS.at(35).get_geom();
     OGRGeometry* v12 = ROADS.at(ROADS.size()-1).get_geom();
     cout << v1->Distance(centroid) << endl;
@@ -75,15 +74,15 @@ int main()
         cout << i << endl;
         Parcel parcel = PARCELS.at(i);
         vector<string> envelopObj_temp;
+
         poly_to_triangle(parcel.get_geom(), parcelTriangles, FLOOR);
 
         OGRLineString* linearIntersection = get_intersection_road(parcel.get_geom(), ROADS);
         OGRLineString* otherSides = get_other_sides(parcel.get_geom(), linearIntersection);
 
         Footprint footprint = parcel.create_footprint(linearIntersection, otherSides);
-        cout << footprint.get_geom()->getGeometryName() << endl;
-
         Envelop envelop = footprint.create_envelop();
+
         envelopObj_temp = envelop.to_obj(centroid);
         for (int k = 0; k<3; ++k)
         {

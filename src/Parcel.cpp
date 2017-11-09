@@ -47,23 +47,35 @@ void Parcel::print(){
 Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides)
 {
     vector<double> margins = type->get_margin();
+
     OGRGeometry* road_buffer = linearIntersection->Buffer(margins.at(1));
     OGRGeometry* neigh_buffer = otherSides->Buffer(margins.at(0));
-
-    OGRGeometry* diff1 = geom->Difference(road_buffer);
-    OGRGeometry* diff2 = diff1->Difference(neigh_buffer);
-
-    OGRGeometry* contour = diff2->Boundary();
-    OGRLinearRing* contour2 = (OGRLinearRing*) contour;
 
     //By default, the footprint takes all the parcel space
     Footprint footprint(geom->getExteriorRing(),this);
 
-    // More common: if the contour is a LinearRing (expected)
-    if (contour2->getGeometryName()=="LINEARRING")
+    //If the difference returns an empty thing, return the parcel contour
+    OGRGeometry* diff1 = geom->Difference(road_buffer);
+    if (diff1->getGeometryType()==7)
     {
-        footprint= Footprint(contour2,this);
+        return footprint;
     }
+
+    OGRGeometry* diff2 = diff1->Difference(neigh_buffer);
+    if (diff2->getGeometryType()==7)
+    {
+        return footprint;
+    }
+
+    OGRGeometry* contour = diff2->Boundary();
+    OGRLinearRing* contour2 = (OGRLinearRing*) contour;
+
+    // More common: if the contour is a LinearRing (expected)
+    /*if (contour2->get_IsClosed())
+    {
+        cout << contour2->getGeometryName() << endl;
+        footprint= Footprint(contour2,this);
+    }*/
     return footprint;
 }
 
