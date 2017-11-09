@@ -13,8 +13,12 @@ Building::Building(Envelop* env)
 
     double gap=0.00005; //length between two points
     double step= 20; // angle between two rectangles calculated
+
+
     parcel=env->get_parcel();
     double height = env->get_height();
+
+
     string parcel_type = parcel->get_type()->get_type();
     //cout << parcel_type << endl;
     //lim
@@ -229,6 +233,8 @@ Building::Building(Envelop* env)
     building_footprint.addRing(&a);
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
+
+
     building_model.push_back(BuildingModel(li_tri, parcel));
 }
 
