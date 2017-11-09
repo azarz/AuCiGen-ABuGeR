@@ -16,9 +16,14 @@ class Envelop
     *Contain the 3D envelop specs.
     */
     public:
-        Envelop(Footprint* trace);
+        Envelop();
         /**
         *@fn Envelop::Envelop()
+        *Constructor.
+        */
+        Envelop(Footprint* trace);
+        /**
+        *@fn Envelop::Envelop(Footprint* trace)
         *Constructor.
         *@param[in] trace Footprint*: The footprint object class.
         */

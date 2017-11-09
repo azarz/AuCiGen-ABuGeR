@@ -22,6 +22,8 @@
 #include "open_shp.h"
 #include "orient.h"
 #include "poly_to_triangle.h"
+#include "triangles_to_obj.h"
+#include "typeinfo" //for Footprint tests
 
 //////////// Building //////////////
 
@@ -89,7 +91,7 @@ TEST_CASE("size BuildingModel", "[size]")
 
 }
 
-TEST_CASE("split BuildingModel are computed", "[spli]")
+TEST_CASE("split BuildingModel are computed", "[split]")
 {
     // simple intersection
 

@@ -1,6 +1,5 @@
 #include "Point.h"
 
-#include "catch.h"
 #include <iostream>
 #include <cmath>
 
@@ -63,79 +62,3 @@ void Point::size(double vec[3])
     y *= vec[1];
     z *= vec[2];
 }
-
-
-
-/*
-
-TEST_CASE("Point constructor + Getters +Setters","[Point] [get_x] [get_y] [get_z] [set_x] [set_y] [set_z]")
-
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point();
-    b.set_x(3);
-    b.set_y(9);
-    b.set_z(7);
-
-    REQUIRE(a.get_x()==2.0);
-    REQUIRE(a.get_y()==5.0);
-    REQUIRE(a.get_z()==6.0);
-    REQUIRE(b.get_x()==3.0);
-    REQUIRE(b.get_y()==9.0);
-    REQUIRE(b.get_z()==7.0);
-}
-
-TEST_CASE("operator == are computed","[opertator==]")
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
-
-    REQUIRE(a==a);
-    REQUIRE(b==b);
-    REQUIRE(!(c==a));
-}
-
-TEST_CASE("translate point are computed","[translate]")
-{
-    Point a =  Point(2,5,6);
-    double vec[3];
-    vec[0] = 1;
-    vec[1] = 2;
-    vec[2] = 3;
-    a.translate(vec);
-
-    REQUIRE(a.get_x()==3.0);
-    REQUIRE(a.get_y()==7.0);
-    REQUIRE(a.get_z()==9.0);
-}
-
-TEST_CASE("rotate are computed", "[rotate]")
-{
-    Point a = Point(1,-1,2);
-    double vec[3];
-    vec[0] = 0;
-    vec[1] = 0;
-    vec[2] = 1;
-    double angle =  M_PI_2l;
-    a.rotate(vec,angle);
-
-    REQUIRE(a.get_x()==1.0);
-    //REQUIRE(a.get_y()==sin(M_PI_2l)*1*1);
-    REQUIRE(a.get_z()==2.0);
-}
-
-TEST_CASE("size are computed", "[size]")
-{
-    Point a = Point(2,5,6);
-    double vec[3];
-    vec[0] = 1;
-    vec[1] = 2;
-    vec[2] = 3;
-    a.size(vec);
-
-    REQUIRE(a.get_x()==2.0);
-    REQUIRE(a.get_y()==10.0);
-    REQUIRE(a.get_z()==18.0);
-}
-*/

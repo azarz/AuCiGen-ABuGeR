@@ -126,7 +126,7 @@ class Triangle
         *@return The list of Triangle from the split
         */
 
-        //Triangle repeat(TriangleType newName);
+        Triangle repeat(TriangleType newName);
         /**
         *@fn Triangle Triangle::repeat(TriangleType newName)
         *Repeats/copies the triangle.
@@ -140,7 +140,7 @@ class Triangle
         *Avoids the hidden walls inside buildingModel.
         */
 
-        //BuildingModel creat_roof();
+        //BuildingModel create_roof();
         /**
         *@fn BuildingModel Triangle::creat_roof()
         *Creates a roof.
