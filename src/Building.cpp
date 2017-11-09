@@ -16,7 +16,7 @@ Building::Building(Envelop* env)
 
 
     parcel=env->get_parcel();
-    double height = env->get_height();
+    height = env->get_height();
 
 
     string parcel_type = parcel->get_type()->get_type();
@@ -231,6 +231,7 @@ Building::Building(Envelop* env)
         a.addPoint(&pt_temp);
     }
     building_footprint.addRing(&a);
+    geom=&building_footprint;
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
 
