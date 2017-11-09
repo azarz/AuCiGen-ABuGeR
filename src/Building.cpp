@@ -11,10 +11,14 @@ Building::Building(Envelop* env)
 {
     //ctor
 
-    /*double gap=0.00005; //length between two points
+    double gap=0.00005; //length between two points
     double step= 20; // angle between two rectangles calculated
+
+
     parcel=env->get_parcel();
-    double height = env->get_height();
+    height = env->get_height();
+
+
     string parcel_type = parcel->get_type()->get_type();
     //cout << parcel_type << endl;
     //lim
@@ -83,7 +87,7 @@ Building::Building(Envelop* env)
 
     /* for rectangles : ALL PARCEL TYPE */
 
-/*
+
     vector<int> lim;
     int best_area =larger_rectangle_included (b,N,M,lim,0);
     vector<double> coord_rect;
@@ -96,9 +100,9 @@ Building::Building(Envelop* env)
     //cout << best_area <<endl;
 
 
-*/
+
     /*L building : ALL PARCEL TYPE */
- /*   lim.clear();
+    lim.clear();
     int best_area1 =larger_L_included (b,N,M,lim,best_area);
     if (best_area1>best_area)
     {
@@ -176,9 +180,9 @@ Building::Building(Envelop* env)
         //cout<< "N ="<< N<<"; M ="<< M <<endl;
         if (N*M>best_area)
         {
-*/
+
             /*for rectangles : ALL PARCEL TYPE;*/
-/*
+
             lim.clear();
             int best_area1 =larger_rectangle_included (b,N,M,lim,best_area);
 
@@ -194,9 +198,9 @@ Building::Building(Envelop* env)
                 best_area=best_area1;
                 //cout<<best_area<<endl;
             }
-*/
+
             /*L building : ALL PARCEL TYPE */
-  /*          lim.clear();
+            lim.clear();
             best_area1 =larger_L_included (b,N,M,lim,0);//best_area);
             //cout<<"L aire : "<< best_area1<<endl;
             if (best_area1>best_area)
@@ -227,9 +231,12 @@ Building::Building(Envelop* env)
         a.addPoint(&pt_temp);
     }
     building_footprint.addRing(&a);
+    geom=&building_footprint;
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
-    building_model.push_back(BuildingModel(li_tri, parcel));*/
+
+    building_model.push_back(BuildingModel(li_tri, parcel));
+
 }
 
 Building::~Building()
