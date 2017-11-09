@@ -64,9 +64,9 @@ Building::Building(Envelop* env)
     //cout << "min ("<<xmin <<", "<< ymin<<"); max ("<<xmax<<", "<< ymax <<")"<<endl;
     double dx = xmax-xmin;
     double dy = ymax-ymin;
-    cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
+    //cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
     double gap = max(dx, dy)/50;
-    cout << "gap = "<< gap<<endl;
+    //cout << "gap = "<< gap<<endl;
     int N=0;
     int M;
     for (double xp=xmin; xp<=xmax+gap; xp+=gap)
@@ -85,7 +85,7 @@ Building::Building(Envelop* env)
         }
         //cout <<endl;
     }
-    cout<< "N ="<< N<<"; M ="<< M <<endl;
+    //cout<< "N ="<< N<<"; M ="<< M <<endl;
 
 
     /* for rectangles : ALL PARCEL TYPE */
@@ -123,7 +123,7 @@ Building::Building(Envelop* env)
     for (double A = M_PI/step; A<M_PI/2; A+=(M_PI/step))
     {
         //with rotation :
-        cout<<" A = "<< A/M_PI*180<<endl;
+        //cout<<" A = "<< A/M_PI*180<<endl;
         //limit :
         double xminR=10000000000000;
         double xmaxR=-1000000000000;
@@ -205,8 +205,7 @@ Building::Building(Envelop* env)
 
             /*L building : ALL PARCEL TYPE */
             lim.clear();
-            best_area1 =larger_L_included (b,N,M,lim,0);//best_area);
-            //cout<<"L aire : "<< best_area1<<endl;
+            best_area1 =larger_L_included (b,N,M,lim,best_area);
             if (best_area1>best_area)
             {
                 coord_rect.clear();
@@ -236,9 +235,6 @@ Building::Building(Envelop* env)
     }
     building_footprint.addRing(&a);
     geom=new OGRPolygon(building_footprint);
-    char* text;
-    geom->OGRPolygon::exportToWkt(&text,  wkbVariantOldOgc);
-    cout<<text<<endl;
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
 
