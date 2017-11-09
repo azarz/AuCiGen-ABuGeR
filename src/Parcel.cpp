@@ -1,12 +1,16 @@
-#include <iostream>
 #include "Parcel.h"
-#include "ogrsf_frmts.h"
+
+#include <iostream>
+#include <vector>
+
 #include "BuildingType.h"
 #include "Footprint.h"
-#include <vector>
 #include "Triangle.h"
+
+#include "ogrsf_frmts.h"
 #include "poly_to_triangle.h"
 #include "triangles_to_obj.h"
+
 using namespace std;
 
 Parcel::Parcel()

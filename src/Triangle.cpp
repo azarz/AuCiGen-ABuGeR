@@ -1,15 +1,14 @@
 #include "Triangle.h"
-#include "Point.h"
-#include "catch.h"
+
 #include <vector>
-#include <string>
+//#include <string>
 #include <cmath>
 #include <iostream>
-#include "gauss.h"
+
+#include "Point.h"
+
+//#include "gauss.h"
 #include "matrix_methods.h"
-
-
-
 
 
 Triangle::Triangle()
@@ -347,16 +346,12 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
             iz.set_y(IZ[1][0]);
             iz.set_z(IZ[2][0]);
         }
-
     }
-
-
 
     if (intersectUXp && intersectUYp && intersectUZp)
     {
         result.push_back(*this);
         return result;
-        std::cout << "all"<< std::endl;
     }
     else if (intersectUXp && intersectUYp)
     {
@@ -366,7 +361,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         result.push_back(tri1);
         result.push_back(tri2);
         result.push_back(tri3);
-        std::cout << "x y"<< std::endl;
         return result;
     }
     else if (intersectUXp && intersectUZp)
@@ -377,7 +371,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         result.push_back(tri1);
         result.push_back(tri2);
         result.push_back(tri3);
-        std::cout << "x z"<< std::endl;
         return result;
     }
     else if (intersectUYp && intersectUZp)
@@ -388,7 +381,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         result.push_back(tri1);
         result.push_back(tri2);
         result.push_back(tri3);
-        std::cout << "y z"<< std::endl;
         return result;
     }
     else if (intersectUXp)
@@ -397,7 +389,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         Triangle tri2 = Triangle(p2,p3,ix,newName);
         result.push_back(tri1);
         result.push_back(tri2);
-        std::cout << "x"<< std::endl;
         return result;
     }
     else if (intersectUYp)
@@ -406,156 +397,24 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
         Triangle tri2 = Triangle(p2,p3,iy,newName);
         result.push_back(tri1);
         result.push_back(tri2);
-        std::cout << "y"<< std::endl;
         return result;
     }
     else if (intersectUZp)
     {
-        iz.print();
         Triangle tri1 = Triangle(p1,p2,iz,newName);
         Triangle tri2 = Triangle(p1,iz,p3,newName);
         result.push_back(tri1);
         result.push_back(tri2);
-        std::cout << "z"<< std::endl;
         return result;
     }
     else
     {
         result.push_back(*this);
-        std::cout << "cooool"<< std::endl;
         return result;
     }
-
 }
 
-
-
-
-/*
 Triangle Triangle::repeat(TriangleType newName)
 {
-    return Triangle();
+    return Triangle(p1,p2,p3,newName);
 }
-*/
-
-
-
-/*
-TEST_CASE("Triangle constructor + Getters are computed", "[Triangle] [get_p1] [get_p2] [get_p3] [get_type]")
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
-    Triangle d = Triangle(a,b,c,WALL);
-
-    REQUIRE(d.get_p1() == a);
-    REQUIRE(d.get_p2() == b);
-    REQUIRE(d.get_p3() == c);
-    REQUIRE(d.get_type() == WALL);
-}
-
-/*
-TEST_CASE("add_type are computed", "[add_type]")
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
-    Triangle d = Triangle(a,b,c,WALL);
-    d.set_type(ROOF);
-
-    REQUIRE(d.get_type() == ROOF);
-}
-
-TEST_CASE("is_equal are computed", "[is_equal]")
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
-    Triangle d = Triangle(a,b,c,WALL);
-    Triangle e = Triangle(a,b,c,WALL);
-
-    REQUIRE(d.is_equal(e));
-}
-
-TEST_CASE("translate triangle are computed", "[translate]")
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
-
-    Triangle d = Triangle(a,b,c,WALL);
-
-    double vec[3];
-    vec[0] = 1;
-    vec[1] = 2;
-    vec[2] = 3;
-
-    d.translate(vec);
-
-    Point e =  Point(3,7,9);
-    Point f =  Point(4,11,10);
-    Point g =  Point(6,8,11);
-
-    Triangle h = Triangle(e,f,g,WALL);
-
-    REQUIRE(d.is_equal(h));
-}
-
-TEST_CASE("rotate triangle are computed", "[rotate]")
-{
-
-}
-
-TEST_CASE("size triangle are computed", "[size]")
-{
-    Point a =  Point(2,5,6);
-    Point b =  Point(3,9,7);
-    Point c =  Point(5,6,8);
-
-    Triangle d = Triangle(a,b,c,WALL);
-
-    double vec[3];
-    vec[0] = 1;
-    vec[1] = 2;
-    vec[2] = 3;
-
-    d.size(vec);
-
-    Point e =  Point(2,10,18);
-    Point f =  Point(3,18,21);
-    Point g =  Point(5,12,24);
-
-    Triangle h = Triangle(e,f,g,WALL);
-
-    REQUIRE(d.is_equal(h));
-
-}
-
-TEST_CASE("split Triangle are computed", "[split]")
-{
-    Point p1(1,1,0);
-    Point p2(2,1,0);
-    Point p3(1,2,0);
-
-    Triangle tri(p1,p2,p3,WALL);
-
-    Point origin(0,0,0);
-    double axis[3][1];
-    axis[0][0] = 1;
-    axis[1][0] = 1;
-    axis[2][0] = 0;
-
-    vector<Triangle> ltri;
-
-    ltri = tri.split(*axis,origin,ROOF);
-
-    Point iZ(1.5,1.5,0);
-
-    REQUIRE(ltri.size()==2);
-    REQUIRE(ltri[0].get_type()==ROOF);
-    REQUIRE(ltri[0].get_p1()==p1);
-    REQUIRE(ltri[0].get_p2()==p2);
-    REQUIRE(ltri[0].get_p3()==iZ);
-    REQUIRE(ltri[1].get_p3()==p3);
-}
-*/

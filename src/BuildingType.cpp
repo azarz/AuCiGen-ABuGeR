@@ -1,5 +1,8 @@
 #include "BuildingType.h"
 
+#include <vector>
+#include <iostream>
+
 BuildingType::BuildingType()
 {
     //dtor;
