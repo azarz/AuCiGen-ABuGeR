@@ -56,7 +56,6 @@ OGRPoint* open_shp_roads(const char* file_path, vector<Road>& liPolygon, const c
                     //cout << road.get_type() << endl;
                 //}
            }
-
        }
        road_collection->Centroid(centroid);
     }
@@ -101,36 +100,7 @@ void open_shp_parcels(const char* file_path, vector<Parcel>& liPolygon, OGRPoint
                 Parcel parcel = Parcel(poPolygon, centroid);
                 liPolygon.push_back(parcel);
            }
-
        }
     }
     GDALClose( poDS );
 }
-
-
-
-
-
-/*
-TEST_CASE("OpenShapeFile_roads are computed","[OpenShapeFile_roads]")
-{
-    vector<Road> ROADS;
-    char* fill_directory ="1_data/test/road_test.shp";
-    OpenShapeFile_roads(fill_directory, ROADS);
-    REQUIRE(ROADS.size()==1193);
-    REQUIRE(ROADS.at(0).get_type()==1);
-    REQUIRE(ROADS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==55);
-    REQUIRE(ROADS.at(0).get_geom()->getGeometryType()==3);
-}
-
-TEST_CASE("OpenShapeFile_parcels are computed","[OpenShapeFile_parcels]")
-{
-    vector<Parcel> PARCELS;
-    char* fill_directory ="1_data/test/test_parcel.shp";
-    OpenShapeFile_parcels(fill_directory, PARCELS);
-    REQUIRE(PARCELS.size()==594);
-    REQUIRE(PARCELS.at(0).get_area()==PARCELS.at(0).get_geom()->OGRCurvePolygon::get_Area());
-    REQUIRE(PARCELS.at(0).get_geom()->getExteriorRing()->OGRSimpleCurve::getNumPoints()==4);
-    REQUIRE(PARCELS.at(0).get_geom()->getGeometryType()==3);
-}*/
-

@@ -1,9 +1,11 @@
+#include "orient.h"
+
 #include <iostream>
-#include "ogrsf_frmts.h"
-#include "Road.h"
-#include "catch.h"
 #include <vector>
 
+#include "ogrsf_frmts.h"
+
+#include "Road.h"
 
 OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> ROADS)
 {
@@ -54,8 +56,6 @@ OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> ROADS
     }
     return linearIntersection;
 }
-
-
 
 OGRLineString* get_other_sides(OGRGeometry* parcelGeom, OGRGeometry* intersectionLine)
 {
