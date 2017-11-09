@@ -52,11 +52,14 @@ class Building
         *Gets the list of BuildingModel associated to one house.
         *@return building_model std::vector<BuildingModel>
         */
-
+        double get_height()const{return height;};
+        OGRPolygon* get_geom()const{return geom;};
     protected:
     private:
         Parcel* parcel;
         std::vector<BuildingModel> building_model;
+        double height;
+        OGRPolygon* geom;
 };
 
 #endif // BUILDING_H
