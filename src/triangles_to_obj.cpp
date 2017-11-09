@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 #include <sstream>
 
@@ -92,17 +93,51 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
             }
         }
 
+        string vnormal;
         // Constructing the face line corresponding to the triangle
         if (type==WALL){
-            faces += "f " + num_to_string(p1_index + index_offset) + "/1/1 "
-                          + num_to_string(p2_index + index_offset) + "/2/1 "
-                          + num_to_string(p3_index + index_offset) + "/3/1\n";
+            double x_normal = (p2.get_y()-p1.get_y())*(p3.get_z()-p1.get_z()) - (p2.get_z()-p1.get_z())*(p3.get_y()-p1.get_y());
+            double y_normal = (p2.get_z()-p1.get_z())*(p3.get_x()-p1.get_x()) - (p2.get_x()-p1.get_x())*(p3.get_z()-p1.get_z());
+
+            if (y_normal!=0){
+                double xn_yn = abs(x_normal/y_normal);
+
+                if (xn_yn > 3){
+                    if (x_normal>0){
+                        vnormal = "2";
+                    } else{
+                        vnormal = "5";
+                    }
+                } else if (xn_yn < 0.33){
+                    if (y_normal>0){
+                        vnormal = "3";
+                    } else{
+                        vnormal = "4";
+                    }
+                } else{
+                    if (x_normal>0 && y_normal>0){
+                        vnormal = "6";
+                    } else if (x_normal>0 && y_normal<=0){
+                        vnormal = "9";
+                    } else if (x_normal<=0 &&y_normal<=0){
+                        vnormal = "7";
+                    } else{
+                        vnormal = "8";
+                    }
+                }
+            } else {
+                if (x_normal>0){vnormal="2";}
+                else{vnormal="5";}
+            }
+
+
         } else{
-            faces += "f " + num_to_string(p1_index + index_offset) + "/1/1 "
-                          + num_to_string(p2_index + index_offset) + "/2/1 "
-                          + num_to_string(p3_index + index_offset) + "/3/1\n";
+            vnormal = "1";
         }
 
+        faces += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
+                      + num_to_string(p2_index + index_offset) + "/2/1" + vnormal + " "
+                      + num_to_string(p3_index + index_offset) + "/3/1" + vnormal + "\n";
     }
 
     // Default uv coordinates
