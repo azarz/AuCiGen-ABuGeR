@@ -30,14 +30,13 @@ int main()
     layer_name ="test_paris_seuil";
     open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
-    cout << "Test Amaury " << endl;
-
-    //vector<Triangle> roadTriangles;
+    cout << "Converting the roads to .obj..." << endl;
     vector<string> roadOBJ{"","",""};
     int offset_road(0);
 
-    for(unsigned int i=0U; i< ROADS.size();++i)
+    for(unsigned int i=0U; i<ROADS.size();++i)
     {
+        cout << 100*i/ROADS.size() << "%\r";
         vector<string> roadOBJ_temp;
         roadOBJ_temp = ROADS.at(i).to_obj(centroid, offset_road);
 
@@ -46,7 +45,9 @@ int main()
             roadOBJ.at(k)+=roadOBJ_temp.at(k);
         }
     }
+    cout << endl;
 
+    cout << "Converting the parcels and envelops to .obj..." << endl;
     vector<string> parcelOBJ{"","",""};
     vector<string> envelopOBJ{"","",""};
 
@@ -55,21 +56,26 @@ int main()
 
     for(unsigned int i=0U; i<PARCELS.size();++i)
     {
-        cout << i << endl;
+        cout << 100*i/PARCELS.size() << "%\r";
         Parcel parcel = PARCELS.at(i);
-        vector<string> envelopOBJ_temp;
-        vector<string> parcelOBJ_temp;
 
-        //poly_to_triangle(parcel.get_geom(), parcelTriangles, FLOOR);
-
+        vector<string> envelopOBJ_temp{"","",""};
+        vector<string> parcelOBJ_temp{"","",""};
         OGRLineString* linearIntersection = get_intersection_road(parcel.get_geom(), ROADS);
         OGRLineString* otherSides = get_other_sides(parcel.get_geom(), linearIntersection);
 
         Footprint footprint = parcel.create_footprint(linearIntersection, otherSides);
-        Envelop envelop = footprint.create_envelop();
+
+        OGRPolygon poPolygon = OGRPolygon();
+        OGRLinearRing* a = footprint.get_geom();
+        poPolygon.addRing(a);
+        if (poPolygon.OGRCurvePolygon::get_Area() > 50)
+        {
+            Envelop envelop = footprint.create_envelop();
+            envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
+        }
 
         parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
-        envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
 
         for (int k = 0; k<3; ++k)
         {
@@ -79,6 +85,7 @@ int main()
         delete linearIntersection;
         delete otherSides;
     }
+    cout << endl;
 
     //To have an output file
     ofstream out_road("2_models/roads.obj");
@@ -86,7 +93,10 @@ int main()
     out_road.close();
 
     ofstream out_parcel("2_models/parcels.obj");
-    out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1) << parcelOBJ.at(2);
+    out_road << "mtllib parcel.mtl \n";
+    out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1);
+    out_parcel << "usemtl Parcel\ns 1";
+    out_parcel << parcelOBJ.at(2);
     out_parcel.close();
 
     ofstream out_envelop("2_models/envelops.obj");
