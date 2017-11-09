@@ -5,6 +5,7 @@
 #include "BuildingModel.h"
 #include "Envelop.h"
 #include <vector>
+#include "ogrsf_frmts.h"
 
 class Building
 {
@@ -56,6 +57,11 @@ class Building
         */
         double get_height()const{return height;};
         OGRPolygon* get_geom()const{return geom;};
+        /**
+        *@fn OGRPolygon* Building::get_geom() const
+        *Gets the building's geometry.
+        *@return geom
+        */
 
     protected:
     private:

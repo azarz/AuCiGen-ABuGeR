@@ -14,6 +14,11 @@ class Footprint
     *Contain the Footprint specs.
     */
     public:
+        Footprint();
+        /**
+        *@fn Footprint::Footprint()
+        *Constructor Footprint()
+        */
         Footprint(OGRLinearRing* linearRing, Parcel* parcel);
         /**
         *@fn Footprint::Footprint(OGRLinearRing* linearRing, Parcel* parcel)

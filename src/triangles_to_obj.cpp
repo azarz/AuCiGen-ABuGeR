@@ -1,4 +1,9 @@
 #include "triangles_to_obj.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+
 #include <sstream>
 
 
