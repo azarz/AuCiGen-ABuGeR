@@ -118,10 +118,10 @@ Building::Building(Envelop* env)
         //cout<< best_area<<endl;
     }
 
-    for (double A = M_PI/step; A<M_PI/2; A+=M_PI/step)
+    for (double A = M_PI/step; A<M_PI/2; A+=(M_PI/step))
     {
         //with rotation :
-        cout<<M_PI/A<<endl;
+        //cout<<" A = "<< A/M_PI*180<<endl;
         //limit :
         double xminR=10000000000000;
         double xmaxR=-1000000000000;
@@ -240,8 +240,8 @@ Building::Building(Envelop* env)
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
 
-
     building_model.push_back(BuildingModel(li_tri, parcel));
+
 }
 
 Building::~Building()

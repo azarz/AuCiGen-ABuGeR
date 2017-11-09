@@ -78,8 +78,8 @@ void Villa::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.10;
-    margin_road=0.10;
+    margin_parcel=0.1;
+    margin_road=0.1;
     type="Villa";
 }
 Townhouse::Townhouse(){set_param();}
@@ -95,97 +95,3 @@ void Townhouse::set_param()
     margin_road=0.05;
     type="Townhouse";
 }
-
-/*
-#include "catch.h"
-TEST_CASE("Industry are computed", "[Industry]")
-{
-    Industry I;
-    REQUIRE(I.get_floor() ==1);
-    REQUIRE(I.get_floor_height() ==1);
-    REQUIRE(I.get_gap() ==1);
-    REQUIRE(I.get_height(1) ==1);
-    REQUIRE(I.get_height(2) ==3);
-    REQUIRE(I.get_height(3) ==4);
-    double tmp[] = { 0.00001, 0.00001 };
-    std::vector<double> margin( tmp, tmp+2 );
-    REQUIRE(I.get_margin() ==margin);
-    REQUIRE(I.get_margin_parcel() ==0.00001);
-    REQUIRE(I.get_margin_road() ==0.00001);
-    REQUIRE(I.get_profitability() ==1);
-    REQUIRE(I.get_roof() ==1);
-    REQUIRE(I.get_wall() ==1);
-}
-TEST_CASE("Office are computed", "[Office]")
-{
-    Office I;
-    REQUIRE(I.get_floor() ==1);
-    REQUIRE(I.get_floor_height() ==1);
-    REQUIRE(I.get_gap() ==1);
-    REQUIRE(I.get_height(1) ==1);
-    REQUIRE(I.get_height(2) ==3);
-    REQUIRE(I.get_height(3) ==4);
-    double tmp[] = { 0.00001, 0.00001 };
-    std::vector<double> margin( tmp, tmp+2 );
-    REQUIRE(I.get_margin() ==margin);
-    REQUIRE(I.get_margin_parcel() ==0.00001);
-    REQUIRE(I.get_margin_road() ==0.00001);
-    REQUIRE(I.get_profitability() ==1);
-    REQUIRE(I.get_roof() ==1);
-    REQUIRE(I.get_wall() ==1);
-}
-TEST_CASE("ApartmentBuilding are computed", "[ApartmentBuilding]")
-{
-    ApartmentBuilding I;
-    REQUIRE(I.get_floor() ==1);
-    REQUIRE(I.get_floor_height() ==1);
-    REQUIRE(I.get_gap() ==1);
-    REQUIRE(I.get_height(1) ==1);
-    REQUIRE(I.get_height(2) ==3);
-    REQUIRE(I.get_height(3) ==4);
-    double tmp[] = { 0.00001, 0.00001 };
-    std::vector<double> margin( tmp, tmp+2 );
-    REQUIRE(I.get_margin() ==margin);
-    REQUIRE(I.get_margin_parcel() ==0.00001);
-    REQUIRE(I.get_margin_road() ==0.00001);
-    REQUIRE(I.get_profitability() ==1);
-    REQUIRE(I.get_roof() ==1);
-    REQUIRE(I.get_wall() ==1);
-}
-TEST_CASE(" Villa are computed", "[Villa]")
-{
-     Villa I;
-    REQUIRE(I.get_floor() ==1);
-    REQUIRE(I.get_floor_height() ==1);
-    REQUIRE(I.get_gap() ==1);
-    REQUIRE(I.get_height(1) ==1);
-    REQUIRE(I.get_height(2) ==3);
-    REQUIRE(I.get_height(3) ==4);
-    double tmp[] = { 0.00001, 0.00001 };
-    std::vector<double> margin( tmp, tmp+2 );
-    REQUIRE(I.get_margin() ==margin);
-    REQUIRE(I.get_margin_parcel() ==0.00001);
-    REQUIRE(I.get_margin_road() ==0.00001);
-    REQUIRE(I.get_profitability() ==1);
-    REQUIRE(I.get_roof() ==1);
-    REQUIRE(I.get_wall() ==1);
-}
-TEST_CASE("Townhouse are computed", "[Townhouse]")
-{
-    Townhouse I;
-    REQUIRE(I.get_floor() ==1);
-    REQUIRE(I.get_floor_height() ==1);
-    REQUIRE(I.get_gap() ==1);
-    REQUIRE(I.get_height(1) ==1);
-    REQUIRE(I.get_height(2) ==3);
-    REQUIRE(I.get_height(3) ==4);
-    double tmp[] = { 0.00001, 0.00001 };
-    std::vector<double> margin( tmp, tmp+2 );
-    REQUIRE(I.get_margin() ==margin);
-    REQUIRE(I.get_margin_parcel() ==0.00001);
-    REQUIRE(I.get_margin_road() ==0.00001);
-    REQUIRE(I.get_profitability() ==1);
-    REQUIRE(I.get_roof() ==1);
-    REQUIRE(I.get_wall() ==1);
-}
-*/
