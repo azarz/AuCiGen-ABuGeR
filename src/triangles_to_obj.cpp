@@ -24,15 +24,17 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
     // Strings for the final output
     string vertices;
     string uv_coordinates;
+    string normal_coordinates;
     string faces;
 
     for (unsigned int i=0U; i<triangles.size() ;++i)
     {
-        // Getting the triangle and its points
+        // Getting the triangle and its points and type
         Triangle triangle = triangles.at(i);
         Point p1 = triangle.get_p1();
         Point p2 = triangle.get_p2();
         Point p3 = triangle.get_p3();
+        TriangleType type = triangle.get_type();
 
         // Boolean values to test whether the triangle's points are already listed
         bool p1_in_points = false;
@@ -91,14 +93,32 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
         }
 
         // Constructing the face line corresponding to the triangle
-        faces += "f " + num_to_string(p1_index + index_offset) + "/1 "
-                      + num_to_string(p2_index + index_offset) + "/2 "
-                      + num_to_string(p3_index + index_offset) + "/3\n";
+        if (type==WALL){
+            faces += "f " + num_to_string(p1_index + index_offset) + "/1/1 "
+                          + num_to_string(p2_index + index_offset) + "/2/1 "
+                          + num_to_string(p3_index + index_offset) + "/3/1\n";
+        } else{
+            faces += "f " + num_to_string(p1_index + index_offset) + "/1/1 "
+                          + num_to_string(p2_index + index_offset) + "/2/1 "
+                          + num_to_string(p3_index + index_offset) + "/3/1\n";
+        }
 
     }
 
     // Default uv coordinates
-    uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
+    if (index_offset==0){
+        uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
+        //Roof and floor
+        normal_coordinates = "vn 0 1 0\n";
+        //Walls
+        normal_coordinates+= "vn 1 0 0\nvn 0 0 1\nvn 0 0 -1\n";
+        normal_coordinates+= "vn -1 0 0\nvn 1 0 1\nvn -1 0 -1\n";
+        normal_coordinates+= "vn -1 0 1\nvn 1 0 -1\n";
+
+    } else{
+        uv_coordinates = "";
+        normal_coordinates = "";
+    }
 
     // Constructing the vertex list base on the vector
     for(unsigned int i=0;i<points.size();++i)

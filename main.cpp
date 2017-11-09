@@ -34,7 +34,7 @@ int main()
     vector<string> roadOBJ{"","",""};
     int offset_road(0);
 
-    for(unsigned int i=0U; i<ROADS.size();++i)
+    /*for(unsigned int i=0U; i<ROADS.size();++i)
     {
         cout << 100*i/ROADS.size() << "%\r";
         vector<string> roadOBJ_temp;
@@ -45,7 +45,7 @@ int main()
             roadOBJ.at(k)+=roadOBJ_temp.at(k);
         }
     }
-    cout << endl;
+    cout << endl;*/
 
     cout << "Converting the parcels and envelops to .obj..." << endl;
     vector<string> parcelOBJ{"","",""};
@@ -93,7 +93,7 @@ int main()
     out_road.close();
 
     ofstream out_parcel("2_models/parcels.obj");
-    out_road << "mtllib parcel.mtl \n";
+    out_parcel << "mtllib parcel.mtl \n";
     out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1);
     out_parcel << "usemtl Parcel\ns 1";
     out_parcel << parcelOBJ.at(2);
