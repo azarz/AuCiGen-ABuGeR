@@ -27,11 +27,12 @@ class Envelop
         *@fn virtual Envelop::~Envelop()
         *Destructor.
         */
-        vector<string> to_obj(OGRPoint* centroid);
+        vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         /**
         *@fn void Envelop::to_obj()
         *Converts the Envelop volume to Wavefront .obj format.
         *@param[in] an OGRPoint pointer corresponding to the centroid of the city
+        *@param[in] the index offset
         **/
 
         // Getters

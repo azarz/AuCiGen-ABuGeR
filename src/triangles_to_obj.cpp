@@ -10,7 +10,8 @@ template <typename T>
      return ss.str();
   }
 
-vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, double y_centroid)
+vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
+                                double x_centroid, double y_centroid)
 {
     // Vector of all the points
     vector<Point> points;
@@ -85,9 +86,9 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
         }
 
         // Constructing the face line corresponding to the triangle
-        faces += "f " + num_to_string(p1_index) + "/1 "
-                      + num_to_string(p2_index) + "/2 "
-                      + num_to_string(p3_index) + "/3\n";
+        faces += "f " + num_to_string(p1_index + index_offset) + "/1 "
+                      + num_to_string(p2_index + index_offset) + "/2 "
+                      + num_to_string(p3_index + index_offset) + "/3\n";
 
     }
 
@@ -100,11 +101,14 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, double x_centroid, d
         Point vertex = points.at(i);
         vertices += "v " + num_to_string(vertex.get_x() - x_centroid) + " "
                          + num_to_string(vertex.get_z()) + " "
-                         + num_to_string(vertex.get_y() - y_centroid) + "\n";
+                         + num_to_string(-(vertex.get_y() - y_centroid)) + "\n";
 
     }
 
     vector<string> results;
+
+    // Updating the index offset
+    index_offset+= points.size();
 
     results.push_back(vertices);
     results.push_back(uv_coordinates);
