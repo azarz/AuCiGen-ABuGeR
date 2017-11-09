@@ -32,11 +32,12 @@ class Building
         *@param[in] roofAngle: The roof angle.
         */
 
-        void to_obj(OGRPoint* centroid);
+        vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         /**
         *@fn void Building::to_obj()
         *Converts the Building to Wavefront .obj format.
         *@param[in] an OGRPoint pointer corresponding to the centroid of the city
+        *@param[in] the index offset
         **/
 
         // Getters
@@ -46,18 +47,20 @@ class Building
         *Gets the Parcel associated with the building.
         *@return parcel Parcel*
         */
-        std::vector<BuildingModel> get_building_model()const{return building_model;};
+
+        std::vector<BuildingModel> get_building_models()const{return building_models;};
         /**
-        *@fn std::vector<BuildingModel> Building::get_building_model() const
+        *@fn std::vector<BuildingModel> Building::get_building_models() const
         *Gets the list of BuildingModel associated to one house.
-        *@return building_model std::vector<BuildingModel>
+        *@return building_models std::vector<BuildingModel>
         */
         double get_height()const{return height;};
         OGRPolygon* get_geom()const{return geom;};
+
     protected:
     private:
         Parcel* parcel;
-        std::vector<BuildingModel> building_model;
+        std::vector<BuildingModel> building_models;
         double height;
         OGRPolygon* geom;
 };

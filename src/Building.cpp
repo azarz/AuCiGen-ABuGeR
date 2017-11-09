@@ -6,6 +6,7 @@
 #include "create_wall.h"
 #include <math.h>
 #include <vector>
+#include "triangles_to_obj.h"
 
 Building::Building(Envelop* env)
 {
@@ -91,7 +92,7 @@ Building::Building(Envelop* env)
     vector<int> lim;
     int best_area =larger_rectangle_included (b,N,M,lim,0);
     vector<double> coord_rect;
-    for (int k =0; k<lim.size(); k+=2)
+    for (unsigned int k=0U; k<lim.size(); k+=2)
     {
         coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
         coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -107,7 +108,7 @@ Building::Building(Envelop* env)
     if (best_area1>best_area)
     {
         coord_rect.clear();
-        for (int k =0; k<lim.size(); k+=2)
+        for (unsigned int k=0U; k<lim.size(); k+=2)
         {
             coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
             coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -189,7 +190,7 @@ Building::Building(Envelop* env)
             if (best_area1>best_area)
             {
                 coord_rect.clear();
-                for (int k =0; k<lim.size(); k+=2)
+                for (unsigned int k=0U; k<lim.size(); k+=2)
                 {
                     coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
                     coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -206,7 +207,7 @@ Building::Building(Envelop* env)
             if (best_area1>best_area)
             {
                 coord_rect.clear();
-                for (int k =0; k<lim.size(); k+=2)
+                for (unsigned int k=0U; k<lim.size(); k+=2)
                 {
                     coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
                     coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -225,7 +226,7 @@ Building::Building(Envelop* env)
     OGRLinearRing a;
     OGRPoint pt_temp;
     //cout << "coord_rect.size() "<< coord_rect.size()<<endl;
-    for (int k=0; k< coord_rect.size(); k+=2)
+    for (unsigned int k=0U; k< coord_rect.size(); k+=2)
     {
         pt_temp =OGRPoint(coord_rect.at(k),coord_rect.at(k+1));
         a.addPoint(&pt_temp);
@@ -235,7 +236,7 @@ Building::Building(Envelop* env)
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
 
-    building_model.push_back(BuildingModel(li_tri, parcel));
+    building_models.push_back(BuildingModel(li_tri, parcel));
 
 }
 
@@ -248,8 +249,17 @@ void Building::creat_roof(double roofAngle)
 {
 
 }
-void Building::to_obj(OGRPoint* centroid)
+
+vector<string> Building::to_obj(OGRPoint* centroid, int& index_offset)
 {
-    //
+    vector<Triangle> li_triangles;
+    for (unsigned int i=0U; i<building_models.size(); i++)
+    {
+        BuildingModel build_mod = building_models.at(i);
+        vector<Triangle> building_triangles = build_mod.get_li_triangle();
+
+        li_triangles.insert(li_triangles.end(), building_triangles.begin(), building_triangles.end());
+    }
+    return triangles_to_obj(li_triangles, index_offset, centroid->getX(), centroid->getY());
 }
 

@@ -32,21 +32,21 @@ std::vector<double> BuildingType::get_margin()
 Industry::Industry(){set_param();}
 void Industry::set_param()
 {
-    profitability=2.0;
+    profitability=1.0;
     floor_height=3.0;
     gap=15.0; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
     margin_parcel=2.0;
-    margin_road=3.0;
+    margin_road=10.0;
     type="Industry";
 }
 
 Office::Office(){set_param();}
 void Office::set_param()
 {
-    profitability=12.0;
+    profitability=4.0;
     floor_height=3;
     gap=5; //height between the 0floor and the 1floor
     roof=1;
@@ -59,14 +59,14 @@ void Office::set_param()
 ApartmentBuilding::ApartmentBuilding(){set_param();}
 void ApartmentBuilding::set_param()
 {
-    profitability=6.0;
+    profitability=3.0;
     floor_height=3.0;
     gap=5.0; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
     margin_parcel=0.001;
-    margin_road=0.05;
+    margin_road=1;
     type="ApartmentBuilding";
 }
 Villa::Villa(){set_param();}
@@ -78,20 +78,20 @@ void Villa::set_param()
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.1;
-    margin_road=0.1;
+    margin_parcel=5;
+    margin_road=9;
     type="Villa";
 }
 Townhouse::Townhouse(){set_param();}
 void Townhouse::set_param()
 {
     profitability=1.0;
-    floor_height=1.0;
-    gap=1.0; //height between the 0floor and the 1floor
+    floor_height=3.0;
+    gap=3.0; //height between the 0floor and the 1floor
     roof=1;
     wall=1;
     floor=1;
-    margin_parcel=0.001;
-    margin_road=0.05;
+    margin_parcel=0.1;
+    margin_road=0.5;
     type="Townhouse";
 }

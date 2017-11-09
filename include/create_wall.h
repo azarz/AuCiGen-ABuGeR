@@ -1,5 +1,5 @@
-#ifndef CREAT_WALL_H_INCLUDED
-#define CREAT_WALL_H_INCLUDED
+#ifndef CREATE_WALL_H_INCLUDED
+#define CREATE_WALL_H_INCLUDED
 
 #include "ogrsf_frmts.h"
 #include "Triangle.h"
