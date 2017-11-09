@@ -26,7 +26,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
     string uv_coordinates;
     string faces;
 
-    for (int i=0; i<triangles.size() ;++i)
+    for (unsigned int i=0U; i<triangles.size() ;++i)
     {
         // Getting the triangle and its points
         Triangle triangle = triangles.at(i);
@@ -60,7 +60,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
             // Testing if the triangles's points are already in the list
             // (Last half of the triangles for faster results, because the common points are
             //   in adjacent triangles)
-            for(int j=(i-i/2)*3;j<points.size();++j)
+            for(unsigned int j=(i-i/2)*3;j<points.size();++j)
             {
                 Point p_j = points.at(j);
                 if(p_j==p1){
@@ -101,7 +101,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
     uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
 
     // Constructing the vertex list base on the vector
-    for(int i=0;i<points.size();++i)
+    for(unsigned int i=0;i<points.size();++i)
     {
         Point vertex = points.at(i);
         vertices += "v " + num_to_string(vertex.get_x() - x_centroid) + " "

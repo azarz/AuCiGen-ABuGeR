@@ -6,6 +6,7 @@
 #include "create_wall.h"
 #include <math.h>
 #include <vector>
+#include "triangles_to_obj.h"
 
 Building::Building(Envelop* env)
 {
@@ -64,9 +65,9 @@ Building::Building(Envelop* env)
     //cout << "min ("<<xmin <<", "<< ymin<<"); max ("<<xmax<<", "<< ymax <<")"<<endl;
     double dx = xmax-xmin;
     double dy = ymax-ymin;
-    cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
+    //cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
     double gap = max(dx, dy)/50;
-    cout << "gap = "<< gap<<endl;
+    //cout << "gap = "<< gap<<endl;
     int N=0;
     int M;
     for (double xp=xmin; xp<=xmax+gap; xp+=gap)
@@ -85,7 +86,7 @@ Building::Building(Envelop* env)
         }
         //cout <<endl;
     }
-    cout<< "N ="<< N<<"; M ="<< M <<endl;
+    //cout<< "N ="<< N<<"; M ="<< M <<endl;
 
 
     /* for rectangles : ALL PARCEL TYPE */
@@ -94,7 +95,7 @@ Building::Building(Envelop* env)
     vector<int> lim;
     int best_area =larger_rectangle_included (b,N,M,lim,0);
     vector<double> coord_rect;
-    for (int k =0; k<lim.size(); k+=2)
+    for (unsigned int k=0U; k<lim.size(); k+=2)
     {
         coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
         coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -110,7 +111,7 @@ Building::Building(Envelop* env)
     if (best_area1>best_area)
     {
         coord_rect.clear();
-        for (int k =0; k<lim.size(); k+=2)
+        for (unsigned int k=0U; k<lim.size(); k+=2)
         {
             coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
             coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -123,7 +124,7 @@ Building::Building(Envelop* env)
     for (double A = M_PI/step; A<M_PI/2; A+=(M_PI/step))
     {
         //with rotation :
-        cout<<" A = "<< A/M_PI*180<<endl;
+        //cout<<" A = "<< A/M_PI*180<<endl;
         //limit :
         double xminR=10000000000000;
         double xmaxR=-1000000000000;
@@ -193,7 +194,7 @@ Building::Building(Envelop* env)
             if (best_area1>best_area)
             {
                 coord_rect.clear();
-                for (int k =0; k<lim.size(); k+=2)
+                for (unsigned int k=0U; k<lim.size(); k+=2)
                 {
                     coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
                     coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -205,12 +206,11 @@ Building::Building(Envelop* env)
 
             /*L building : ALL PARCEL TYPE */
             lim.clear();
-            best_area1 =larger_L_included (b,N,M,lim,0);//best_area);
-            //cout<<"L aire : "<< best_area1<<endl;
+            best_area1 =larger_L_included (b,N,M,lim,best_area);
             if (best_area1>best_area)
             {
                 coord_rect.clear();
-                for (int k =0; k<lim.size(); k+=2)
+                for (unsigned int k=0U; k<lim.size(); k+=2)
                 {
                     coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
                     coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
@@ -229,20 +229,17 @@ Building::Building(Envelop* env)
     OGRLinearRing a;
     OGRPoint pt_temp;
     //cout << "coord_rect.size() "<< coord_rect.size()<<endl;
-    for (int k=0; k< coord_rect.size(); k+=2)
+    for (unsigned int k=0U; k< coord_rect.size(); k+=2)
     {
         pt_temp =OGRPoint(coord_rect.at(k),coord_rect.at(k+1));
         a.addPoint(&pt_temp);
     }
     building_footprint.addRing(&a);
     geom=new OGRPolygon(building_footprint);
-    char* text;
-    geom->OGRPolygon::exportToWkt(&text,  wkbVariantOldOgc);
-    cout<<text<<endl;
     create_wall(&building_footprint, height, li_tri);
     //cout <<"li_tri " <<li_tri.size()<<endl;
 
-    building_model.push_back(BuildingModel(li_tri, parcel));
+    building_models.push_back(BuildingModel(li_tri, parcel));
 
 }
 
@@ -255,8 +252,17 @@ void Building::creat_roof(double roofAngle)
 {
 
 }
-void Building::to_obj(OGRPoint* centroid)
+
+vector<string> Building::to_obj(OGRPoint* centroid, int& index_offset)
 {
-    //
+    vector<Triangle> li_triangles;
+    for (unsigned int i=0U; i<building_models.size(); i++)
+    {
+        BuildingModel build_mod = building_models.at(i);
+        vector<Triangle> building_triangles = build_mod.get_li_triangle();
+
+        li_triangles.insert(li_triangles.end(), building_triangles.begin(), building_triangles.end());
+    }
+    return triangles_to_obj(li_triangles, index_offset, centroid->getX(), centroid->getY());
 }
 

@@ -102,10 +102,7 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     double bc0 = p3.get_x() - p2.get_x();
     double bc1 = p3.get_y() - p2.get_y();
     double bc2 = p3.get_z() - p2.get_z();
-    double BC[3][1];
-    BC[0][0]=bc0;
-    BC[1][0]=bc1;
-    BC[2][0]=bc2;
+
     //set S coordinates
     double s0 = origin.get_x() + axis[0];
     double s1 = origin.get_y() + axis[1];
@@ -166,27 +163,13 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     matrix_product(M,Ot,Op);
 
     //set 2D variables
-    double Sp2[2][1], Op2[2][1], UXp2[2][1], UYp2[2][1], Ap2[2][1], Bp2[2][1], Cp2[2][2];
-    Ap2[0][0]=0;
-    Ap2[1][0]=0;
-
-    Bp2[0][0]=1;
-    Bp2[1][0]=0;
-
-    Cp2[0][0]=0;
-    Cp2[1][0]=1;
+    double Sp2[2][1], Op2[2][1];
 
     Op2[0][0]=Op[0][0];
     Op2[1][0]=Op[1][0];
 
     Sp2[0][0]=Sp[0][0];
     Sp2[1][0]=Sp[1][0];
-
-    UXp2[0][0]=1;
-    UXp2[0][0]=0;
-
-    UYp2[0][0]=0;
-    UYp2[0][0]=1;
 
     //vector OS
     double OSp2[2][1];
@@ -416,5 +399,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
 
 Triangle Triangle::repeat(TriangleType newName)
 {
-    return Triangle(p1,p2,p3,newName);
+    return Triangle();
 }
+

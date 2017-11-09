@@ -372,4 +372,4 @@ TEST_CASE("gauss2p are computed","[gauss2p]")
     REQUIRE(C[0][0]==1);
     REQUIRE(C[1][0]==1);
 }
-/* */
+ */

@@ -41,6 +41,18 @@ int areaL(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int>&
 *@param[in] not_lim: zone not on L shape (xmin, ymin, xmax, ymax).
 *@return area int
 */
+int sum(int llx, int lly, int urx, int ury, vector<int> b, int M);
+/**
+*@fn int sum(int llx, int lly, int urx, int ury, vector<int> b, int M)
+*Calculates the sum of 1 on submatrix.
+*@param[in] llx: start x point.
+*@param[in] lly: start y point.
+*@param[in] urx: end x point.
+*@param[in] ury: end y point.
+*@param[in] b: 'matrix' composed of 0 and 1; M comumn.
+*@param[in] M: The matrix's column number.
+*@return sum int
+*/
 bool all_ones(int llx, int lly, int urx, int ury, vector<int> b, int M);
 /**
 *@fn areaL(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int>& not_lim);

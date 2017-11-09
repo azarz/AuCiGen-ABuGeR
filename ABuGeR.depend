@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1510158299 source:/home/formation/AuCiGen/ABuGeR/src/Building.cpp
+1510233646 source:/home/formation/AuCiGen/ABuGeR/src/Building.cpp
 	"Building.h"
 	"Parcel.h"
 	"BuildingModel.h"
@@ -8,8 +8,9 @@
 	"create_wall.h"
 	<math.h>
 	<vector>
+	"triangles_to_obj.h"
 
-1510046672 /home/formation/AuCiGen/ABuGeR/include/Building.h
+1510233535 /home/formation/AuCiGen/ABuGeR/include/Building.h
 	"Parcel.h"
 	"BuildingModel.h"
 	"Envelop.h"
@@ -47,12 +48,28 @@
 
 1510157501 /home/formation/AuCiGen/ABuGeR/include/Point.h
 
-1510157276 source:/home/formation/AuCiGen/ABuGeR/src/BuildingType.cpp
+1510232723 source:/home/formation/AuCiGen/ABuGeR/src/BuildingType.cpp
 	"BuildingType.h"
-	"catch.h"
 
-1510046672 source:/home/formation/AuCiGen/ABuGeR/src/catch.cpp
+1510220538 source:/home/formation/AuCiGen/ABuGeR/src/catch.cpp
 	"catch.h"
+	<iostream>
+	<vector>
+	"Building.h"
+	"BuildingModel.h"
+	"BuildingType.h"
+	"Envelop.h"
+	"Footprint.h"
+	"Parcel.h"
+	"Point.h"
+	"Road.h"
+	"Triangle.h"
+	"create_wall.h"
+	"get_max_rectangle.h"
+	"matrix_methods.h"
+	"open_shp.h"
+	"orient.h"
+	"poly_to_triangle.h"
 
 1510046672 /home/formation/AuCiGen/ABuGeR/include/catch.h
 	<sstream>
@@ -174,7 +191,7 @@
 	<cfloat>
 	<cstdio>
 
-1510218156 source:/home/formation/AuCiGen/ABuGeR/src/Envelop.cpp
+1510224466 source:/home/formation/AuCiGen/ABuGeR/src/Envelop.cpp
 	"Envelop.h"
 	"typeinfo"
 	"Footprint.h"
@@ -183,11 +200,12 @@
 	"poly_to_triangle.h"
 	"Triangle.h"
 	"create_wall.h"
+	"create_env_roof.h"
 	"triangles_to_obj.h"
 	"catch.h"
 	"open_shp.h"
 
-1510217989 /home/formation/AuCiGen/ABuGeR/include/Envelop.h
+1510224611 /home/formation/AuCiGen/ABuGeR/include/Envelop.h
 	"BuildingModel.h"
 	"Footprint.h"
 	"Triangle.h"
@@ -197,7 +215,7 @@
 	"Parcel.h"
 	"ogrsf_frmts.h"
 
-1510157501 source:/home/formation/AuCiGen/ABuGeR/src/Footprint.cpp
+1510233861 source:/home/formation/AuCiGen/ABuGeR/src/Footprint.cpp
 	"Footprint.h"
 	"Envelop.h"
 	"Parcel.h"
@@ -205,14 +223,14 @@
 	"catch.h"
 	"open_shp.h"
 
-1510139273 source:/home/formation/AuCiGen/ABuGeR/src/orient.cpp
+1510233787 source:/home/formation/AuCiGen/ABuGeR/src/orient.cpp
 	<iostream>
 	"ogrsf_frmts.h"
 	"Road.h"
 	"catch.h"
 	<vector>
 
-1510218355 source:/home/formation/AuCiGen/ABuGeR/src/Parcel.cpp
+1510232830 source:/home/formation/AuCiGen/ABuGeR/src/Parcel.cpp
 	<iostream>
 	"Parcel.h"
 	"ogrsf_frmts.h"
@@ -251,7 +269,7 @@
 	<iostream>
 	<cmath>
 
-1510157501 source:/home/formation/AuCiGen/ABuGeR/src/Triangle.cpp
+1510233857 source:/home/formation/AuCiGen/ABuGeR/src/Triangle.cpp
 	"Triangle.h"
 	"Point.h"
 	"catch.h"
@@ -262,7 +280,7 @@
 	"gauss.h"
 	"matrix_methods.h"
 
-1510218317 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+1510225523 source:/home/formation/AuCiGen/ABuGeR/main.cpp
 	<iostream>
 	<vector>
 	<fstream>
@@ -326,11 +344,11 @@
 	"Triangle.h"
 	"catch.h"
 
-1510046672 /home/formation/AuCiGen/ABuGeR/include/create_wall.h
+1510224650 /home/formation/AuCiGen/ABuGeR/include/create_wall.h
 	"ogrsf_frmts.h"
 	"Triangle.h"
 
-1510046672 source:/home/formation/AuCiGen/ABuGeR/src/gauss.cpp
+1510233759 source:/home/formation/AuCiGen/ABuGeR/src/gauss.cpp
 	<iostream>
 	<vector>
 	"catch.h"
@@ -358,7 +376,7 @@
 	<vector>
 	"Triangle.h"
 
-1510218363 source:/home/formation/AuCiGen/ABuGeR/src/triangles_to_obj.cpp
+1510233921 source:/home/formation/AuCiGen/ABuGeR/src/triangles_to_obj.cpp
 	"triangles_to_obj.h"
 	<sstream>
 
@@ -371,11 +389,23 @@
 	<vector>
 	"ogrsf_frmts.h"
 
-1510157501 source:/home/formation/AuCiGen/ABuGeR/src/get_max_rectangle.cpp
+1510233758 source:/home/formation/AuCiGen/ABuGeR/src/get_max_rectangle.cpp
 	"get_max_rectangle.h"
 	"ogrsf_frmts.h"
 	<iostream>
 	<vector>
 	<stdio.h>
 	<math.h>
+	"catch.h"
+
+1510224374 source:/home/formation/AuCiGen/ABuGeR/src/create_env_roof.cpp
+	"create_env_roof.h"
+	"BuildingModel.h"
+	"ogrsf_frmts.h"
+	"Point.h"
+	"Triangle.h"
+
+1510224632 /home/formation/AuCiGen/ABuGeR/include/create_env_roof.h
+	"ogrsf_frmts.h"
+	"Triangle.h"
 
