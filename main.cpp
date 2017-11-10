@@ -10,6 +10,7 @@
 #include "catch.h"
 #include "poly_to_triangle.h"
 #include "triangles_to_obj.h"
+#include "Building.h"
 
 
 using namespace std;
@@ -23,11 +24,11 @@ int main()
 {
     OGRPoint* centroid;
 
-    const char* file_path ="1_data/paris_test/route_secondaire_buffer.shp";
-    const char* layer_name ="route_secondaire_buffer";
+    const char* file_path ="1_data/paris_test/route_secondaire_buffer_2.shp";
+    const char* layer_name ="route_secondaire_buffer_2";
     centroid = open_shp_roads(file_path, ROADS, layer_name);
-    file_path ="1_data/paris_test/test_paris_seuil.shp";
-    layer_name ="test_paris_seuil";
+    file_path ="1_data/paris_test/test_paris_seuil_2.shp";
+    layer_name ="test_paris_seuil_2";
     open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
     cout << "Converting the roads to .obj..." << endl;
@@ -45,21 +46,25 @@ int main()
             roadOBJ.at(k)+=roadOBJ_temp.at(k);
         }
     }
-    cout << endl;
+    cout <<100<< "%\r";
+    cout<<endl;
 
     cout << "Converting the parcels and envelops to .obj..." << endl;
     vector<string> parcelOBJ{"","",""};
     vector<string> envelopOBJ{"","",""};
+    vector<string> buildingOBJ{"","",""};
 
     int offset_parcel(0);
     int offset_envelop(0);
+    int offset_building(0);
 
-    for(unsigned int i=0U; i<PARCELS.size();++i)
+    for(unsigned int i=0U; i<PARCELS.size();i++)
     {
-        cout << 100*i/PARCELS.size() << "%\r";
+        cout << 100*i/PARCELS.size()<< "%\r";
         Parcel parcel = PARCELS.at(i);
-
+        //cout << i <<" / " << PARCELS.size() << endl;
         vector<string> envelopOBJ_temp{"","",""};
+        vector<string> buildingOBJ_temp{"","",""};
         vector<string> parcelOBJ_temp{"","",""};
         OGRLineString* linearIntersection = get_intersection_road(parcel.get_geom(), ROADS);
         OGRLineString* otherSides = get_other_sides(parcel.get_geom(), linearIntersection);
@@ -73,6 +78,8 @@ int main()
         {
             Envelop envelop = footprint.create_envelop();
             envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
+            Building bui= Building(&envelop);
+            buildingOBJ_temp = bui.to_obj(centroid, offset_building);
         }
 
         parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
@@ -80,12 +87,13 @@ int main()
         for (int k = 0; k<3; ++k)
         {
             envelopOBJ.at(k)+=envelopOBJ_temp.at(k);
+            buildingOBJ.at(k)+=buildingOBJ_temp.at(k);
             parcelOBJ.at(k)+=parcelOBJ_temp.at(k);
         }
         delete linearIntersection;
         delete otherSides;
     }
-    cout << endl;
+    cout <<"100%\r"<< endl;
 
     //To have an output file
     ofstream out_road("2_models/roads.obj");
@@ -93,7 +101,7 @@ int main()
     out_road.close();
 
     ofstream out_parcel("2_models/parcels.obj");
-    out_road << "mtllib parcel.mtl \n";
+    out_parcel << "mtllib parcel.mtl \n";
     out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1);
     out_parcel << "usemtl Parcel\ns 1";
     out_parcel << parcelOBJ.at(2);
@@ -102,6 +110,9 @@ int main()
     ofstream out_envelop("2_models/envelops.obj");
     out_envelop << envelopOBJ.at(0) << envelopOBJ.at(1) << envelopOBJ.at(2);
     out_envelop.close();
+    ofstream out_building("2_models/building.obj");
+    out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2);
+    out_building.close();
 
     return 0;
 }

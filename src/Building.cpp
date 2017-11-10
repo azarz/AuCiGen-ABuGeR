@@ -107,8 +107,8 @@ Building::Building(Envelop* env)
 
     /*L building : ALL PARCEL TYPE */
     lim.clear();
-    int best_area1 =larger_L_included (b,N,M,lim,best_area);
-    if (best_area1>best_area)
+    int best_area1 =larger_L_included (b,N,M,lim,best_area*1.1);
+    if (best_area1>best_area*1.1)
     {
         coord_rect.clear();
         for (unsigned int k=0U; k<lim.size(); k+=2)
@@ -206,8 +206,8 @@ Building::Building(Envelop* env)
 
             /*L building : ALL PARCEL TYPE */
             lim.clear();
-            best_area1 =larger_L_included (b,N,M,lim,best_area);
-            if (best_area1>best_area)
+            best_area1 =larger_L_included (b,N,M,lim,best_area*1.1);
+            if (best_area1>best_area*1.1)
             {
                 coord_rect.clear();
                 for (unsigned int k=0U; k<lim.size(); k+=2)

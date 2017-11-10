@@ -35,13 +35,8 @@ int larger_rectangle_included (vector<int> b, int N, int M, vector<int>& lim, in
                         ury++;
                         continue;
                     }
-                    while (ury < M && sum(llx, ury, urx, ury, b, M)==urx-llx+1)
+                    while (ury < M && all_ones(llx, lly, urx, ury, b, M))//sum(llx, ury, urx, ury, b, M)==urx-llx+1)
                     {
-                        if(sum(llx, ury, urx, ury, b, M)==0)
-                        {
-                            ury++;
-                            continue;
-                        }
                         int area_temp=area(llx,lly, urx, ury );
                         if (area_temp>best_area)
                         {
