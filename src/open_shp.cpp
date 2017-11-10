@@ -44,6 +44,7 @@ OGRPoint* open_shp_roads(const char* file_path, vector<Road>& liPolygon, const c
            if ( poGeometry != NULL && wkbFlatten ( poGeometry->getGeometryType() ) == wkbPolygon )
            {
                 OGRPolygon* poPolygon = (OGRPolygon*)poGeometry;
+                poPolygon->closeRings();
                 road_collection->addGeometry(poPolygon);
                 /*OGRFeatureDefn *poFDefn = poLayer->GetLayerDefn();
                 int iField =1;
@@ -83,7 +84,6 @@ void open_shp_parcels(const char* file_path, vector<Parcel>& liPolygon, OGRPoint
     OGRwkbGeometryType LayerGeometryType = poLayer ->GetGeomType();
     int NumberOfFeatures = poLayer ->GetFeatureCount(true);
     poLayer ->ResetReading();
-
     //Polygon Shapefile
     if ( wkbFlatten ( LayerGeometryType ) == wkbPolygon )
     {
@@ -96,7 +96,7 @@ void open_shp_parcels(const char* file_path, vector<Parcel>& liPolygon, OGRPoint
            if ( poGeometry != NULL && wkbFlatten ( poGeometry ->getGeometryType() ) == wkbPolygon )
            {
                 OGRPolygon* poPolygon = (OGRPolygon*)poGeometry;
-
+                poPolygon->OGRPolygon::closeRings ();
                 Parcel parcel = Parcel(poPolygon, centroid);
                 liPolygon.push_back(parcel);
            }
