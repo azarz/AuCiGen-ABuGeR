@@ -4,6 +4,7 @@
 #include "ogrsf_frmts.h"
 #include <ogr_geometry.h>
 #include <vector>
+#include <string>
 #include "Point.h"
 #include "Footprint.h"
 #include "Envelop.h"
@@ -24,7 +25,7 @@ OGRPolygon Straight_Skeleton(BuildingModel bu);
 */
 
 
-void crossed_spine(Building b, double roofAngle);
+BuildingModel crossed_spine(Building b, double roofAngle);
 /**
 *@fn
 *Manage a crossed roof skeleton.
@@ -32,7 +33,7 @@ void crossed_spine(Building b, double roofAngle);
 *@return .
 */
 
-void linear_spine();
+BuildingModel linear_spine(Building b, double roofAngle);
 /**
 *@fn
 *Manage mono linear roof skeleton.
