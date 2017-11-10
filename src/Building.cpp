@@ -27,8 +27,11 @@ Building::Building(Envelop* env)
     OGRPoint ptTemp1;
     OGRPolygon poPolygon;
     OGRLinearRing poExteriorRing= (OGRLinearRing)env->get_footprint()->get_geom();
+    poExteriorRing.OGRLinearRing::closeRings();
     poPolygon.addRing(&poExteriorRing);
     int NumberOfExteriorRingVertices = poExteriorRing.OGRSimpleCurve::getNumPoints();
+    poExteriorRing.getPoint(0,&ptTemp);
+    poExteriorRing.getPoint(NumberOfExteriorRingVertices-1,&ptTemp1);
     double xmin=100000000;
     double xmax=-10000000;
     double ymin=100000000;
@@ -36,6 +39,7 @@ Building::Building(Envelop* env)
     double centerx =0;
     double centery =0;
     vector<double> li_angle;
+    li_angle.push_back(0);
     for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)//NumberOfExteriorRingVertices; k++ )
     {
         poExteriorRing.getPoint(k,&ptTemp);
@@ -43,7 +47,7 @@ Building::Building(Envelop* env)
         {
             xmin=ptTemp.getX();
         }
-        else if (ptTemp.getX()>xmax)
+        if (ptTemp.getX()>xmax)
         {
             xmax=ptTemp.getX();
         }
@@ -51,7 +55,7 @@ Building::Building(Envelop* env)
         {
             ymin=ptTemp.getY();
         }
-        else if (ptTemp.getY()>ymax)
+        if (ptTemp.getY()>ymax)
         {
             ymax=ptTemp.getY();
         }
@@ -66,11 +70,7 @@ Building::Building(Envelop* env)
         {
             angle-=M_PI/2;
         }
-        if (li_angle.size()==0)
-        {
-            li_angle.push_back(angle);
-        }
-        else if (sqrt(Xb*Xb+Yb*Yb)>=4)
+        if (sqrt(Xb*Xb+Yb*Yb)>=4)
         {
             bool test_a=true;
             for (int k =0; k<li_angle.size(); k++)
@@ -92,7 +92,7 @@ Building::Building(Envelop* env)
             //cin>> azerty;
         }
     }
-    cout<<"nb angle = "<< li_angle.size()<<endl;
+    //cout<<"nb angle = "<< li_angle.size()<<endl;
     centerx/=NumberOfExteriorRingVertices-1;
     centery/=NumberOfExteriorRingVertices-1;
     vector<int> b;
@@ -103,14 +103,18 @@ Building::Building(Envelop* env)
     double dy = ymax-ymin;
     //cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
     double gap = max(dx, dy)/50;
+    if (max(dx, dy)>10*min(dx, dy))
+    {gap=min(dx, dy)/10;}
+    if (gap<1)
+    {gap=1;}
     //cout << "gap = "<< gap<<endl;
     int N=0;
     int M;
-    for (double xp=xmin; xp<=xmax+gap; xp+=gap)
+    for (double xp=xmin+0.1; xp<=xmax+gap; xp+=gap)
     {
         N++;
         M=0;
-        for (double yp=ymin; yp<=ymax+gap; yp+=gap)
+        for (double yp=ymin+0.; yp<=ymax+gap; yp+=gap)
         {
             M++;
             ptTemp = OGRPoint(xp, yp);
@@ -161,7 +165,7 @@ Building::Building(Envelop* env)
     {
         //with rotation :
         double A = li_angle.at(k_a);
-        cout<<" A = "<< A/M_PI*180<<endl;
+        //cout<<" A = "<< A/M_PI*180<<endl;
         //limit :
         double xminR=10000000000000;
         double xmaxR=-1000000000000;
@@ -169,7 +173,7 @@ Building::Building(Envelop* env)
         double ymaxR=-1000000000000;
         double Rx, Ry;
         OGRPoint ptTemp;
-        for ( int k = 0; k < NumberOfExteriorRingVertices; k++)//NumberOfExteriorRingVertices; k++ )
+        for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)//NumberOfExteriorRingVertices; k++ )
         {
             poExteriorRing.getPoint(k,&ptTemp);
             vector<double>R_pt= rotate_p(ptTemp, centerx, centery, A);
@@ -179,7 +183,7 @@ Building::Building(Envelop* env)
             {
                 xminR=Rx;
             }
-            else if (Rx>xmaxR)
+            if (Rx>xmaxR)
             {
                 xmaxR=Rx;
             }
@@ -187,7 +191,7 @@ Building::Building(Envelop* env)
             {
                 yminR=Ry;
             }
-            else if (Ry>ymaxR)
+            if (Ry>ymaxR)
             {
                 ymaxR=Ry;
             }
@@ -201,11 +205,11 @@ Building::Building(Envelop* env)
         b.clear();
         b_coordx.clear();
         b_coordy.clear();
-        for (double xp=xminR; xp<=xmaxR+gap; xp+=gap)
+        for (double xp=xminR+0.1; xp<=xmaxR+gap; xp+=gap)
         {
             N++;
             M=0;
-            for (double yp=yminR; yp<=ymaxR+gap; yp+=gap)
+            for (double yp=yminR+0.1; yp<=ymaxR+gap; yp+=gap)
             {
                 M++;
                 ptTemp = OGRPoint(xp, yp);

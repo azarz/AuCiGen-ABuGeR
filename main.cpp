@@ -23,18 +23,16 @@ vector<Parcel> PARCELS;
 int main()
 {
     OGRPoint* centroid;
-
-    const char* file_path ="1_data/paris_test/route_secondaire_buffer_2.shp";
-    const char* layer_name ="route_secondaire_buffer_2";
+    const char* file_path ="1_data/paris_test/route_secondaire_buffer.shp";
+    const char* layer_name ="route_secondaire_buffer";
     centroid = open_shp_roads(file_path, ROADS, layer_name);
-    file_path ="1_data/paris_test/test_paris_seuil_2.shp";
-    layer_name ="test_paris_seuil_2";
+    file_path ="1_data/paris_test/test_paris_seuil.shp";
+    layer_name ="test_paris_seuil";
     open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 
     cout << "Converting the roads to .obj..." << endl;
     vector<string> roadOBJ{"","",""};
     int offset_road(0);
-
     for(unsigned int i=0U; i<ROADS.size();++i)
     {
         cout << 100*i/ROADS.size() << "%\r";
@@ -58,11 +56,12 @@ int main()
     int offset_envelop(0);
     int offset_building(0);
 
-    for(unsigned int i=0U; i<PARCELS.size();i++)
+    for(unsigned int i=0; i<PARCELS.size();i++)
     {
-        //cout << 100*i/PARCELS.size()<< "%\r";
+
         Parcel parcel = PARCELS.at(i);
-        cout << i <<" / " << PARCELS.size() << endl;
+        //cout << 100*i/PARCELS.size()<< "%\r";
+        cout << i <<" / " << PARCELS.size()<< endl;
         vector<string> envelopOBJ_temp{"","",""};
         vector<string> buildingOBJ_temp{"","",""};
         vector<string> parcelOBJ_temp{"","",""};
@@ -96,9 +95,9 @@ int main()
     cout <<"100%\r"<< endl;
 
     //To have an output file
-    ofstream out_road("2_models/roads.obj");
+    /*ofstream out_road("2_models/roads.obj");
     out_road << roadOBJ.at(0) << roadOBJ.at(1) << roadOBJ.at(2);
-    out_road.close();
+    out_road.close();*/
 
     ofstream out_parcel("2_models/parcels.obj");
     out_parcel << "mtllib parcel.mtl \n";
