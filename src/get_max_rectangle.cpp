@@ -479,3 +479,15 @@ int larger_L_included (vector<int> b, int N, int M, vector<int>& lim, int best_a
     return best_area;
 }
 
+double angle_calcul(double Xb, double Yb)
+{
+    double Xa, Ya;
+    Xa=0.0;
+    Ya=1.0;
+    double Na=sqrt(Xa*Xa+Ya*Ya);
+    double Nb=sqrt(Xb*Xb+Yb*Yb);
+    double C=(Xa*Xb+Ya*Yb)/(Na*Nb);
+    double angle = acos(C);
+    //cout<<angle/M_PI*180<<endl;
+    return angle;
+}

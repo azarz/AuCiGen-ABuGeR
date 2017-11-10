@@ -100,4 +100,6 @@ int larger_L_included (vector<int> b, int N, int M, vector<int>& lim, int best_a
 *@param[in] best_area: The previous best area for calculation reference.
 *@return best_area int
 */
+
+double angle_calcul(double Xb, double Yb);
 #endif // GET_MAX_RECTANGLE_H_INCLUDED

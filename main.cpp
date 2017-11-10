@@ -11,7 +11,7 @@
 #include "poly_to_triangle.h"
 #include "triangles_to_obj.h"
 #include "Building.h"
-
+#include "math.h"
 
 using namespace std;
 
@@ -113,6 +113,7 @@ int main()
     ofstream out_building("2_models/building.obj");
     out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2);
     out_building.close();
+
 
     return 0;
 }

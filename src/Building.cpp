@@ -24,6 +24,7 @@ Building::Building(Envelop* env)
     //cout << parcel_type << endl;
     //lim
     OGRPoint ptTemp;
+    OGRPoint ptTemp1;
     OGRPolygon poPolygon;
     OGRLinearRing poExteriorRing= (OGRLinearRing)env->get_footprint()->get_geom();
     poPolygon.addRing(&poExteriorRing);
@@ -34,7 +35,8 @@ Building::Building(Envelop* env)
     double ymax=-10000000;
     double centerx =0;
     double centery =0;
-    for ( int k = 0; k < NumberOfExteriorRingVertices; k++)//NumberOfExteriorRingVertices; k++ )
+    vector<double> li_angle;
+    for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)//NumberOfExteriorRingVertices; k++ )
     {
         poExteriorRing.getPoint(k,&ptTemp);
         if (ptTemp.getX()<xmin)
@@ -56,7 +58,41 @@ Building::Building(Envelop* env)
         //cout<<"("<<ptTemp.getX()<<", "<<ptTemp.getY()<<")"<<endl;
         centerx+=ptTemp.getX();
         centery+=ptTemp.getY();
+        poExteriorRing.getPoint(k+1,&ptTemp1);
+        double Xb = (ptTemp1.getX()-ptTemp.getX());
+        double Yb = (ptTemp1.getY()-ptTemp.getY());
+        double angle = angle_calcul(Xb, Yb);
+        if (angle >M_PI/2)
+        {
+            angle-=M_PI/2;
+        }
+        if (li_angle.size()==0)
+        {
+            li_angle.push_back(angle);
+        }
+        else if (sqrt(Xb*Xb+Yb*Yb)>=4)
+        {
+            bool test_a=true;
+            for (int k =0; k<li_angle.size(); k++)
+            {
+                //cout<< angle/M_PI*180<<", "<< li_angle.at(k)/M_PI*180<< ", ["<<(li_angle.at(k)-10/180*M_PI)/M_PI*180<<", "<< ((li_angle.at(k))/M_PI*180+10)<<"]"<<endl;
+                if (angle/M_PI*180 > ((li_angle.at(k))/M_PI*180-5) && (angle/M_PI*180 < ((li_angle.at(k))/M_PI*180+5)))
+                {
+                    test_a=false;
+                    //cout<<"break"<<endl;
+                    break;
+                }
+            }
+            if(test_a==true)
+            {
+                li_angle.push_back(angle);
+                //cout << "Angle = " <<angle/M_PI*180<<endl;
+            }
+            //int azerty;
+            //cin>> azerty;
+        }
     }
+    cout<<"nb angle = "<< li_angle.size()<<endl;
     centerx/=NumberOfExteriorRingVertices-1;
     centery/=NumberOfExteriorRingVertices-1;
     vector<int> b;
@@ -121,10 +157,11 @@ Building::Building(Envelop* env)
         //cout<< best_area<<endl;
     }
 
-    for (double A = M_PI/step; A<M_PI/2; A+=(M_PI/step))
+    for (int k_a = 0; k_a<li_angle.size(); k_a++)
     {
         //with rotation :
-        //cout<<" A = "<< A/M_PI*180<<endl;
+        double A = li_angle.at(k_a);
+        cout<<" A = "<< A/M_PI*180<<endl;
         //limit :
         double xminR=10000000000000;
         double xmaxR=-1000000000000;
