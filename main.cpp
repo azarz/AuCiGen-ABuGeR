@@ -60,9 +60,9 @@ int main()
 
     for(unsigned int i=0U; i<PARCELS.size();i++)
     {
-        cout << 100*i/PARCELS.size()<< "%\r";
+        //cout << 100*i/PARCELS.size()<< "%\r";
         Parcel parcel = PARCELS.at(i);
-        //cout << i <<" / " << PARCELS.size() << endl;
+        cout << i <<" / " << PARCELS.size() << endl;
         vector<string> envelopOBJ_temp{"","",""};
         vector<string> buildingOBJ_temp{"","",""};
         vector<string> parcelOBJ_temp{"","",""};

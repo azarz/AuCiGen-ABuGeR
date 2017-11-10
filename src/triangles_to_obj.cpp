@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 #include <sstream>
 
@@ -24,15 +25,17 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
     // Strings for the final output
     string vertices;
     string uv_coordinates;
+    string normal_coordinates;
     string faces;
 
     for (unsigned int i=0U; i<triangles.size() ;++i)
     {
-        // Getting the triangle and its points
+        // Getting the triangle and its points and type
         Triangle triangle = triangles.at(i);
         Point p1 = triangle.get_p1();
         Point p2 = triangle.get_p2();
         Point p3 = triangle.get_p3();
+        TriangleType type = triangle.get_type();
 
         // Boolean values to test whether the triangle's points are already listed
         bool p1_in_points = false;
@@ -90,15 +93,67 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
             }
         }
 
+        string vnormal;
         // Constructing the face line corresponding to the triangle
-        faces += "f " + num_to_string(p1_index + index_offset) + "/1 "
-                      + num_to_string(p2_index + index_offset) + "/2 "
-                      + num_to_string(p3_index + index_offset) + "/3\n";
+        if (type==WALL){
+            double x_normal = (p2.get_y()-p1.get_y())*(p3.get_z()-p1.get_z()) - (p2.get_z()-p1.get_z())*(p3.get_y()-p1.get_y());
+            double y_normal = (p2.get_z()-p1.get_z())*(p3.get_x()-p1.get_x()) - (p2.get_x()-p1.get_x())*(p3.get_z()-p1.get_z());
 
+            if (y_normal!=0){
+                double xn_yn = abs(x_normal/y_normal);
+
+                if (xn_yn > 3){
+                    if (x_normal>0){
+                        vnormal = "2";
+                    } else{
+                        vnormal = "5";
+                    }
+                } else if (xn_yn < 0.33){
+                    if (y_normal>0){
+                        vnormal = "3";
+                    } else{
+                        vnormal = "4";
+                    }
+                } else{
+                    if (x_normal>0 && y_normal>0){
+                        vnormal = "6";
+                    } else if (x_normal>0 && y_normal<=0){
+                        vnormal = "9";
+                    } else if (x_normal<=0 &&y_normal<=0){
+                        vnormal = "7";
+                    } else{
+                        vnormal = "8";
+                    }
+                }
+            } else {
+                if (x_normal>0){vnormal="2";}
+                else{vnormal="5";}
+            }
+
+
+        } else{
+            vnormal = "1";
+        }
+
+        faces += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
+                      + num_to_string(p2_index + index_offset) + "/2/1" + vnormal + " "
+                      + num_to_string(p3_index + index_offset) + "/3/1" + vnormal + "\n";
     }
 
     // Default uv coordinates
-    uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
+    if (index_offset==0){
+        uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
+        //Roof and floor
+        normal_coordinates = "vn 0 1 0\n";
+        //Walls
+        normal_coordinates+= "vn 1 0 0\nvn 0 0 1\nvn 0 0 -1\n";
+        normal_coordinates+= "vn -1 0 0\nvn 1 0 1\nvn -1 0 -1\n";
+        normal_coordinates+= "vn -1 0 1\nvn 1 0 -1\n";
+
+    } else{
+        uv_coordinates = "";
+        normal_coordinates = "";
+    }
 
     // Constructing the vertex list base on the vector
     for(unsigned int i=0;i<points.size();++i)
