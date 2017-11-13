@@ -1,0 +1,8 @@
+newmtl Envelop
+Ka 1.000 1.000 1.000     # white
+Kd 1.000 1.000 1.000     # white
+Ks 0.000 0.000 0.000     # black (off)
+Ns 10.000                # ranges between 0 and 1000
+d 1.0
+illum 1
+map_Kd road.png

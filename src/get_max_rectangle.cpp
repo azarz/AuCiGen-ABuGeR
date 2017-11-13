@@ -196,13 +196,13 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             {//cout<<"6.b"<<endl;
             return false;}
 
+        lim.push_back(xmax); lim.push_back(lly);
+        lim.push_back(xmax); lim.push_back(ymax);
         lim.push_back(llx); lim.push_back(ymax);
         lim.push_back(llx); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(lly);
         lim.push_back(xmax); lim.push_back(lly);
-        lim.push_back(xmax); lim.push_back(ymax);
-        lim.push_back(llx); lim.push_back(ymax);
 
         not_lim.push_back(llx); not_lim.push_back(lly);
         not_lim.push_back(xmax-1); not_lim.push_back(ymax-1);
@@ -267,13 +267,13 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             {//cout<<"9.b"<<endl;
             return false;}
 
-        lim.push_back(llx); lim.push_back(lly);
         lim.push_back(llx); lim.push_back(ymin);
         lim.push_back(xmax); lim.push_back(ymin);
         lim.push_back(xmax); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(lly);
         lim.push_back(llx); lim.push_back(lly);
+        lim.push_back(llx); lim.push_back(ymin);
 
         not_lim.push_back(llx); not_lim.push_back(ymin+1);
         not_lim.push_back(xmax-1); not_lim.push_back(ury);
@@ -334,13 +334,13 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             {//cout<<"13.b"<<endl;
             return false;}
 
-        lim.push_back(llx); lim.push_back(lly);
-        lim.push_back(llx); lim.push_back(ury);
-        lim.push_back(urx); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(ymax);
         lim.push_back(xmin); lim.push_back(ymax);
         lim.push_back(xmin); lim.push_back(lly);
         lim.push_back(llx); lim.push_back(lly);
+        lim.push_back(llx); lim.push_back(ury);
+        lim.push_back(urx); lim.push_back(ury);
+        lim.push_back(urx); lim.push_back(ymax);
 
         not_lim.push_back(xmin+1); not_lim.push_back(lly);
         not_lim.push_back(urx); not_lim.push_back(ymax-1);
@@ -395,13 +395,13 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             {//cout<<"15.b"<<endl;
             return false;}
 
-        lim.push_back(llx); lim.push_back(lly);
-        lim.push_back(llx); lim.push_back(ury);
         lim.push_back(xmin); lim.push_back(ury);
         lim.push_back(xmin); lim.push_back(ymin);
         lim.push_back(urx); lim.push_back(ymin);
         lim.push_back(urx); lim.push_back(lly);
         lim.push_back(llx); lim.push_back(lly);
+        lim.push_back(llx); lim.push_back(ury);
+        lim.push_back(xmin); lim.push_back(ury);
 
         not_lim.push_back(xmin+1); not_lim.push_back(ymin+1);
         not_lim.push_back(urx); not_lim.push_back(ury);
