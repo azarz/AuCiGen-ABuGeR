@@ -136,8 +136,8 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
         }
 
         faces += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
-                      + num_to_string(p2_index + index_offset) + "/2/1" + vnormal + " "
-                      + num_to_string(p3_index + index_offset) + "/3/1" + vnormal + "\n";
+                      + num_to_string(p2_index + index_offset) + "/2/" + vnormal + " "
+                      + num_to_string(p3_index + index_offset) + "/3/" + vnormal + "\n";
     }
 
     // Default uv coordinates
