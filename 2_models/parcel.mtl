@@ -1,4 +1,4 @@
-newmtl Parcel
+newmtl Floor
 Ka 1.000 1.000 1.000     # white
 Kd 1.000 1.000 1.000     # white
 Ks 0.000 0.000 0.000     # black (off)

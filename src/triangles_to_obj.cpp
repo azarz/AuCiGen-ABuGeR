@@ -28,6 +28,10 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
     string normal_coordinates;
     string faces;
 
+    string faces_roof = "usemtl Roof\n";
+    string faces_wall = "usemtl Wall\n";
+    string faces_floor = "usemtl Floor\n";
+
     for (unsigned int i=0U; i<triangles.size() ;++i)
     {
         // Getting the triangle and its points and type
@@ -134,10 +138,19 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
         } else{
             vnormal = "1";
         }
-
-        faces += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
-                      + num_to_string(p2_index + index_offset) + "/2/" + vnormal + " "
-                      + num_to_string(p3_index + index_offset) + "/3/" + vnormal + "\n";
+        if (type == WALL){
+            faces_wall += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
+                          + num_to_string(p2_index + index_offset) + "/2/" + vnormal + " "
+                          + num_to_string(p3_index + index_offset) + "/3/" + vnormal + "\n";
+        } else if (type == ROOF){
+            faces_roof += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
+                          + num_to_string(p2_index + index_offset) + "/2/" + vnormal + " "
+                          + num_to_string(p3_index + index_offset) + "/3/" + vnormal + "\n";
+        } else{
+            faces_floor += "f " + num_to_string(p1_index + index_offset) + "/1/" + vnormal + " "
+                                      + num_to_string(p2_index + index_offset) + "/2/" + vnormal + " "
+                                      + num_to_string(p3_index + index_offset) + "/3/" + vnormal + "\n";
+        }
     }
 
     // Default uv coordinates
@@ -164,6 +177,8 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
                          + num_to_string(-(vertex.get_y() - y_centroid)) + "\n";
 
     }
+
+    faces = faces_floor + faces_wall + faces_roof;
 
     vector<string> results;
 

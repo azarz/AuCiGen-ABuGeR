@@ -69,7 +69,7 @@ void ApartmentBuilding::set_param()
     wall=1;
     floor=1;
     margin_parcel=0.001;
-    margin_road=1;
+    margin_road=4;
     type="ApartmentBuilding";
 }
 Villa::Villa(){set_param();}
