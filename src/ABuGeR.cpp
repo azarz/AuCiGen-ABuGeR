@@ -28,7 +28,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     cout << "Converting the roads to .obj..." << endl;
     vector<string> roadOBJ{"","","",""};
     int offset_road(0);
-    for(unsigned int i=0U; i<ROADS.size();++i)
+    /*for(unsigned int i=0U; i<ROADS.size();++i)
     {
         cout << 100*i/ROADS.size() << "%\r";
         vector<string> roadOBJ_temp;
@@ -38,7 +38,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
         {
             roadOBJ.at(k)+=roadOBJ_temp.at(k);
         }
-    }
+    }*/
     cout << "100%\r"<<endl;
 
     cout << "Converting the parcels and envelops to .obj..." << endl;
@@ -50,14 +50,14 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     int offset_envelop(0);
     int offset_building(0);
 
-    for(unsigned int i=0; i<3000;i++)
+    for(unsigned int i=0; i<500;i++)
 
     {
         Parcel parcel = PARCELS.at(i);
         cout << 100*i/PARCELS.size()<< "%\r";
 
         vector<string> envelopOBJ_temp{"","","",""};
-        vector<string> buildingOBJ_temp{"","",""};
+        vector<string> buildingOBJ_temp{"","","",""};
         vector<string> parcelOBJ_temp{"","","",""};
 
         OGRLineString* linearIntersection = get_intersection_road(parcel.get_geom(), ROADS);
@@ -72,9 +72,9 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
         {
             Envelop envelop = footprint.create_envelop();
             envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
-            //Building bui= Building(&envelop);
-            //bui.creat_roof(angle_roof.at( rand() %4));
-            //buildingOBJ_temp = bui.to_obj(centroid, offset_building);
+            Building bui= Building(&envelop);
+            bui.creat_roof(angle_roof.at( rand() %4));
+            buildingOBJ_temp = bui.to_obj(centroid, offset_building);
         }
 
         parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
@@ -82,7 +82,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
         for (int k = 0; k<4; ++k)
         {
             envelopOBJ.at(k)+=envelopOBJ_temp.at(k);
-            //buildingOBJ.at(k)+=buildingOBJ_temp.at(k);
+            buildingOBJ.at(k)+=buildingOBJ_temp.at(k);
             parcelOBJ.at(k)+=parcelOBJ_temp.at(k);
         }
         delete linearIntersection;
@@ -105,11 +105,11 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     out_envelop << "mtllib envelop.mtl\n";
     out_envelop << envelopOBJ.at(0) << envelopOBJ.at(1) << envelopOBJ.at(2) << envelopOBJ.at(3);
     out_envelop.close();
-/*
+
     ofstream out_building("2_models/building.obj");
     out_building << "mtllib building.mtl\n";
     out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2) << buildingOBJ.at(3);
-    out_building.close();*/
+    out_building.close();
 
 
     return 0;
