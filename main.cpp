@@ -98,14 +98,14 @@ int main()
 
     //To have an output file
     ofstream out_road("2_models/roads.obj");
-    out_road << "mtllib road.mtl \n";
+    out_road << "mtllib road.mtl\n";
     out_road << roadOBJ.at(0) << roadOBJ.at(1) << envelopOBJ.at(2);
     out_road << "usemtl Road\ns 1\n";
     out_road << roadOBJ.at(3);
     out_road.close();
 
     ofstream out_parcel("2_models/parcels.obj");
-    out_parcel << "mtllib parcel.mtl \n";
+    out_parcel << "mtllib parcel.mtl\n";
 
     out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1) << parcelOBJ.at(2);
     out_parcel << "usemtl Parcel\ns 1\n";
