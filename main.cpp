@@ -29,7 +29,7 @@ int main()
     file_path ="1_data/paris_test/test_paris_seuil.shp";
     layer_name ="test_paris_seuil";
     open_shp_parcels(file_path, PARCELS, centroid, layer_name);
-
+/*
     cout << "Converting the roads to .obj..." << endl;
     vector<string> roadOBJ{"","",""};
     int offset_road(0);
@@ -46,7 +46,7 @@ int main()
     }
     cout <<100<< "%\r";
     cout<<endl;
-
+*/
     cout << "Converting the parcels and envelops to .obj..." << endl;
     vector<string> parcelOBJ{"","",""};
     vector<string> envelopOBJ{"","",""};
@@ -56,12 +56,12 @@ int main()
     int offset_envelop(0);
     int offset_building(0);
 
-    for(unsigned int i=0; i<PARCELS.size();i++)
+    for(unsigned int i=0; i<100;i++)//PARCELS.size();i++)
     {
 
         Parcel parcel = PARCELS.at(i);
         //cout << 100*i/PARCELS.size()<< "%\r";
-        cout << i <<" / " << PARCELS.size()<< endl;
+        cout << i+1 <<" / " << PARCELS.size()<< endl;
         vector<string> envelopOBJ_temp{"","",""};
         vector<string> buildingOBJ_temp{"","",""};
         vector<string> parcelOBJ_temp{"","",""};
@@ -76,18 +76,19 @@ int main()
         if (poPolygon.OGRCurvePolygon::get_Area() > 50)
         {
             Envelop envelop = footprint.create_envelop();
-            envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
+            //envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
             Building bui= Building(&envelop);
+            bui.creat_roof(M_PI/4);
             buildingOBJ_temp = bui.to_obj(centroid, offset_building);
         }
 
-        parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
+        //parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
 
         for (int k = 0; k<3; ++k)
         {
-            envelopOBJ.at(k)+=envelopOBJ_temp.at(k);
+            //envelopOBJ.at(k)+=envelopOBJ_temp.at(k);
             buildingOBJ.at(k)+=buildingOBJ_temp.at(k);
-            parcelOBJ.at(k)+=parcelOBJ_temp.at(k);
+            //parcelOBJ.at(k)+=parcelOBJ_temp.at(k);
         }
         delete linearIntersection;
         delete otherSides;
@@ -99,16 +100,17 @@ int main()
     out_road << roadOBJ.at(0) << roadOBJ.at(1) << roadOBJ.at(2);
     out_road.close();*/
 
-    ofstream out_parcel("2_models/parcels.obj");
+    /*ofstream out_parcel("2_models/parcels.obj");
     out_parcel << "mtllib parcel.mtl \n";
     out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1);
     out_parcel << "usemtl Parcel\ns 1";
     out_parcel << parcelOBJ.at(2);
-    out_parcel.close();
+    out_parcel.close();*/
 
-    ofstream out_envelop("2_models/envelops.obj");
+    /*ofstream out_envelop("2_models/envelops.obj");
     out_envelop << envelopOBJ.at(0) << envelopOBJ.at(1) << envelopOBJ.at(2);
-    out_envelop.close();
+    out_envelop.close();*/
+
     ofstream out_building("2_models/building.obj");
     out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2);
     out_building.close();
