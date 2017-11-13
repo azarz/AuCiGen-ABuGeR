@@ -1244,9 +1244,9 @@ TEST_CASE("get_other_sides computed", "[get_other_sides]")
 TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
 {
     vector<Parcel> PARCELS;
-    char* fill_directory ="1_data/test/test_parcel.shp";
+    const char* fill_directory ="1_data/test/test_parcel.shp";
 
-    char* wkt ="POINT ((55.4683455250644 -21.3282187046573))";
+    const char* wkt ="POINT ((55.4683455250644 -21.3282187046573))";
     OGRPoint* centroid = new OGRPoint();
     centroid->OGRPoint::importFromWkt( &wkt);
 

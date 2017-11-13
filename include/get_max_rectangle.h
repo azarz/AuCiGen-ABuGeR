@@ -102,4 +102,11 @@ int larger_L_included (vector<int> b, int N, int M, vector<int>& lim, int best_a
 */
 
 double angle_calcul(double Xb, double Yb);
+/**
+*@fn double angle_calcul (double Xb, double Yb);
+*Calculate the angle of a point with the X axis.
+*@param[in] Xb: The x coordinate of the point.
+*@param[in] Yb: The y coordinate of the point.
+*@return angle double
+*/
 #endif // GET_MAX_RECTANGLE_H_INCLUDED

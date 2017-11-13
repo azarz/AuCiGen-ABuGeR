@@ -362,4 +362,4 @@ TEST_CASE("XSkeleton is computed","[crossed_spine]")
     bu_obj.close();
 
 
-}/* */
+} */
