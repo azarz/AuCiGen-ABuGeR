@@ -290,13 +290,34 @@ Building::~Building()
 
 void Building::creat_roof(double roofAngle)
 {
+    BuildingModel bm;
     OGRLinearRing* poExteriorRing= geom->getExteriorRing();
     poExteriorRing->OGRLinearRing::closeRings();
     int NumberOfExteriorRingVertices = poExteriorRing->OGRSimpleCurve::getNumPoints();
     if (NumberOfExteriorRingVertices==5)
     {
-        //BuildingModel bm= crossed_spine(*this, roofAngle);
-        BuildingModel bm= linear_spine(*this, roofAngle);
+        string type = parcel->get_type()->get_type();
+        if (roofAngle==0)
+        {
+            bm= flat_roof(*this);
+        }
+        else
+        {
+            int a = rand() % 2;
+            if (a==0)
+            {
+                bm= crossed_spine(*this, roofAngle);
+            }
+            else
+            {
+                bm= linear_spine(*this, roofAngle);
+            }
+        }
+        building_models.push_back(bm);
+    }
+    else if (NumberOfExteriorRingVertices==7)
+    {
+        bm= flat_roof(*this);
         building_models.push_back(bm);
     }
 }
