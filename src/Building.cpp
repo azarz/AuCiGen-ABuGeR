@@ -274,13 +274,23 @@ Building::Building(Envelop* env)
         pt_temp =OGRPoint(coord_rect.at(k),coord_rect.at(k+1));
         a.addPoint(&pt_temp);
     }
+
     building_footprint.addRing(&a);
-    geom=new OGRPolygon(building_footprint);
-    create_wall(&building_footprint, height, li_tri);
-    //cout <<"li_tri " <<li_tri.size()<<endl;
-
-    building_models.push_back(BuildingModel(li_tri, parcel));
-
+    double perimeter = a.OGRSimpleCurve::get_Length();
+    double area_B = building_footprint.OGRCurvePolygon::get_Area();
+    double L=perimeter/4+sqrt(perimeter*perimeter/16-area_B);
+    double l=perimeter/2-L;
+    if (area_B >50 && L<5*l)
+    {
+        geom=new OGRPolygon(building_footprint);
+        create_wall(&building_footprint, height, li_tri);
+        building_models.push_back(BuildingModel(li_tri, parcel));
+    }
+    else
+    {
+        geom = new OGRPolygon();
+        building_models.push_back(BuildingModel());
+    }
 }
 
 Building::~Building()
@@ -290,35 +300,45 @@ Building::~Building()
 
 void Building::creat_roof(double roofAngle)
 {
-    BuildingModel bm;
-    OGRLinearRing* poExteriorRing= geom->getExteriorRing();
-    poExteriorRing->OGRLinearRing::closeRings();
-    int NumberOfExteriorRingVertices = poExteriorRing->OGRSimpleCurve::getNumPoints();
-    if (NumberOfExteriorRingVertices==5)
+    if (!geom->OGRCurvePolygon::IsEmpty())
     {
-        string type = parcel->get_type()->get_type();
-        if (roofAngle==0)
+        BuildingModel bm;
+        OGRLinearRing* poExteriorRing= geom->getExteriorRing();
+        poExteriorRing->OGRLinearRing::closeRings();
+        int NumberOfExteriorRingVertices = poExteriorRing->OGRSimpleCurve::getNumPoints();
+        if (NumberOfExteriorRingVertices==5)
         {
-            bm= flat_roof(*this);
-        }
-        else
-        {
-            int a = rand() % 2;
-            if (a==0)
+            string type = parcel->get_type()->get_type();
+            if (roofAngle==0)
             {
-                bm= crossed_spine(*this, roofAngle);
+                bm= flat_roof(*this);
+            }
+            else
+            {
+                int a = rand() % 2;
+                if (a==0)
+                {
+                    bm= crossed_spine(*this, roofAngle);
+                }
+                else
+                {
+                    bm= linear_spine(*this, roofAngle);
+                }
+            }
+            building_models.push_back(bm);
+        }
+        else if (NumberOfExteriorRingVertices==7)
+        {
+            if (roofAngle==0)
+            {
+                bm= flat_roof(*this);
             }
             else
             {
                 bm= linear_spine(*this, roofAngle);
             }
+            building_models.push_back(bm);
         }
-        building_models.push_back(bm);
-    }
-    else if (NumberOfExteriorRingVertices==7)
-    {
-        bm= flat_roof(*this);
-        building_models.push_back(bm);
     }
 }
 
