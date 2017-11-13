@@ -40,7 +40,7 @@ BuildingModel linear_spine(Building b, double roofAngle);
 *@param[in] .
 *@return .
 */
-void linear_cross_spine();
+BuildingModel linear_cross_spine(Building b, double roofAngle);
 /**
 *@fn
 *Manage linear roof skeleton linked to the four corners roof .
