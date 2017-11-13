@@ -175,7 +175,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             return false;}
 
         //horizontal ONE rectangle
-        test_y=0;
+        test_y=lly;
         while (test_y<ymax)
         {
             test_x=xmax;
@@ -200,8 +200,8 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
         lim.push_back(llx); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(ury);
         lim.push_back(urx); lim.push_back(lly);
-        lim.push_back(xmax+1); lim.push_back(lly);
-        lim.push_back(xmax+1); lim.push_back(ymax);
+        lim.push_back(xmax); lim.push_back(lly);
+        lim.push_back(xmax); lim.push_back(ymax);
         lim.push_back(llx); lim.push_back(ymax);
 
         not_lim.push_back(llx); not_lim.push_back(lly);
@@ -213,6 +213,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
         int ymin=y-1;//last 1 on line llx
         if (ymin==lly)
             {return false;}
+        x=llx;
         while (x<urx && b.at(x*M+ury)==0)
         {
             x++;
@@ -281,7 +282,6 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
     else if(y==lly) // first 0 on (?, lly)
     {
         xmin=x-1;//last 1 on column lly
-        ymin=0;
         while (b.at(urx*M+y)==0 && y<=ury)
         {
             y++;
@@ -289,10 +289,8 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
         if (y>ury)
             {//cout<<"10"<<endl;
             return false;}
-        xmax=urx;
         ymax=y;//first 1 on line urx
         //vertical ONE rectangle
-
         test_x=llx;
         while (test_x<=urx)
         {
