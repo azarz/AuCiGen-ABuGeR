@@ -47,4 +47,12 @@ void linear_cross_spine();
 *@param[in] .
 *@return .
 */
+
+BuildingModel flat_roof(Building bu);
+/**
+*@fn BuildingModel flat_roof(Building bu)
+*Manage mono linear roof skeleton.
+*@param[in] bu : building whose roof is to create.
+*@return building model with roof.
+*/
 #endif // SS_H_INCLUDED

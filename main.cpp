@@ -55,15 +55,17 @@ int main()
     int offset_envelop(0);
     int offset_building(0);
 
-    for(unsigned int i=0; i<PARCELS.size();i++)
+    for(unsigned int i=0; i<1000;i++)//PARCELS.size();i++)
     {
 
         Parcel parcel = PARCELS.at(i);
-        //cout << 100*i/PARCELS.size()<< "%\r";
-        cout << 100*i/ROADS.size() << "%\r";
+        cout << 100*i/PARCELS.size()<< "%\r";
+
+        //cout << i+1 <<" / " << PARCELS.size()<< endl;
         vector<string> envelopOBJ_temp{"","","",""};
         //vector<string> buildingOBJ_temp{"","",""};
         vector<string> parcelOBJ_temp{"","","",""};
+
         OGRLineString* linearIntersection = get_intersection_road(parcel.get_geom(), ROADS);
         OGRLineString* otherSides = get_other_sides(parcel.get_geom(), linearIntersection);
 
@@ -77,6 +79,7 @@ int main()
             Envelop envelop = footprint.create_envelop();
             envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
             //Building bui= Building(&envelop);
+            //bui.creat_roof(M_PI/4);
             //buildingOBJ_temp = bui.to_obj(centroid, offset_building);
         }
 
@@ -103,7 +106,8 @@ int main()
 
     ofstream out_parcel("2_models/parcels.obj");
     out_parcel << "mtllib parcel.mtl \n";
-    out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1) << envelopOBJ.at(2);
+
+    out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1) << parcelOBJ.at(2);
     out_parcel << "usemtl Parcel\ns 1\n";
     out_parcel << parcelOBJ.at(3);
     out_parcel.close();
@@ -113,7 +117,7 @@ int main()
     out_envelop.close();
 
     /*ofstream out_building("2_models/building.obj");
-    out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2);
+    out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2) << buildingOBJ.at(3);
     out_building.close();*/
 
 

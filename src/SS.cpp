@@ -49,9 +49,9 @@ BuildingModel crossed_spine(Building bu, double roofAngle)
     d = sqrt( dX*dX/dY*dY );
     if (d<0){d*=-1;}//setting value to positive if it's negative
     P.set_z(( height )+( tan(roofAngle)*d ));
-    cout<<d<<endl;
-    cout<<tan(roofAngle)<<endl;
-    cout<<P.get_z()-height<<endl;
+    //cout<<d<<endl;
+    //cout<<tan(roofAngle)<<endl;
+    //cout<<P.get_z()-height<<endl;
 
     //adding a new building model 'roof' from triangular fronts to those of the building list.
     vector<Triangle> li_triangle;
@@ -128,6 +128,12 @@ BuildingModel linear_spine(Building bu, double roofAngle)
         li_triangle.push_back(fc);
         Triangle fd(m1,li_point.at(2),li_point.at(3),ROOF);
         li_triangle.push_back(fd);
+
+        Triangle fe(m1,li_point.at(3),li_point.at(0),WALL);
+        li_triangle.push_back(fe);
+        Triangle ff(m2,li_point.at(1),li_point.at(2),WALL);
+        li_triangle.push_back(ff);
+
         }
     //else : m1=a.translate([ab]/2);m2=d.translate([dc]/2)
     else
@@ -148,6 +154,11 @@ BuildingModel linear_spine(Building bu, double roofAngle)
         li_triangle.push_back(fc);
         Triangle fd(m1,li_point.at(3),li_point.at(0),ROOF);
         li_triangle.push_back(fd);
+
+        Triangle fe(m1,li_point.at(0),li_point.at(1),WALL);
+        li_triangle.push_back(fe);
+        Triangle ff(m2,li_point.at(2),li_point.at(3),WALL);
+        li_triangle.push_back(ff);
     }
 
     //adding a new building model 'roof' from triangular fronts to those of the building list.
@@ -236,6 +247,41 @@ void linear_cross_spine(Building bu, double roofAngle)
 
 }
 */
+BuildingModel flat_roof(Building bu)
+{
+    //getting the exterior ring of the polygon ...
+    OGRPolygon* poPoly = bu.get_geom();
+    OGRLinearRing* poExteriorRing = (OGRLinearRing*)poPoly->getExteriorRing();
+    //setting all the vertices edges of the polygon
+    vector<Point> li_point;
+    OGRPoint ptTemp;
+    int NumberOfExteriorRingVertices = poExteriorRing ->OGRSimpleCurve::getNumPoints();
+    for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)
+    {
+        poExteriorRing ->getPoint(k,&ptTemp);
+        Point* pt;
+        if (ptTemp.getX()!=0.0 && ptTemp.getY()!=0.0)
+        {
+            pt= new Point(ptTemp.getX(), ptTemp.getY(),bu.get_height());
+            li_point.push_back(*pt);
+        }
+    }
+    vector<Triangle> li_triangle;
+    if (NumberOfExteriorRingVertices==5)
+    {
+        li_triangle.push_back(Triangle(li_point.at(0),li_point.at(1),li_point.at(2),ROOF));
+        li_triangle.push_back(Triangle(li_point.at(0),li_point.at(2),li_point.at(3),ROOF));
+    }
+    else if (NumberOfExteriorRingVertices==7)
+    {
+        li_triangle.push_back(Triangle(li_point.at(0),li_point.at(1),li_point.at(5),ROOF));
+        li_triangle.push_back(Triangle(li_point.at(1),li_point.at(4),li_point.at(5),ROOF));
+        li_triangle.push_back(Triangle(li_point.at(1),li_point.at(2),li_point.at(3),ROOF));
+        li_triangle.push_back(Triangle(li_point.at(1),li_point.at(3),li_point.at(4),ROOF));
+    }
+    return BuildingModel(li_triangle, bu.get_parcel());
+}
+
 /*
 #include "catch.h"
 #include "open_shp.h"
@@ -270,4 +316,4 @@ TEST_CASE("XSkeleton is computed","[crossed_spine]")
     bu_obj.close();
 
 
-}/**/
+} */

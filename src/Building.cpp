@@ -7,6 +7,7 @@
 #include <math.h>
 #include <vector>
 #include "triangles_to_obj.h"
+#include "SS.h"
 
 Building::Building(Envelop* env)
 {
@@ -30,8 +31,6 @@ Building::Building(Envelop* env)
     poExteriorRing.OGRLinearRing::closeRings();
     poPolygon.addRing(&poExteriorRing);
     int NumberOfExteriorRingVertices = poExteriorRing.OGRSimpleCurve::getNumPoints();
-    poExteriorRing.getPoint(0,&ptTemp);
-    poExteriorRing.getPoint(NumberOfExteriorRingVertices-1,&ptTemp1);
     double xmin=100000000;
     double xmax=-10000000;
     double ymin=100000000;
@@ -291,7 +290,36 @@ Building::~Building()
 
 void Building::creat_roof(double roofAngle)
 {
-
+    BuildingModel bm;
+    OGRLinearRing* poExteriorRing= geom->getExteriorRing();
+    poExteriorRing->OGRLinearRing::closeRings();
+    int NumberOfExteriorRingVertices = poExteriorRing->OGRSimpleCurve::getNumPoints();
+    if (NumberOfExteriorRingVertices==5)
+    {
+        string type = parcel->get_type()->get_type();
+        if (roofAngle==0)
+        {
+            bm= flat_roof(*this);
+        }
+        else
+        {
+            int a = rand() % 2;
+            if (a==0)
+            {
+                bm= crossed_spine(*this, roofAngle);
+            }
+            else
+            {
+                bm= linear_spine(*this, roofAngle);
+            }
+        }
+        building_models.push_back(bm);
+    }
+    else if (NumberOfExteriorRingVertices==7)
+    {
+        bm= flat_roof(*this);
+        building_models.push_back(bm);
+    }
 }
 
 vector<string> Building::to_obj(OGRPoint* centroid, int& index_offset)
