@@ -172,19 +172,8 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
 
     results.push_back(vertices);
     results.push_back(uv_coordinates);
+    results.push_back(normal_coordinates);
     results.push_back(faces);
-
-    /* To control the output
-    cout << vertices << endl;
-    cout << uv_coordinates << endl;
-    cout << faces << endl;
-    */
-
-    /* To have an output file
-    ofstream out("roads.obj");
-    out << vertices << uv_coordinates << faces;
-    out.close();
-    */
 
     return results;
 }
