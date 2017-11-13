@@ -99,7 +99,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
 
         string vnormal;
         // Constructing the face line corresponding to the triangle
-        if (type==WALL){
+        if (type!=FLOOR){
             double x_normal = (p2.get_y()-p1.get_y())*(p3.get_z()-p1.get_z()) - (p2.get_z()-p1.get_z())*(p3.get_y()-p1.get_y());
             double y_normal = (p2.get_z()-p1.get_z())*(p3.get_x()-p1.get_x()) - (p2.get_x()-p1.get_x())*(p3.get_z()-p1.get_z());
 
@@ -159,9 +159,9 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
         //Roof and floor
         normal_coordinates = "vn 0 1 0\n";
         //Walls
-        normal_coordinates+= "vn 1 0 0\nvn 0 0 1\nvn 0 0 -1\n";
-        normal_coordinates+= "vn -1 0 0\nvn 1 0 1\nvn -1 0 -1\n";
-        normal_coordinates+= "vn -1 0 1\nvn 1 0 -1\n";
+        normal_coordinates+= "vn -1 0 0\nvn 0 0 -1\nvn 0 0 1\n";
+        normal_coordinates+= "vn 1 0 0\nvn -1 0 -1\nvn 1 0 1\n";
+        normal_coordinates+= "vn 1 0 -1\nvn -1 0 1\n";
 
     } else{
         uv_coordinates = "";
