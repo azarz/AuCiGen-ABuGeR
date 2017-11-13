@@ -56,7 +56,7 @@ int main()
     int offset_envelop(0);
     int offset_building(0);
 
-    for(unsigned int i=0; i<100;i++)//PARCELS.size();i++)
+    for(unsigned int i=0; i<20;i++)//PARCELS.size();i++)
     {
 
         Parcel parcel = PARCELS.at(i);

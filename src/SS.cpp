@@ -91,74 +91,120 @@ BuildingModel linear_spine(Building bu, double roofAngle)
             li_point.push_back(pt);
         }
     }
-
-    //getting the higher distance edge (lengthwise and crosswise)
-    /* if __l1__           else  __l1__
-      a...........b              a....b
-      .           .   |          . m1 .
-    m1.   l1>l2   .m2 l2         .    . |
-      .           .   |          .    . l2
-      d...........c              .    . |
-                                 d....c
-                                   m2
-    */
-    double dx = li_point.at(1).get_x()-li_point.at(0).get_x();
-    double dy =li_point.at(1).get_y()-li_point.at(0).get_y();
-    double l1 = sqrt(dx*dx+dy*dy);
-    dx =li_point.at(1).get_x()-li_point.at(2).get_x();
-    dy =li_point.at(1).get_y()-li_point.at(2).get_y();
-    double l2 = sqrt(dx*dx+dy*dy);
-
-    Point m1;// setting middle point of width on the left side
-    Point m2;//and right side         (with height from angle roof)
-    if (l1>l2)//if __l1__>__l2__: m2=c.translate([cb]/2) & m1=d.translate([da]/2),
-        {
-        m2.set_x( li_point.at(2).get_x() + ( (li_point.at(1).get_x()-li_point.at(2).get_x())/2) );
-        m2.set_y( li_point.at(2).get_y() + ( (li_point.at(1).get_y()-li_point.at(2).get_y()) /2) );
-        m2.set_z( li_point.at(2).get_z() + ( (li_point.at(1).get_z()-li_point.at(2).get_z()) /2) +(tan(roofAngle)*(l2/2)) );
-
-        m1.set_x( li_point.at(3).get_x() + ( (li_point.at(0).get_x()-li_point.at(3).get_x()) /2) );
-        m1.set_y( li_point.at(3).get_y() + ( (li_point.at(0).get_y()-li_point.at(3).get_y()) /2) );
-        m1.set_z( li_point.at(3).get_z() + ( (li_point.at(0).get_z()-li_point.at(3).get_z()) /2) +(tan(roofAngle)*(l2/2)));
-        Triangle fa(m1,li_point.at(0),li_point.at(1),ROOF);
-        li_triangle.push_back(fa);
-        Triangle fb(m1,li_point.at(1),m2,ROOF);
-        li_triangle.push_back(fb);
-        Triangle fc(m1,m2,li_point.at(2),ROOF);
-        li_triangle.push_back(fc);
-        Triangle fd(m1,li_point.at(2),li_point.at(3),ROOF);
-        li_triangle.push_back(fd);
-
-        Triangle fe(m1,li_point.at(3),li_point.at(0),WALL);
-        li_triangle.push_back(fe);
-        Triangle ff(m2,li_point.at(1),li_point.at(2),WALL);
-        li_triangle.push_back(ff);
-
-        }
-    //else : m1=a.translate([ab]/2);m2=d.translate([dc]/2)
-    else
+    if (NumberOfExteriorRingVertices==5)
     {
-        m1.set_x( li_point.at(0).get_x() + ( (li_point.at(1).get_x()-li_point.at(0).get_x()) /2) );
-        m1.set_y( li_point.at(0).get_y() + ( (li_point.at(1).get_y()-li_point.at(0).get_y()) /2) );
-        m1.set_z( li_point.at(0).get_z() + ( (li_point.at(1).get_z()-li_point.at(0).get_z()) /2) +(tan(roofAngle)*(l1/2)) );
+        //getting the higher distance edge (lengthwise and crosswise)
+        /* if __l1__           else  __l1__
+          a...........b              a....b
+          .           .   |          . m1 .
+        m1.   l1>l2   .m2 l2         .    . |
+          .           .   |          .    . l2
+          d...........c              .    . |
+                                     d....c
+                                       m2
+        */
+        double dx = li_point.at(1).get_x()-li_point.at(0).get_x();
+        double dy =li_point.at(1).get_y()-li_point.at(0).get_y();
+        double l1 = sqrt(dx*dx+dy*dy);
+        dx =li_point.at(1).get_x()-li_point.at(2).get_x();
+        dy =li_point.at(1).get_y()-li_point.at(2).get_y();
+        double l2 = sqrt(dx*dx+dy*dy);
 
-        m2.set_x( li_point.at(3).get_x() + ( (li_point.at(2).get_x()-li_point.at(3).get_x()) /2) );
-        m2.set_y( li_point.at(3).get_y() + ( (li_point.at(2).get_y()-li_point.at(3).get_y()) /2) );
-        m2.set_z( li_point.at(3).get_z() + ( (li_point.at(2).get_z()-li_point.at(3).get_z()) /2) +(tan(roofAngle)*(l1/2)));
+        Point m1;// setting middle point of width on the left side
+        Point m2;//and right side         (with height from angle roof)
+        if (l1>l2)//if __l1__>__l2__: m2=c.translate([cb]/2) & m1=d.translate([da]/2),
+            {
+            m2.set_x( li_point.at(2).get_x() + ( (li_point.at(1).get_x()-li_point.at(2).get_x())/2) );
+            m2.set_y( li_point.at(2).get_y() + ( (li_point.at(1).get_y()-li_point.at(2).get_y()) /2) );
+            m2.set_z( li_point.at(2).get_z() + ( (li_point.at(1).get_z()-li_point.at(2).get_z()) /2) +(tan(roofAngle)*(l2/2)) );
 
-        Triangle fa(m1,li_point.at(1),li_point.at(2),ROOF);
-        li_triangle.push_back(fa);
-        Triangle fb(m1,li_point.at(2),m2,ROOF);
-        li_triangle.push_back(fb);
-        Triangle fc(m1,m2,li_point.at(3),ROOF);
-        li_triangle.push_back(fc);
-        Triangle fd(m1,li_point.at(3),li_point.at(0),ROOF);
-        li_triangle.push_back(fd);
+            m1.set_x( li_point.at(3).get_x() + ( (li_point.at(0).get_x()-li_point.at(3).get_x()) /2) );
+            m1.set_y( li_point.at(3).get_y() + ( (li_point.at(0).get_y()-li_point.at(3).get_y()) /2) );
+            m1.set_z( li_point.at(3).get_z() + ( (li_point.at(0).get_z()-li_point.at(3).get_z()) /2) +(tan(roofAngle)*(l2/2)));
+            Triangle fa(m1,li_point.at(0),li_point.at(1),ROOF);
+            li_triangle.push_back(fa);
+            Triangle fb(m1,li_point.at(1),m2,ROOF);
+            li_triangle.push_back(fb);
+            Triangle fc(m1,m2,li_point.at(2),ROOF);
+            li_triangle.push_back(fc);
+            Triangle fd(m1,li_point.at(2),li_point.at(3),ROOF);
+            li_triangle.push_back(fd);
 
-        Triangle fe(m1,li_point.at(0),li_point.at(1),WALL);
-        li_triangle.push_back(fe);
-        Triangle ff(m2,li_point.at(2),li_point.at(3),WALL);
-        li_triangle.push_back(ff);
+            Triangle fe(m1,li_point.at(3),li_point.at(0),WALL);
+            li_triangle.push_back(fe);
+            Triangle ff(m2,li_point.at(1),li_point.at(2),WALL);
+            li_triangle.push_back(ff);
+        }
+        //else : m1=a.translate([ab]/2);m2=d.translate([dc]/2)
+        else
+        {
+            m1.set_x( li_point.at(0).get_x() + ( (li_point.at(1).get_x()-li_point.at(0).get_x()) /2) );
+            m1.set_y( li_point.at(0).get_y() + ( (li_point.at(1).get_y()-li_point.at(0).get_y()) /2) );
+            m1.set_z( li_point.at(0).get_z() + ( (li_point.at(1).get_z()-li_point.at(0).get_z()) /2) +(tan(roofAngle)*(l1/2)) );
+
+            m2.set_x( li_point.at(3).get_x() + ( (li_point.at(2).get_x()-li_point.at(3).get_x()) /2) );
+            m2.set_y( li_point.at(3).get_y() + ( (li_point.at(2).get_y()-li_point.at(3).get_y()) /2) );
+            m2.set_z( li_point.at(3).get_z() + ( (li_point.at(2).get_z()-li_point.at(3).get_z()) /2) +(tan(roofAngle)*(l1/2)));
+
+            Triangle fa(m1,li_point.at(1),li_point.at(2),ROOF);
+            li_triangle.push_back(fa);
+            Triangle fb(m1,li_point.at(2),m2,ROOF);
+            li_triangle.push_back(fb);
+            Triangle fc(m1,m2,li_point.at(3),ROOF);
+            li_triangle.push_back(fc);
+            Triangle fd(m1,li_point.at(3),li_point.at(0),ROOF);
+            li_triangle.push_back(fd);
+
+            Triangle fe(m1,li_point.at(0),li_point.at(1),WALL);
+            li_triangle.push_back(fe);
+            Triangle ff(m2,li_point.at(2),li_point.at(3),WALL);
+            li_triangle.push_back(ff);
+        }
+    }
+    else if (NumberOfExteriorRingVertices==7)
+    {
+        Point A, B, C;
+        double dx = li_point.at(5).get_x()-li_point.at(0).get_x();
+        double dy =li_point.at(5).get_y()-li_point.at(0).get_y();
+        double lA = sqrt(dx*dx+dy*dy);
+        dx = li_point.at(2).get_x()-li_point.at(3).get_x();
+        dy =li_point.at(2).get_y()-li_point.at(3).get_y();
+        double lC = sqrt(dx*dx+dy*dy);
+        double lm=(lA+lC)/2;
+        A.set_x( (li_point.at(5).get_x()+li_point.at(0).get_x()) /2);
+        A.set_y( (li_point.at(5).get_y()+li_point.at(0).get_y()) /2);
+        A.set_z( (li_point.at(5).get_z()+li_point.at(0).get_z()) /2 +(tan(roofAngle)*(lm/2)) );
+
+        B.set_x( (li_point.at(1).get_x()+li_point.at(4).get_x()) /2);
+        B.set_y( (li_point.at(1).get_y()+li_point.at(4).get_y()) /2);
+        B.set_z( (li_point.at(1).get_z()+li_point.at(4).get_z()) /2 +(tan(roofAngle)*(lm/2)) );
+
+        C.set_x( (li_point.at(2).get_x()+li_point.at(3).get_x()) /2);
+        C.set_y( (li_point.at(2).get_y()+li_point.at(3).get_y()) /2);
+        C.set_z( (li_point.at(2).get_z()+li_point.at(3).get_z()) /2 +(tan(roofAngle)*(lm/2)) );
+
+        Triangle tri;
+        tri=Triangle(A, li_point.at(4), li_point.at(5), ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(A, B, li_point.at(4), ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(A, li_point.at(0), B, ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(li_point.at(0), li_point.at(1), B, ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(li_point.at(1), C, B, ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(li_point.at(1), li_point.at(2), C, ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(li_point.at(3), li_point.at(4), C, ROOF);
+        li_triangle.push_back(tri);
+        tri=Triangle(li_point.at(4), B, C, ROOF);
+        li_triangle.push_back(tri);
+
+        tri=Triangle(li_point.at(5), li_point.at(0), A, WALL);
+        li_triangle.push_back(tri);
+        tri=Triangle(li_point.at(2), li_point.at(3), C, WALL);
+        li_triangle.push_back(tri);
     }
 
     //adding a new building model 'roof' from triangular fronts to those of the building list.
