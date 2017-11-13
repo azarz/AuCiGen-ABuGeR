@@ -102,12 +102,12 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     out_parcel.close();
 
     ofstream out_envelop("2_models/envelops.obj");
-    out_parcel << "mtllib envelop.mtl\n";
+    out_envelop << "mtllib envelop.mtl\n";
     out_envelop << envelopOBJ.at(0) << envelopOBJ.at(1) << envelopOBJ.at(2) << envelopOBJ.at(3);
     out_envelop.close();
 /*
     ofstream out_building("2_models/building.obj");
-    out_parcel << "mtllib building.mtl\n";
+    out_building << "mtllib building.mtl\n";
     out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2) << buildingOBJ.at(3);
     out_building.close();*/
 

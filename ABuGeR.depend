@@ -50,7 +50,7 @@
 
 1510157501 /home/formation/AuCiGen/ABuGeR/include/Point.h
 
-1510239033 source:/home/formation/AuCiGen/ABuGeR/src/BuildingType.cpp
+1510584990 source:/home/formation/AuCiGen/ABuGeR/src/BuildingType.cpp
 	"BuildingType.h"
 	<vector>
 	<iostream>
@@ -278,21 +278,8 @@
 	"Point.h"
 	"matrix_methods.h"
 
-1510582536 source:/home/formation/AuCiGen/ABuGeR/main.cpp
-	<iostream>
-	<vector>
-	<fstream>
-	"Envelop.h"
-	"open_shp.h"
-	"Road.h"
-	"Parcel.h"
-	"orient.h"
-	"Footprint.h"
-	"catch.h"
-	"poly_to_triangle.h"
-	"triangles_to_obj.h"
-	"Building.h"
-	"math.h"
+1510583857 source:/home/formation/AuCiGen/ABuGeR/main.cpp
+	"ABuGeR.h"
 
 1510143552 /home/formation/AuCiGen/ABuGeR/include/open_shp.h
 	"Road.h"
@@ -433,4 +420,6 @@
 	<CGAL/Exact_predicates_inexact_constructions_kernel.h>
 	<CGAL/Polygon_2.h>
 	<CGAL/Straight_skeleton_2.h>
+
+1510583857 /home/formation/AuCiGen/ABuGeR/include/ABuGeR.h
 
