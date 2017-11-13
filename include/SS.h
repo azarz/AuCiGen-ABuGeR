@@ -16,36 +16,28 @@
 #include <CGAL/Straight_skeleton_2.h>*/
 
 /*! \file */
-OGRPolygon Straight_Skeleton(BuildingModel bu);
-/**
-*@fn
-*Manage a straight skeleton for the roof.
-*@param[in] .
-*@return .
-*/
-
-
 BuildingModel crossed_spine(Building b, double roofAngle);
 /**
-*@fn
+*@fn BuildingModel crossed_spine(Building b, double roofAngle)
 *Manage a crossed roof skeleton.
-*@param[in] .
-*@return .
+*@param[in] bu : building whose roof is to create.
+*@return building model with roof.
 */
 
 BuildingModel linear_spine(Building b, double roofAngle);
 /**
-*@fn
+*@fn BuildingModel linear_spine(Building b, double roofAngle)
 *Manage mono linear roof skeleton.
-*@param[in] .
-*@return .
+*@param[in] bu : building whose roof is to create..
+*@return building model with roof.
 */
+
 BuildingModel linear_cross_spine(Building b, double roofAngle);
 /**
-*@fn
+*@fn BuildingModel linear_cross_spine(Building b, double roofAngle)
 *Manage linear roof skeleton linked to the four corners roof .
-*@param[in] .
-*@return .
+*@param[in] bu : building whose roof is to create.
+*@return building model with roof.
 */
 
 BuildingModel flat_roof(Building bu);

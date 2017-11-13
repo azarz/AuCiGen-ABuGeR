@@ -213,7 +213,6 @@ BuildingModel linear_spine(Building bu, double roofAngle)
     return roof;
 }
 
-/*
 BuildingModel linear_cross_spine(Building bu, double roofAngle)
 {
     vector<Triangle> li_triangle;
@@ -268,15 +267,15 @@ BuildingModel linear_cross_spine(Building bu, double roofAngle)
     Point m2;//and right side         (with height from angle roof)
     if (l1>l2)//if __l1__>__l2__: m2=c.translate([cb]/2) & m1=d.translate([da]/2)
         {
-        m2.set_x( li_point.at(2).get_x() + ( (li_point.at(1).get_x()-li_point.at(2).get_x())/2 ) + ( P.get_x()-li_point.at(2).get_x())/2);
-        m2.set_y( li_point.at(2).get_y() + ( (li_point.at(1).get_y()-li_point.at(2).get_y()) /2) + ( P.get_y()-li_point.at(2).get_y())/2);
-        double dx = m2.get_x()-li_point.at(0).get_x();
-        double dy = m2.get_y()-li_point.at(0).get_y();
+        m2.set_x( ((li_point.at(1).get_x()+li_point.at(2).get_x())/2  + P.get_x())/2);
+        m2.set_y( ((li_point.at(1).get_y()+li_point.at(2).get_y())/2  + P.get_y())/2);
+        double dx = m2.get_x()-li_point.at(2).get_x();
+        double dy = m2.get_y()-li_point.at(2).get_y();
         double d = sqrt(dx*dx+dy*dy);
         m2.set_z( bu.get_height() + (tan(roofAngle)*d) );
 
-        m1.set_x( li_point.at(3).get_x() + ( (li_point.at(0).get_x()-li_point.at(3).get_x()) /2) + ( P.get_x()-li_point.at(3).get_x())/2) ;
-        m1.set_y( li_point.at(3).get_y() + ( (li_point.at(0).get_y()-li_point.at(3).get_y()) /2) + ( P.get_y()-li_point.at(3).get_y())/2) ;
+        m1.set_x( ((li_point.at(0).get_x()+li_point.at(3).get_x()) /2 + P.get_x())/2) ;
+        m1.set_y( ((li_point.at(0).get_y()+li_point.at(3).get_y()) /2 + P.get_y())/2) ;
         m1.set_z( m2.get_z());
 
         Triangle fa(m1,li_point.at(0),li_point.at(1),ROOF);
@@ -288,24 +287,24 @@ BuildingModel linear_cross_spine(Building bu, double roofAngle)
         Triangle fd(m1,li_point.at(2),li_point.at(3),ROOF);
         li_triangle.push_back(fd);
 
-        Triangle fe(m1,li_point.at(3),li_point.at(0),WALL);
+        Triangle fe(m1,li_point.at(3),li_point.at(0),ROOF);
         li_triangle.push_back(fe);
-        Triangle ff(m2,li_point.at(1),li_point.at(2),WALL);
+        Triangle ff(m2,li_point.at(1),li_point.at(2),ROOF);
         li_triangle.push_back(ff);
         }
     //else : m1=a.translate([ab]/2);m2=d.translate([dc]/2)
     else
     {
-        m1.set_x( li_point.at(0).get_x() + ( (li_point.at(1).get_x()-li_point.at(0).get_x()) /2) + ( P.get_x()-li_point.at(0).get_x())/2);
-        m1.set_y( li_point.at(0).get_y() + ( (li_point.at(1).get_y()-li_point.at(0).get_y()) /2) + ( P.get_y()-li_point.at(0).get_y())/2);
+        m1.set_x( ((li_point.at(1).get_x()+li_point.at(0).get_x()) /2 +  P.get_x())/2);
+        m1.set_y( ((li_point.at(1).get_y()+li_point.at(0).get_y()) /2 +  P.get_y())/2);
         double dx = m1.get_x()-li_point.at(0).get_x();
         double dy = m1.get_y()-li_point.at(0).get_y();
         double d = sqrt(dx*dx+dy*dy);
         m1.set_z( bu.get_height() + (tan(roofAngle)*d) );
 
         m2.set_z( bu.get_height() + (tan(roofAngle)*d) );
-        m2.set_x( li_point.at(3).get_x() + ( (li_point.at(2).get_x()-li_point.at(3).get_x()) /2) + ( P.get_x()-li_point.at(3).get_x())/2);
-        m2.set_y( li_point.at(3).get_y() + ( (li_point.at(2).get_y()-li_point.at(3).get_y()) /2) + ( P.get_y()-li_point.at(3).get_y())/2);
+        m2.set_x( ((li_point.at(2).get_x()+li_point.at(3).get_x()) /2 + P.get_x())/2);
+        m2.set_y( ((li_point.at(2).get_y()+li_point.at(3).get_y()) /2 + P.get_y())/2);
         m2.set_z( m1.get_z());
 
         Triangle fa(m1,li_point.at(1),li_point.at(2),ROOF);
@@ -317,13 +316,13 @@ BuildingModel linear_cross_spine(Building bu, double roofAngle)
         Triangle fd(m1,li_point.at(3),li_point.at(0),ROOF);
         li_triangle.push_back(fd);
 
-        Triangle fe(m1,li_point.at(0),li_point.at(1),WALL);
+        Triangle fe(m1,li_point.at(0),li_point.at(1),ROOF);
         li_triangle.push_back(fe);
-        Triangle ff(m2,li_point.at(2),li_point.at(3),WALL);
+        Triangle ff(m2,li_point.at(2),li_point.at(3),ROOF);
         li_triangle.push_back(ff);
     }
     return BuildingModel(li_triangle, bu.get_parcel());
-}*/
+}
 
 BuildingModel flat_roof(Building bu)
 {
