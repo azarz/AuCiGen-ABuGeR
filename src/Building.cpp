@@ -315,14 +315,18 @@ void Building::creat_roof(double roofAngle)
             }
             else
             {
-                int a = rand() % 2;
+                int a = rand() % 3;
                 if (a==0)
                 {
                     bm= crossed_spine(*this, roofAngle);
                 }
-                else
+                else if (a==1)
                 {
                     bm= linear_spine(*this, roofAngle);
+                }
+                else
+                {
+                    bm = linear_cross_spine(*this, roofAngle);
                 }
             }
             building_models.push_back(bm);
