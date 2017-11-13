@@ -109,18 +109,23 @@ int main()
 
     ofstream out_parcel("2_models/parcels.obj");
     out_parcel << "mtllib parcel.mtl\n";
-
     out_parcel << parcelOBJ.at(0) << parcelOBJ.at(1) << parcelOBJ.at(2);
     out_parcel << "usemtl Parcel\ns 1\n";
     out_parcel << parcelOBJ.at(3);
     out_parcel.close();
 
     ofstream out_envelop("2_models/envelops.obj");
-    out_envelop << envelopOBJ.at(0) << envelopOBJ.at(1) << envelopOBJ.at(2) << envelopOBJ.at(3);
+    out_envelop << "mtllib envelop.mtl\n";
+    out_envelop << envelopOBJ.at(0) << envelopOBJ.at(1) << envelopOBJ.at(2);
+    out_envelop << "usemtl Envelop\ns 1\n";
+    out_envelop << envelopOBJ.at(3);
     out_envelop.close();
 
     /*ofstream out_building("2_models/building.obj");
-    out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2) << buildingOBJ.at(3);
+    out_building << "mtllib building.mtl\n";
+    out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2);
+    out_building << "usemtl Building\ns 1\n";
+    out_building << buildingOBJ.at(3);
     out_building.close();*/
 
 
