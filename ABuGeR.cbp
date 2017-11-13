@@ -42,6 +42,7 @@
 		<Unit filename="include/Parcel.h" />
 		<Unit filename="include/Point.h" />
 		<Unit filename="include/Road.h" />
+		<Unit filename="include/SS.h" />
 		<Unit filename="include/Triangle.h" />
 		<Unit filename="include/catch.h" />
 		<Unit filename="include/create_env_roof.h" />
@@ -63,8 +64,8 @@
 		<Unit filename="src/Parcel.cpp" />
 		<Unit filename="src/Point.cpp" />
 		<Unit filename="src/Road.cpp" />
+		<Unit filename="src/SS.cpp" />
 		<Unit filename="src/Triangle.cpp" />
-		<Unit filename="src/catch.cpp" />
 		<Unit filename="src/create_env_roof.cpp" />
 		<Unit filename="src/create_wall.cpp" />
 		<Unit filename="src/gauss.cpp" />

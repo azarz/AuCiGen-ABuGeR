@@ -18,7 +18,7 @@ void create_env_roof(double height, vector<Triangle>& li_tri)
         Point newP2 = Point(P2.get_x(), P2.get_y(), height);
         Point newP3 = Point(P3.get_x(), P3.get_y(), height);
 
-        Triangle tri1 = Triangle(newP1, newP2, newP3, ROOF);
+        Triangle tri1 = Triangle(newP1, newP3, newP2, ROOF);
         li_tri.push_back(tri1);
     }
 }

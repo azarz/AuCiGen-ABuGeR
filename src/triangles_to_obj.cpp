@@ -142,7 +142,7 @@ vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
 
     // Default uv coordinates
     if (index_offset==0){
-        uv_coordinates = "vt 0 0 \nvt 100 0 \nvt 0 100\n";
+        uv_coordinates = "vt 0 0 \nvt 10 0 \nvt 0 10\n";
         //Roof and floor
         normal_coordinates = "vn 0 1 0\n";
         //Walls
