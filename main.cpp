@@ -28,6 +28,8 @@ int main()
     centroid = open_shp_roads(file_path, ROADS, layer_name);
     file_path ="1_data/paris_test/test_paris_seuil.shp";
     layer_name ="test_paris_seuil";
+    //vector<double > angle_roof{0, }
+
     open_shp_parcels(file_path, PARCELS, centroid, layer_name);
 /*
     cout << "Converting the roads to .obj..." << endl;
