@@ -1,7 +1,7 @@
-newmtl Road
+newmtl Building
 Ka 1.000 1.000 1.000     # white
-Kd 1.000 1.000 1.000     # white
+Kd 1.00 1.000 1.000     # white
 Ks 0.000 0.000 0.000     # black (off)
 d 1.0
 illum 2
-map_Kd road.png
+map_Kd envelop.jpg
