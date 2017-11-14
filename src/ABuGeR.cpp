@@ -25,7 +25,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
 
     open_shp_parcels(file_path_Parcel, PARCELS, centroid, layer_name_Parcel);
 
-    /*cout << "Converting the roads to .obj..." << endl;
+    cout << "Converting the roads to .obj..." << endl;
     vector<string> roadOBJ{"","","",""};
     int offset_road(0);
     for(unsigned int i=0U; i<ROADS.size();++i)
@@ -110,7 +110,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     ofstream out_building("2_models/building.obj");
     out_building << "mtllib building.mtl\n";
     out_building << buildingOBJ.at(0) << buildingOBJ.at(1) << buildingOBJ.at(2) << buildingOBJ.at(3);
-    out_building.close();*/
+    out_building.close();
 
 
     return 0;
