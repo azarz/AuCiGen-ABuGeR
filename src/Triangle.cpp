@@ -98,10 +98,6 @@ vector <Triangle> Triangle::split(double axis[3], Point origin, TriangleType new
     AB[0][0]=ab0;
     AB[1][0]=ab1;
     AB[2][0]=ab2;
-    //set BC coordinates
-    double bc0 = p3.get_x() - p2.get_x();
-    double bc1 = p3.get_y() - p2.get_y();
-    double bc2 = p3.get_z() - p2.get_z();
 
     //set S coordinates
     double s0 = origin.get_x() + axis[0];

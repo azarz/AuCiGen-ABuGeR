@@ -74,7 +74,7 @@ void BuildingModel::split(double axis[3], Point origin, TriangleType oldName, Tr
 
 void BuildingModel::repeat(TriangleType oldName, TriangleType newName)
 {
-    for (int i=0; i<li_triangle.size(); i++)
+    for (unsigned int i=0U; i<li_triangle.size(); i++)
     {
         if (li_triangle[i].get_type() == newName)
         {

@@ -14,7 +14,7 @@ Building::Building(Envelop* env)
     //ctor
 
     //double gap=1; //length between two points
-    double step= 20; // angle between two rectangles calculated
+    //double step= 20; // angle between two rectangles calculated
 
 
     parcel=env->get_parcel();
@@ -72,7 +72,7 @@ Building::Building(Envelop* env)
         if (sqrt(Xb*Xb+Yb*Yb)>=4)
         {
             bool test_a=true;
-            for (int k =0; k<li_angle.size(); k++)
+            for (unsigned int k =0U; k<li_angle.size(); k++)
             {
                 //cout<< angle/M_PI*180<<", "<< li_angle.at(k)/M_PI*180<< ", ["<<(li_angle.at(k)-10/180*M_PI)/M_PI*180<<", "<< ((li_angle.at(k))/M_PI*180+10)<<"]"<<endl;
                 if (angle/M_PI*180 > ((li_angle.at(k))/M_PI*180-5) && (angle/M_PI*180 < ((li_angle.at(k))/M_PI*180+5)))
@@ -160,7 +160,7 @@ Building::Building(Envelop* env)
         //cout<< best_area<<endl;
     }
 
-    for (int k_a = 0; k_a<li_angle.size(); k_a++)
+    for (unsigned int k_a = 0U; k_a<li_angle.size(); k_a++)
     {
         //with rotation :
         double A = li_angle.at(k_a);
@@ -195,10 +195,7 @@ Building::Building(Envelop* env)
                 ymaxR=Ry;
             }
         }
-        //cout << "min ("<<xminR <<", "<< yminR<<"); max ("<<xmaxR<<", "<< ymaxR <<")"<<endl;
-        double dxR = xmaxR-xminR;
-        double dyR = ymaxR-yminR;
-        //cout << "dx = "<<dxR<<"; dy = "<<dyR<<endl;
+
         //matrix creation :
         N=0;
         b.clear();

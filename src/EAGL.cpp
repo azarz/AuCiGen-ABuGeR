@@ -217,5 +217,3 @@ int EAGL()
     return 0;
 }
 
-
-#pragma endregion

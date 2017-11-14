@@ -10,5 +10,5 @@ int main()
     const char* layer_name_Parcel ="test_paris_seuil";
     int a = ABuGeR(file_path_Road, layer_name_Road, file_path_Parcel, layer_name_Parcel);
     int b = EAGL();
-    return b;
+    return a+b;
 }

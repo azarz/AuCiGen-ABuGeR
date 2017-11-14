@@ -72,19 +72,19 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
         if (poPolygon.OGRCurvePolygon::get_Area() > 50)
         {
             Envelop envelop = footprint.create_envelop();
-            //envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
+            envelopOBJ_temp = envelop.to_obj(centroid, offset_envelop);
             Building bui= Building(&envelop);
             bui.creat_roof(angle_roof.at( rand() %4));
             buildingOBJ_temp = bui.to_obj(centroid, offset_building);
         }
 
-        //parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
+        parcelOBJ_temp = parcel.to_obj(centroid, offset_parcel);
 
         for (int k = 0; k<4; ++k)
         {
-            //envelopOBJ.at(k)+=envelopOBJ_temp.at(k);
+            envelopOBJ.at(k)+=envelopOBJ_temp.at(k);
             buildingOBJ.at(k)+=buildingOBJ_temp.at(k);
-            //parcelOBJ.at(k)+=parcelOBJ_temp.at(k);
+            parcelOBJ.at(k)+=parcelOBJ_temp.at(k);
         }
         delete linearIntersection;
         delete otherSides;
