@@ -25,7 +25,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
 
     open_shp_parcels(file_path_Parcel, PARCELS, centroid, layer_name_Parcel);
 
-    cout << "Converting the roads to .obj..." << endl;
+    /*cout << "Converting the roads to .obj..." << endl;
     vector<string> roadOBJ{"","","",""};
     int offset_road(0);
     for(unsigned int i=0U; i<ROADS.size();++i)
@@ -39,7 +39,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
             roadOBJ.at(k)+=roadOBJ_temp.at(k);
         }
     }
-    cout << "100%\r"<<endl;
+    cout << "100%\r"<<endl;*/
 
     cout << "Converting the parcels and envelops to .obj..." << endl;
     cout << 0 << "%\r";
@@ -51,7 +51,7 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     int offset_envelop(0);
     int offset_building(0);
 
-    for(unsigned int i=0; i<20;i++)
+    for(unsigned int i=0; i<100;i++)
 
     {
         Parcel parcel = PARCELS.at(i);
@@ -92,10 +92,10 @@ int ABuGeR(const char* file_path_Road, const char* layer_name_Road, const char* 
     cout <<"100%\r"<<endl;
 
     //To have an output file
-    ofstream out_road("2_models/roads.obj");
+    /*ofstream out_road("2_models/roads.obj");
     out_road << "mtllib road.mtl\n";
     out_road << roadOBJ.at(0) << roadOBJ.at(1) << roadOBJ.at(2) << roadOBJ.at(3);
-    out_road.close();
+    out_road.close();*/
 
     ofstream out_parcel("2_models/parcels.obj");
     out_parcel << "mtllib parcel.mtl\n";
