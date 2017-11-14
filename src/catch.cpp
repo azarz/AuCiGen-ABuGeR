@@ -1246,7 +1246,7 @@ TEST_CASE("poly_to_triangle are computed","[poly_to_triangle]")
     vector<Parcel> PARCELS;
     const char* fill_directory ="1_data/test/test_parcel.shp";
 
-    const char* wkt ="POINT ((55.4683455250644 -21.3282187046573))";
+    char* wkt ="POINT ((55.4683455250644 -21.3282187046573))";
     OGRPoint* centroid = new OGRPoint();
     centroid->OGRPoint::importFromWkt( &wkt);
 
