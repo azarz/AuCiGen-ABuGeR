@@ -55,26 +55,3 @@ void create_wall(OGRPolygon* poPolygon, double height, vector<Triangle>& li_tri)
         li_tri.push_back(tri2);
     }
 }
-/*
-#include "catch.h"
-
-TEST_CASE("creat_wall are computed","[creat_wall]")
-{
-    char * wkt = "POLYGON ((55.4678416936841 -21.3283219559282, 55.4678375166117 -21.3283189126795, 55.467812437186 -21.3283006408084, 55.4680106001766 -21.3280669525981, 55.468037199703 -21.328085230485, 55.4678416936841 -21.3283219559282))";
-    OGRPolygon poPolygon= OGRPolygon();
-    poPolygon.OGRPolygon::importFromWkt( &wkt);
-    vector<Triangle> li_tri;
-    creat_wall(&poPolygon, 4, li_tri);
-    REQUIRE(li_tri.size()==10);
-    REQUIRE(li_tri.at(0).get_p1().get_x()==55.4678375166117);
-    REQUIRE(li_tri.at(0).get_p1().get_y()==-21.3283189126795);
-    REQUIRE(li_tri.at(0).get_p1().get_z()==4);
-    REQUIRE(li_tri.at(0).get_p2().get_x()==55.4678375166117);
-    REQUIRE(li_tri.at(0).get_p2().get_y()==-21.3283189126795);
-    REQUIRE(li_tri.at(0).get_p2().get_z()==0);
-    REQUIRE(li_tri.at(0).get_p3().get_x()==55.4678416936841);
-    REQUIRE(li_tri.at(0).get_p3().get_y()==-21.3283219559282);
-    REQUIRE(li_tri.at(0).get_p3().get_z()==0);
-
-}
-*/

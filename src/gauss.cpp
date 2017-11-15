@@ -259,7 +259,6 @@ int gauss2P(double A[3][2], double B[3][1], double C[2][1])
 }
 
 /*
-#include "catch.h"
 TEST_CASE("gauss3p are computed","[gauss3p]")
 {
     double A[3][3];
