@@ -6,7 +6,6 @@
 #include <string>
 #include <fstream>
 #include "triangles_to_obj.h"
-//#include "catch.h"
 
 
 Road::Road(OGRPolygon* poPolygon, int t_r)

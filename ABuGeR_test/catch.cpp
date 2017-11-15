@@ -1,4 +1,4 @@
-//#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_MAIN
 #include "catch.h"
 
 #include <iostream>
@@ -251,7 +251,7 @@ TEST_CASE("split BuildingModel are computed", "[split]")
 ////////////////////////////////////
 
 ////////// BuildingType ////////////
-/*
+
 TEST_CASE("Industry are computed", "[Industry]")
 {
     Industry I;
@@ -342,7 +342,7 @@ TEST_CASE("Townhouse are computed", "[Townhouse]")
     REQUIRE(I.get_roof() ==1);
     REQUIRE(I.get_wall() ==1);
 }
-*/
+
 ////////////////////////////////////
 
 //////////// Envelop //////////////

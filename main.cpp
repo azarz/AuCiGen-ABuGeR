@@ -8,8 +8,8 @@ int main()
     const char* layer_name_Road ="route_secondaire_buffer";
     const char* file_path_Parcel ="1_data/paris_test/test_paris_seuil.shp";
     const char* layer_name_Parcel ="test_paris_seuil";
-    bool create_obj = true;
-    bool visualize = true;
+    bool create_obj = true;//false;
+    bool visualize = /*false;*/true;
     int a(0);
     int b(0);
     if(create_obj)
