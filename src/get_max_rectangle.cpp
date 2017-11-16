@@ -23,7 +23,6 @@ int larger_rectangle_included (vector<int> b, int N, int M, vector<int>& lim, in
         lly=0;
         while (lly<M && (N-llx)*(M-lly)> best_area)
         {
-            //cout<<"llx = "<<llx<<" lly = "<< lly <<" value = "<< b.at(llx*M+lly)<<endl;
             if (b.at(llx*M+lly)!=0)
             {
                 int a = floor(best_area/N);
@@ -35,7 +34,7 @@ int larger_rectangle_included (vector<int> b, int N, int M, vector<int>& lim, in
                         ury++;
                         continue;
                     }
-                    while (ury < M && all_ones(llx, lly, urx, ury, b, M))//sum(llx, ury, urx, ury, b, M)==urx-llx+1)
+                    while (ury < M && all_ones(llx, lly, urx, ury, b, M))
                     {
                         int area_temp=area(llx,lly, urx, ury );
                         if (area_temp>best_area)
@@ -117,8 +116,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
     int xmin, ymin, xmax, ymax;
     int test_x, test_y;
     if (all_ones(llx,lly,urx,ury, b, M)) // all 0 => no best L possible
-        {//cout<<"1"<<endl;
-        return false;}
+        {return false;}
     //find the first 0
     while (b.at(x*M+y)==1 && x<=urx)
     {
@@ -130,8 +128,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
         }
     }
     if (x>urx) // no 0 on b
-        {//cout<<"2"<<endl;
-        return false;}
+        {return false;}
     else if (x==llx && y==lly)//first 0 on (0, 0)
     {
         //first 1 on line llx
@@ -140,8 +137,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             y++;
         }
         if (y>=ury)
-            {//cout<<"3"<<endl;
-            return false;}
+            {return false;}
         int ymax=y;
         //first 0 on column lly
         while (b.at(x*M+lly)==0 && x<urx)
@@ -149,8 +145,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             x++;
         }
         if (x>=urx)
-            {//cout<<"4"<<endl;
-            return false;}
+            {return false;}
         int xmax=x;
         //vertical ONE rectangle
         test_x=llx;
@@ -163,16 +158,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     ymax=test_y+1;
                     if (ymax>=ury)
-                        { //cout<<"5.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_y++;
             }
             test_x++;
         }
         if (ymax>=ury)
-            {//cout<<"5.b"<<endl;
-            return false;}
+            {return false;}
 
         //horizontal ONE rectangle
         test_y=lly;
@@ -185,16 +178,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     xmax=test_x+1;
                     if (xmax>=urx)
-                        {//cout<<"6.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_x++;
             }
             test_y++;
         }
         if (xmax>=urx)
-            {//cout<<"6.b"<<endl;
-            return false;}
+            {return false;}
 
         lim.push_back(xmax); lim.push_back(lly);
         lim.push_back(xmax); lim.push_back(ymax);
@@ -219,8 +210,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             x++;
         }
         if (x>=urx)
-            {//cout<<"7"<<endl;
-            return false;}
+            {return false;}
         xmax=x;//first 1 on column ury
 
         //vertical ONE rectangle
@@ -234,16 +224,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     ymin=test_y-1;
                     if (ymin<=lly)
-                        {//cout<<"8.b"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_y++;
             }
             test_x++;
         }
         if (ymin<=lly)
-            {//out<<"8.a"<<endl;
-            return false;}
+            {return false;}
 
         //horizontal ONE rectangle
         test_y=ymin;
@@ -256,16 +244,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     xmax=test_x+1;
                     if (xmax>=urx)
-                        { //cout<<"9.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_x++;
             }
             test_y++;
         }
         if (xmax>=urx)
-            {//cout<<"9.b"<<endl;
-            return false;}
+            {return false;}
 
         lim.push_back(llx); lim.push_back(ymin);
         lim.push_back(xmax); lim.push_back(ymin);
@@ -287,8 +273,7 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
             y++;
         }
         if (y>ury)
-            {//cout<<"10"<<endl;
-            return false;}
+            {return false;}
         ymax=y;//first 1 on line urx
         //vertical ONE rectangle
         test_x=llx;
@@ -301,16 +286,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     ymax=test_y+1;
                     if (ymax>=ury)
-                        {//cout<<"12.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_y++;
             }
             test_x++;
         }
         if (ymax>=ury)
-            {//cout<<"12.b"<<endl;
-            return false;}
+            {return false;}
 
         //horizontal ONE rectangle
         test_y=lly;
@@ -323,16 +306,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     xmin=test_x-1;
                     if (xmin<=llx)
-                        {//cout<<"13.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_x++;
             }
             test_y++;
         }
         if (xmin<=llx)
-            {//cout<<"13.b"<<endl;
-            return false;}
+            {return false;}
 
         lim.push_back(urx); lim.push_back(ymax);
         lim.push_back(xmin); lim.push_back(ymax);
@@ -361,16 +342,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     ymin=test_y-1;
                     if (ymin<=lly)
-                        {//cout<<"14.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_y++;
             }
             test_x++;
         }
         if (ymin<=lly)
-            {//cout<<"14.b"<<endl;
-            return false;}
+            {return false;}
 
         //horizontal ONE rectangle
 
@@ -384,16 +363,14 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
                 {
                     xmin=test_x-1;
                     if (xmin<=llx)
-                        {//cout<<"15.a"<<endl;
-                        return false;}
+                        {return false;}
                 }
                 test_x++;
             }
             test_y++;
         }
         if (xmin<=llx)
-            {//cout<<"15.b"<<endl;
-            return false;}
+            {return false;}
 
         lim.push_back(xmin); lim.push_back(ury);
         lim.push_back(xmin); lim.push_back(ymin);
@@ -408,7 +385,6 @@ bool L_ones(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int
         return true;
     }
     lim.clear();
-    //cout<<"16"<<endl;
     return false;
 }
 vector<double> rotate_p(OGRPoint ptTemp, double centerx, double centery, double A)
@@ -435,14 +411,12 @@ int larger_L_included (vector<int> b, int N, int M, vector<int>& lim, int best_a
         lly=0;
         while (lly<M && (N-llx)*(M-lly)> best_area)
         {
-            //cout<<"llx = "<<llx<<" lly = "<< lly <<" value = "<< b.at(llx*M+lly)<<endl;
             if (b.at(llx*M+lly)!=0)
             {
                 int a = floor(best_area/M);
                 for (urx = llx+a; urx < N; urx++)
                 {
                     ury = lly+floor(best_area/(urx-llx+1));
-                    //cout<<"llx = "<<llx<<" lly = "<< lly <<" urx = "<< urx <<" ury = "<<ury<<endl;
                     while (ury < M)
                     {
                         if(sum(llx, ury, urx, ury, b, M)==0)
@@ -450,22 +424,17 @@ int larger_L_included (vector<int> b, int N, int M, vector<int>& lim, int best_a
                             ury++;
                             continue;
                         }
-                        //cout<<"urx = "<<urx<<"ury = "<<ury;
                         lim_temp.clear();
                         no_lim.clear();
-                        //cout<<"llx = "<<llx<<" lly = "<< lly <<" urx = "<< urx <<" ury = "<<ury<< "out ";
                         if (sum(llx,lly, urx, ury, b, M)>best_area && L_ones(llx,lly, urx, ury, b, M, lim_temp, no_lim))
                         {
-                            //cout<<"urx = "<<urx<<"ury = "<<ury;
                             int area_temp=areaL(llx,lly, urx, ury, b, M, no_lim);
-                            //cout <<" aire = "<< area_temp<<endl;
                             if (area_temp>best_area)
                             {
                                 lim=lim_temp;
                                 best_area=area_temp;
                             }
                         }
-                        //cout <<endl;
                         ury ++;
                     }
                 }
@@ -486,6 +455,5 @@ double angle_calcul(double Xb, double Yb)
     double Nb=sqrt(Xb*Xb+Yb*Yb);
     double C=(Xa*Xb+Ya*Yb)/(Na*Nb);
     double angle = acos(C);
-    //cout<<angle/M_PI*180<<endl;
     return angle;
 }

@@ -9,7 +9,7 @@
 vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset,
                                 double x_centroid = 0, double y_centroid = 0);
 /**
-*@fn vector<string> triangles_to_obj(vector<Triangle> triangles)
+*@fn vector<string> triangles_to_obj(vector<Triangle> triangles, int& index_offset, double x_centroid = 0, double y_centroid = 0);
 *Converts a list of triangles into Wavefront .obj format.
 *Returns 3 strings corresponding respectively to the vertices, the uv_coordinates and the faces
 *of a vector of Triangle in Wavefront .obj format.

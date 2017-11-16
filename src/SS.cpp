@@ -43,10 +43,6 @@ BuildingModel crossed_spine(Building bu, double roofAngle)
     d = sqrt( dX*dX/dY*dY );
     if (d<0){d*=-1;}//setting value to positive if it's negative
     P.set_z(( height )+( tan(roofAngle)*d ));
-    //cout<<d<<endl;
-    //cout<<tan(roofAngle)<<endl;
-    //cout<<P.get_z()-height<<endl;
-
     //adding a new building model 'roof' from triangular fronts to those of the building list.
     vector<Triangle> li_triangle;
     Triangle fa(P,li_point.at(1),li_point.at(0),ROOF);
@@ -202,7 +198,6 @@ BuildingModel linear_spine(Building bu, double roofAngle)
     }
 
     //adding a new building model 'roof' from triangular fronts to those of the building list.
-
     BuildingModel roof(li_triangle,bu.get_parcel());
     return roof;
 }

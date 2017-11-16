@@ -18,7 +18,7 @@ class Parcel
         Parcel(),
         Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
         /**
-        *@fn Parcel::Parcel(OGRPolygon* poPolygon)
+        *@fn Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
         *Constructor.
         *@param[in] poPolygon OGRPolygon*: The parcel geometry.
         *@param[in] centroid OGRPoint*: Then centroid of the city.
@@ -41,7 +41,7 @@ class Parcel
 
         vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         /**
-        *@fn void Parcel::to_obj()
+        *@fn vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         *Converts the Parcel to Wavefront .obj format.
         *@param[in] an OGRPoint pointer corresponding to the centroid of the city
         *@param[in] the index offset of the triangles.
@@ -56,7 +56,7 @@ class Parcel
 
         void compute_type(OGRPoint* centroid);
         /**
-        *@fn void Parcel::compute_type();
+        *@fn void compute_type(OGRPoint* centroid);
         *Computes the type of the parcel.
         *@param[in] centroid OGRPoint*: Then centroid of the city.
         */

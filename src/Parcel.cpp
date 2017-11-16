@@ -21,14 +21,8 @@ Parcel::Parcel()
 Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 {
     //ctor
-    //area(1), area_price(1), floorspace(1)//
     geom = poPolygon;
-
     area = poPolygon->OGRCurvePolygon::get_Area();
-
-
-    //type = new Industry();
-    area=geom->OGRCurvePolygon::get_Area();
     area_price=10*area;
     this->compute_type(centroid);
     floorspace=area_price*(type->get_profitability()); // need profitability !!!!!!
@@ -37,7 +31,6 @@ Parcel::Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
 Parcel::~Parcel()
 {
     //dtor
-    //cout << "del" << endl;
 }
 
 void Parcel::print(){

@@ -59,8 +59,8 @@ class Building
         OGRPolygon* get_geom()const{return geom;};
         /**
         *@fn OGRPolygon* Building::get_geom() const
-        *Gets the building's geometry.
-        *@return geom
+        *Gets the building's height.
+        *@return height double
         */
 
     protected:
