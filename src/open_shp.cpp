@@ -36,7 +36,6 @@ OGRPoint* open_shp_roads(const char* file_path, vector<Road>& liPolygon, const c
        OGRPoint ptTemp;
        for (int i = 0; i < NumberOfFeatures; i++)
        {
-           //printf("\nelement : %d\n", i);
            poFeature = poLayer->GetNextFeature();
            OGRGeometry* poGeometry;
            poGeometry = poFeature->GetGeometryRef();
@@ -51,9 +50,7 @@ OGRPoint* open_shp_roads(const char* file_path, vector<Road>& liPolygon, const c
                 if( poFieldDefn->GetType() == OFTInteger )
                 {*/
                     Road road = Road(poPolygon,1);// poFeature->GetFieldAsInteger(iField));
-                    //printf("%s\n", road->type);
                     liPolygon.push_back(road);
-                    //cout << road.get_type() << endl;
                 //}
            }
        }

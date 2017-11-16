@@ -28,7 +28,7 @@ class Road
 
         vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         /**
-        *@fn void Road::to_obj()
+        *@fn vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         *Creates an .obj of road.
         *@param[in] an OGRPoint pointer corresponding to the centroid of the city
         *@param[in] the index offset of the triangles.

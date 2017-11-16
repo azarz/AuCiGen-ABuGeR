@@ -21,17 +21,10 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
         if (ptTemp.getX()!=0.0 && ptTemp.getY()!=0.0)
         {
             pt= new Point(ptTemp.getX(), ptTemp.getY(), 0.0);
-            //printf("%.10f, %.10f\n", ptTemp.getX(), ptTemp.getY());
             li_point.push_back(*pt);
         }
     }
-    //cout << "nomber points" << NumberOfExteriorRingVertices-1 <<endl;
     unsigned int i=0U;
-    /*for (int k=0; k<li_point.size(); k++)
-    {
-        cout << li_point.at(k).get_x() << endl;
-    }*/
-
     Triangle* tri;
     int counter(0);
     while (li_point.size()>=3)
@@ -41,9 +34,7 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
             i=0;
             counter++;
         }
-        //double a= li_point.at(i).get_x();
         OGRPoint p1 = OGRPoint(li_point.at(i).get_x(), li_point.at(i).get_y(), li_point.at(i).get_z());
-        //OGRPoint p1 = OGRPoint(a, a, a);
         unsigned int j=i+1;
         if (j>=li_point.size())
         {
@@ -57,11 +48,8 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
         }
         OGRPoint p3 =OGRPoint(li_point.at(k).get_x(), li_point.at(k).get_y(), li_point.at(k).get_z());
         OGRTriangle triangle =	OGRTriangle(p1,p2,p3);
-        //OGRGeometry* g_tri = (OGRGeometry * ) triangle;
-        //cout << i<<", "<< j <<", "<< k <<  " / " << li_point.size() << "test : " << poPolygon->OGRCurvePolygon::Contains(&triangle) << "   "<< li_vector.size() << endl;
         if (poPolygon->OGRCurvePolygon::Contains(&triangle) || counter>=3)
         {
-            //cout << li_point.at(i).get_x()<<endl;
             OGRLinearRing* triangle_trace = (OGRLinearRing*)triangle.getExteriorRing();
             if (!triangle_trace->isClockwise())
             {
@@ -78,7 +66,5 @@ void poly_to_triangle(OGRPolygon* poPolygon, vector<Triangle>& li_vector, Triang
         {
         i++;
         }
-    }/**/
-    //cout << "in : "<<li_vector.at(0).get_p2().get_x()<<endl;
-    //cout << "in : "<<li_vector.at(2).get_p2()->get_x()<<endl;
+    }
 }

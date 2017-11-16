@@ -43,10 +43,6 @@ BuildingModel crossed_spine(Building bu, double roofAngle)
     d = sqrt( dX*dX/dY*dY );
     if (d<0){d*=-1;}//setting value to positive if it's negative
     P.set_z(( height )+( tan(roofAngle)*d ));
-    //cout<<d<<endl;
-    //cout<<tan(roofAngle)<<endl;
-    //cout<<P.get_z()-height<<endl;
-
     //adding a new building model 'roof' from triangular fronts to those of the building list.
     vector<Triangle> li_triangle;
     Triangle fa(P,li_point.at(1),li_point.at(0),ROOF);
@@ -202,7 +198,6 @@ BuildingModel linear_spine(Building bu, double roofAngle)
     }
 
     //adding a new building model 'roof' from triangular fronts to those of the building list.
-
     BuildingModel roof(li_triangle,bu.get_parcel());
     return roof;
 }
@@ -352,39 +347,3 @@ BuildingModel flat_roof(Building bu)
     }
     return BuildingModel(li_triangle, bu.get_parcel());
 }
-
-/*
-#include "catch.h"
-#include "open_shp.h"
-#include "Point.h"
-#include <fstream>
-TEST_CASE("XSkeleton is computed","[crossed_spine]")
-{
-    int offset(0);
-    vector<Road> ROADS;
-    vector<Parcel> PARCELS;
-    OGRPoint* centroid;
-    const char* file_path ="1_data/paris_test/route_secondaire_buffer_2.shp";
-    const char* layer_name ="route_secondaire_buffer_2";
-    centroid = open_shp_roads(file_path, ROADS, layer_name);
-    file_path ="1_data/paris_test/test_paris_seuil_2.shp";
-    layer_name ="test_paris_seuil_2";
-    open_shp_parcels(file_path, PARCELS, centroid, layer_name);
-
-    OGRGeometry* parcel = PARCELS.at(30).get_geom();
-    OGRLineString* v2 = get_intersection_road(parcel,ROADS);
-    OGRLineString* v3 = get_other_sides(parcel,v2);
-    Footprint v4 = PARCELS.at(30).create_footprint(v2,v3);
-    Envelop v5 = v4.create_envelop();
-    Building bu = Building(&v5);
-
-    crossed_spine(bu, M_PI/8);
-    //linear_spine(bu, M_PI/8);
-    vector<string> v = bu.to_obj(centroid,offset);
-
-    ofstream bu_obj("testroof.obj");
-    bu_obj << v.at(0) << v.at(1) << v.at(2);
-    bu_obj.close();
-
-
-} */

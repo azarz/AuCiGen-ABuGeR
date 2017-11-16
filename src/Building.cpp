@@ -11,18 +11,11 @@
 
 Building::Building(Envelop* env)
 {
-    //ctor
-
-    //double gap=1; //length between two points
-    //double step= 20; // angle between two rectangles calculated
-
-
     parcel=env->get_parcel();
     height = env->get_height();
 
 
     string parcel_type = parcel->get_type()->get_type();
-    //cout << parcel_type << endl;
     //lim
     OGRPoint ptTemp;
     OGRPoint ptTemp1;
@@ -39,7 +32,7 @@ Building::Building(Envelop* env)
     double centery =0;
     vector<double> li_angle;
     li_angle.push_back(0);
-    for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)//NumberOfExteriorRingVertices; k++ )
+    for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)
     {
         poExteriorRing.getPoint(k,&ptTemp);
         if (ptTemp.getX()<xmin)
@@ -58,7 +51,6 @@ Building::Building(Envelop* env)
         {
             ymax=ptTemp.getY();
         }
-        //cout<<"("<<ptTemp.getX()<<", "<<ptTemp.getY()<<")"<<endl;
         centerx+=ptTemp.getX();
         centery+=ptTemp.getY();
         poExteriorRing.getPoint(k+1,&ptTemp1);
@@ -74,39 +66,30 @@ Building::Building(Envelop* env)
             bool test_a=true;
             for (unsigned int k =0U; k<li_angle.size(); k++)
             {
-                //cout<< angle/M_PI*180<<", "<< li_angle.at(k)/M_PI*180<< ", ["<<(li_angle.at(k)-10/180*M_PI)/M_PI*180<<", "<< ((li_angle.at(k))/M_PI*180+10)<<"]"<<endl;
                 if (angle/M_PI*180 > ((li_angle.at(k))/M_PI*180-5) && (angle/M_PI*180 < ((li_angle.at(k))/M_PI*180+5)))
                 {
                     test_a=false;
-                    //cout<<"break"<<endl;
                     break;
                 }
             }
             if(test_a==true)
             {
                 li_angle.push_back(angle);
-                //cout << "Angle = " <<angle/M_PI*180<<endl;
             }
-            //int azerty;
-            //cin>> azerty;
         }
     }
-    //cout<<"nb angle = "<< li_angle.size()<<endl;
     centerx/=NumberOfExteriorRingVertices-1;
     centery/=NumberOfExteriorRingVertices-1;
     vector<int> b;
     vector<double> b_coordx;
     vector<double> b_coordy;
-    //cout << "min ("<<xmin <<", "<< ymin<<"); max ("<<xmax<<", "<< ymax <<")"<<endl;
     double dx = xmax-xmin;
     double dy = ymax-ymin;
-    //cout << "dx = "<<dx<<"; dy = "<<dy<<endl;
     double gap = max(dx, dy)/50;
     if (max(dx, dy)>10*min(dx, dy))
     {gap=min(dx, dy)/10;}
     if (gap<1)
     {gap=1;}
-    //cout << "gap = "<< gap<<endl;
     int N=0;
     int M;
     for (double xp=xmin+0.1; xp<=xmax+gap; xp+=gap)
@@ -121,11 +104,8 @@ Building::Building(Envelop* env)
             b.push_back(a);
             b_coordx.push_back(xp);
             b_coordy.push_back(yp);
-            //cout<< a<<" ";
         }
-        //cout <<endl;
     }
-    //cout<< "N ="<< N<<"; M ="<< M <<endl;
 
 
     /* for rectangles : ALL PARCEL TYPE */
@@ -138,9 +118,7 @@ Building::Building(Envelop* env)
     {
         coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
         coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
-        //cout<<"rect ("<< lim.at(k)<<", "<<lim.at(k+1)<<")"<<endl;
     }
-    //cout << best_area <<endl;
 
 
 
@@ -154,17 +132,14 @@ Building::Building(Envelop* env)
         {
             coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
             coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
-            //cout<<"L ("<< lim.at(k)<<", "<<lim.at(k+1)<<")"<<endl;
         }
         best_area=best_area1;
-        //cout<< best_area<<endl;
     }
 
     for (unsigned int k_a = 0U; k_a<li_angle.size(); k_a++)
     {
         //with rotation :
         double A = li_angle.at(k_a);
-        //cout<<" A = "<< A/M_PI*180<<endl;
         //limit :
         double xminR=10000000000000;
         double xmaxR=-1000000000000;
@@ -172,7 +147,7 @@ Building::Building(Envelop* env)
         double ymaxR=-1000000000000;
         double Rx, Ry;
         OGRPoint ptTemp;
-        for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)//NumberOfExteriorRingVertices; k++ )
+        for ( int k = 0; k < NumberOfExteriorRingVertices-1; k++)
         {
             poExteriorRing.getPoint(k,&ptTemp);
             vector<double>R_pt= rotate_p(ptTemp, centerx, centery, A);
@@ -215,11 +190,8 @@ Building::Building(Envelop* env)
                 b.push_back(a);
                 b_coordx.push_back(R_pt.at(0));
                 b_coordy.push_back(R_pt.at(1));
-                //cout<< a<<" ";
             }
-            //cout <<endl;
         }
-        //cout<< "N ="<< N<<"; M ="<< M <<endl;
         if (N*M>best_area)
         {
 
@@ -235,10 +207,8 @@ Building::Building(Envelop* env)
                 {
                     coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
                     coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
-                    //cout<<"rect ("<< lim.at(k)<<", "<<lim.at(k+1)<<")"<<endl;
                 }
                 best_area=best_area1;
-                //cout<<best_area<<endl;
             }
 
             /*L building : ALL PARCEL TYPE */
@@ -251,10 +221,8 @@ Building::Building(Envelop* env)
                 {
                     coord_rect.push_back( b_coordx.at(lim.at(k)*M+lim.at(k+1)));
                     coord_rect.push_back( b_coordy.at(lim.at(k)*M+lim.at(k+1)));
-                    //cout<<"L ("<< lim.at(k)<<", "<<lim.at(k+1)<<")"<<endl;
                 }
                 best_area=best_area1;
-                //cout<<best_area<<endl;
             }
         }
 
@@ -265,7 +233,6 @@ Building::Building(Envelop* env)
     OGRPolygon building_footprint;
     OGRLinearRing a;
     OGRPoint pt_temp;
-    //cout << "coord_rect.size() "<< coord_rect.size()<<endl;
     for (unsigned int k=0U; k< coord_rect.size(); k+=2)
     {
         pt_temp =OGRPoint(coord_rect.at(k),coord_rect.at(k+1));

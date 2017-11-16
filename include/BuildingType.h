@@ -105,6 +105,11 @@ class BuildingType
         */
 
         string get_type()const{return type;};
+        /**
+        *@fn string get_type() const
+        *Gets the type for the building.
+        *@return type string
+        */
 
     protected:
         double profitability;

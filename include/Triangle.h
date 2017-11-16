@@ -34,6 +34,10 @@ class Triangle
         /**
         *@fn Triangle::Triangle(Point T_p1, Point T_p2, Point T_p3, TriangleType T_type)
         *Constructor with arguments.
+        @param[in] T_p1 : first point of triangle.
+        @param[in] T_p2 : second point of triangle.
+        @param[in] T_p3 : third point of triangle.
+        @param[in] T_type : type of triangle.
         */
 
         virtual ~Triangle();

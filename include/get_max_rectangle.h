@@ -45,17 +45,17 @@ int sum(int llx, int lly, int urx, int ury, vector<int> b, int M);
 /**
 *@fn int sum(int llx, int lly, int urx, int ury, vector<int> b, int M)
 *Calculates the sum of 1 on submatrix.
-*@param[in] llx: start x point.
-*@param[in] lly: start y point.
-*@param[in] urx: end x point.
-*@param[in] ury: end y point.
+*@param[in] llx: start x point of submatrix.
+*@param[in] lly: start y point of submatrix.
+*@param[in] urx: end x point of submatrix.
+*@param[in] ury: end y point of submatrix.
 *@param[in] b: 'matrix' composed of 0 and 1; M comumn.
 *@param[in] M: The matrix's column number.
 *@return sum int
 */
 bool all_ones(int llx, int lly, int urx, int ury, vector<int> b, int M);
 /**
-*@fn areaL(int llx, int lly, int urx, int ury, vector<int> b, int M, vector<int>& not_lim);
+*@fn bool all_ones(int llx, int lly, int urx, int ury, vector<int> b, int M);
 *Test if the submatrix is composed only of 1.
 *@param[in] llx: start x point of submatrix.
 *@param[in] lly: start y point of submatrix.
