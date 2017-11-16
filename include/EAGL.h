@@ -1,6 +1,8 @@
 #ifndef EAGL_H_INCLUDED
 #define EAGL_H_INCLUDED
 
+/** @file */
+
 int EAGL();
 /**
 *@fn int EAGL();
