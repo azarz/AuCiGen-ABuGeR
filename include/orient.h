@@ -11,7 +11,7 @@ OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> road)
 *@fn OGRLineString* get_intersection_road(OGRGeometry* parcelGeom, vector<Road> road)
 *Gets the intersection line between a linear ring and the road polygons.
 *@param[in] parcelGeom: The parcel geometry.
-*@param[in] road Vector: A vector Containing all the roads.
+*@param[in] road: A vector Containing all the roads.
 *@return The side in front of the largest road.
 */
 

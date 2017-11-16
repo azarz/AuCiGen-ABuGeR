@@ -18,7 +18,7 @@ class Building
         /**
         *@fn Building::Building()
         *Constructor.
-        *@param[in] env : envelop object
+        *@param[in] env: envelop object
         */
         virtual ~Building();
         /**
@@ -37,8 +37,8 @@ class Building
         /**
         *@fn void Building::to_obj()
         *Converts the Building to Wavefront .obj format.
-        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
-        *@param[in] the index offset
+        *@param[in] centroid: an OGRPoint pointer corresponding to the centroid of the city
+        *@param[in] index_offset: the index offset
         **/
 
         // Getters
@@ -56,11 +56,17 @@ class Building
         *@return building_models std::vector<BuildingModel>
         */
         double get_height()const{return height;};
+        /**
+        *@fn double get_height()const{return height;};
+        *Gets the building's height.
+        *@return height double
+        */
+
         OGRPolygon* get_geom()const{return geom;};
         /**
         *@fn OGRPolygon* Building::get_geom() const
-        *Gets the building's height.
-        *@return height double
+        *Gets the building's geometry.
+        *@return geom OGRPolygon*
         */
 
     protected:

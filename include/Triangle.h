@@ -56,7 +56,7 @@ class Triangle
 
         void set_type(TriangleType newType);
         /**
-        *@fn void Triangle::add_type(TriangleType newType)
+        *@fn void Triangle::set_type(TriangleType newType)
         *Sets the TriangleType of the Triangle.
         *@param[in] newType: The TriangleType of the Triangle.
         */

@@ -23,8 +23,8 @@ class BuildingModel
         /**
         *@fn BuildingModel::BuildingModel(std::vector<Triangle> li_T, Parcel* p)
         *Constructor 2.
-        *@param[in] li_T std::vector<Triangle> : It's a list of Triangles making up the BuildingModel.
-        *@param[in] p Parcel* : It's the parcel associated to the BuildingModel.
+        *@param[in] li_T: It's a list of Triangles making up the BuildingModel.
+        *@param[in] p: It's the parcel associated to the BuildingModel.
         */
 
         virtual ~BuildingModel();
@@ -87,12 +87,6 @@ class BuildingModel
         /**
         *@fn void BuildingModel::scope()
         *Extracts the surfaces touched by occlusion.
-        */
-
-        void to_obj();
-        /**
-        *@fn void BuildingModel::to_obj()
-        *Converts the BuildingModel to .obj format.
         */
 
         // Getters

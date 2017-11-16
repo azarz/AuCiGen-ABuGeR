@@ -25,7 +25,7 @@ class Envelop
         /**
         *@fn Envelop::Envelop(Footprint* trace)
         *Constructor.
-        *@param[in] trace Footprint*: The footprint object class.
+        *@param[in] trace: The footprint object class.
         */
         virtual ~Envelop();
         /**
@@ -36,8 +36,8 @@ class Envelop
         /**
         *@fn vector<string> to_obj(OGRPoint* centroid, int& index_offset)
         *Converts the Envelop volume to Wavefront .obj format.
-        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
-        *@param[in] the index offset
+        *@param[in] centroid: an OGRPoint pointer corresponding to the centroid of the city
+        *@param[in] index_offset: the index offset
         **/
 
         // Getters

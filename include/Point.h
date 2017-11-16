@@ -16,11 +16,11 @@ class Point
         */
         Point(double p_x, double p_y, double p_z);
         /**
-        *@fn Point::Point()
+        *@fn Point::Point(double p_x, double p_y, double p_z);
         *Constructor with coordinates parameters.
-        *@param[in] p_x double: x coordinate.
-        *@param[in] p_y double: y coordinate.
-        *@param[in] p_z double: z coordinate.
+        *@param[in] p_x: x coordinate.
+        *@param[in] p_y: y coordinate.
+        *@param[in] p_z: z coordinate.
         */
         virtual ~Point();
         /**
@@ -78,22 +78,22 @@ class Point
         *@fn void Point::translate(double vec[3])
         *Translates the point with a 3d vector,
         *updates the x, y, z coordiantes.
-        *@param[in] vec vector<double> dim 3: Translation vector
+        *@param[in] vec: Translation vector vector<double> dim 3
         */
         void rotate(double vec[3], double angle);
         /**
         *@fn void Point::rotate(double vec[3], double angle)
         *Rotates the point with a rotate axis and a angle,
         *updates the x, y, z coordinates.
-        *@param[in] vec vector<double> dim 3: Rotation axis
-        *@param[in] angle double: Rotation angle [rad]
+        *@param[in] vec: Rotation axis vector<double> dim 3
+        *@param[in] angle: Rotation angle [rad]
         */
         void size(double vec[3]);
         /**
         *@fn void Point::size(double vec[3])
         *Resizes the Point according to an array (the origin is [0, 0, 0]),
         *updates the x, y, z coordinates.
-        *@param[in] vec vector<double> dim 3: WTF IS RESIZING A POINT ??????
+        *@param[in] vec: vector<double> dim 3
         */
 
     protected:

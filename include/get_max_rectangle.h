@@ -6,6 +6,9 @@
 #include "ogrsf_frmts.h"
 using namespace std;
 
+
+/** @file */
+
 int larger_rectangle_included(vector<int> b, int N, int M, std::vector<int>& lim, int best_area);
 /**
 *@fn int larger_rectangle_included(vector<int> b, int N, int M, std::vector<int>& lim, int best_area)

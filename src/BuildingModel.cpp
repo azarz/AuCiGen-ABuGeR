@@ -96,8 +96,3 @@ void BuildingModel::join(BuildingModel buildingModel)
         li_triangle.push_back(buildingModel.li_triangle[i]);
     }
 }
-
-void BuildingModel::to_obj()
-{
-
-}

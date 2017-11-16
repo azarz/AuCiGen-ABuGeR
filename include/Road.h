@@ -16,8 +16,8 @@ class Road
         /**
         *@fn Road::Road(OGRPolygon* poPolygon, int t_r)
         *Road creator.
-        *@param[in] poPolygon OGRPolygon*: A road geometry.
-        *@param[in] t_r int: The type of road (1: main road, 2: side road).
+        *@param[in] poPolygon: A road geometry.
+        *@param[in] t_r: The type of road (1: main road, 2: side road).
         */
 
         virtual ~Road();
@@ -30,8 +30,8 @@ class Road
         /**
         *@fn vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         *Creates an .obj of road.
-        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
-        *@param[in] the index offset of the triangles.
+        *@param[in] centroid: an OGRPoint pointer corresponding to the centroid of the city
+        *@param[in] index_offset: the index offset of the triangles.
         *@return A vector of 3 strings: 1-vertices 2-uv coordinates 3-faces
         **/
 

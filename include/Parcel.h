@@ -15,13 +15,17 @@ class Parcel
     *Contain parcel
     */
     public:
-        Parcel(),
+        Parcel();
+        /**
+        *@fn Parcel()
+        *Constructor.
+        */
         Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
         /**
-        *@fn Parcel(OGRPolygon* poPolygon, OGRPoint* centroid);
+        *@fn Parcel(OGRPolygon* poPolygon, OGRPoint* centroid)
         *Constructor.
-        *@param[in] poPolygon OGRPolygon*: The parcel geometry.
-        *@param[in] centroid OGRPoint*: Then centroid of the city.
+        *@param[in] poPolygon: The parcel geometry.
+        *@param[in] centroid: Then centroid of the city.
         */
 
         virtual ~Parcel();
@@ -34,8 +38,8 @@ class Parcel
         /**
         *@fn Footprint Parcel::create_footprint(OGRLineString* linearIntersection, OGRLineString* otherSides);
         *Creates the footprint of the building on the parcel.
-        *@param[in] linearIntersection OGRLineString*: intersection between the parcel and the main road.
-        *@param[in] otherSides OGRLineString*: the sides of the parcel that aren't "linearIntersection".
+        *@param[in] linearIntersection: intersection between the parcel and the main road.
+        *@param[in] otherSides: the sides of the parcel that aren't "linearIntersection".
         *@returns the Footprint associated to the parcel.
         */
 
@@ -43,8 +47,8 @@ class Parcel
         /**
         *@fn vector<string> to_obj(OGRPoint* centroid, int& index_offset);
         *Converts the Parcel to Wavefront .obj format.
-        *@param[in] an OGRPoint pointer corresponding to the centroid of the city
-        *@param[in] the index offset of the triangles.
+        *@param[in] centroid: an OGRPoint pointer corresponding to the centroid of the city
+        *@param[in] index_offset: the index offset of the triangles.
         *@return A vector of 3 strings: 1-vertices 2-uv coordinates 3-faces
         **/
 
@@ -58,7 +62,7 @@ class Parcel
         /**
         *@fn void compute_type(OGRPoint* centroid);
         *Computes the type of the parcel.
-        *@param[in] centroid OGRPoint*: Then centroid of the city.
+        *@param[in] centroid: Then centroid of the city.
         */
 
         // Getters
