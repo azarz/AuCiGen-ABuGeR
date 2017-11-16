@@ -21270,7 +21270,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "create Road.obj",
+											"text": "create road.obj",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21588,7 +21588,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "find the road border of parcel",
+											"text": "find the Road border of Parcel",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21763,7 +21763,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "find the other side of parcel",
+											"text": "find the other side of Parcel",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21938,7 +21938,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "create footprint",
+											"text": "create Footprint object",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22113,7 +22113,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "create envelope",
+											"text": "create Envelope object",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22288,7 +22288,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "create Building",
+											"text": "create Building object",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22463,7 +22463,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "creat Parcel.obj",
+											"text": "create parcel.obj",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24575,7 +24575,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "create Road.obj",
+					"name": "create road.obj",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
@@ -24587,7 +24587,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "find the road border of parcel",
+					"name": "find the Road border of Parcel",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
@@ -24599,7 +24599,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "find the other side of parcel",
+					"name": "find the other side of Parcel",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
@@ -24611,7 +24611,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "create footprint",
+					"name": "create Footprint object",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
@@ -24623,7 +24623,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "create envelope",
+					"name": "create Envelope object",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
@@ -24635,7 +24635,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "create Building",
+					"name": "create Building object",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
@@ -24647,7 +24647,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFfxFsAJ6JOLYQ="
 					},
-					"name": "creat Parcel.obj",
+					"name": "create parcel.obj",
 					"visibility": "public",
 					"kind": "opaque",
 					"isLocallyReentrant": false,
