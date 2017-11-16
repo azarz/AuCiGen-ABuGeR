@@ -199,9 +199,8 @@ int EAGL()
 
         //DRAWING THE OBJECTS
 
-
         model = glm::mat4(1.0f);
-        model = glm::scale(model, glm::vec3(0.01f));
+        model = glm::scale(model, glm::vec3(0.007f));
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
         roads.Draw(shader, frustum, 0.0f, 0.0f, 0.0f);
